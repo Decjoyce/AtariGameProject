@@ -10,14 +10,14 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
 
     //These are only here until weapon func is added
-    public Transform pivot;
-    public Transform firePoint;
+    public Transform pivot, firePoint;
     public GameObject bulletPrefab;
     public float bulletForce;
-    public float currentSpeed;
-    public float walkSpeed;
-    public float crouchSpeed;
-    public float lerpedAimSpeed;
+    ////
+
+    public float currentHeight, crouchHeight, normalHeight, jumpHeight;
+    public float currentSpeed, walkSpeed, crouchSpeed, lerpedAimSpeed;
+    public GameObject crouchGraphics, standGraphics;
 
     PlayerState_Base currentState;
     public PlayerState_Neutral state_Neutral = new PlayerState_Neutral();

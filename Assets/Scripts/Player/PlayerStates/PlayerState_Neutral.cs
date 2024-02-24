@@ -9,6 +9,7 @@ public class PlayerState_Neutral : PlayerState_Base
     float movementInput;
     Vector2 lookInput;
     bool lerpedRotation;
+    bool isCrouched;
 
     public override void EnterState(PlayerController controller)
     {
@@ -83,7 +84,23 @@ public class PlayerState_Neutral : PlayerState_Base
 
     void Crouch(PlayerController controller)
     {
-        //Code for crouching here
+        isCrouched = !isCrouched;
+        if (isCrouched)
+        {
+            controller.currentSpeed = controller.crouchSpeed;
+            controller.currentHeight = controller.crouchHeight;
+            controller.crouchGraphics.SetActive(true);
+            controller.standGraphics.SetActive(false);
+        }
+        else
+        {
+            controller.currentSpeed = controller.walkSpeed;
+            controller.currentHeight = controller.normalHeight;
+            controller.crouchGraphics.SetActive(false);
+            controller.standGraphics.SetActive(true);
+        }
+        Vector3 newPos = new Vector3(0, controller.currentHeight, 0);
+        controller.pivot.localPosition = newPos;
     }
 
     //Here until functionality for weapons is added
