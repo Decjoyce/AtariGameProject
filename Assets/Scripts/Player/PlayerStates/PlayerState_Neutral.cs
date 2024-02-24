@@ -31,7 +31,9 @@ public class PlayerState_Neutral : PlayerState_Base
 
         if (movementInput > 0.1 || movementInput < -0.1)
         {
-            controller.rb.velocity = new Vector3(controller.currentSpeed * movementInput * Time.fixedDeltaTime, controller.rb.velocity.y, 0f);
+            //Vector3 velocity = new(controller.currentSpeed * movementInput * Time.fixedDeltaTime, controller.rb.velocity.y, 0f);
+            //controller.rb.velocity = velocity;
+            controller.rb.AddForce(Vector3.right * controller.currentSpeed * movementInput * Time.fixedDeltaTime, ForceMode.VelocityChange);
         }
 
 
