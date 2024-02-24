@@ -174,9 +174,9 @@ MonoBehaviour:
   crouchHeight: 0.8
   normalHeight: 1.5
   jumpHeight: 0
-  currentSpeed: 150
-  walkSpeed: 150
-  crouchSpeed: 100
+  currentSpeed: 50
+  walkSpeed: 50
+  crouchSpeed: 30
   lerpedAimSpeed: 35
   crouchGraphics: {fileID: 4156682510280960119}
   standGraphics: {fileID: 2088447094372869958}

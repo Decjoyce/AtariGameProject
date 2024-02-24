@@ -40,7 +40,7 @@ public class PlayerState_Neutral : PlayerState_Base
         float angle = Mathf.Atan2(lookInput.x, -lookInput.y) * Mathf.Rad2Deg;
         if (lookInput.magnitude > 0.7)
         {
-            float newAngle = ModularClamp(angle, -110f, 110f);
+            float newAngle = ExtensionMethods.ModularClamp(angle, -110f, 110f);
             Quaternion newRot;
             if (lerpedRotation)
                 newRot = Quaternion.Lerp(controller.pivot.rotation, Quaternion.Euler(newAngle, 0, 0), controller.lerpedAimSpeed * Time.fixedDeltaTime);
@@ -110,14 +110,6 @@ public class PlayerState_Neutral : PlayerState_Base
     {
         GameObject bullet = controller.HelpInstantiate(controller.bulletPrefab, controller.firePoint.transform.position, controller.pivot.transform.rotation);
         bullet.GetComponent<Rigidbody>().AddForce(controller.firePoint.transform.up * controller.bulletForce, ForceMode.Impulse);
-    }
-
-    //Here temp
-    public float ModularClamp(float val, float min, float max, float rangemin = -180f, float rangemax = 180f)
-    {
-        var modulus = Mathf.Abs(rangemax - rangemin);
-        if ((val %= modulus) < 0f) val += modulus;
-        return Mathf.Clamp(val + Mathf.Min(rangemin, rangemax), min, max);
     }
 
 }
