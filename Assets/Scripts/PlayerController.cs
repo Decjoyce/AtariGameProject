@@ -15,8 +15,9 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletForce;
     public float currentSpeed;
+    public float walkSpeed;
+    public float crouchSpeed;
     public float lerpedAimSpeed;
-    public float aimSpeed;
 
     PlayerState_Base currentState;
     public PlayerState_Neutral state_Neutral = new PlayerState_Neutral();
@@ -88,9 +89,10 @@ public class PlayerController : MonoBehaviour
         currentState.EnterState(this);
     }
 
-    public GameObject HelpInstantiate(GameObject newObject, Vector3 pos, Quaternion rot)
+    public GameObject HelpInstantiate(GameObject objectToSpawn, Vector3 pos, Quaternion rot)
     {
-        return Instantiate(newObject, pos, rot);
+        GameObject newObject =  Instantiate(objectToSpawn, pos, rot);
+        return newObject;
     }
 
     #endregion

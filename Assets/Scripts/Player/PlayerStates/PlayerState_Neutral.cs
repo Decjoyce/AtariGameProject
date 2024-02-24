@@ -27,28 +27,25 @@ public class PlayerState_Neutral : PlayerState_Base
 
     public override void PhysicsUpdate(PlayerController controller)
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            SceneManager.LoadScene(0);
-        }
 
         if (movementInput > 0.1 || movementInput < -0.1)
         {
-            controller.rb.velocity = new Vector3(0, controller.rb.velocity.y, controller.currentSpeed * movementInput * Time.fixedDeltaTime);
+            controller.rb.velocity = new Vector3(controller.currentSpeed * movementInput * Time.fixedDeltaTime, controller.rb.velocity.y, 0f);
         }
 
 
         float angle = Mathf.Atan2(lookInput.x, -lookInput.y) * Mathf.Rad2Deg;
         if (lookInput.magnitude > 0.7)
         {
-            float newAngle = ModularClamp(-angle, -110f, 110f);
+            float newAngle = ModularClamp(angle, -110f, 110f);
             Quaternion newRot;
             if (lerpedRotation)
                 newRot = Quaternion.Lerp(controller.pivot.rotation, Quaternion.Euler(newAngle, 0, 0), controller.lerpedAimSpeed * Time.fixedDeltaTime);
             else
-                newRot = Quaternion.Euler(newAngle, 0, 0);
+                newRot = Quaternion.Euler(0, 0, newAngle);
             controller.pivot.rotation = newRot;
         }
+
     }
 
     public override void OnMove(PlayerController controller, InputAction.CallbackContext ctx)
@@ -81,22 +78,17 @@ public class PlayerState_Neutral : PlayerState_Base
 
     void Jump(PlayerController controller)
     {
-
         //Code for jumping here
-
     }
 
     void Crouch(PlayerController controller)
     {
-
-        //Code for crouchingn here
-
+        //Code for crouching here
     }
 
     //Here until functionality for weapons is added
     void Shoot(PlayerController controller)
     {
-
         GameObject bullet = controller.HelpInstantiate(controller.bulletPrefab, controller.firePoint.transform.position, controller.pivot.transform.rotation);
         bullet.GetComponent<Rigidbody>().AddForce(controller.firePoint.transform.up * controller.bulletForce, ForceMode.Impulse);
     }
