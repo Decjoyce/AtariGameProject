@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public float gravityScale, checkOffset = 0.1f;
     public bool isGrounded;
     public GameObject crouchGraphics, standGraphics;
-    public LayerMask playerLayer;
+    public LayerMask groundLayers;
 
     PlayerState_Base currentState;
     public PlayerState_Neutral state_Neutral = new PlayerState_Neutral();

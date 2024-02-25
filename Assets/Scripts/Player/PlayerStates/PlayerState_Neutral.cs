@@ -13,7 +13,6 @@ public class PlayerState_Neutral : PlayerState_Base
     bool lerpedRotation;
     bool isCrouched;
     bool isJumping;
-    bool checkForGround;
     Rigidbody rb;
 
     Vector3 boxSize = new(0.5f, 0.1f, 0.5f);
@@ -30,14 +29,24 @@ public class PlayerState_Neutral : PlayerState_Base
 
     public override void FrameUpdate(PlayerController controller)
     {
-            int numCollisions = Physics.OverlapBox(controller.transform.position - Vector3.up * controller.checkOffset, boxSize, Quaternion.Euler(Vector3.zero), controller.playerLayer).Length;
-            Debug.Log(numCollisions);
-            Debug.Log(controller.isGrounded);
+            int numCollisions = Physics.OverlapBox(controller.transform.position - Vector3.up * controller.checkOffset, boxSize, Quaternion.Euler(Vector3.zero), controller.groundLayers).Length;
             controller.isGrounded = numCollisions > 0;
             if (controller.isGrounded && isJumping)
             {
                 isJumping = false;
             }
+
+        float angle = Mathf.Atan2(lookInput.x, -lookInput.y) * Mathf.Rad2Deg;
+        if (lookInput.magnitude > 0.7)
+        {
+            float newAngle = ExtensionMethods.ModularClamp(angle, -110f, 110f);
+            Quaternion newRot;
+            if (lerpedRotation)
+                newRot = Quaternion.Lerp(controller.pivot.rotation, Quaternion.Euler(newAngle, 0, 0), controller.lerpedAimSpeed * Time.deltaTime);
+            else
+                newRot = Quaternion.Euler(0, 0, newAngle);
+            controller.pivot.rotation = newRot;
+        }
     }
 
     public override void PhysicsUpdate(PlayerController controller)
@@ -48,22 +57,8 @@ public class PlayerState_Neutral : PlayerState_Base
 
         if (movementInput > 0.1 || movementInput < -0.1)
         {
-            //rb.AddForce(Vector3.right * controller.currentSpeed * movementInput * Time.fixedDeltaTime, ForceMode.VelocityChange);
             Vector3 vel = Vector3.right * controller.currentSpeed * movementInput * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + vel);
-        }
-
-
-        float angle = Mathf.Atan2(lookInput.x, -lookInput.y) * Mathf.Rad2Deg;
-        if (lookInput.magnitude > 0.7)
-        {
-            float newAngle = ExtensionMethods.ModularClamp(angle, -110f, 110f);
-            Quaternion newRot;
-            if (lerpedRotation)
-                newRot = Quaternion.Lerp(controller.pivot.rotation, Quaternion.Euler(newAngle, 0, 0), controller.lerpedAimSpeed * Time.fixedDeltaTime);
-            else
-                newRot = Quaternion.Euler(0, 0, newAngle);
-            controller.pivot.rotation = newRot;
         }
 
     }
@@ -83,12 +78,6 @@ public class PlayerState_Neutral : PlayerState_Base
         if (controller.isGrounded && ctx.performed)
         {
             Jump(controller);
-            string s = "";
-            foreach(Collider col in Physics.OverlapBox(controller.transform.position, Vector3.one * 0.1f))
-            {
-                s += col.name + " + ";
-            }
-            Debug.Log(s);
         }
     }
 
@@ -106,7 +95,6 @@ public class PlayerState_Neutral : PlayerState_Base
 
     void Jump(PlayerController controller)
     {
-        Debug.Log("Jumped");
         float jumpForce = Mathf.Sqrt(controller.jumpHeight * -2 * (Physics.gravity.y * controller.gravityScale * rb.mass));
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
@@ -120,15 +108,15 @@ public class PlayerState_Neutral : PlayerState_Base
         {
             controller.currentSpeed = controller.crouchSpeed;
             controller.currentHeight = controller.crouchHeight;
-            controller.crouchGraphics.SetActive(true);
-            controller.standGraphics.SetActive(false);
+            controller.crouchGraphics.SetActive(true); //Temp
+            controller.standGraphics.SetActive(false); //Temp
         }
         else
         {
             controller.currentSpeed = controller.walkSpeed;
             controller.currentHeight = controller.normalHeight;
-            controller.crouchGraphics.SetActive(false);
-            controller.standGraphics.SetActive(true);
+            controller.crouchGraphics.SetActive(false); //Temp
+            controller.standGraphics.SetActive(true); //Temp
         }
         Vector3 newPos = new Vector3(0, controller.currentHeight, 0);
         controller.pivot.localPosition = newPos;

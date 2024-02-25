@@ -46,12 +46,11 @@ public class PlayerManager : MonoBehaviour
 
         players.Add(player);
         player.name = "Player" + players.Count;
-        PlayerController controller = player.gameObject.GetComponentInChildren<PlayerController>();
+        PlayerController controller = player.GetComponent<PlayerController>();
         controller.playerNum = players.Count;
         controller.playerCam = playerCams[players.Count - 1];
 
         SetSplitScreen();
-        //SetLayers(player);
 
         player.transform.position = spawnPoints[players.Count - 1].position;
     }
@@ -134,12 +133,4 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    void SetLayers(PlayerInput player)
-    {
-        int _playerLayerToAdd = (int)Mathf.Log(playerLayers[players.Count - 1].value, 2);
-        //int _cameraLayerToAdd = (int)Mathf.Log(cameraLayers[players.Count - 1].value, 2);
-        player.gameObject.layer = _playerLayerToAdd;
-        PlayerController controller = player.gameObject.GetComponentInChildren<PlayerController>();
-        //controller.playerCam.cullingMask
-    }
 }
