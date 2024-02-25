@@ -2273,7 +2273,7 @@ MeshRenderer:
   m_GameObject: {fileID: 630457229}
   m_Enabled: 1
   m_CastShadows: 0
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -6292,6 +6292,8 @@ MonoBehaviour:
   canInteract: 1
   switch2State: 
   door: {fileID: 23813510}
+  panel: {fileID: 630457232}
+  unlockedMat: {fileID: 2100000, guid: 8f2354ecacf808e4da9bde01ecbde17e, type: 2}
 --- !u!136 &1987480666
 CapsuleCollider:
   m_ObjectHideFlags: 0

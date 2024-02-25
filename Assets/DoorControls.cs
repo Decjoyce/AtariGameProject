@@ -5,6 +5,8 @@ using UnityEngine;
 public class DoorControls : Interactable
 {
     [SerializeField] Door door;
+    [SerializeField] Renderer panel;
+    [SerializeField] Material unlockedMat;
 
     public override void Interaction(PlayerInteraction player)
     {
@@ -12,6 +14,7 @@ public class DoorControls : Interactable
         {
             base.Interaction(player);
             door.UnlockDoor();
+            panel.material = unlockedMat;
             canInteract = false;
         }
 
