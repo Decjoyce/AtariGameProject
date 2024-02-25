@@ -12,10 +12,10 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private List<LayerMask> playerLayers;
     //[SerializeField] private List<LayerMask> cameraLayers;
     [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
-    [SerializeField] private Camera[] playerCams;
+    public Camera[] playerCams;
     [SerializeField] private GameObject[] playerCanvases;
 
-    [SerializeField] GameObject tempText; //temp
+    [SerializeField] GameObject tempText, tempBlackness; //temp
     [SerializeField] bool keepRatio; //temp
 
     public static PlayerManager instance;
@@ -43,6 +43,7 @@ public class PlayerManager : MonoBehaviour
     public void AddPlayer(PlayerInput player)
     {
         tempText.SetActive(false);  //temp
+        tempBlackness.SetActive(true);  //temp
 
         players.Add(player);
         player.name = "Player" + players.Count;
