@@ -6,6 +6,8 @@ public class Door : MonoBehaviour
 {
     [SerializeField] bool locked;
     [SerializeField] float doorOffset;
+    [SerializeField] Renderer sign;
+    [SerializeField] Material openMat;
     Animator anim;
     bool doorOpen;
     int pplAtDoor;
@@ -49,4 +51,11 @@ public class Door : MonoBehaviour
         anim.SetBool("doorOpen", false);
     }
 
+    public void UnlockDoor()
+    {
+        locked = false;
+        sign.material = openMat;
+        if (pplAtDoor > 0)
+            OpenDoor();
+    }
 }

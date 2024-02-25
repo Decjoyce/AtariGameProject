@@ -100,7 +100,8 @@ public class PlayerState_Neutral : PlayerState_Base
 
     public override void OnInteract(PlayerController controller, InputAction.CallbackContext ctx)
     {
-
+        if (ctx.performed)
+            controller.interaction.Interact();
     }
 
 

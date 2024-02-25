@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public int playerNum;
+    public PlayerInteraction interaction;
     public Camera playerCam;
     public Rigidbody rb;
     public CapsuleCollider col;
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
         playerCam = GetComponentInChildren<Camera>();
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
+        interaction = GetComponent<PlayerInteraction>();
     }
 
     

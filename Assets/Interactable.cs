@@ -5,20 +5,10 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     public bool canInteract;
-
-    private void OnTriggerEnter(Collider other)
+    public string switch2State;
+    
+    public virtual void Interaction(PlayerInteraction player)
     {
-        if (canInteract && other.CompareTag("Player"))
-        {
-            
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-
-        }
+        Debug.Log(player.name + " Interacted with " + name);
     }
 }
