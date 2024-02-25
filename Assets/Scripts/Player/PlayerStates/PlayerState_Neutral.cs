@@ -15,7 +15,12 @@ public class PlayerState_Neutral : PlayerState_Base
     bool isJumping;
     Rigidbody rb;
 
-    Vector3 boxSize = new(0.5f, 0.1f, 0.5f);
+    float standColiderHeight = 2f;
+    Vector3 standColideroffset = new(0f, 1f, 0f);
+    Vector3 crouchColideroffset = new(0f, 0.65f, 0f);
+    float crouchColiderHeight = 1.3f;
+
+    Vector3 checkBoxSize = new(0.5f, 0.1f, 0.5f);
 
     public override void EnterState(PlayerController controller)
     {
@@ -29,12 +34,12 @@ public class PlayerState_Neutral : PlayerState_Base
 
     public override void FrameUpdate(PlayerController controller)
     {
-            int numCollisions = Physics.OverlapBox(controller.transform.position - Vector3.up * controller.checkOffset, boxSize, Quaternion.Euler(Vector3.zero), controller.groundLayers).Length;
-            controller.isGrounded = numCollisions > 0;
-            if (controller.isGrounded && isJumping)
-            {
-                isJumping = false;
-            }
+        int numCollisions = Physics.OverlapBox(controller.transform.position - Vector3.up * controller.checkOffset, checkBoxSize, Quaternion.Euler(Vector3.zero), controller.groundLayers).Length;
+        controller.isGrounded = numCollisions > 0;
+        if (controller.isGrounded && isJumping)
+        {
+            isJumping = false;
+        }
 
         float angle = Mathf.Atan2(lookInput.x, -lookInput.y) * Mathf.Rad2Deg;
         if (lookInput.magnitude > 0.7)
@@ -93,6 +98,13 @@ public class PlayerState_Neutral : PlayerState_Base
             Shoot(controller);
     }
 
+    public override void OnInteract(PlayerController controller, InputAction.CallbackContext ctx)
+    {
+
+    }
+
+
+
     void Jump(PlayerController controller)
     {
         float jumpForce = Mathf.Sqrt(controller.jumpHeight * -2 * (Physics.gravity.y * controller.gravityScale * rb.mass));
@@ -108,6 +120,10 @@ public class PlayerState_Neutral : PlayerState_Base
         {
             controller.currentSpeed = controller.crouchSpeed;
             controller.currentHeight = controller.crouchHeight;
+
+            controller.col.center = crouchColideroffset;
+            controller.col.height = crouchColiderHeight;
+
             controller.crouchGraphics.SetActive(true); //Temp
             controller.standGraphics.SetActive(false); //Temp
         }
@@ -115,6 +131,10 @@ public class PlayerState_Neutral : PlayerState_Base
         {
             controller.currentSpeed = controller.walkSpeed;
             controller.currentHeight = controller.normalHeight;
+
+            controller.col.center = standColideroffset;
+            controller.col.height = standColiderHeight;
+
             controller.crouchGraphics.SetActive(false); //Temp
             controller.standGraphics.SetActive(true); //Temp
         }

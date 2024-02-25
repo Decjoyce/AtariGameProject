@@ -8,18 +8,21 @@ public class PlayerController : MonoBehaviour
     public int playerNum;
     public Camera playerCam;
     public Rigidbody rb;
+    public CapsuleCollider col;
 
     //These are only here until weapon func is added
     public Transform pivot, firePoint;
     public GameObject bulletPrefab;
-    public float bulletForce;
+    public float bulletForce;   
+    public GameObject standGraphics, crouchGraphics;
     ////
-
-    public float currentHeight, crouchHeight, normalHeight, jumpHeight;
+    //Pivot Height
+    public float currentHeight, crouchHeight, normalHeight;
+    //Speed
     public float currentSpeed, walkSpeed, crouchSpeed, lerpedAimSpeed;
-    public float gravityScale, checkOffset = 0.1f;
+    //Jumping
+    public float jumpHeight, gravityScale, checkOffset = 0.1f;
     public bool isGrounded;
-    public GameObject crouchGraphics, standGraphics;
     public LayerMask groundLayers;
 
     PlayerState_Base currentState;
@@ -29,6 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         playerCam = GetComponentInChildren<Camera>();
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<CapsuleCollider>();
     }
 
     
@@ -72,6 +76,16 @@ public class PlayerController : MonoBehaviour
     public void OnShoot(InputAction.CallbackContext ctx)
     {
         currentState.OnShoot(this, ctx);
+    }
+
+    public void OnAction(InputAction.CallbackContext ctx)
+    {
+        //currentState.OnAction(this, ctx);
+    }
+
+    public void OnInteract(InputAction.CallbackContext ctx)
+    {
+        currentState.OnInteract(this, ctx);
     }
 
     public void SwitchState(string newState, bool performExit = true)

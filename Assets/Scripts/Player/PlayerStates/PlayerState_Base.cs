@@ -42,4 +42,14 @@ public abstract class PlayerState_Base
     {
 
     }
+
+    public virtual void OnAction(PlayerController controller, InputAction.CallbackContext ctx)
+    {
+
+    }
+
+    public virtual void OnInteract(PlayerController controller, InputAction.CallbackContext ctx)
+    {
+
+    }
 }
