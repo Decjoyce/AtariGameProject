@@ -8,9 +8,12 @@ public class DoorControls : Interactable
 
     public override void Interaction(PlayerInteraction player)
     {
-        base.Interaction(player);
-        door.UnlockDoor();
-        player.RemoveInteraction(this);
-        Destroy(this);
+        if (canInteract)
+        {
+            base.Interaction(player);
+            door.UnlockDoor();
+            canInteract = false;
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (other.GetComponent<Interactable>())
                 RemoveInteraction(other.GetComponent<Interactable>());
-        }
+        }        
     }
 
     public void RemoveInteraction(Interactable interactable)

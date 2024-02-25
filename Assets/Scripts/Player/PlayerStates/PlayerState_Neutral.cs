@@ -56,16 +56,13 @@ public class PlayerState_Neutral : PlayerState_Base
 
     public override void PhysicsUpdate(PlayerController controller)
     {
-
-            rb.AddForce(Vector3.up * (Physics.gravity.y * controller.gravityScale * rb.mass));
- 
+        rb.AddForce(Vector3.up * (Physics.gravity.y * controller.gravityScale * rb.mass));
 
         if (movementInput > 0.1 || movementInput < -0.1)
         {
             Vector3 vel = Vector3.right * controller.currentSpeed * movementInput * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + vel);
         }
-
     }
 
     public override void OnMove(PlayerController controller, InputAction.CallbackContext ctx)
