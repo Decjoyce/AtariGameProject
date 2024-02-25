@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Camera playerCam;
     public Rigidbody rb;
     public CapsuleCollider col;
+    public Canvas canvas;
 
     //These are only here until weapon func is added
     public Transform pivot, firePoint;
@@ -31,7 +32,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        playerCam = GetComponentInChildren<Camera>();
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
         interaction = GetComponent<PlayerInteraction>();

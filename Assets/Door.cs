@@ -41,13 +41,11 @@ public class Door : MonoBehaviour
 
     void OpenDoor()
     {
-        Debug.Log("DoorOpen");
         anim.SetBool("doorOpen", true);
     }
 
     void CloseDoor()
     {
-        Debug.Log("DoorClose");
         anim.SetBool("doorOpen", false);
     }
 

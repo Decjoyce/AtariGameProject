@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,8 @@ public class PlayerInteraction : MonoBehaviour
     private List<Interactable> availableInteractions = new List<Interactable>();
 
     bool canInteract;
+
+    [SerializeField] TextMeshProUGUI interactionText;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +34,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             if(other.GetComponent<Interactable>())
                 availableInteractions.Add(other.GetComponent<Interactable>());
+            SetInteractionText();
         }
     }
 
@@ -48,6 +52,7 @@ public class PlayerInteraction : MonoBehaviour
         //Checks if the object that left is in availableInteractions and if so remove it from the list 
         if (availableInteractions.Contains(interactable))
             availableInteractions.Remove(interactable);
+        SetInteractionText();
     }
 
     public Interactable FindClosestInteractable()
@@ -72,8 +77,17 @@ public class PlayerInteraction : MonoBehaviour
         if (canInteract)
         {
             FindClosestInteractable().Interaction(this);
+            SetInteractionText();
         }
     }
 
+    void SetInteractionText()
+    {
+        Interactable closestInt = FindClosestInteractable();
+        if (closestInt != null && closestInt.canInteract)
+            interactionText.text = FindClosestInteractable().interactPrompt;
+        else
+            interactionText.text = null;
+    }
 
 }
