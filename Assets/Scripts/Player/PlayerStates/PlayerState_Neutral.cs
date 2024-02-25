@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerState_Neutral : PlayerState_Base
 {
@@ -10,10 +12,15 @@ public class PlayerState_Neutral : PlayerState_Base
     Vector2 lookInput;
     bool lerpedRotation;
     bool isCrouched;
+    bool isJumping;
+    bool checkForGround;
+    Rigidbody rb;
+
+    Vector3 boxSize = new(0.5f, 0.1f, 0.5f);
 
     public override void EnterState(PlayerController controller)
     {
-
+        rb = controller.rb;
     }
 
     public override void ExitState(PlayerController controller)
@@ -23,17 +30,27 @@ public class PlayerState_Neutral : PlayerState_Base
 
     public override void FrameUpdate(PlayerController controller)
     {
-
+            int numCollisions = Physics.OverlapBox(controller.transform.position - Vector3.up * controller.checkOffset, boxSize, Quaternion.Euler(Vector3.zero), controller.playerLayer).Length;
+            Debug.Log(numCollisions);
+            Debug.Log(controller.isGrounded);
+            controller.isGrounded = numCollisions > 0;
+            if (controller.isGrounded && isJumping)
+            {
+                isJumping = false;
+            }
     }
 
     public override void PhysicsUpdate(PlayerController controller)
     {
 
+            rb.AddForce(Vector3.up * (Physics.gravity.y * controller.gravityScale * rb.mass));
+ 
+
         if (movementInput > 0.1 || movementInput < -0.1)
         {
-            //Vector3 velocity = new(controller.currentSpeed * movementInput * Time.fixedDeltaTime, controller.rb.velocity.y, 0f);
-            //controller.rb.velocity = velocity;
-            controller.rb.AddForce(Vector3.right * controller.currentSpeed * movementInput * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            //rb.AddForce(Vector3.right * controller.currentSpeed * movementInput * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            Vector3 vel = Vector3.right * controller.currentSpeed * movementInput * Time.fixedDeltaTime;
+            rb.MovePosition(rb.position + vel);
         }
 
 
@@ -63,8 +80,16 @@ public class PlayerState_Neutral : PlayerState_Base
 
     public override void OnJump(PlayerController controller, InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (controller.isGrounded && ctx.performed)
+        {
             Jump(controller);
+            string s = "";
+            foreach(Collider col in Physics.OverlapBox(controller.transform.position, Vector3.one * 0.1f))
+            {
+                s += col.name + " + ";
+            }
+            Debug.Log(s);
+        }
     }
 
     public override void OnCrouch(PlayerController controller, InputAction.CallbackContext ctx)
@@ -81,7 +106,11 @@ public class PlayerState_Neutral : PlayerState_Base
 
     void Jump(PlayerController controller)
     {
-        //Code for jumping here
+        Debug.Log("Jumped");
+        float jumpForce = Mathf.Sqrt(controller.jumpHeight * -2 * (Physics.gravity.y * controller.gravityScale * rb.mass));
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+        isJumping = true;
     }
 
     void Crouch(PlayerController controller)

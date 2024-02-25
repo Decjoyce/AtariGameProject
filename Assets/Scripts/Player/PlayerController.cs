@@ -17,7 +17,10 @@ public class PlayerController : MonoBehaviour
 
     public float currentHeight, crouchHeight, normalHeight, jumpHeight;
     public float currentSpeed, walkSpeed, crouchSpeed, lerpedAimSpeed;
+    public float gravityScale, checkOffset = 0.1f;
+    public bool isGrounded;
     public GameObject crouchGraphics, standGraphics;
+    public LayerMask playerLayer;
 
     PlayerState_Base currentState;
     public PlayerState_Neutral state_Neutral = new PlayerState_Neutral();

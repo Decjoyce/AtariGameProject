@@ -66,7 +66,7 @@
                 {
                     "name": "",
                     "id": "c8b993cf-348b-4c65-b567-f62e5749b833",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "BaseControlScheme",
