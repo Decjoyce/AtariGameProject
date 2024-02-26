@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DecoScene.unity
     guid: 217928a118805094c84e74fe30ee9192
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+    guid: 290cc0fbcc3c114469265959bc107bf1
   m_configObjects: {}

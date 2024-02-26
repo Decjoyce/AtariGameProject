@@ -8,6 +8,7 @@ public class Door : MonoBehaviour
     [SerializeField] float doorOffset;
     [SerializeField] Renderer sign;
     [SerializeField] Material openMat;
+    //[SerializeField] GameObject blackness;
     Animator anim;
     bool doorOpen;
     int pplAtDoor;
@@ -42,11 +43,13 @@ public class Door : MonoBehaviour
     void OpenDoor()
     {
         anim.SetBool("doorOpen", true);
+        //blackness.SetActive(false);
     }
 
     void CloseDoor()
     {
         anim.SetBool("doorOpen", false);
+        //blackness.SetActive(true);
     }
 
     public void UnlockDoor()
