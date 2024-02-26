@@ -1430,7 +1430,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   tempText: {fileID: 916323550}
-  keepRatio: 1
+  keepRatio: 0
 --- !u!1 &500065670
 GameObject:
   m_ObjectHideFlags: 0

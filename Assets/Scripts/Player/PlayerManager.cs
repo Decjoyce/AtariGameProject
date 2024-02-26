@@ -64,18 +64,15 @@ public class PlayerManager : MonoBehaviour
             {
                 case 1:
                     playerCams[0].gameObject.SetActive(true);
-                    //playerCanvases[0].SetActive(true);
                     break;
                 case 2:
                     playerCams[1].gameObject.SetActive(true);
-                    //playerCanvases[0].SetActive(true);
 
                     playerCams[0].rect = new Rect(0.25f, 0.5f, 0.5f, 1f);
                     playerCams[1].rect = new Rect(0.25f,- 0.5f, 0.5f, 1);
                     break;
                 case 3:
                     playerCams[2].gameObject.SetActive(true);
-                    //playerCanvases[0].SetActive(true);
 
                     playerCams[0].rect = new Rect(0f, 0.5f, 0.5f, 1);
                     playerCams[1].rect = new Rect(0.5f, 0.5f, 0.5f, 1);
@@ -83,7 +80,6 @@ public class PlayerManager : MonoBehaviour
                     break;
                 case 4:
                     playerCams[3].gameObject.SetActive(true);
-                    //playerCanvases[0].SetActive(true);
 
                     playerCams[0].rect = new Rect(0f, 0.5f, 0.5f, 1);
                     playerCams[1].rect = new Rect(0.5f, 0.5f, 0.5f, 1);
@@ -101,18 +97,15 @@ public class PlayerManager : MonoBehaviour
             {
                 case 1:
                     playerCams[0].gameObject.SetActive(true);
-                    playerCanvases[0].SetActive(true);
                     break;
                 case 2:
                     playerCams[1].gameObject.SetActive(true);
-                    playerCanvases[0].SetActive(true);
 
                     playerCams[0].rect = new Rect(0f, 0.5f, 1, 1);
                     playerCams[1].rect = new Rect(0f, -0.5f, 1, 1);
                     break;
                 case 3:
                     playerCams[2].gameObject.SetActive(true);
-                    playerCanvases[0].SetActive(true);
 
                     playerCams[0].rect = new Rect(-0.5f, 0.5f, 1, 1);
                     playerCams[1].rect = new Rect(0.5f, 0.5f, 1, 1);
@@ -120,7 +113,6 @@ public class PlayerManager : MonoBehaviour
                     break;
                 case 4:
                     playerCams[3].gameObject.SetActive(true);
-                    playerCanvases[0].SetActive(true);
 
                     playerCams[0].rect = new Rect(-0.5f, 0.5f, 1, 1);
                     playerCams[1].rect = new Rect(0.5f, 0.5f, 1, 1);
