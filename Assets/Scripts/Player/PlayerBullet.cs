@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
+    [SerializeField] int damage;
+
     private void Start()
     {
         Destroy(gameObject, 3f);
@@ -14,6 +16,7 @@ public class PlayerBullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("HIT " + collision.gameObject.name);
+            collision.gameObject.GetComponent<EnemyHealthTest>().TakeDamage(damage);
         }
         Destroy(gameObject);
     }
