@@ -9,12 +9,12 @@ public class PlayerManager : MonoBehaviour
 
     private PlayerInputManager playerInputManager;
 
-    //[SerializeField] private List<Transform> spawnPoints = new List<Transform>();
-    //public Camera[] playerCams;
-    //public Camera sharedCam;
+    [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
+    public Camera[] playerCams;
+    public Camera sharedCam;
     //[SerializeField] private GameObject[] playerCanvases;
 
-    //[SerializeField] GameObject tempText; //temp
+    [SerializeField] GameObject tempText; //temp
     [SerializeField] bool keepRatio; //temp
 
     public static PlayerManager instance;
@@ -42,8 +42,8 @@ public class PlayerManager : MonoBehaviour
 
     public void AddPlayer(PlayerInput player)
     {
-        //tempText.SetActive(false);  //temp
-        //sharedCam.cullingMask = 0;
+        tempText.SetActive(false);  //temp
+        sharedCam.cullingMask = 0;
 
         player.transform.parent = transform;
 
@@ -54,12 +54,12 @@ public class PlayerManager : MonoBehaviour
         //controller.playerCam = playerCams[players.Count - 1];
         //controller.canvas.worldCamera = playerCams[players.Count - 1];
 
-        //SetSplitScreen();
+        SetSplitScreen();
 
-        //player.transform.position = spawnPoints[players.Count - 1].position;
+        player.transform.position = spawnPoints[players.Count - 1].position;
     }
 
-/*    public void SetSplitScreen()
+    public void SetSplitScreen()
     {
         if (keepRatio)
         {
@@ -127,6 +127,6 @@ public class PlayerManager : MonoBehaviour
                     break;
             }
         }
-    }*/
+    }
 
 }

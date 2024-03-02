@@ -1413,6 +1413,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
+  spawnPoints:
+  - {fileID: 145911923}
+  - {fileID: 2100775325}
+  - {fileID: 1839980757}
+  - {fileID: 1552180868}
+  playerCams:
+  - {fileID: 1195220478}
+  - {fileID: 1423399119}
+  - {fileID: 1344820906}
+  - {fileID: 2122669}
+  sharedCam: {fileID: 1925480288}
+  tempText: {fileID: 916323550}
   keepRatio: 1
 --- !u!1 &500065670
 GameObject:
@@ -2513,7 +2525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &916323551
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3394,7 +3406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &1195220478
 Camera:
   m_ObjectHideFlags: 0
