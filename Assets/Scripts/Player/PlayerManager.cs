@@ -51,12 +51,25 @@ public class PlayerManager : MonoBehaviour
         player.name = "Player" + players.Count;
         PlayerController controller = player.GetComponent<PlayerController>();
         controller.playerNum = players.Count;
-        //controller.playerCam = playerCams[players.Count - 1];
-        //controller.canvas.worldCamera = playerCams[players.Count - 1];
+        controller.playerCam = playerCams[players.Count - 1];
+        controller.canvas.worldCamera = playerCams[players.Count - 1];
 
         SetSplitScreen();
 
         player.transform.position = spawnPoints[players.Count - 1].position;
+    }
+
+    int playersSelected = 1;
+    public void TESTNextPlayerUISelection()
+    {
+        playersSelected++;
+        for(int i = 0; i < players.Count; i++)
+        {
+            if (i == playersSelected)
+                players[i].enabled = true;
+            else
+                players[i].enabled = false;
+        }
     }
 
     public void SetSplitScreen()

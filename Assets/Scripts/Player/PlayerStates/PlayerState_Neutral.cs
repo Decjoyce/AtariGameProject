@@ -101,6 +101,11 @@ public class PlayerState_Neutral : PlayerState_Base
     }
 
 
+    public override void OnAction(PlayerController controller, InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+            controller.currentCharacter.Action(controller);
+    }
 
     void Jump(PlayerController controller)
     {

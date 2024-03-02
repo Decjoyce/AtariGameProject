@@ -561,7 +561,19 @@ MonoBehaviour:
     m_ActionId: 72849393-0cbf-4cc1-af92-d6560762f341
     m_ActionName: GameplayControls/Shoot
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7426833092788421380}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a92c99d5-3f41-473a-b1a3-d137b350b40f
     m_ActionName: GameplayControls/Action[/XInputControllerWindows/buttonWest]
   - m_PersistentCalls:
