@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: Weap_Projectile_TEST
   m_EditorClassIdentifier: Assembly-CSharp::Weapon_Projectile_Single
-  weaponName: 
-  damage: 0
+  weaponName: TEST Pistol
+  damage: 3
   weaponModel: {fileID: 0}
+  holdType: 
+  fireRate: 1
+  reloadSpeed: 5
+  magCapacity: 3
+  reserveCapacity: 2
+  fireSound: {fileID: 0}
+  impactSound: {fileID: 0}

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: Weap_Melee_TEST
   m_EditorClassIdentifier: Assembly-CSharp::Weapon_Melee_Single
-  weaponName: 
-  damage: 0
+  weaponName: TEST DAGGER
+  damage: 5
   weaponModel: {fileID: 0}
-  swingSpeed: 0
+  holdType: 
+  swingSpeed: 2
   swingSound: {fileID: 0}
   impactSound: {fileID: 0}
