@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
     public Character_TEST character_TEST = new Character_TEST();
     public Character_Captain character_Captain = new Character_Captain();
 
+    //public Weapon_Base currentWeapon;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
