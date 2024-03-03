@@ -89,6 +89,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LayerUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""e29c2ef8-30d6-4bb9-a7dc-673297e1ea06"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LayerDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""9bf9aa72-7bac-482c-9408-ae2b99255cb4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.2)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -190,6 +208,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1377bfa-ba76-4156-a1fb-4bcbbdedb6c3"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LayerUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee09f9b0-601e-4563-af2e-7bbde7263b47"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LayerDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -217,6 +257,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_GameplayControls_Shoot = m_GameplayControls.FindAction("Shoot", throwIfNotFound: true);
         m_GameplayControls_Action = m_GameplayControls.FindAction("Action", throwIfNotFound: true);
         m_GameplayControls_Interact = m_GameplayControls.FindAction("Interact", throwIfNotFound: true);
+        m_GameplayControls_LayerUp = m_GameplayControls.FindAction("LayerUp", throwIfNotFound: true);
+        m_GameplayControls_LayerDown = m_GameplayControls.FindAction("LayerDown", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -285,6 +327,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_GameplayControls_Shoot;
     private readonly InputAction m_GameplayControls_Action;
     private readonly InputAction m_GameplayControls_Interact;
+    private readonly InputAction m_GameplayControls_LayerUp;
+    private readonly InputAction m_GameplayControls_LayerDown;
     public struct GameplayControlsActions
     {
         private @PlayerControls m_Wrapper;
@@ -296,6 +340,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_GameplayControls_Shoot;
         public InputAction @Action => m_Wrapper.m_GameplayControls_Action;
         public InputAction @Interact => m_Wrapper.m_GameplayControls_Interact;
+        public InputAction @LayerUp => m_Wrapper.m_GameplayControls_LayerUp;
+        public InputAction @LayerDown => m_Wrapper.m_GameplayControls_LayerDown;
         public InputActionMap Get() { return m_Wrapper.m_GameplayControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -326,6 +372,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @LayerUp.started += instance.OnLayerUp;
+            @LayerUp.performed += instance.OnLayerUp;
+            @LayerUp.canceled += instance.OnLayerUp;
+            @LayerDown.started += instance.OnLayerDown;
+            @LayerDown.performed += instance.OnLayerDown;
+            @LayerDown.canceled += instance.OnLayerDown;
         }
 
         private void UnregisterCallbacks(IGameplayControlsActions instance)
@@ -351,6 +403,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @LayerUp.started -= instance.OnLayerUp;
+            @LayerUp.performed -= instance.OnLayerUp;
+            @LayerUp.canceled -= instance.OnLayerUp;
+            @LayerDown.started -= instance.OnLayerDown;
+            @LayerDown.performed -= instance.OnLayerDown;
+            @LayerDown.canceled -= instance.OnLayerDown;
         }
 
         public void RemoveCallbacks(IGameplayControlsActions instance)
@@ -386,5 +444,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnLayerUp(InputAction.CallbackContext context);
+        void OnLayerDown(InputAction.CallbackContext context);
     }
 }

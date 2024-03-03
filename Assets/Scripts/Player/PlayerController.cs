@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     ////
     //Pivot Height
     public float currentHeight, crouchHeight, normalHeight;
+    //Layering - as in the 3d layers not the unity layers
+    public float currentLayer, layerOffset;
+    public LayerMask layerLayers;
     //Speed
     public float currentSpeed, walkSpeed, crouchSpeed, lerpedAimSpeed;
     //Jumping
@@ -71,6 +74,16 @@ public class PlayerController : MonoBehaviour
     public void OnLook(InputAction.CallbackContext ctx)
     {
         currentState.OnLook(this, ctx);
+    }
+
+    public void OnLayerDown(InputAction.CallbackContext ctx)
+    {
+        currentState.OnLayerDown(this, ctx);
+    }
+
+    public void OnLayerUp(InputAction.CallbackContext ctx)
+    {
+        currentState.OnLayerUp(this, ctx);
     }
 
     public void OnJump(InputAction.CallbackContext ctx)

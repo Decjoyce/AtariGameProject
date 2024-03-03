@@ -592,6 +592,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7b7b11e6-6302-413c-95d9-3a86fc77cc7c
     m_ActionName: GameplayControls/OnInteract[/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7426833092788421380}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnLayerUp
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e29c2ef8-30d6-4bb9-a7dc-673297e1ea06
+    m_ActionName: GameplayControls/LayerChange[/DualShock4GamepadHID/leftTrigger,/XInputControllerWindows/leftTrigger,/DualShock4GamepadHID/rightTrigger,/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7426833092788421380}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnLayerDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9bf9aa72-7bac-482c-9408-ae2b99255cb4
+    m_ActionName: GameplayControls/LayerDown[/DualShock4GamepadHID/leftTrigger,/XInputControllerWindows/leftTrigger]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: BaseControlScheme
   m_DefaultActionMap: GameplayControls
@@ -624,6 +656,11 @@ MonoBehaviour:
   currentHeight: 1.5
   crouchHeight: 0.8
   normalHeight: 1.5
+  currentLayer: 0
+  layerOffset: 2.5
+  layerLayers:
+    serializedVersion: 2
+    m_Bits: 1536
   currentSpeed: 5
   walkSpeed: 5
   crouchSpeed: 3

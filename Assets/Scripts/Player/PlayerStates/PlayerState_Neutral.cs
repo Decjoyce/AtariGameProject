@@ -9,6 +9,7 @@ public class PlayerState_Neutral : PlayerState_Base
 {
     float movementInput;
     Vector2 lookInput;
+    Vector3 vel;
     bool lerpedRotation;
     bool isCrouched;
     bool isJumping;
@@ -72,6 +73,50 @@ public class PlayerState_Neutral : PlayerState_Base
     public override void OnLook(PlayerController controller, InputAction.CallbackContext ctx)
     {
         lookInput = ctx.ReadValue<Vector2>();
+    }
+
+    public override void OnLayerDown(PlayerController controller, InputAction.CallbackContext ctx)
+    {
+        if (controller.isGrounded && ctx.performed)
+        {
+            Vector3 checkObstacleSize = new(0.5f, 2f, controller.layerOffset / 2);
+            Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.y + controller.layerOffset/2);
+            int numCollisions = Physics.OverlapBox(checkObstaclePos, checkObstacleSize, Quaternion.identity, controller.layerLayers).Length;
+
+            //RaycastHit hit;
+            //!Physics.Raycast(controller.transform.position, controller.transform.forward, out hit, controller.layerOffset, controller.layerLayers)
+            if (numCollisions <= 0)
+            {
+                controller.currentLayer += controller.layerOffset;
+                if (controller.currentLayer > controller.layerOffset)
+                    controller.currentLayer = controller.layerOffset;
+
+                Vector3 newPos = new(rb.position.x, rb.position.y, controller.currentLayer);
+                rb.MovePosition(newPos + vel);
+            }
+        }
+    }
+
+    public override void OnLayerUp(PlayerController controller, InputAction.CallbackContext ctx)
+    {
+        if (controller.isGrounded && ctx.performed)
+        {
+            Vector3 checkObstacleSize = new(0.5f, 2f, controller.layerOffset / 2);
+            Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.y - controller.layerOffset / 2);
+            int numCollisions = Physics.OverlapBox(checkObstaclePos, checkObstacleSize, Quaternion.identity, controller.layerLayers).Length;
+
+            //RaycastHit hit;
+            //!Physics.Raycast(controller.transform.position, -controller.transform.forward, out hit, controller.layerOffset, controller.layerLayers))
+            if (numCollisions <= 0)
+            {
+                controller.currentLayer -= controller.layerOffset;
+                if (controller.currentLayer < -controller.layerOffset)
+                    controller.currentLayer = -controller.layerOffset;
+
+                Vector3 newPos = new(rb.position.x, rb.position.y, controller.currentLayer);
+                rb.MovePosition(newPos + vel);
+            }
+        }
     }
 
     public override void OnJump(PlayerController controller, InputAction.CallbackContext ctx)

@@ -28,6 +28,16 @@ public abstract class PlayerState_Base
 
     }
 
+    public virtual void OnLayerDown(PlayerController controller, InputAction.CallbackContext ctx)
+    {
+
+    }
+
+    public virtual void OnLayerUp(PlayerController controller, InputAction.CallbackContext ctx)
+    {
+
+    }
+
     public virtual void OnJump(PlayerController controller, InputAction.CallbackContext ctx)
     {
 
