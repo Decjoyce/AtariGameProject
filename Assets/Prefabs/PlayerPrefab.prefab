@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 815842970077995047}
   - component: {fileID: 1636335342371811009}
   - component: {fileID: 7426833092788421380}
+  - component: {fileID: 4591346196035371541}
   - component: {fileID: 3197097366858936561}
   - component: {fileID: 8124268400481534176}
   - component: {fileID: 692459879546678373}
@@ -641,21 +642,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608ab4a004fe9a543b08a63ad1b43e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 0
-  interaction: {fileID: 0}
   playerCam: {fileID: 0}
   rb: {fileID: 8124268400481534176}
   col: {fileID: 0}
   canvas: {fileID: 8654108079530258661}
   pivot: {fileID: 7386889648952322511}
-  firePoint: {fileID: 5998401415215566978}
-  bulletPrefab: {fileID: 1112150731768423405, guid: 3435b869aa0fa57429206004c09d53a4, type: 3}
-  bulletForce: 20
-  standGraphics: {fileID: 2714775601070898450}
-  crouchGraphics: {fileID: 6561160724514354392}
-  currentHeight: 1.5
-  crouchHeight: 0.8
-  normalHeight: 1.5
   currentLayer: 0
   layerOffset: 2.5
   layerLayers:
@@ -672,6 +663,25 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 256
+  standGraphics: {fileID: 2714775601070898450}
+  crouchGraphics: {fileID: 6561160724514354392}
+  currentHeight: 1.5
+  crouchHeight: 0.8
+  normalHeight: 1.5
+--- !u!114 &4591346196035371541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941526012871332646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67dd70fa14bc2547a99867c19a70d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 11400000, guid: 9af29d2fd0ef339489d8e0b5b57943b3, type: 2}
+  firePoint: {fileID: 5998401415215566978}
 --- !u!114 &3197097366858936561
 MonoBehaviour:
   m_ObjectHideFlags: 0

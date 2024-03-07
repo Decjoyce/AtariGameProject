@@ -83,8 +83,6 @@ public class PlayerState_Neutral : PlayerState_Base
             Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.y + controller.layerOffset/2);
             int numCollisions = Physics.OverlapBox(checkObstaclePos, checkObstacleSize, Quaternion.identity, controller.layerLayers).Length;
 
-            //RaycastHit hit;
-            //!Physics.Raycast(controller.transform.position, controller.transform.forward, out hit, controller.layerOffset, controller.layerLayers)
             if (numCollisions <= 0)
             {
                 controller.currentLayer += controller.layerOffset;
@@ -105,8 +103,6 @@ public class PlayerState_Neutral : PlayerState_Base
             Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.y - controller.layerOffset / 2);
             int numCollisions = Physics.OverlapBox(checkObstaclePos, checkObstacleSize, Quaternion.identity, controller.layerLayers).Length;
 
-            //RaycastHit hit;
-            //!Physics.Raycast(controller.transform.position, -controller.transform.forward, out hit, controller.layerOffset, controller.layerLayers))
             if (numCollisions <= 0)
             {
                 controller.currentLayer -= controller.layerOffset;
@@ -135,8 +131,7 @@ public class PlayerState_Neutral : PlayerState_Base
 
     public override void OnShoot(PlayerController controller, InputAction.CallbackContext ctx)
     {
-        if(ctx.performed)
-            Shoot(controller);
+        controller.attack.Attack(ctx);
     }
 
     public override void OnInteract(PlayerController controller, InputAction.CallbackContext ctx)
@@ -185,15 +180,8 @@ public class PlayerState_Neutral : PlayerState_Base
             controller.crouchGraphics.SetActive(false); //Temp
             controller.standGraphics.SetActive(true); //Temp
         }
+
         Vector3 newPos = new Vector3(0, controller.currentHeight, 0);
         controller.pivot.localPosition = newPos;
     }
-
-    //Here until functionality for weapons is added
-    void Shoot(PlayerController controller)
-    {
-        GameObject bullet = controller.HelpInstantiate(controller.bulletPrefab, controller.firePoint.transform.position, controller.pivot.transform.rotation);
-        bullet.GetComponent<Rigidbody>().AddForce(controller.firePoint.transform.up * controller.bulletForce, ForceMode.Impulse);
-    }
-
 }

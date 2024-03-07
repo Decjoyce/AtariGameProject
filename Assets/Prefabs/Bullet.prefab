@@ -48,7 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa0349d2164b0644817640f031720cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  rb: {fileID: 6135950335788547709}
+  damage: 5
+  forwardForce: 20
+  upwardForce: 0
+  torqueForce: 0
+  delayBeforeDelete: 3
 --- !u!33 &3878263138014491432
 MeshFilter:
   m_ObjectHideFlags: 0

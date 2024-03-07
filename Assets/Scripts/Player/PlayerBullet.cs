@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
+    [SerializeField] Rigidbody rb;
     [SerializeField] int damage;
+    [SerializeField] float forwardForce, upwardForce,torqueForce; //Upwards force dont work bc up is right and right is up and when pivot rotates it messes it up and stuff so ye need to fix basically
+    [SerializeField] float delayBeforeDelete = 3f;
 
     private void Start()
     {
-        Destroy(gameObject, 3f);
+        rb.AddForce((transform.right * -upwardForce) + (transform.up * forwardForce), ForceMode.Impulse);
+        rb.AddTorque(transform.forward * torqueForce);
+        Destroy(gameObject, delayBeforeDelete);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -18,6 +23,7 @@ public class PlayerBullet : MonoBehaviour
             Debug.Log("HIT " + collision.gameObject.name);
             collision.gameObject.GetComponent<EnemyHealthTest>().TakeDamage(damage);
         }
+        Debug.Log("HIT " + collision.gameObject.name);
         Destroy(gameObject);
     }
 }
