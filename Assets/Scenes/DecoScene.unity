@@ -2925,6 +2925,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1004619749}
   - component: {fileID: 1004619750}
+  - component: {fileID: 1004619751}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -2976,6 +2977,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1004619751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004619748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b82258432037b9488c384502a3331a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1013064141
 GameObject:
   m_ObjectHideFlags: 0
@@ -3212,7 +3225,7 @@ GameObject:
   - component: {fileID: 1044238494}
   - component: {fileID: 1044238493}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Graphic_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3829,7 +3842,7 @@ GameObject:
   - component: {fileID: 1295686403}
   - component: {fileID: 1295686402}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Graphic_Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4310,7 +4323,7 @@ GameObject:
   - component: {fileID: 1417227704}
   - component: {fileID: 1417227703}
   m_Layer: 0
-  m_Name: Base
+  m_Name: Graphic_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
