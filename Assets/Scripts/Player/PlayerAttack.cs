@@ -7,7 +7,7 @@ public class PlayerAttack : MonoBehaviour
 {
     PlayerController controller;
 
-    public WeaponType currentWeapon;
+    public Weapon currentWeapon;
     public WeaponType testWeap;
 
     [SerializeField] Transform firePoint;
@@ -44,7 +44,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext ctx)
     {
-        switch (currentWeapon.attackType)
+        switch (currentWeapon.weapon.attackType)
         {
             case AttackType.single:
                 SingleShot(ctx);
@@ -62,7 +62,7 @@ public class PlayerAttack : MonoBehaviour
                 SwingMelee(ctx);
                 break;
             default:
-                Debug.LogError("ERROR: the AttackType - " + currentWeapon.attackType.ToString() + " - is invalid");
+                Debug.LogError("ERROR: the AttackType - " + currentWeapon.weapon.attackType.ToString() + " - is invalid");
                 break;
         }
     }
@@ -71,8 +71,8 @@ public class PlayerAttack : MonoBehaviour
     {
         Debug.Log("Relaoding");
         isReloading = true;
-        yield return new WaitForSecondsRealtime(currentWeapon.reloadSpeed);
-        currentWeapon.currentAmmo = currentWeapon.magCapacity;
+        yield return new WaitForSecondsRealtime(currentWeapon.weapon.reloadSpeed);
+        currentWeapon.currentAmmo = currentWeapon.weapon.magCapacity;
         isReloading = false;
     }
 
@@ -83,16 +83,16 @@ public class PlayerAttack : MonoBehaviour
         isReloading = false;
         canAttack = true;
         attackDelay = 0;
-        currentWeapon = testWeap;
+        currentWeapon.weapon = testWeap;
     }
 
     private void SingleShot(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && !isReloading && canAttack)
         {
-            Instantiate(currentWeapon.projectile, firePoint.position, firePoint.rotation);
+            Instantiate(currentWeapon.weapon.projectile, firePoint.position, firePoint.rotation);
             canAttack = false;
-            attackDelay = currentWeapon.fireRate;
+            attackDelay = currentWeapon.weapon.fireRate;
             currentWeapon.currentAmmo--;
             if (currentWeapon.currentAmmo == 0)
                 currentReloadCoroutine = StartCoroutine(Reload());
@@ -103,10 +103,10 @@ public class PlayerAttack : MonoBehaviour
     {
         if (canAttack && !isReloading)
         {
-            Instantiate(currentWeapon.projectile, firePoint.position, firePoint.rotation);
+            Instantiate(currentWeapon.weapon.projectile, firePoint.position, firePoint.rotation);
 
             canAttack = false;
-            attackDelay = currentWeapon.fireRate;
+            attackDelay = currentWeapon.weapon.fireRate;
 
             currentWeapon.currentAmmo--;
             if (currentWeapon.currentAmmo == 0)
@@ -118,10 +118,10 @@ public class PlayerAttack : MonoBehaviour
     {
         if (ctx.performed && canAttack)
         {
-            Instantiate(currentWeapon.projectile, firePoint.position, firePoint.rotation);
+            Instantiate(currentWeapon.weapon.projectile, firePoint.position, firePoint.rotation);
 
             canAttack = false;
-            attackDelay = currentWeapon.fireRate;
+            attackDelay = currentWeapon.weapon.fireRate;
         }
     }
 
@@ -129,10 +129,10 @@ public class PlayerAttack : MonoBehaviour
     {
         if (ctx.performed && canAttack)
         {
-            Instantiate(currentWeapon.projectile, firePoint.position, firePoint.rotation);
+            Instantiate(currentWeapon.weapon.projectile, firePoint.position, firePoint.rotation);
 
             canAttack = false;
-            attackDelay = currentWeapon.fireRate;
+            attackDelay = currentWeapon.weapon.fireRate;
         }
     }
 

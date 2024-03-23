@@ -16,7 +16,6 @@ public class WeaponType: ScriptableObject
     [Header("Stats")]
     public float fireRate;
     public float reloadSpeed;
-    public int currentAmmo;
     public int magCapacity;
     public int reserveCapacity;
 
