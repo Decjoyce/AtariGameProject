@@ -775,8 +775,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 9af29d2fd0ef339489d8e0b5b57943b3, type: 2}
-  currentAmmo: 50
-  currentCapacity: 50
+  currentAmmo: 1
+  currentCapacity: 5
 --- !u!1 &8710672970288746243
 GameObject:
   m_ObjectHideFlags: 0

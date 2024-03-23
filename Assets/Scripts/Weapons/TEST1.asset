@@ -18,7 +18,7 @@ MonoBehaviour:
   projectile: {fileID: 1112150731768423405, guid: 3435b869aa0fa57429206004c09d53a4, type: 3}
   weaponModel: {fileID: 0}
   fireRate: 2
-  reloadSpeed: 0
+  reloadSpeed: 5
   magCapacity: 5
   reserveCapacity: 0
   fireSound: {fileID: 0}
