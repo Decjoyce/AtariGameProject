@@ -19,7 +19,6 @@ MonoBehaviour:
   weaponModel: {fileID: 0}
   fireRate: 2
   reloadSpeed: 0
-  currentAmmo: 4
   magCapacity: 5
   reserveCapacity: 0
   fireSound: {fileID: 0}

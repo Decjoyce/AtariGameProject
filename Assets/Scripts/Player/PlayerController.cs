@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public float walkSpeed;
     public float crouchSpeed;
     public float lerpedAimSpeed;
+    public float switchLaneSpeed;
 
     [Header("Jumping")]
     public float jumpHeight;

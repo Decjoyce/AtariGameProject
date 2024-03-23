@@ -13,6 +13,7 @@ public class PlayerState_Neutral : PlayerState_Base
     bool lerpedRotation;
     bool isCrouched;
     bool isJumping;
+    bool isSwitchingLanes;
     Rigidbody rb;
 
     float standColiderHeight = 2f;
@@ -52,6 +53,24 @@ public class PlayerState_Neutral : PlayerState_Base
                 newRot = Quaternion.Euler(0, 0, newAngle);
             controller.pivot.rotation = newRot;
         }
+
+        if (isSwitchingLanes)
+        {
+            if (controller.transform.position.z > controller.currentLayer + 0.025f || controller.transform.position.z < controller.currentLayer - 0.025f)
+            {
+                float newLanePos = Mathf.Lerp(controller.transform.position.z, controller.currentLayer, controller.switchLaneSpeed * Time.deltaTime);
+                Vector3 newPos = new(rb.position.x, rb.position.y, newLanePos);
+                rb.MovePosition(newPos + vel);
+                Debug.Log("sdmspo");
+            }
+            else
+            {
+                Vector3 newPos = new(rb.position.x, rb.position.y, controller.currentLayer);
+                rb.MovePosition(newPos + vel);
+                isSwitchingLanes = false;
+                Debug.Log("asdadw");
+            }
+        }
     }
 
     public override void PhysicsUpdate(PlayerController controller)
@@ -77,7 +96,7 @@ public class PlayerState_Neutral : PlayerState_Base
 
     public override void OnLayerDown(PlayerController controller, InputAction.CallbackContext ctx)
     {
-        if (controller.isGrounded && ctx.performed)
+        if (controller.isGrounded && ctx.performed && !isSwitchingLanes)
         {
             Vector3 checkObstacleSize = new(0.5f, 2f, controller.layerOffset / 2);
             Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.y + controller.layerOffset/2);
@@ -89,15 +108,14 @@ public class PlayerState_Neutral : PlayerState_Base
                 if (controller.currentLayer > controller.layerOffset)
                     controller.currentLayer = controller.layerOffset;
 
-                Vector3 newPos = new(rb.position.x, rb.position.y, controller.currentLayer);
-                rb.MovePosition(newPos + vel);
+                isSwitchingLanes = true;
             }
         }
     }
 
     public override void OnLayerUp(PlayerController controller, InputAction.CallbackContext ctx)
     {
-        if (controller.isGrounded && ctx.performed)
+        if (controller.isGrounded && ctx.performed && !isSwitchingLanes)
         {
             Vector3 checkObstacleSize = new(0.5f, 2f, controller.layerOffset / 2);
             Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.y - controller.layerOffset / 2);
@@ -109,8 +127,7 @@ public class PlayerState_Neutral : PlayerState_Base
                 if (controller.currentLayer < -controller.layerOffset)
                     controller.currentLayer = -controller.layerOffset;
 
-                Vector3 newPos = new(rb.position.x, rb.position.y, controller.currentLayer);
-                rb.MovePosition(newPos + vel);
+                isSwitchingLanes = true;
             }
         }
     }
