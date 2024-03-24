@@ -8,6 +8,7 @@ public class Enemy_Turret : MonoBehaviour
     public Transform y_pivot, x_pivot;
     public LayerMask ignoreLayers;
     public GameObject projectile;
+    [SerializeField] ProximityTrigger proxTrig;
 
     public Transform target;
     public List<Transform> targets = new List<Transform>();
@@ -26,6 +27,18 @@ public class Enemy_Turret : MonoBehaviour
         currentState.EnterState(this);
     }
 
+    private void OnEnable()
+    {
+        proxTrig.OnEnter += OnProximityTriggerEnter;
+        proxTrig.OnExit += OnProximityTriggerExit;
+    }
+
+    private void OnDisable()
+    {
+        proxTrig.OnEnter -= OnProximityTriggerEnter;
+        proxTrig.OnExit -= OnProximityTriggerExit;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -37,12 +50,12 @@ public class Enemy_Turret : MonoBehaviour
         currentState.PhysicsUpdate(this);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnProximityTriggerEnter(Collider other)
     {
         currentState.OnTriggerEnter(this, other);
     }
 
-    private void OnTriggerExit(Collider other)
+    public void OnProximityTriggerExit(Collider other)
     {
         currentState.OnTriggerExit(this, other);
     }

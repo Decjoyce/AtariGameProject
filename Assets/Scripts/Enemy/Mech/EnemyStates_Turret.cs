@@ -42,9 +42,9 @@ public class TurretState_Idle : EnemyStates_Turret
     {
         if(controller.x_pivot.localRotation.x != 0 || controller.y_pivot.localRotation.y != 0)
         {        
-            float newYAngle = Mathf.LerpAngle(controller.y_pivot.localEulerAngles.y, 0, 0.05f);
+            float newYAngle = Mathf.LerpAngle(controller.y_pivot.localEulerAngles.y, 0, 0.005f);
             controller.y_pivot.rotation = Quaternion.Euler(0, newYAngle, 0);
-            float newXAngle = Mathf.LerpAngle(controller.x_pivot.localEulerAngles.x, 0, 0.05f);
+            float newXAngle = Mathf.LerpAngle(controller.x_pivot.localEulerAngles.x, 0, 0.005f);
             controller.x_pivot.rotation = Quaternion.Euler(newXAngle, 0, 0);
         }
     }

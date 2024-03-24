@@ -12,15 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a637e49a52b4fe4fb9c22d14bdf6a23, type: 3}
   m_Name: TEST2
   m_EditorClassIdentifier: 
-  weaponName: 
+  weaponName: SMG
   attackType: 1
   holdType: 
   projectile: {fileID: 1112150731768423405, guid: 3435b869aa0fa57429206004c09d53a4, type: 3}
   weaponModel: {fileID: 0}
-  fireRate: 0.2
-  reloadSpeed: 0
-  currentAmmo: 5
-  magCapacity: 0
-  reserveCapacity: 0
+  fireRate: 0.08
+  reloadSpeed: 3
+  magCapacity: 20
+  reserveCapacity: 100
   fireSound: {fileID: 0}
   impactSound: {fileID: 0}

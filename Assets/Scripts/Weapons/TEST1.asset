@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a637e49a52b4fe4fb9c22d14bdf6a23, type: 3}
   m_Name: TEST1
   m_EditorClassIdentifier: 
-  weaponName: 
+  weaponName: Pistol
   attackType: 0
   holdType: 
   projectile: {fileID: 1112150731768423405, guid: 3435b869aa0fa57429206004c09d53a4, type: 3}
   weaponModel: {fileID: 0}
-  fireRate: 2
-  reloadSpeed: 5
-  magCapacity: 5
-  reserveCapacity: 0
+  fireRate: 0.1
+  reloadSpeed: 1.5
+  magCapacity: 7
+  reserveCapacity: 35
   fireSound: {fileID: 0}
   impactSound: {fileID: 0}

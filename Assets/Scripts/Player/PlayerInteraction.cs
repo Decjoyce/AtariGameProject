@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    PlayerController controller;
+    [HideInInspector] public PlayerController controller;
+    [HideInInspector] public PlayerAttack attack;
 
     private List<Interactable> availableInteractions = new List<Interactable>();
 
@@ -18,6 +19,7 @@ public class PlayerInteraction : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlayerController>();
+        attack = GetComponent<PlayerAttack>();
     }
 
     private void Update()

@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public WeaponType weapon;
-
-    public int currentAmmo;
-    public int currentCapacity;
+//Obsolete
 
 }
