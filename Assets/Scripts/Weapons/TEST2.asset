@@ -17,7 +17,7 @@ MonoBehaviour:
   holdType: 
   projectile: {fileID: 1112150731768423405, guid: 3435b869aa0fa57429206004c09d53a4, type: 3}
   weaponModel: {fileID: 0}
-  fireRate: 0.08
+  fireRate: 0.1
   reloadSpeed: 3
   magCapacity: 20
   reserveCapacity: 100

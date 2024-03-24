@@ -73,7 +73,8 @@ public class PlayerAttack : MonoBehaviour
         if (currentAmmo == 0)
         {
             weaponMesh.material.SetColor("_EmissionColor", Color.red); //temp
-            currentReloadCoroutine = StartCoroutine(Reload());
+            if(currentReserve != 0)
+                currentReloadCoroutine = StartCoroutine(Reload());
         }
 
     }
