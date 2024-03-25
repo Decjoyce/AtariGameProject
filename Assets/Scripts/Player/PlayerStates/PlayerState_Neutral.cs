@@ -10,7 +10,7 @@ public class PlayerState_Neutral : PlayerState_Base
     float movementInput;
     Vector2 lookInput;
     Vector3 vel;
-    bool lerpedRotation;
+    bool lerpedRotation = true;
     bool isCrouched;
     bool isJumping;
     bool isSwitchingLanes;
@@ -48,7 +48,7 @@ public class PlayerState_Neutral : PlayerState_Base
             float newAngle = ExtensionMethods.ModularClamp(angle, -110f, 110f);
             Quaternion newRot;
             if (lerpedRotation)
-                newRot = Quaternion.Lerp(controller.pivot.rotation, Quaternion.Euler(newAngle, 0, 0), controller.lerpedAimSpeed * Time.deltaTime);
+                newRot = Quaternion.Lerp(controller.pivot.rotation, Quaternion.Euler(0, 0, newAngle), controller.lerpedAimSpeed * Time.deltaTime);
             else
                 newRot = Quaternion.Euler(0, 0, newAngle);
             controller.pivot.rotation = newRot;
