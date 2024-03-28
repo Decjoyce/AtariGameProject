@@ -27,16 +27,16 @@ public class PlayerBullet : MonoBehaviour
         {
             Debug.Log("HIT " + collision.gameObject.name);
             float dist = Vector3.Distance(transform.position, startPos);
-            if(dist < range)
+            if (dist < range)
             {
                 collision.gameObject.GetComponent<EnemyHealthTest>().TakeDamage(damage);
-                Debug.Log("IN RANGE: " + damage);
+                Debug.Log("IN RANGE - Dam: " + damage + " Dist: " + dist);
             }
             else
             {
-                float newDam = (damage / (dist - range) * (dist - range));
+                float newDam = damage / ((dist * dist) / (range * range));
                 collision.gameObject.GetComponent<EnemyHealthTest>().TakeDamage(newDam);
-                Debug.Log("OUT OF RANGE: " + newDam);
+                Debug.Log("OUT OF RANGE - Dam: " + newDam + " Dist:" + dist);
             }
 
         }
