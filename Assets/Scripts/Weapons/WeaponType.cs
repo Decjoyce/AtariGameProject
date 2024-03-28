@@ -10,14 +10,22 @@ public class WeaponType: ScriptableObject
     public string weaponName;
     public AttackType attackType;
     public string holdType;
-    public GameObject projectile;
     public GameObject weaponModel;
 
-    [Header("Stats")]
+    [Header("General Stats")]
     public float fireRate;
+
+    [Header("Projectile Stats")]
+    public GameObject projectile;
     public float reloadSpeed;
     public int magCapacity;
     public int reserveCapacity;
+
+    [Header("Melee Stats")]
+    public float meleeDamage;
+    public float meleeRange;
+    public float radius;
+    public float speed;
 
     [Header("Aesthetics")]
     public AudioClip fireSound;

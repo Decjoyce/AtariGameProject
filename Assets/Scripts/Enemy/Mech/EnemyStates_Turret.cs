@@ -93,7 +93,7 @@ public class TurretState_Aggro : EnemyStates_Turret
                 RaycastHit hit;
                 if(Physics.Raycast(controller.firePoint.position, controller.firePoint.up, out hit, Mathf.Infinity, controller.ignoreLayers))
                 {
-                    Debug.Log("HIT " + hit.transform.name);
+                    //Debug.Log("HIT " + hit.transform.name);
                     if (hit.transform.CompareTag("Player"))
                     {
                         controller.HelpInstantiate(controller.firePoint.position, controller.firePoint.rotation);

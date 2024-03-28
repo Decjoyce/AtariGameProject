@@ -96,7 +96,7 @@ public class PlayerState_Neutral : PlayerState_Base
 
     public override void OnLayerDown(PlayerController controller, InputAction.CallbackContext ctx)
     {
-        if (controller.isGrounded && ctx.performed && !isSwitchingLanes)
+        if (controller.isGrounded && ctx.performed)
         {
             Vector3 checkObstacleSize = new(0.5f, 2f, controller.layerOffset / 2);
             Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.y + controller.layerOffset/2);
@@ -115,7 +115,7 @@ public class PlayerState_Neutral : PlayerState_Base
 
     public override void OnLayerUp(PlayerController controller, InputAction.CallbackContext ctx)
     {
-        if (controller.isGrounded && ctx.performed && !isSwitchingLanes)
+        if (controller.isGrounded && ctx.performed)
         {
             Vector3 checkObstacleSize = new(0.5f, 2f, controller.layerOffset / 2);
             Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.y - controller.layerOffset / 2);
@@ -163,6 +163,23 @@ public class PlayerState_Neutral : PlayerState_Base
         if (ctx.performed)
             controller.currentCharacter.Action(controller);
     }
+
+    public override void OnReload(PlayerController controller, InputAction.CallbackContext ctx)
+    {
+        if (ctx.canceled)
+        {
+            controller.attack.PerformReload();
+        }
+        else if (ctx.performed)
+        {
+            controller.attack.DropWeapon(true);
+        }
+    }
+
+
+
+
+
 
     void Jump(PlayerController controller)
     {

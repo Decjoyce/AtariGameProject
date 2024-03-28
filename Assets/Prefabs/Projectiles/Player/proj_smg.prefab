@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3332005423018080123}
-  - component: {fileID: 2579376444552749079}
+  - component: {fileID: 4218218547394294748}
   - component: {fileID: 3878263138014491432}
   - component: {fileID: 4954892936018453448}
   - component: {fileID: 2329368756154790555}
   - component: {fileID: 6135950335788547709}
-  m_Layer: 11
-  m_Name: TurretBullet
+  m_Layer: 7
+  m_Name: proj_smg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,7 +36,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2579376444552749079
+--- !u!114 &4218218547394294748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,15 +45,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1112150731768423405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb89c9eef1463c9469ef14d76fab54b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fa0349d2164b0644817640f031720cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6135950335788547709}
-  damage: 5
-  forwardForce: 65
+  damage: 3
+  forwardForce: 20
   upwardForce: 0
   torqueForce: 0
-  delayBeforeDelete: 3
+  delayBeforeDelete: 5
 --- !u!33 &3878263138014491432
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -82,7 +82,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7cfbcb04a64e97488ecd45de389611c, type: 2}
+  - {fileID: 2100000, guid: 71b3ff7e36563f5499df04e2a361e650, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

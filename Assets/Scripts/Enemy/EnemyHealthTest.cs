@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemyHealthTest : MonoBehaviour
 {
-    public int currentHealth;
+    public float currentHealth;
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         currentHealth -= amount;
         if(currentHealth <= 0)

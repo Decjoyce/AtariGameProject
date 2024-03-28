@@ -82,6 +82,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""272f9a24-5fe7-4cca-a3c4-c4ba6d848590"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""7b7b11e6-6302-413c-95d9-3a86fc77cc7c"",
@@ -230,6 +239,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""LayerDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2237c311-8580-499b-8b15-2a4a2d84421a"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -256,6 +276,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_GameplayControls_Crouch = m_GameplayControls.FindAction("Crouch", throwIfNotFound: true);
         m_GameplayControls_Shoot = m_GameplayControls.FindAction("Shoot", throwIfNotFound: true);
         m_GameplayControls_Action = m_GameplayControls.FindAction("Action", throwIfNotFound: true);
+        m_GameplayControls_Reload = m_GameplayControls.FindAction("Reload", throwIfNotFound: true);
         m_GameplayControls_Interact = m_GameplayControls.FindAction("Interact", throwIfNotFound: true);
         m_GameplayControls_LayerUp = m_GameplayControls.FindAction("LayerUp", throwIfNotFound: true);
         m_GameplayControls_LayerDown = m_GameplayControls.FindAction("LayerDown", throwIfNotFound: true);
@@ -326,6 +347,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_GameplayControls_Crouch;
     private readonly InputAction m_GameplayControls_Shoot;
     private readonly InputAction m_GameplayControls_Action;
+    private readonly InputAction m_GameplayControls_Reload;
     private readonly InputAction m_GameplayControls_Interact;
     private readonly InputAction m_GameplayControls_LayerUp;
     private readonly InputAction m_GameplayControls_LayerDown;
@@ -339,6 +361,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_GameplayControls_Crouch;
         public InputAction @Shoot => m_Wrapper.m_GameplayControls_Shoot;
         public InputAction @Action => m_Wrapper.m_GameplayControls_Action;
+        public InputAction @Reload => m_Wrapper.m_GameplayControls_Reload;
         public InputAction @Interact => m_Wrapper.m_GameplayControls_Interact;
         public InputAction @LayerUp => m_Wrapper.m_GameplayControls_LayerUp;
         public InputAction @LayerDown => m_Wrapper.m_GameplayControls_LayerDown;
@@ -369,6 +392,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Action.started += instance.OnAction;
             @Action.performed += instance.OnAction;
             @Action.canceled += instance.OnAction;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -400,6 +426,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Action.started -= instance.OnAction;
             @Action.performed -= instance.OnAction;
             @Action.canceled -= instance.OnAction;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -443,6 +472,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnLayerUp(InputAction.CallbackContext context);
         void OnLayerDown(InputAction.CallbackContext context);

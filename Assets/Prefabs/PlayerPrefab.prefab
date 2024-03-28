@@ -626,6 +626,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 9bf9aa72-7bac-482c-9408-ae2b99255cb4
     m_ActionName: GameplayControls/LayerDown[/DualShock4GamepadHID/leftTrigger,/XInputControllerWindows/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7426833092788421380}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnReload
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 272f9a24-5fe7-4cca-a3c4-c4ba6d848590
+    m_ActionName: GameplayControls/Reload[/DualShock4GamepadHID/buttonEast,/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: BaseControlScheme
   m_DefaultActionMap: GameplayControls
@@ -685,6 +701,7 @@ MonoBehaviour:
   firePoint: {fileID: 5998401415215566978}
   weaponMesh: {fileID: 6180794187780701295}
   defaultWeapon: {fileID: 11400000, guid: 9af29d2fd0ef339489d8e0b5b57943b3, type: 2}
+  fists: {fileID: 11400000, guid: f2f1e677da7b57a4288db014c6e99b7f, type: 2}
   droppedWeaponPrefab: {fileID: 2982337102470626192, guid: e72ade0b948578d48a314d9264f6cf3d, type: 3}
 --- !u!114 &3197097366858936561
 MonoBehaviour:

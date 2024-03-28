@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a637e49a52b4fe4fb9c22d14bdf6a23, type: 3}
+  m_Name: wpn_pistol
+  m_EditorClassIdentifier: 
+  weaponName: Pistol
+  attackType: 0
+  holdType: 
+  weaponModel: {fileID: 0}
+  fireRate: 0.1
+  projectile: {fileID: 1112150731768423405, guid: 3435b869aa0fa57429206004c09d53a4, type: 3}
+  reloadSpeed: 1.5
+  magCapacity: 7
+  reserveCapacity: 35
+  meleeDamage: 0
+  meleeRange: 0
+  radius: 0
+  speed: 0
+  fireSound: {fileID: 0}
+  impactSound: {fileID: 0}

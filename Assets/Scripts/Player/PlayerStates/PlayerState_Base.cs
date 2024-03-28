@@ -62,4 +62,9 @@ public abstract class PlayerState_Base
     {
 
     }
+
+    public virtual void OnReload(PlayerController controller, InputAction.CallbackContext ctx)
+    {
+        
+    }
 }

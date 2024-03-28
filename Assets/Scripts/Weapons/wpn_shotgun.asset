@@ -10,16 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a637e49a52b4fe4fb9c22d14bdf6a23, type: 3}
-  m_Name: TEST2
+  m_Name: wpn_shotgun
   m_EditorClassIdentifier: 
-  weaponName: SMG
-  attackType: 1
+  weaponName: Shotgun
+  attackType: 0
   holdType: 
-  projectile: {fileID: 1112150731768423405, guid: 3435b869aa0fa57429206004c09d53a4, type: 3}
   weaponModel: {fileID: 0}
-  fireRate: 0.1
-  reloadSpeed: 3
-  magCapacity: 20
-  reserveCapacity: 100
+  fireRate: 1
+  projectile: {fileID: 0}
+  reloadSpeed: 5
+  magCapacity: 5
+  reserveCapacity: 25
+  meleeDamage: 0
+  meleeRange: 0
+  radius: 0
+  speed: 0
   fireSound: {fileID: 0}
   impactSound: {fileID: 0}

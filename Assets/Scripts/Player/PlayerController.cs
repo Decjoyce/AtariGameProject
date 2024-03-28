@@ -126,6 +126,11 @@ public class PlayerController : MonoBehaviour
         currentState.OnInteract(this, ctx);
     }
 
+    public void OnReload(InputAction.CallbackContext ctx)
+    {
+        currentState.OnReload(this, ctx);
+    }
+
     public void SwitchState(string newState, bool performExit = true)
     {
         if (performExit)

@@ -20,10 +20,10 @@ public class EnemyProjectile : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("HIT " + collision.gameObject.name);
+            //Debug.Log("HIT " + collision.gameObject.name);
             collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
-        Debug.Log("HIT " + collision.gameObject.name);
+        //Debug.Log("HIT " + collision.gameObject.name);
         Destroy(gameObject);
     }
 }

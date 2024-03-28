@@ -10,16 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a637e49a52b4fe4fb9c22d14bdf6a23, type: 3}
-  m_Name: TEST1
+  m_Name: wpn_fists
   m_EditorClassIdentifier: 
-  weaponName: Pistol
-  attackType: 0
+  weaponName: Fists
+  attackType: 3
   holdType: 
-  projectile: {fileID: 1112150731768423405, guid: 3435b869aa0fa57429206004c09d53a4, type: 3}
   weaponModel: {fileID: 0}
   fireRate: 0.1
-  reloadSpeed: 1.5
-  magCapacity: 7
-  reserveCapacity: 35
+  projectile: {fileID: 1651700291602923542, guid: 8b1f506fcb6abc34a87850f6fa7ebe91, type: 3}
+  reloadSpeed: 0
+  magCapacity: 100
+  reserveCapacity: 100
+  meleeDamage: 2
+  meleeRange: 2
+  radius: 0.2
+  speed: 3
   fireSound: {fileID: 0}
   impactSound: {fileID: 0}
