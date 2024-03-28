@@ -11,7 +11,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] MeshRenderer weaponMesh; //Temp
 
     WeaponType weapon;
-    [SerializeField] WeaponType defaultWeapon;
+    [SerializeField] WeaponType defaultWeapon, fists;
     int currentAmmo, currentReserve;
     bool canAttack = true, isReloading;
     bool isAutoFiring;
@@ -53,16 +53,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void PickUpWeapon(WeaponType newWeapon, int newAmmo, int newReserve)
     {
-        if (currentReloadCoroutine != null)
-            StopCoroutine(currentReloadCoroutine);
-
-        isAutoFiring = false;
-        isReloading = false;
-        canAttack = true;
-        attackDelay = 0;
-
-        GameObject droppedWeapon = Instantiate(droppedWeaponPrefab, firePoint.position, Quaternion.identity);
-        droppedWeapon.GetComponent<WeaponPickup>().ChangeStats(weapon, currentAmmo, currentReserve);
+        DropWeapon();
 
         weapon = newWeapon;
         currentAmmo = newAmmo;
@@ -77,6 +68,32 @@ public class PlayerAttack : MonoBehaviour
                 currentReloadCoroutine = StartCoroutine(Reload());
         }
 
+    }
+
+    public void DropWeapon(bool returnToFists = false)
+    {
+        if (currentReloadCoroutine != null)
+            StopCoroutine(currentReloadCoroutine);
+
+        isAutoFiring = false;
+        isReloading = false;
+        canAttack = true;
+        attackDelay = 0;
+
+        if(weapon != fists)
+        {
+            GameObject droppedWeapon = Instantiate(droppedWeaponPrefab, firePoint.position, Quaternion.identity);
+            droppedWeapon.GetComponent<WeaponPickup>().ChangeStats(weapon, currentAmmo, currentReserve);
+        }
+
+        if (returnToFists)
+        {
+            weapon = fists;
+            currentAmmo = 420;
+            currentReserve = 69;
+            weaponMesh.material.SetColor("_EmissionColor", Color.yellow); //temp
+            Debug.Log("Fistacuffs");
+        }
     }
 
     public void Attack(InputAction.CallbackContext ctx)
@@ -96,11 +113,22 @@ public class PlayerAttack : MonoBehaviour
                 SwingMelee(ctx);
                 break;
             case AttackType.thrust:
-                SwingMelee(ctx);
+                ThrustMelee(ctx);
                 break;
             default:
                 Debug.LogError("ERROR: the AttackType - " + weapon.attackType.ToString() + " - is invalid");
                 break;
+        }
+    }
+
+    public void PerformReload()
+    {
+        if(weapon.reloadSpeed > 0 && currentAmmo < weapon.magCapacity)
+        {
+            Debug.Log("Reloading");
+            weaponMesh.material.SetColor("_EmissionColor", Color.red); //temp
+            if (currentReserve > 0)
+                currentReloadCoroutine = StartCoroutine(Reload());
         }
     }
 
@@ -136,9 +164,7 @@ public class PlayerAttack : MonoBehaviour
             currentAmmo--;
             if (currentAmmo == 0)
             {
-                weaponMesh.material.SetColor("_EmissionColor", Color.red); //temp
-                if (currentReserve > 0)
-                    currentReloadCoroutine = StartCoroutine(Reload());
+                PerformReload();
             }
         }
     }
@@ -167,7 +193,16 @@ public class PlayerAttack : MonoBehaviour
     {
         if (ctx.performed && canAttack)
         {
-            Instantiate(weapon.projectile, firePoint.position, firePoint.rotation);
+            Collider[] hits;
+            hits = Physics.OverlapCapsule(firePoint.position, firePoint.localPosition + (Vector3.up * weapon.meleeRange), weapon.radius);
+
+            for(int i = 0; i < hits.Length; i++)
+            {
+                EnemyHealthTest enemyHealth = hits[i].transform.GetComponent<EnemyHealthTest>();
+
+                if (enemyHealth != null)
+                    enemyHealth.TakeDamage(weapon.meleeDamage);
+            }
 
             canAttack = false;
             attackDelay = weapon.fireRate;
@@ -178,7 +213,19 @@ public class PlayerAttack : MonoBehaviour
     {
         if (ctx.performed && canAttack)
         {
-            Instantiate(weapon.projectile, firePoint.position, firePoint.rotation);
+            Collider[] hits;
+            hits = Physics.OverlapCapsule(firePoint.position, firePoint.localPosition + (Vector3.up * weapon.meleeRange), weapon.radius);
+
+            for (int i = 0; i < hits.Length; i++)
+            {
+                EnemyHealthTest enemyHealth = hits[i].transform.GetComponent<EnemyHealthTest>();
+
+                if (enemyHealth != null)
+                {
+                    Debug.Log("HIT " + hits[i].gameObject.name);
+                    enemyHealth.TakeDamage(weapon.meleeDamage);
+                }
+            }
 
             canAttack = false;
             attackDelay = weapon.fireRate;
