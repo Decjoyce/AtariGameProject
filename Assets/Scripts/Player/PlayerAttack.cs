@@ -17,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
     bool canAttack = true, isReloading;
     bool isAutoFiring;
     float attackDelay;
+    float colorPerShot;
 
     [SerializeField] GameObject droppedWeaponPrefab;
 
@@ -33,6 +34,9 @@ public class PlayerAttack : MonoBehaviour
 
         currentAmmo = weapon.magCapacity;
         currentReserve = weapon.reserveCapacity;
+        colorPerShot = 1f / weapon.magCapacity;
+        Debug.Log(colorPerShot);
+        weaponMesh.material.SetColor("_EmissionColor", Color.blue);
     }
 
     // Update is called once per frame
@@ -61,7 +65,10 @@ public class PlayerAttack : MonoBehaviour
         currentAmmo = newAmmo;
         currentReserve = newReserve;
 
-        weaponMesh.material.SetColor("_EmissionColor", Color.blue); //temp
+        colorPerShot = 1f / weapon.magCapacity;
+
+        Color newColor = new Color(0f, colorPerShot * currentAmmo, 255f);
+        weaponMesh.material.SetColor("_EmissionColor", newColor); //temp
 
         if (currentAmmo == 0)
         {
@@ -168,6 +175,13 @@ public class PlayerAttack : MonoBehaviour
             source.PlayOneShot(weapon.fireSound);
 
             currentAmmo--;
+
+            float newCol = colorPerShot * (weapon.magCapacity - currentAmmo);
+            if(currentAmmo > weapon.magCapacity/2)
+                weaponMesh.material.SetColor("_EmissionColor", new Vector4(newCol, newCol, 1f, 1.000f) * Mathf.Pow(2.0F, 2f)); // temp
+            else
+                weaponMesh.material.SetColor("_EmissionColor", new Vector4(newCol, newCol, 1f, 1.000f) * Mathf.Pow(2.0F, 2f));
+
             if (currentAmmo == 0)
             {
                 PerformReload();
@@ -186,7 +200,17 @@ public class PlayerAttack : MonoBehaviour
 
             source.PlayOneShot(weapon.fireSound);
 
+            Color newColor = new Color(0f, colorPerShot * (weapon.magCapacity - currentAmmo), 255f);
+            weaponMesh.material.SetColor("_EmissionColor", newColor); //temp
+
             currentAmmo--;
+
+            float newCol = colorPerShot * (weapon.magCapacity - currentAmmo);
+            if (currentAmmo > weapon.magCapacity / 2)
+                weaponMesh.material.SetColor("_EmissionColor", new Vector4(newCol, newCol, 1f, 1.000f) * Mathf.Pow(2.0F, 2f)); // temp
+            else
+                weaponMesh.material.SetColor("_EmissionColor", new Vector4(newCol, newCol, 1f, 1.000f) * Mathf.Pow(2.0F, 2f));
+
             if (currentAmmo == 0)
             {
                 weaponMesh.material.SetColor("_EmissionColor", Color.red); //temp
