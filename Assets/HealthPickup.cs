@@ -10,7 +10,6 @@ public class HealthPickup : Interactable
     {
         base.Interaction(player);
         player.health.Heal(healAmount);
-        player.RemoveInteraction(this);
         Destroy(gameObject);
     }
 }

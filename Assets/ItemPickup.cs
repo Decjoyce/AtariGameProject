@@ -15,7 +15,6 @@ public class ItemPickup : Interactable
     {
         base.Interaction(player);
         player.AddItemToInventory(item);
-        player.RemoveInteraction(this);
         Destroy(gameObject);
     }
 }

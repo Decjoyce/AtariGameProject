@@ -25,7 +25,6 @@ public class WeaponPickup : Interactable
     {
         base.Interaction(player);
         player.attack.PickUpWeapon(weapon, currentAmmo, currentReserve);
-        ///player.RemoveInteraction(this);
         Destroy(gameObject);
     }
 
