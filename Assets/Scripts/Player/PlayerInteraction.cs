@@ -6,8 +6,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    public delegate void InteractedWithSomething(Interactable other);
+    public static event InteractedWithSomething OnInteractedWith;
+
     [HideInInspector] public PlayerController controller;
     [HideInInspector] public PlayerAttack attack;
+    [HideInInspector] public PlayerHealth health;
 
     private List<Interactable> availableInteractions = new List<Interactable>();
 
@@ -15,11 +19,29 @@ public class PlayerInteraction : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI interactionText;
 
+    List<Item> inventory = new List<Item>();
+
+    Coroutine coroutine_findingInteractions;
+
+    [SerializeField] float findInteractionDelay;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<PlayerController>();
         attack = GetComponent<PlayerAttack>();
+        health = GetComponent<PlayerHealth>();
+        coroutine_findingInteractions = StartCoroutine(FindInteractionsWithDelay());
+    }
+
+    private void OnEnable()
+    {
+        OnInteractedWith += RemoveInteraction;
+    }
+
+    private void OnDisable()
+    {
+        OnInteractedWith -= RemoveInteraction;
     }
 
     private void Update()
@@ -78,8 +100,11 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (canInteract)
         {
-            FindClosestInteractable().Interaction(this);
+            Interactable closestInt = FindClosestInteractable();
+            closestInt.Interaction(this);
             SetInteractionText();
+
+            OnInteractedWith.Invoke(closestInt);
         }
     }
 
@@ -90,6 +115,25 @@ public class PlayerInteraction : MonoBehaviour
             interactionText.text = FindClosestInteractable().interactPrompt;
         else
             interactionText.text = null;
+    }
+
+    IEnumerator FindInteractionsWithDelay()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(findInteractionDelay);
+            SetInteractionText();
+        }
+    }
+
+    public void AddItemToInventory(Item item)
+    {
+        inventory.Add(item);
+    }
+
+    public void ClearInventory()
+    {
+        inventory.Clear();
     }
 
 }

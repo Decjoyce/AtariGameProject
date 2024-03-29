@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [System.NonSerialized] public int playerNum;
     [System.NonSerialized] public PlayerInteraction interaction;
     [System.NonSerialized] public PlayerAttack attack;
+    [System.NonSerialized] public PlayerHealth health;
 
     [Header("References")]
     public Camera playerCam;
@@ -46,16 +47,19 @@ public class PlayerController : MonoBehaviour
 
     PlayerState_Base currentState;
     public PlayerState_Neutral state_Neutral = new PlayerState_Neutral();
-
+    public PlayerState_Death state_Death = new PlayerState_Death();
 
     public Character_Base currentCharacter;
     public Character_TEST character_TEST = new Character_TEST();
     public Character_Captain character_Captain = new Character_Captain();
 
+    public bool debuggingMode;
+
     private void Awake()
     {
         interaction = GetComponent<PlayerInteraction>();
         attack = GetComponent<PlayerAttack>();
+        health = GetComponent<PlayerHealth>();
 
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
@@ -140,6 +144,9 @@ public class PlayerController : MonoBehaviour
         {
             case "NEUTRAL":
                 currentState = state_Neutral;
+                break;
+            case "DEATH":
+                currentState = state_Death;
                 break;
             default:
                 Debug.LogError("INVALID STATE: " + newState);

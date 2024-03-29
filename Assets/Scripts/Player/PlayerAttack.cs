@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     PlayerController controller;
+    AudioSource source;
 
     [SerializeField] Transform firePoint;
     [SerializeField] MeshRenderer weaponMesh; //Temp
@@ -25,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlayerController>();
+        source = GetComponent<AudioSource>();
 
         if (weapon == null)
             weapon = defaultWeapon;
@@ -159,8 +161,12 @@ public class PlayerAttack : MonoBehaviour
         if (ctx.performed && !isReloading && canAttack && currentAmmo > 0)
         {
             Instantiate(weapon.projectile, firePoint.position, firePoint.rotation);
+
             canAttack = false;
             attackDelay = weapon.fireRate;
+
+            source.PlayOneShot(weapon.fireSound);
+
             currentAmmo--;
             if (currentAmmo == 0)
             {
@@ -177,6 +183,8 @@ public class PlayerAttack : MonoBehaviour
 
             canAttack = false;
             attackDelay = weapon.fireRate;
+
+            source.PlayOneShot(weapon.fireSound);
 
             currentAmmo--;
             if (currentAmmo == 0)
@@ -204,6 +212,8 @@ public class PlayerAttack : MonoBehaviour
                     enemyHealth.TakeDamage(weapon.meleeDamage);
             }
 
+            source.PlayOneShot(weapon.fireSound);
+
             canAttack = false;
             attackDelay = weapon.fireRate;
         }
@@ -226,6 +236,8 @@ public class PlayerAttack : MonoBehaviour
                     enemyHealth.TakeDamage(weapon.meleeDamage);
                 }
             }
+
+            source.PlayOneShot(weapon.fireSound);
 
             canAttack = false;
             attackDelay = weapon.fireRate;

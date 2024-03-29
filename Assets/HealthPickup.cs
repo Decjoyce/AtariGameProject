@@ -2,19 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPickup : Interactable
+public class HealthPickup : Interactable
 {
-    public Item item;
-
-    private void Start()
-    {
-        interactPrompt = "Pick up " + item.itemName;
-    }
+    [SerializeField] float healAmount;
 
     public override void Interaction(PlayerInteraction player)
     {
         base.Interaction(player);
-        player.AddItemToInventory(item);
+        player.health.Heal(healAmount);
         player.RemoveInteraction(this);
         Destroy(gameObject);
     }

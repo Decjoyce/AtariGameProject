@@ -16,7 +16,7 @@ MonoBehaviour:
   attackType: 0
   holdType: 
   weaponModel: {fileID: 0}
-  fireRate: 0.75
+  fireRate: 1.2
   projectile: {fileID: 1112150731768423405, guid: 810c6d6731dbf6745b417f2707b62a95, type: 3}
   reloadSpeed: 4
   magCapacity: 5
@@ -25,5 +25,5 @@ MonoBehaviour:
   meleeRange: 0
   radius: 0
   speed: 0
-  fireSound: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: 6cff04e0628942749801abad158c7d8d, type: 3}
   impactSound: {fileID: 0}
