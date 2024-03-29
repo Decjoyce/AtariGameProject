@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9f0b2549f175243893cd7d31bd08f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canInteract: 0
+  canInteract: 1
   interactPrompt: Pick Up Item
   switch2State: 
   item: {fileID: 0}
