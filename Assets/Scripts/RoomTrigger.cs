@@ -19,8 +19,17 @@ public class RoomTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            int player = other.GetComponent<PlayerController>().playerNum;
-            manager.ChangeRoom(player, roomID);
+            int playerID = other.GetComponent<PlayerController>().playerNum;
+            manager.ChangeRoom(other.gameObject, playerID, roomID);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            int playerID = other.GetComponent<PlayerController>().playerNum;
+            manager.LeftRoom(other.gameObject, roomID);
         }
     }
 }

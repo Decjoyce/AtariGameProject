@@ -16,6 +16,9 @@ public abstract class EnemyStates_Turret
     public abstract void FrameUpdate(Enemy_Turret controller);
     public abstract void PhysicsUpdate(Enemy_Turret controller);
 
+    public virtual void OnRoomEnter(Enemy_Turret controller, GameObject player) { }
+    public virtual void OnRoomExit(Enemy_Turret controller, GameObject player) { }
+
     public virtual void OnTriggerEnter(Enemy_Turret controller, Collider other) { }
     public virtual void OnTriggerExit(Enemy_Turret controller, Collider other) { }
 }
@@ -49,12 +52,22 @@ public class TurretState_Idle : EnemyStates_Turret
         }
     }
 
+    public override void OnRoomEnter(Enemy_Turret controller, GameObject player)
+    {
+        
+    }
+
+    public override void OnRoomExit(Enemy_Turret controller, GameObject player)
+    {
+
+    }
+
     public override void OnTriggerEnter(Enemy_Turret controller, Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (controller.target == null)
-                controller.target = other.transform;
+            if (controller.currentTarget == null)
+                controller.currentTarget = other.transform;
             else
                 controller.targets.Add(other.transform);
             controller.SwitchState("AGGRO");
@@ -86,7 +99,7 @@ public class TurretState_Aggro : EnemyStates_Turret
     public override void FrameUpdate(Enemy_Turret controller)
     {
         //Need to fix it so it doesnt rotate on y axis when player is on same lane
-        if (controller.target != null)
+        if (controller.currentTarget != null)
         {
             if (shootDelay <= 0)
             {
@@ -108,9 +121,9 @@ public class TurretState_Aggro : EnemyStates_Turret
 
     public override void PhysicsUpdate(Enemy_Turret controller)
     {
-        if (controller.target)
+        if (controller.currentTarget)
         {
-            Vector3 direction = (controller.target.transform.position + (Vector3.up * 2f)) - controller.y_pivot.position;
+            Vector3 direction = (controller.currentTarget.transform.position + (Vector3.up * 2f)) - controller.y_pivot.position;
             Vector3 rot = Quaternion.LookRotation(direction).eulerAngles;
 
             float newYAngle = Mathf.LerpAngle(controller.y_pivot.localEulerAngles.y, rot.y, 0.2f);
@@ -120,12 +133,22 @@ public class TurretState_Aggro : EnemyStates_Turret
         }
     }
 
+    public override void OnRoomEnter(Enemy_Turret controller, GameObject player)
+    {
+
+    }
+
+    public override void OnRoomExit(Enemy_Turret controller, GameObject player)
+    {
+
+    }
+
     public override void OnTriggerEnter(Enemy_Turret controller, Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (controller.target == null)
-                controller.target = other.transform;
+            if (controller.currentTarget == null)
+                controller.currentTarget = other.transform;
             else
                 controller.targets.Add(other.transform);
         }
@@ -136,7 +159,7 @@ public class TurretState_Aggro : EnemyStates_Turret
     {
         if (other.CompareTag("Player"))
         {
-            if (controller.target = other.transform)
+            if (controller.currentTarget = other.transform)
                 controller.NextTarget();
             else if (controller.targets.Contains(other.transform))
                 controller.targets.RemoveAt(controller.targets.IndexOf(other.transform));

@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Enemy_Turret : MonoBehaviour
 {
+    public int currentRoomID;
+
     public Transform firePoint;
     public Transform y_pivot, x_pivot;
     public LayerMask ignoreLayers;
     public GameObject projectile;
     [SerializeField] ProximityTrigger proxTrig;
 
-    public Transform target;
+    public Transform currentTarget;
     public List<Transform> targets = new List<Transform>();
 
     public float shoot_delay;
@@ -29,12 +31,16 @@ public class Enemy_Turret : MonoBehaviour
 
     private void OnEnable()
     {
+        RoomManager.OnEnter += OnPlayerEnterRoom;
+        RoomManager.OnExit += OnPlayerEnterRoom;
         proxTrig.OnEnter += OnProximityTriggerEnter;
         proxTrig.OnExit += OnProximityTriggerExit;
     }
 
     private void OnDisable()
     {
+        RoomManager.OnEnter -= OnPlayerEnterRoom;
+        RoomManager.OnExit -= OnPlayerEnterRoom;
         proxTrig.OnEnter -= OnProximityTriggerEnter;
         proxTrig.OnExit -= OnProximityTriggerExit;
     }
@@ -48,6 +54,23 @@ public class Enemy_Turret : MonoBehaviour
     private void FixedUpdate()
     {
         currentState.PhysicsUpdate(this);
+    }
+
+    public void OnPlayerEnterRoom(GameObject player, int roomID)
+    {
+        if (currentRoomID == roomID)
+        {
+            currentState.OnRoomEnter(this, player);
+        }
+
+    }
+
+    public void OnPlayerExitRoom(GameObject player, int roomID)
+    {
+        if (currentRoomID == roomID)
+        {
+            currentState.OnRoomExit(this, player);
+        }
     }
 
     public void OnProximityTriggerEnter(Collider other)
@@ -81,12 +104,18 @@ public class Enemy_Turret : MonoBehaviour
         currentState.ExitState(this);
     }
 
+    public void AddTarget(GameObject target)
+    {
+        if(!targets.Contains(target.transform))
+            targets.Add(target.transform);
+    }
+
     public void NextTarget()
     {
         if(targets.Count > 0)
         {
             targets.RemoveAt(0);
-            target = targets[0];
+            currentTarget = targets[0];
         }
         else
         {

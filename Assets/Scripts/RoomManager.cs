@@ -10,6 +10,11 @@ public class RoomManager : MonoBehaviour
     [SerializeField] RoomTrigger[] rooms; //StartRoom should always be at index 0!!!!!
     [SerializeField] Camera[] playerCams;
 
+    public delegate void RoomEntered(GameObject player, int roomID);
+    public delegate void RoomExited(GameObject player, int roomID);
+    public static event RoomEntered OnEnter;
+    public static event RoomExited OnExit;
+
     public static RoomManager instance;
     private void Awake()
     {
@@ -26,10 +31,16 @@ public class RoomManager : MonoBehaviour
         RoomsInit();
     }
 
-    public void ChangeRoom(int playerNum, int roomID)
+    public void ChangeRoom(GameObject player, int playerNum, int roomID)
     {
         playerRooms[playerNum] = roomID;
         playerCams[playerNum].transform.position = rooms[roomID].camPos.position;
+        OnEnter(player, roomID);
+    }
+
+    public void LeftRoom(GameObject player, int roomID)
+    {
+        OnExit(player, roomID);
     }
 
     void RoomsInit()
