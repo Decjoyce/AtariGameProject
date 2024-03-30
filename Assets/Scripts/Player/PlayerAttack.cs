@@ -17,7 +17,8 @@ public class PlayerAttack : MonoBehaviour
     bool canAttack = true, isReloading;
     bool isAutoFiring;
     float attackDelay;
-    float colorPerShot;
+
+    [SerializeField] Gradient ammoColorGradient;
 
     [SerializeField] GameObject droppedWeaponPrefab;
 
@@ -34,9 +35,7 @@ public class PlayerAttack : MonoBehaviour
 
         currentAmmo = weapon.magCapacity;
         currentReserve = weapon.reserveCapacity;
-        colorPerShot = 1f / weapon.magCapacity;
-        Debug.Log(colorPerShot);
-        weaponMesh.material.SetColor("_EmissionColor", Color.blue);
+        SetGunColor();
     }
 
     // Update is called once per frame
@@ -65,15 +64,12 @@ public class PlayerAttack : MonoBehaviour
         currentAmmo = newAmmo;
         currentReserve = newReserve;
 
-        colorPerShot = 1f / weapon.magCapacity;
-
-        Color newColor = new Color(0f, colorPerShot * currentAmmo, 255f);
-        weaponMesh.material.SetColor("_EmissionColor", newColor); //temp
+        SetGunColor();
 
         if (currentAmmo == 0)
         {
-            weaponMesh.material.SetColor("_EmissionColor", Color.red); //temp
-            if(currentReserve != 0)
+            weaponMesh.material.SetColor("_EmissionColor", Color.red);
+            if (currentReserve != 0)
                 currentReloadCoroutine = StartCoroutine(Reload());
         }
 
@@ -135,7 +131,7 @@ public class PlayerAttack : MonoBehaviour
         if(weapon.reloadSpeed > 0 && currentAmmo < weapon.magCapacity)
         {
             Debug.Log("Reloading");
-            weaponMesh.material.SetColor("_EmissionColor", Color.red); //temp
+            weaponMesh.material.SetColor("_EmissionColor", Color.red);
             if (currentReserve > 0)
                 currentReloadCoroutine = StartCoroutine(Reload());
         }
@@ -143,7 +139,6 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator Reload()
     {
-        Debug.Log("Relaoding");
         isReloading = true;
         yield return new WaitForSecondsRealtime(weapon.reloadSpeed);
 
@@ -158,7 +153,7 @@ public class PlayerAttack : MonoBehaviour
             currentReserve = 0;
         }
 
-        weaponMesh.material.SetColor("_EmissionColor", Color.blue); //temp
+        SetGunColor();
 
         isReloading = false;
     }
@@ -176,11 +171,7 @@ public class PlayerAttack : MonoBehaviour
 
             currentAmmo--;
 
-            float newCol = colorPerShot * (weapon.magCapacity - currentAmmo);
-            if(currentAmmo > weapon.magCapacity/2)
-                weaponMesh.material.SetColor("_EmissionColor", new Vector4(newCol, newCol, 1f, 1.000f) * Mathf.Pow(2.0F, 2f)); // temp
-            else
-                weaponMesh.material.SetColor("_EmissionColor", new Vector4(newCol, newCol, 1f, 1.000f) * Mathf.Pow(2.0F, 2f));
+            SetGunColor();
 
             if (currentAmmo == 0)
             {
@@ -200,22 +191,13 @@ public class PlayerAttack : MonoBehaviour
 
             source.PlayOneShot(weapon.fireSound);
 
-            Color newColor = new Color(0f, colorPerShot * (weapon.magCapacity - currentAmmo), 255f);
-            weaponMesh.material.SetColor("_EmissionColor", newColor); //temp
-
             currentAmmo--;
 
-            float newCol = colorPerShot * (weapon.magCapacity - currentAmmo);
-            if (currentAmmo > weapon.magCapacity / 2)
-                weaponMesh.material.SetColor("_EmissionColor", new Vector4(newCol, newCol, 1f, 1.000f) * Mathf.Pow(2.0F, 2f)); // temp
-            else
-                weaponMesh.material.SetColor("_EmissionColor", new Vector4(newCol, newCol, 1f, 1.000f) * Mathf.Pow(2.0F, 2f));
+            SetGunColor();
 
             if (currentAmmo == 0)
             {
-                weaponMesh.material.SetColor("_EmissionColor", Color.red); //temp
-                if (currentReserve > 0)
-                    currentReloadCoroutine = StartCoroutine(Reload());
+                PerformReload();
             }
 
         }
@@ -266,6 +248,11 @@ public class PlayerAttack : MonoBehaviour
             canAttack = false;
             attackDelay = weapon.fireRate;
         }
+    }
+
+    void SetGunColor()
+    {
+        weaponMesh.material.SetColor("_EmissionColor", ammoColorGradient.Evaluate((float)(weapon.magCapacity - currentAmmo) / weapon.magCapacity));
     }
 
 }

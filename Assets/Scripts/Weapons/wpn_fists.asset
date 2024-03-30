@@ -19,8 +19,8 @@ MonoBehaviour:
   fireRate: 0.1
   projectile: {fileID: 1651700291602923542, guid: 8b1f506fcb6abc34a87850f6fa7ebe91, type: 3}
   reloadSpeed: 0
-  magCapacity: 100
-  reserveCapacity: 100
+  magCapacity: 420
+  reserveCapacity: 69
   meleeDamage: 2
   meleeRange: 2
   radius: 0.2

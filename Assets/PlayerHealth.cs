@@ -9,6 +9,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] float maxHealth;
     private float currentHealth;
 
+    [SerializeField] MeshRenderer[] healthMeshes; //temp
+    [SerializeField] Gradient healthColorGradient;
+
     bool isDead;
 
     // Start is called before the first frame update
@@ -16,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
     {
         controller = GetComponent<PlayerController>();
         currentHealth = maxHealth;
+        SetHealthColor();
     }
 
     public void TakeDamage(float amount)
@@ -27,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
             controller.SwitchState("DEATH");
             isDead = true;
         }
+        SetHealthColor();
     }
 
     public void Heal(float amount)
@@ -36,6 +41,16 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+        SetHealthColor();
+    }
+
+    void SetHealthColor()
+    {
+        foreach(MeshRenderer mr in healthMeshes)
+        {
+            mr.material.SetColor("_EmissionColor", healthColorGradient.Evaluate((maxHealth - currentHealth) / maxHealth));
+        }
+
     }
 
 }
