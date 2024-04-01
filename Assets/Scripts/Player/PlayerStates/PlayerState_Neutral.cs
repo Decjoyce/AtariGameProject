@@ -42,16 +42,13 @@ public class PlayerState_Neutral : PlayerState_Base
             isJumping = false;
         }
 
-        float angle = Mathf.Atan2(lookInput.x, -lookInput.y) * Mathf.Rad2Deg;
-        if (lookInput.magnitude > 0.7)
+        if (controller.oldLook)
         {
-            float newAngle = ExtensionMethods.ModularClamp(angle, -110f, 110f);
-            Quaternion newRot;
-            if (lerpedRotation)
-                newRot = Quaternion.Lerp(controller.pivot.rotation, Quaternion.Euler(0, 0, newAngle), controller.lerpedAimSpeed * Time.deltaTime);
-            else
-                newRot = Quaternion.Euler(0, 0, newAngle);
-            controller.pivot.rotation = newRot;
+            LookOld(controller);
+        }
+        else
+        {
+            LookNew(controller);
         }
 
         if (isSwitchingLanes)
@@ -61,14 +58,12 @@ public class PlayerState_Neutral : PlayerState_Base
                 float newLanePos = Mathf.Lerp(controller.transform.position.z, controller.currentLayer, controller.switchLaneSpeed * Time.deltaTime);
                 Vector3 newPos = new(rb.position.x, rb.position.y, newLanePos);
                 rb.MovePosition(newPos + vel);
-                Debug.Log("sdmspo");
             }
             else
             {
                 Vector3 newPos = new(rb.position.x, rb.position.y, controller.currentLayer);
                 rb.MovePosition(newPos + vel);
                 isSwitchingLanes = false;
-                Debug.Log("asdadw");
             }
         }
     }
@@ -178,8 +173,46 @@ public class PlayerState_Neutral : PlayerState_Base
 
 
 
+    /// <summary>
+    /// 
+    /// </summary>
 
+    void LookOld(PlayerController controller)
+    {
+        float angle = Mathf.Atan2(lookInput.x, -lookInput.y) * Mathf.Rad2Deg;
+        if (lookInput.magnitude > 0.7)
+        {
+            float newAngle = ExtensionMethods.ModularClamp(angle, -110f, 110f);
+            Quaternion newRot;
+            if (lerpedRotation)
+                newRot = Quaternion.Lerp(controller.pivot.rotation, Quaternion.Euler(0, 0, newAngle), controller.lerpedAimSpeed * Time.deltaTime);
+            else
+                newRot = Quaternion.Euler(0, 0, newAngle);
 
+            controller.pivot.rotation = newRot;
+        }
+    }
+
+    void LookNew(PlayerController controller)
+    {
+        float angle = Mathf.Atan2(lookInput.x, lookInput.y) * Mathf.Rad2Deg;
+        if (lookInput.magnitude > 0.7)
+        {
+            //float newAngle = ExtensionMethods.ModularClamp(angle, -110f, 110f);
+            Quaternion newRot;
+            if (lerpedRotation)
+                newRot = Quaternion.Lerp(controller.pivot.rotation, Quaternion.Euler(0, 0, -angle), controller.lerpedAimSpeed * Time.deltaTime);
+            else
+                newRot = Quaternion.Euler(0, 0, -angle);
+
+            if (newRot.eulerAngles.z < 0 && newRot.eulerAngles.z < -180)
+                Debug.Log("hi");
+
+            Debug.Log(newRot.eulerAngles.z);
+
+            controller.pivot.rotation = newRot;
+        }
+    }
 
     void Jump(PlayerController controller)
     {

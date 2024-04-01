@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: Shotgun
   attackType: 0
   holdType: 
-  weaponModel: {fileID: 0}
+  weaponModel: {fileID: 1955286229275572462, guid: 1aa6d4902142c7a4099c1a17eaa32405, type: 3}
   fireRate: 1
   projectile: {fileID: 2972611999958584287, guid: cdd468f3dbb16f44b8142243de2fb375, type: 3}
   reloadSpeed: 3

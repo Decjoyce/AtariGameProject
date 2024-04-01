@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: SMG
   attackType: 1
   holdType: 
-  weaponModel: {fileID: 0}
+  weaponModel: {fileID: 3035886163761882251, guid: 8670c15a7573cd84598d93344b33ea96, type: 3}
   fireRate: 0.1
   projectile: {fileID: 1112150731768423405, guid: 609c6999c9aaf844d8572c1960bfb358, type: 3}
   reloadSpeed: 2

@@ -720,6 +720,7 @@ MonoBehaviour:
   crouchHeight: 0.8
   normalHeight: 1.5
   debuggingMode: 0
+  oldLook: 0
 --- !u!114 &4591346196035371541
 MonoBehaviour:
   m_ObjectHideFlags: 0
