@@ -9,7 +9,11 @@ public class PlayerAttack : MonoBehaviour
     AudioSource source;
 
     [SerializeField] Transform firePoint;
-    [SerializeField] MeshRenderer weaponMesh; //Temp
+    [SerializeField] Transform handPos;
+    [SerializeField] Transform pivot;
+    
+    GameObject weaponMesh;
+    MeshRenderer ammoGraphics; //Temp
 
     WeaponType weapon;
     [SerializeField] WeaponType defaultWeapon, fists;
@@ -35,6 +39,7 @@ public class PlayerAttack : MonoBehaviour
 
         currentAmmo = weapon.magCapacity;
         currentReserve = weapon.reserveCapacity;
+        SetWeaponMesh();
         SetGunColor();
     }
 
@@ -64,11 +69,13 @@ public class PlayerAttack : MonoBehaviour
         currentAmmo = newAmmo;
         currentReserve = newReserve;
 
+        SetWeaponMesh();
+
         SetGunColor();
 
         if (currentAmmo == 0)
         {
-            weaponMesh.material.SetColor("_EmissionColor", Color.red);
+            ammoGraphics.material.SetColor("_EmissionColor", Color.red);
             if (currentReserve != 0)
                 currentReloadCoroutine = StartCoroutine(Reload());
         }
@@ -89,6 +96,8 @@ public class PlayerAttack : MonoBehaviour
         {
             GameObject droppedWeapon = Instantiate(droppedWeaponPrefab, firePoint.position, Quaternion.identity);
             droppedWeapon.GetComponent<WeaponPickup>().ChangeStats(weapon, currentAmmo, currentReserve);
+            GameObject droppedWeaponModel = Instantiate(weaponMesh, droppedWeapon.transform);
+            droppedWeaponModel.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>().material = ammoGraphics.material;
         }
 
         if (returnToFists)
@@ -96,7 +105,7 @@ public class PlayerAttack : MonoBehaviour
             weapon = fists;
             currentAmmo = 420;
             currentReserve = 69;
-            weaponMesh.material.SetColor("_EmissionColor", Color.yellow); //temp
+            ammoGraphics.material.SetColor("_EmissionColor", Color.yellow); //temp
             Debug.Log("Fistacuffs");
         }
     }
@@ -131,7 +140,7 @@ public class PlayerAttack : MonoBehaviour
         if(weapon.reloadSpeed > 0 && currentAmmo < weapon.magCapacity)
         {
             Debug.Log("Reloading");
-            weaponMesh.material.SetColor("_EmissionColor", Color.red);
+            ammoGraphics.material.SetColor("_EmissionColor", Color.red);
             if (currentReserve > 0)
                 currentReloadCoroutine = StartCoroutine(Reload());
         }
@@ -250,9 +259,22 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    void SetWeaponMesh()
+    {
+        if(weaponMesh != null)
+        {
+            ammoGraphics = null;
+            Destroy(weaponMesh);
+        }
+
+        weaponMesh = Instantiate(weapon.weaponModel, handPos.position, pivot.rotation, pivot);
+        ammoGraphics = weaponMesh.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>();
+        firePoint.position = weaponMesh.transform.GetChild(0).GetChild(0).position;
+    }
+
     void SetGunColor()
     {
-        weaponMesh.material.SetColor("_EmissionColor", ammoColorGradient.Evaluate((float)(weapon.magCapacity - currentAmmo) / weapon.magCapacity));
+        ammoGraphics.material.SetColor("_EmissionColor", ammoColorGradient.Evaluate((float)(weapon.magCapacity - currentAmmo) / weapon.magCapacity));
     }
 
 }

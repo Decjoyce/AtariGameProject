@@ -66,10 +66,6 @@ public class TurretState_Idle : EnemyStates_Turret
     {
         if (other.CompareTag("Player"))
         {
-            if (controller.currentTarget == null)
-                controller.currentTarget = other.transform;
-            else
-                controller.targets.Add(other.transform);
             controller.SwitchState("AGGRO");
         }
     }
@@ -126,7 +122,7 @@ public class TurretState_Aggro : EnemyStates_Turret
             Vector3 direction = (controller.currentTarget.transform.position + (Vector3.up * 2f)) - controller.y_pivot.position;
             Vector3 rot = Quaternion.LookRotation(direction).eulerAngles;
 
-            float newYAngle = Mathf.LerpAngle(controller.y_pivot.localEulerAngles.y, rot.y, 0.2f);
+            float newYAngle = Mathf.LerpAngle(controller.y_pivot.localEulerAngles.y, rot.y, controller.turnSpeed);
             controller.y_pivot.rotation = Quaternion.Euler(0, newYAngle, 0);
 
             controller.x_pivot.localRotation = Quaternion.Euler(rot.x + 90, 0, 0);

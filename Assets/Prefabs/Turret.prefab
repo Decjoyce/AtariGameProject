@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b82258432037b9488c384502a3331a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRoomID: 0
   firePoint: {fileID: 5432016240256214558}
   y_pivot: {fileID: 3519702658159577389}
   x_pivot: {fileID: 8500556428372213702}
@@ -284,9 +285,10 @@ MonoBehaviour:
     m_Bits: 4083
   projectile: {fileID: 1112150731768423405, guid: 120ac64df91b0db4087a6962d5bd2958, type: 3}
   proxTrig: {fileID: 8615021156891659443}
-  target: {fileID: 0}
+  currentTarget: {fileID: 0}
   targets: []
   shoot_delay: 1
+  turnSpeed: 0.2
   visibleState: 0
 --- !u!114 &2286946644801905654
 MonoBehaviour:

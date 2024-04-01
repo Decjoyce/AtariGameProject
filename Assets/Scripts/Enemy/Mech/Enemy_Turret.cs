@@ -17,6 +17,8 @@ public class Enemy_Turret : MonoBehaviour
 
     public float shoot_delay;
 
+    public float turnSpeed;
+
     [SerializeField] TurretStates visibleState;
     EnemyStates_Turret currentState;
     public TurretState_Idle state_Idle = new TurretState_Idle();
@@ -61,6 +63,7 @@ public class Enemy_Turret : MonoBehaviour
         if (currentRoomID == roomID)
         {
             currentState.OnRoomEnter(this, player);
+            AddTarget(player);
         }
 
     }
@@ -81,6 +84,11 @@ public class Enemy_Turret : MonoBehaviour
     public void OnProximityTriggerExit(Collider other)
     {
         currentState.OnTriggerExit(this, other);
+    }
+
+    public void OnTargetsChanged()
+    {
+
     }
 
     public void SwitchState(string state)
@@ -106,20 +114,40 @@ public class Enemy_Turret : MonoBehaviour
 
     public void AddTarget(GameObject target)
     {
-        if(!targets.Contains(target.transform))
+        if (!targets.Contains(target.transform))
+        {
             targets.Add(target.transform);
+
+            if (currentTarget == null)
+                currentTarget = target.transform;
+
+            //OnTargetAdded();
+        }
     }
 
     public void NextTarget()
     {
         if(targets.Count > 0)
         {
-            targets.RemoveAt(0);
-            currentTarget = targets[0];
+            float closestInt = 50000f;
+            Transform temp_ClostestInteractable = null;
+            foreach (Transform target in targets)
+            {
+                float dist = Vector3.SqrMagnitude(transform.position - target.transform.position);
+
+                if (dist < closestInt)
+                {
+                    closestInt = dist;
+                    temp_ClostestInteractable = target;
+                }
+            }
+            currentTarget = temp_ClostestInteractable;
+            Debug.Log("Got Next Target: " + currentTarget.name);
         }
         else
         {
             SwitchState("IDLE");
+            Debug.Log("BackToIdle");
         }
     }
 

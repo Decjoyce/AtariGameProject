@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Interactable
   - ScoreManager
+  - Ammo
   layers:
   - Default
   - TransparentFX
