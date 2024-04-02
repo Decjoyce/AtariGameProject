@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class Enemy_Turret : MonoBehaviour
 {
@@ -33,8 +34,9 @@ public class Enemy_Turret : MonoBehaviour
 
     private void OnEnable()
     {
+        PlayerHealth.OnPlayerDied += OnPlayerDied;
         RoomManager.OnEnter += OnPlayerEnterRoom;
-        RoomManager.OnExit += OnPlayerEnterRoom;
+        RoomManager.OnExit += OnPlayerExitRoom;
         proxTrig.OnEnter += OnProximityTriggerEnter;
         proxTrig.OnExit += OnProximityTriggerExit;
     }
@@ -42,7 +44,7 @@ public class Enemy_Turret : MonoBehaviour
     private void OnDisable()
     {
         RoomManager.OnEnter -= OnPlayerEnterRoom;
-        RoomManager.OnExit -= OnPlayerEnterRoom;
+        RoomManager.OnExit -= OnPlayerExitRoom;
         proxTrig.OnEnter -= OnProximityTriggerEnter;
         proxTrig.OnExit -= OnProximityTriggerExit;
     }
@@ -56,6 +58,14 @@ public class Enemy_Turret : MonoBehaviour
     private void FixedUpdate()
     {
         currentState.PhysicsUpdate(this);
+    }
+
+    public void OnPlayerDied(GameObject player, int playerID)
+    {
+        if (targets.Contains(player.transform))
+            targets.RemoveAt(targets.IndexOf(player.transform));
+
+        NextTarget();
     }
 
     public void OnPlayerEnterRoom(GameObject player, int roomID)

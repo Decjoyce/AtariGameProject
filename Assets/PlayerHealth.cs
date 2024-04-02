@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public delegate void PlayerDied(GameObject player, int playerID);
+    public static event PlayerDied OnPlayerDied;
+
     PlayerController controller;
 
     [SerializeField] float maxHealth;
@@ -27,9 +30,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= amount;
         if(currentHealth <= 0 && !isDead)
         {
-            Debug.Log(gameObject.name + " HAS DIED");
-            controller.SwitchState("DEATH");
-            isDead = true;
+            Die();
         }
         SetHealthColor();
     }
@@ -42,6 +43,14 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = maxHealth;
         }
         SetHealthColor();
+    }
+
+    public void Die()
+    {
+        Debug.Log(gameObject.name + " HAS DIED");
+        controller.SwitchState("DEATH");
+        isDead = true;
+        OnPlayerDied(gameObject, controller.playerNum);
     }
 
     void SetHealthColor()

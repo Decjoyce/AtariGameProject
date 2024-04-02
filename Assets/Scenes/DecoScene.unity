@@ -4077,6 +4077,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 895042253010160221, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
+      propertyPath: currentRoomID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3335979719064479126, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_Name
       value: Turret (1)
@@ -4091,11 +4095,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7631991403922533609, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7631991403922533609, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8977252509087680504, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4172,7 +4176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bdaeb03460db82419f8d06ea7051fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomID: 0
+  roomID: 2
   camPos: {fileID: 1591748928}
 --- !u!65 &1126254761
 BoxCollider:
@@ -5212,6 +5216,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 895042253010160221, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
+      propertyPath: currentRoomID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3335979719064479126, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_Name
       value: Turret (2)
@@ -5226,11 +5234,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7631991403922533609, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7631991403922533609, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8977252509087680504, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7592,7 +7600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bdaeb03460db82419f8d06ea7051fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomID: 0
+  roomID: 1
   camPos: {fileID: 249420705}
 --- !u!65 &2089889661
 BoxCollider:
@@ -7837,6 +7845,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 895042253010160221, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
+      propertyPath: currentRoomID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3335979719064479126, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_Name
       value: Turret
@@ -7845,13 +7857,25 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 3818399767675245500, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3818399767675245500, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
+      propertyPath: m_Size.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3818399767675245500, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
+      propertyPath: m_Size.z
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7230523002329243551, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7631991403922533609, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8977252509087680504, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_LocalPosition.x

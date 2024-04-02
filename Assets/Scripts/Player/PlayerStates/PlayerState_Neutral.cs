@@ -205,10 +205,8 @@ public class PlayerState_Neutral : PlayerState_Base
             else
                 newRot = Quaternion.Euler(0, 0, -angle);
 
-            if (newRot.eulerAngles.z < 0 && newRot.eulerAngles.z < -180)
+            if (newRot.eulerAngles.z < 0 && newRot.eulerAngles.z < 180)
                 Debug.Log("hi");
-
-            Debug.Log(newRot.eulerAngles.z);
 
             controller.pivot.rotation = newRot;
         }

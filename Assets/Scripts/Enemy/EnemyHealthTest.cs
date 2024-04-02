@@ -6,12 +6,17 @@ public class EnemyHealthTest : MonoBehaviour
 {
     public float currentHealth;
 
-    public void TakeDamage(float amount)
+    public virtual void TakeDamage(float amount)
     {
         currentHealth -= amount;
         if(currentHealth <= 0)
         {
             gameObject.SetActive(false);
         }
+    }
+
+    public virtual void Die()
+    {
+        gameObject.SetActive(false);
     }
 }

@@ -43,18 +43,18 @@ public class TurretState_Idle : EnemyStates_Turret
 
     public override void PhysicsUpdate(Enemy_Turret controller)
     {
-        if(controller.x_pivot.localRotation.x != 0 || controller.y_pivot.localRotation.y != 0)
+/*        if(controller.x_pivot.localRotation.x != 0 || controller.y_pivot.localRotation.y != 0)
         {        
             float newYAngle = Mathf.LerpAngle(controller.y_pivot.localEulerAngles.y, 0, 0.005f);
             controller.y_pivot.rotation = Quaternion.Euler(0, newYAngle, 0);
             float newXAngle = Mathf.LerpAngle(controller.x_pivot.localEulerAngles.x, 0, 0.005f);
             controller.x_pivot.rotation = Quaternion.Euler(newXAngle, 0, 0);
-        }
+        }*/
     }
 
     public override void OnRoomEnter(Enemy_Turret controller, GameObject player)
     {
-        
+            controller.SwitchState("AGGRO");
     }
 
     public override void OnRoomExit(Enemy_Turret controller, GameObject player)
@@ -64,10 +64,10 @@ public class TurretState_Idle : EnemyStates_Turret
 
     public override void OnTriggerEnter(Enemy_Turret controller, Collider other)
     {
-        if (other.CompareTag("Player"))
+/*        if (other.CompareTag("Player"))
         {
             controller.SwitchState("AGGRO");
-        }
+        }*/
     }
 
     public override void OnTriggerExit(Enemy_Turret controller, Collider other)
@@ -131,24 +131,27 @@ public class TurretState_Aggro : EnemyStates_Turret
 
     public override void OnRoomEnter(Enemy_Turret controller, GameObject player)
     {
-
+        controller.NextTarget();
     }
 
     public override void OnRoomExit(Enemy_Turret controller, GameObject player)
     {
+        if (controller.targets.Contains(player.transform))
+            controller.targets.RemoveAt(controller.targets.IndexOf(player.transform));
+        if (controller.currentTarget = player.transform)
+        {
+            controller.NextTarget();
+        }
 
+        Debug.Log("Adjisjdisdis");
     }
 
     public override void OnTriggerEnter(Enemy_Turret controller, Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (controller.currentTarget == null)
-                controller.currentTarget = other.transform;
-            else
-                controller.targets.Add(other.transform);
+            controller.NextTarget();
         }
-
     }
 
     public override void OnTriggerExit(Enemy_Turret controller, Collider other)
