@@ -38,5 +38,14 @@ public static class ExtensionMethods {
         if ((val %= modulus) < 0f) val += modulus;
         return Mathf.Clamp(val + Mathf.Min(rangemin, rangemax), min, max);
     }
+
+    public static bool CheckTags(string[] theTags, Transform theThing)
+    {
+        foreach(string tag in theTags) 
+        {
+            return theThing.tag == tag;
+        }
+        return false;
+    }
 }
   

@@ -201,14 +201,19 @@ public class PlayerState_Neutral : PlayerState_Base
             //float newAngle = ExtensionMethods.ModularClamp(angle, -110f, 110f);
             Quaternion newRot;
             if (lerpedRotation)
-                newRot = Quaternion.Lerp(controller.pivot.rotation, Quaternion.Euler(0, 0, -angle), controller.lerpedAimSpeed * Time.deltaTime);
+                newRot = Quaternion.Lerp(controller.pivot.localRotation, Quaternion.Euler(0, 0, -angle), controller.lerpedAimSpeed * Time.deltaTime);
             else
                 newRot = Quaternion.Euler(0, 0, -angle);
 
-            if (newRot.eulerAngles.z < 0 && newRot.eulerAngles.z < 180)
-                Debug.Log("hi");
+            if (newRot.eulerAngles.z < 360 && newRot.eulerAngles.z > 180 && !controller.faceLeft)
+                controller.FaceDirection(false);
+            else
+                controller.FaceDirection(true);
 
-            controller.pivot.rotation = newRot;
+
+            Debug.Log(newRot.eulerAngles.z);
+
+            controller.pivot.localRotation = newRot;
         }
     }
 

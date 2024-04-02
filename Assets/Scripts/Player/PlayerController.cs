@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     public bool debuggingMode;
     public bool oldLook;
 
+    [HideInInspector] public bool faceLeft = true;
 
     PlayerState_Base currentState;
     public PlayerState_Neutral state_Neutral = new PlayerState_Neutral();
@@ -175,4 +176,16 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+    public void FaceDirection(bool faceLeft)
+    {
+        if (faceLeft)
+        {
+            attack.handPos.localEulerAngles = new(0f, 180f, attack.handPos.localEulerAngles.z);
+        }
+        else
+        {
+            attack.handPos.localEulerAngles = new(0f, 0f, attack.handPos.localEulerAngles.z);
+        }
+    }
 }

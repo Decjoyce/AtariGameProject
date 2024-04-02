@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 public enum BulldozerStates
 {
@@ -31,7 +30,7 @@ public class BulldozerState_Idle : EnemyStates_Bulldozer
     public override void EnterState(Enemy_Bulldozer controller)
     {
         Debug.Log("Idle");
-
+        controller.chargeDirection = controller.transform.right;
     }
 
     public override void ExitState(Enemy_Bulldozer controller)
@@ -83,7 +82,8 @@ public class BulldozerState_Aggro : EnemyStates_Bulldozer
     public override void EnterState(Enemy_Bulldozer controller)
     {
         chargeDelay = controller.charge_delay;
-        canCharge = false;
+        canCharge = true;
+        FacePlayer(controller);
         Debug.Log("Aggro");
     }
 
@@ -96,7 +96,16 @@ public class BulldozerState_Aggro : EnemyStates_Bulldozer
     {
         if(canCharge && chargeDelay <= 0)
         {
-            controller.SwitchState("CHARGE");
+            RaycastHit hit;
+            if (Physics.Raycast(controller.firePoint.position, controller.firePoint.right, out hit, Mathf.Infinity, controller.ignoreLayers))
+            {
+                Debug.Log("HIT " + hit.transform.name);
+                if (hit.transform.CompareTag("Player"))
+                {
+                    controller.SwitchState("CHARGE");
+                    canCharge = false;
+                }
+            }
         }
         else
         {
@@ -142,6 +151,14 @@ public class BulldozerState_Aggro : EnemyStates_Bulldozer
                 controller.targets.RemoveAt(controller.targets.IndexOf(other.transform));
         }
     }
+
+    void FacePlayer(Enemy_Bulldozer controller)
+    {
+        if (controller.transform.position.x - controller.currentTarget.position.x > 0)
+            controller.transform.eulerAngles = Vector3.up * 180f;
+        else
+            controller.transform.eulerAngles = Vector3.zero;
+    }
 }
 
 public class BulldozerState_Charge : EnemyStates_Bulldozer
@@ -168,6 +185,7 @@ public class BulldozerState_Charge : EnemyStates_Bulldozer
         if (canCharge && chargeDelay <= 0)
         {
             isCharging = true;
+            controller.SetAttackTrigger(true);
             canCharge = false;
             chargingTime = 3f;
         }
@@ -179,6 +197,8 @@ public class BulldozerState_Charge : EnemyStates_Bulldozer
         if(isCharging && chargingTime <= 0)
         {
             controller.SwitchState("AGGRO");
+            controller.SetAttackTrigger(true);
+            isCharging = false;
         }
         else
         {

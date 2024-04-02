@@ -9,9 +9,9 @@ public class PlayerAttack : MonoBehaviour
     AudioSource source;
 
     [SerializeField] Transform firePoint;
-    [SerializeField] Transform handPos;
+    public Transform handPos;
     [SerializeField] Transform pivot;
-    
+
     GameObject weaponMesh;
     MeshRenderer ammoGraphics; //Temp
 
@@ -105,6 +105,8 @@ public class PlayerAttack : MonoBehaviour
             weapon = fists;
             currentAmmo = 420;
             currentReserve = 69;
+            //DisableWeaponMesh();
+            SetWeaponMesh(); // temp
             ammoGraphics.material.SetColor("_EmissionColor", Color.yellow); //temp
             Debug.Log("Fistacuffs");
         }
@@ -267,8 +269,23 @@ public class PlayerAttack : MonoBehaviour
             Destroy(weaponMesh);
         }
 
-        weaponMesh = Instantiate(weapon.weaponModel, handPos.position, pivot.rotation, pivot);
+        weaponMesh = Instantiate(weapon.weaponModel, handPos.position, handPos.rotation, handPos);
         ammoGraphics = weaponMesh.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>();
+        firePoint.position = weaponMesh.transform.GetChild(0).GetChild(0).position;
+    }
+
+    private void DisableWeaponMesh()
+    {
+        if (weaponMesh != null)
+        {
+            ammoGraphics = null;
+            Destroy(weaponMesh);
+            weaponMesh = null;
+        }
+    }
+
+    public void AdjustFirePoint()
+    {
         firePoint.position = weaponMesh.transform.GetChild(0).GetChild(0).position;
     }
 

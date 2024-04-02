@@ -10,6 +10,7 @@ public class Enemy_Bulldozer : MonoBehaviour
     [HideInInspector] public Rigidbody rb;
 
     public LayerMask ignoreLayers;
+    public Transform firePoint;
     [SerializeField] ProximityTrigger proxTrig;
     [SerializeField] ProximityTrigger attackTrig;
 
@@ -21,6 +22,7 @@ public class Enemy_Bulldozer : MonoBehaviour
     public float turnSpeed;
     public float chargeForce;
     public float chargeDamage;
+    [HideInInspector] public Vector3 chargeDirection;
 
     [SerializeField] BulldozerStates visibleState;
     EnemyStates_Bulldozer currentState;
@@ -175,6 +177,11 @@ public class Enemy_Bulldozer : MonoBehaviour
             SwitchState("IDLE");
             Debug.Log("BackToIdle");
         }
+    }
+
+    public void SetAttackTrigger(bool active)
+    {
+        attackTrig.isActive = active;
     }
 
 }

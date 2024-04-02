@@ -12,9 +12,11 @@ public class ProximityTrigger : MonoBehaviour
 
     [SerializeField] string[] checkTags;
 
+    public bool isActive;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (CheckTags(other.tag))
+        if (isActive && CheckTags(other.tag))
         {
             OnEnter(other);
         }
@@ -22,7 +24,7 @@ public class ProximityTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (CheckTags(other.tag))
+        if (isActive && CheckTags(other.tag))
         {
             OnExit(other);
         }
