@@ -30,7 +30,7 @@ public class BulldozerState_Idle : EnemyStates_Bulldozer
 {
     public override void EnterState(Enemy_Bulldozer controller)
     {
-
+        Debug.Log("Idle");
 
     }
 
@@ -84,6 +84,7 @@ public class BulldozerState_Aggro : EnemyStates_Bulldozer
     {
         chargeDelay = controller.charge_delay;
         canCharge = false;
+        Debug.Log("Aggro");
     }
 
     public override void ExitState(Enemy_Bulldozer controller)
@@ -148,11 +149,13 @@ public class BulldozerState_Charge : EnemyStates_Bulldozer
     bool canCharge;
     bool isCharging;
     float chargeDelay;
+    float chargingTime;
 
     public override void EnterState(Enemy_Bulldozer controller)
     {
         chargeDelay = 5f;
         canCharge = true;
+        Debug.Log("Charge");
     }
 
     public override void ExitState(Enemy_Bulldozer controller)
@@ -165,10 +168,21 @@ public class BulldozerState_Charge : EnemyStates_Bulldozer
         if (canCharge && chargeDelay <= 0)
         {
             isCharging = true;
+            canCharge = false;
+            chargingTime = 3f;
         }
         else
         {
             chargeDelay -= Time.deltaTime;
+        }
+
+        if(isCharging && chargingTime <= 0)
+        {
+            controller.SwitchState("AGGRO");
+        }
+        else
+        {
+            chargingTime -= Time.deltaTime;
         }
     }
 
