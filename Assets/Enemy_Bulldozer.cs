@@ -1,33 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
+using static PlayerHealth;
 
-public class Enemy_Turret : MonoBehaviour
+public class Enemy_Bulldozer : MonoBehaviour
 {
     public int currentRoomID;
 
-    public Transform firePoint;
-    public Transform y_pivot, x_pivot;
+    [HideInInspector] public Rigidbody rb;
+
     public LayerMask ignoreLayers;
-    public GameObject projectile;
     [SerializeField] ProximityTrigger proxTrig;
+    [SerializeField] ProximityTrigger attackTrig;
 
     public Transform currentTarget;
     public List<Transform> targets = new List<Transform>();
 
-    public float shoot_delay;
-
+    public float charge_delay;
+    public float speed;
     public float turnSpeed;
+    public float chargeForce;
+    public float chargeDamage;
 
-    [SerializeField] TurretStates visibleState;
-    EnemyStates_Turret currentState;
-    public TurretState_Idle state_Idle = new TurretState_Idle();
-    public TurretState_Aggro state_Aggro = new TurretState_Aggro();
+    [SerializeField] BulldozerStates visibleState;
+    EnemyStates_Bulldozer currentState;
+    public BulldozerState_Idle state_Idle = new BulldozerState_Idle();
+    public BulldozerState_Aggro state_Aggro = new BulldozerState_Aggro();
+    public BulldozerState_Charge state_Charge = new BulldozerState_Charge();
 
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         currentState = state_Idle;
         currentState.EnterState(this);
     }
@@ -39,14 +43,19 @@ public class Enemy_Turret : MonoBehaviour
         RoomManager.OnExit += OnPlayerExitRoom;
         proxTrig.OnEnter += OnProximityTriggerEnter;
         proxTrig.OnExit += OnProximityTriggerExit;
+        attackTrig.OnEnter += OnAttackTriggerEnter;
+        attackTrig.OnExit += OnAttackTriggerExit;
     }
 
     private void OnDisable()
     {
+        PlayerHealth.OnPlayerDied -= OnPlayerDied;
         RoomManager.OnEnter -= OnPlayerEnterRoom;
         RoomManager.OnExit -= OnPlayerExitRoom;
         proxTrig.OnEnter -= OnProximityTriggerEnter;
         proxTrig.OnExit -= OnProximityTriggerExit;
+        attackTrig.OnEnter -= OnAttackTriggerEnter;
+        attackTrig.OnExit -= OnAttackTriggerExit;
     }
 
     // Update is called once per frame
@@ -96,9 +105,13 @@ public class Enemy_Turret : MonoBehaviour
         currentState.OnTriggerExit(this, other);
     }
 
-    public void OnTargetsChanged()
+    public void OnAttackTriggerEnter(Collider other)
     {
+        currentState.OnAttackTriggerEnter(this, other);
+    }
 
+    public void OnAttackTriggerExit(Collider other)
+    {
     }
 
     public void SwitchState(string state)
@@ -109,11 +122,15 @@ public class Enemy_Turret : MonoBehaviour
         {
             case "IDLE":
                 currentState = state_Idle;
-                visibleState = TurretStates.idle;
-            break;
+                visibleState = BulldozerStates.idle;
+                break;
             case "AGGRO":
                 currentState = state_Aggro;
-                visibleState = TurretStates.aggro;
+                visibleState = BulldozerStates.aggro;
+                break;
+            case "CHARGE":
+                currentState = state_Charge;
+                visibleState = BulldozerStates.charge;
                 break;
             default:
                 Debug.LogError("WARNING: STATE NOT VALID");
@@ -131,13 +148,12 @@ public class Enemy_Turret : MonoBehaviour
             if (currentTarget == null)
                 currentTarget = target.transform;
 
-            //OnTargetAdded();
         }
     }
 
     public void NextTarget()
     {
-        if(targets.Count > 0)
+        if (targets.Count > 0)
         {
             float closestInt = 50000f;
             Transform temp_ClostestInteractable = null;
@@ -161,8 +177,4 @@ public class Enemy_Turret : MonoBehaviour
         }
     }
 
-    public void HelpInstantiate(Vector3 pos, Quaternion angle)
-    {
-        Instantiate(projectile, pos, angle);
-    }
 }

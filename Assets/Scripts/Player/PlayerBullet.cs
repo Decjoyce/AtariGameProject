@@ -25,22 +25,50 @@ public class PlayerBullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            DamageEnemy(collision);
+        }
+
+        if (collision.gameObject.CompareTag("CritSpot"))
+        {
+            DamageCritSpot(collision);
+        }
+
+        Debug.Log("HIT " + collision.gameObject.name);
+        Destroy(gameObject);
+    }
+
+    void DamageEnemy(Collision collision)
+    {
             Debug.Log("HIT " + collision.gameObject.name);
             float dist = Vector3.Distance(transform.position, startPos);
             if (dist < range)
             {
-                collision.gameObject.GetComponent<EnemyHealthTest>().TakeDamage(damage);
+                collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
                 Debug.Log("IN RANGE - Dam: " + damage + " Dist: " + dist);
             }
             else
             {
                 float newDam = damage / ((dist * dist) / (range * range));
-                collision.gameObject.GetComponent<EnemyHealthTest>().TakeDamage(newDam);
+                collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(newDam);
                 Debug.Log("OUT OF RANGE - Dam: " + newDam + " Dist:" + dist);
             }
-
-        }
-        Debug.Log("HIT " + collision.gameObject.name);
-        Destroy(gameObject);
     }
+
+    void DamageCritSpot(Collision collision)
+    {
+        Debug.Log("HIT " + collision.gameObject.name);
+        float dist = Vector3.Distance(transform.position, startPos);
+        if (dist < range)
+        {
+            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage * 2f);
+            Debug.Log("IN RANGE - Dam: " + damage + " Dist: " + dist);
+        }
+        else
+        {
+            float newDam = damage / ((dist * dist) / (range * range));
+            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(newDam * 2f);
+            Debug.Log("OUT OF RANGE - Dam: " + newDam + " Dist:" + dist);
+        }
+    }
+
 }

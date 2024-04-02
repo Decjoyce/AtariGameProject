@@ -8,6 +8,7 @@ TagManager:
   - Interactable
   - ScoreManager
   - Ammo
+  - CritSpot
   layers:
   - Default
   - TransparentFX

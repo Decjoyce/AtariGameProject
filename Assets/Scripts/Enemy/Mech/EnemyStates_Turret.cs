@@ -142,8 +142,6 @@ public class TurretState_Aggro : EnemyStates_Turret
         {
             controller.NextTarget();
         }
-
-        Debug.Log("Adjisjdisdis");
     }
 
     public override void OnTriggerEnter(Enemy_Turret controller, Collider other)
@@ -162,8 +160,6 @@ public class TurretState_Aggro : EnemyStates_Turret
                 controller.NextTarget();
             else if (controller.targets.Contains(other.transform))
                 controller.targets.RemoveAt(controller.targets.IndexOf(other.transform));
-                
-            Debug.Log(other.transform.position);
         }
     }
 }

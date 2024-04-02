@@ -221,7 +221,7 @@ public class PlayerAttack : MonoBehaviour
 
             for(int i = 0; i < hits.Length; i++)
             {
-                EnemyHealthTest enemyHealth = hits[i].transform.GetComponent<EnemyHealthTest>();
+                EnemyHealth enemyHealth = hits[i].transform.GetComponent<EnemyHealth>();
 
                 if (enemyHealth != null)
                     enemyHealth.TakeDamage(weapon.meleeDamage);
@@ -243,7 +243,7 @@ public class PlayerAttack : MonoBehaviour
 
             for (int i = 0; i < hits.Length; i++)
             {
-                EnemyHealthTest enemyHealth = hits[i].transform.GetComponent<EnemyHealthTest>();
+                EnemyHealth enemyHealth = hits[i].transform.GetComponent<EnemyHealth>();
 
                 if (enemyHealth != null)
                 {

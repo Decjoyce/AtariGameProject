@@ -17,7 +17,6 @@ public class ProximityTrigger : MonoBehaviour
         if (CheckTags(other.tag))
         {
             OnEnter(other);
-            Debug.Log("diskd");
         }
     }
 

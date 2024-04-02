@@ -28,7 +28,7 @@ public class PlayerMeleeThrust : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             Debug.Log("HIT " + other.gameObject.name);
-            other.gameObject.GetComponent<EnemyHealthTest>().TakeDamage(damage);
+            other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
         }
     }
 

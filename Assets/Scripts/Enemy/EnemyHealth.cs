@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealthTest : MonoBehaviour
+public class EnemyHealth : MonoBehaviour
 {
     public float currentHealth;
 
