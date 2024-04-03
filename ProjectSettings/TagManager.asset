@@ -28,7 +28,7 @@ TagManager:
   - EnemyNoCollide
   - BulletNoCollide
   - EnemyBounds
-  - 
+  - Hitbox
   - 
   - 
   - 

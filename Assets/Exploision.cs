@@ -25,7 +25,7 @@ public class Exploision : MonoBehaviour
         }
         if (other.CompareTag("EnemyHitbox"))
         {
-            other.GetComponent<EnemyHealth>().TakeDamage(damage);
+            other.GetComponent<EnemyHealth>().TakeDamage(damage * 4);
         }
     }
 }

@@ -4079,6 +4079,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116242593}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1117281633 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4711646261515055839, guid: 55c64246468149e4ca2e11a457194b07, type: 3}
+  m_PrefabInstance: {fileID: 3625121780512231498}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1118414242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5361,7 +5366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3335979719064479126, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7230523002329243551, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_Layer
@@ -8063,7 +8068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3335979719064479126, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3818399767675245500, guid: 7bc7bf31f2d409a45b0418d0437de4f8, type: 3}
       propertyPath: m_Size.x
@@ -8138,9 +8143,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2156447604399921519, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3908465210084054607, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25
+      value: 13.75
       objectReference: {fileID: 0}
     - target: {fileID: 3908465210084054607, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8148,7 +8157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3908465210084054607, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3908465210084054607, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8182,12 +8191,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: SecurityBot
       objectReference: {fileID: 0}
-    - target: {fileID: 6756374456166832844, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
-      propertyPath: headPositions.Array.data[1].y
-      value: 1.5
+    - target: {fileID: 7590996127154424549, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 9180287369048138392, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8004008499120392275, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
@@ -8199,6 +8213,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2135233396}
     m_Modifications:
+    - target: {fileID: 155615615405756446, guid: 55c64246468149e4ca2e11a457194b07, type: 3}
+      propertyPath: maxHealth
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 155615615405756446, guid: 55c64246468149e4ca2e11a457194b07, type: 3}
+      propertyPath: healthMeshes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 155615615405756446, guid: 55c64246468149e4ca2e11a457194b07, type: 3}
+      propertyPath: healthColorGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 155615615405756446, guid: 55c64246468149e4ca2e11a457194b07, type: 3}
+      propertyPath: healthColorGradient.key0.g
+      value: 0.22745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 155615615405756446, guid: 55c64246468149e4ca2e11a457194b07, type: 3}
+      propertyPath: healthColorGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 155615615405756446, guid: 55c64246468149e4ca2e11a457194b07, type: 3}
+      propertyPath: healthColorGradient.key1.g
+      value: 0.9996939
+      objectReference: {fileID: 0}
+    - target: {fileID: 155615615405756446, guid: 55c64246468149e4ca2e11a457194b07, type: 3}
+      propertyPath: healthColorGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 155615615405756446, guid: 55c64246468149e4ca2e11a457194b07, type: 3}
+      propertyPath: healthMeshes.Array.data[0]
+      value: 
+      objectReference: {fileID: 1117281633}
     - target: {fileID: 678875456594587884, guid: 55c64246468149e4ca2e11a457194b07, type: 3}
       propertyPath: m_Name
       value: Bulldozer
@@ -8246,6 +8292,14 @@ PrefabInstance:
     - target: {fileID: 5701603501039847235, guid: 55c64246468149e4ca2e11a457194b07, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8733139417611578166, guid: 55c64246468149e4ca2e11a457194b07, type: 3}
+      propertyPath: checkTags.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8733139417611578166, guid: 55c64246468149e4ca2e11a457194b07, type: 3}
+      propertyPath: checkTags.Array.data[2]
+      value: EnemyHitbox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8337,6 +8391,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 878160707404897388, guid: bfb1be362f975784c8db6ac7b39db1be, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 878160707404897388, guid: bfb1be362f975784c8db6ac7b39db1be, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 878160707404897388, guid: bfb1be362f975784c8db6ac7b39db1be, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

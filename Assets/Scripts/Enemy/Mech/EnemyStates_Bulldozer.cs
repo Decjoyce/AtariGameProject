@@ -412,6 +412,11 @@ public class BulldozerState_Charge : EnemyStates_Bulldozer
             other.gameObject.GetComponent<PlayerHealth>().TakeDamage(controller.chargeDamage * controller.rb.velocity.magnitude);
             Debug.Log(controller.chargeDamage * controller.rb.velocity.magnitude);
         }
+        if (other.CompareTag("EnemyHitbox"))
+        {
+            other.gameObject.GetComponent<EnemyHealth>().TakeDamage(controller.chargeDamage * controller.rb.velocity.magnitude);
+            Debug.Log(controller.chargeDamage * controller.rb.velocity.magnitude);
+        }
         if (other.CompareTag("Bounds"))
         {
             controller.rb.velocity = Vector3.zero;

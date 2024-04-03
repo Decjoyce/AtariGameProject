@@ -15,7 +15,6 @@ public class Enemy_SecurityBot : MonoBehaviour
 
     [Header("References")]
     [SerializeField] ProximityTrigger proxTrig;
-    [SerializeField] ProximityTrigger overHeadTrig;
     [SerializeField] Transform head;
     [SerializeField] Transform firepoint;
 
@@ -131,16 +130,6 @@ public class Enemy_SecurityBot : MonoBehaviour
     public void OnProximityTriggerExit(Collider other)
     {
         //currentState.OnTriggerEnter(this, other);
-    }
-
-    public void OnOverHeadTriggerEnter(Collider other)
-    {
-
-    }
-
-    public void OnOverHeadTriggerExit(Collider other)
-    {
-
     }
 
     public void SwitchState(string state)
