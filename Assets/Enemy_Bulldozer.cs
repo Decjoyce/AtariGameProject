@@ -23,6 +23,7 @@ public class Enemy_Bulldozer : MonoBehaviour
     public float turnSpeed;
     public float chargeForce;
     public float chargeDamage;
+    public float attackDamage;
     [HideInInspector] public Vector3 startPos;
 
     //Debugging
@@ -32,6 +33,7 @@ public class Enemy_Bulldozer : MonoBehaviour
     EnemyStates_Bulldozer currentState;
     public BulldozerState_Idle state_Idle = new BulldozerState_Idle();
     public BulldozerState_Aggro state_Aggro = new BulldozerState_Aggro();
+    public BulldozerState_Attack state_Attack = new BulldozerState_Attack();
     public BulldozerState_Windup state_Windup = new BulldozerState_Windup();
     public BulldozerState_Charge state_Charge = new BulldozerState_Charge();
 
@@ -120,6 +122,7 @@ public class Enemy_Bulldozer : MonoBehaviour
 
     public void OnAttackTriggerExit(Collider other)
     {
+
     }
 
     public void SwitchState(string state)
@@ -135,6 +138,10 @@ public class Enemy_Bulldozer : MonoBehaviour
             case "AGGRO":
                 currentState = state_Aggro;
                 visibleState = BulldozerStates.aggro;
+                break;
+            case "ATTACK":
+                currentState = state_Attack;
+                visibleState = BulldozerStates.attack;
                 break;
             case "WINDUP":
                 currentState = state_Windup;
@@ -156,7 +163,6 @@ public class Enemy_Bulldozer : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            Debug.Log("YESSIR");
             Vector3 newForce = new(-transform.right.x, 1f, 0f);
             collision.rigidbody.AddForce(newForce * 50f, ForceMode.Impulse);
         }

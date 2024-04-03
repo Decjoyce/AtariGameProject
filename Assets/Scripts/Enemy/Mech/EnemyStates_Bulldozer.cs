@@ -7,6 +7,7 @@ public enum BulldozerStates
 {
     idle,
     aggro,
+    attack,
     windup,
     charge,
 }
@@ -154,20 +155,23 @@ public class BulldozerState_Aggro : EnemyStates_Bulldozer
         if (other.CompareTag("Player"))
             tryToFacePlayer = true;
     }
+
+    public override void OnAttackTriggerEnter(Enemy_Bulldozer controller, Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            controller.SwitchState("ATTACK");
+        }
+    }
 }
 
 public class BulldozerState_Attack : EnemyStates_Bulldozer
 {
-    bool canCharge;
-    float windupDelay;
-    float chargeDelay;
+    float attackDelay;
 
     public override void EnterState(Enemy_Bulldozer controller)
     {
-        windupDelay = 2f;
-        canCharge = true;
-        chargeDelay = 2f;
-        controller.infoText.text = "Winding Up";
+        attackDelay = 2f;
     }
 
     public override void ExitState(Enemy_Bulldozer controller)
@@ -177,30 +181,13 @@ public class BulldozerState_Attack : EnemyStates_Bulldozer
 
     public override void FrameUpdate(Enemy_Bulldozer controller)
     {
-        if (canCharge && windupDelay <= 0)
+        if (attackDelay <= 0)
         {
-            if (chargeDelay > 0)
-            {
-                controller.infoText.text = "Ready to Charge";
-                RaycastHit hit;
-                if (Physics.Raycast(controller.firePoint.position, controller.firePoint.right, out hit, Mathf.Infinity, controller.ignoreLayers))
-                {
-                    Debug.Log("HIT " + hit.transform.name);
-                    if (hit.transform.CompareTag("Player"))
-                    {
-                        controller.SwitchState("CHARGE");
-                    }
-                }
-                chargeDelay -= Time.deltaTime;
-            }
-            else
-            {
-                controller.SwitchState("CHARGE");
-            }
+            controller.SwitchState("AGGRO");
         }
         else
         {
-            windupDelay -= Time.deltaTime;
+            attackDelay -= Time.deltaTime;
         }
     }
 
@@ -246,7 +233,10 @@ public class BulldozerState_Attack : EnemyStates_Bulldozer
 
     public override void OnAttackTriggerEnter(Enemy_Bulldozer controller, Collider other)
     {
-
+        if (other.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(controller.attackDamage);
+        }
     }
 }
 
@@ -260,8 +250,7 @@ public class BulldozerState_Windup : EnemyStates_Bulldozer
     {
         windupDelay = 2f;
         canCharge = true;
-        chargeDelay = 2f;
-        controller.infoText.text = "Winding Up";
+        chargeDelay = 1f;
     }
 
     public override void ExitState(Enemy_Bulldozer controller)
@@ -353,7 +342,6 @@ public class BulldozerState_Charge : EnemyStates_Bulldozer
     {
         chargingTime = 3f;
         isCharging = true;
-        controller.SetAttackTrigger(true);
     }
 
     public override void ExitState(Enemy_Bulldozer controller)
@@ -366,7 +354,6 @@ public class BulldozerState_Charge : EnemyStates_Bulldozer
         if(chargingTime <= 0)
         {
             controller.SwitchState("AGGRO");
-            controller.SetAttackTrigger(false);
         }
         else
         {

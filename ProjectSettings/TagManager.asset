@@ -26,7 +26,7 @@ TagManager:
   - PlayerNoCollide
   - EnemyNoCollide
   - BulletNoCollide
-  - 
+  - EnemyBounds
   - 
   - 
   - 

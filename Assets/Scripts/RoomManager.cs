@@ -26,6 +26,18 @@ public class RoomManager : MonoBehaviour
         instance = this;
     }
 
+    private void OnEnable()
+    {
+        OnEnter += Shush;
+        OnExit += Shush;
+    }
+
+    private void OnDisable()
+    {
+        OnEnter -= Shush;
+        OnExit -= Shush;
+    }
+
     private void Start()
     {
         RoomsInit();
@@ -54,5 +66,10 @@ public class RoomManager : MonoBehaviour
         {
             rooms[i].roomID = i;
         }
+    }
+
+    void Shush(GameObject player, int roomID)
+    {
+        
     }
 }
