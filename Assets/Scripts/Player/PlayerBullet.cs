@@ -10,6 +10,7 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField] float forwardForce, upwardForce,torqueForce; //Upwards force dont work bc up is right and right is up and when pivot rotates it messes it up and stuff so ye need to fix basically
     [SerializeField] float delayBeforeDelete = 3f;
     [SerializeField] float range;
+    bool madeContact;
 
     Vector3 startPos;
 
@@ -23,17 +24,20 @@ public class PlayerBullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (!madeContact)
         {
-            DamageEnemy(collision);
-        }
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                DamageEnemy(collision);
+            }
 
-        if (collision.gameObject.CompareTag("CritSpot"))
-        {
-            DamageCritSpot(collision);
+            if (collision.gameObject.CompareTag("CritSpot"))
+            {
+                DamageCritSpot(collision);
+            }
         }
-
         Debug.Log("HIT " + collision.gameObject.name);
+        madeContact = true;
         Destroy(gameObject);
     }
 
@@ -44,13 +48,13 @@ public class PlayerBullet : MonoBehaviour
             if (dist < range)
             {
                 collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
-                Debug.Log("IN RANGE - Dam: " + damage + " Dist: " + dist);
+                //Debug.Log("IN RANGE - Dam: " + damage + " Dist: " + dist);
             }
             else
             {
                 float newDam = damage / ((dist * dist) / (range * range));
                 collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(newDam);
-                Debug.Log("OUT OF RANGE - Dam: " + newDam + " Dist:" + dist);
+                //Debug.Log("OUT OF RANGE - Dam: " + newDam + " Dist:" + dist);
             }
     }
 
@@ -61,13 +65,13 @@ public class PlayerBullet : MonoBehaviour
         if (dist < range)
         {
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage * 2f);
-            Debug.Log("IN RANGE - Dam: " + damage + " Dist: " + dist);
+            //Debug.Log("IN RANGE - Dam: " + damage + " Dist: " + dist);
         }
         else
         {
             float newDam = damage / ((dist * dist) / (range * range));
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(newDam * 2f);
-            Debug.Log("OUT OF RANGE - Dam: " + newDam + " Dist:" + dist);
+            //Debug.Log("OUT OF RANGE - Dam: " + newDam + " Dist:" + dist);
         }
     }
 

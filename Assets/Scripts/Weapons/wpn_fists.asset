@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: Fists
   attackType: 3
   holdType: 
-  weaponModel: {fileID: 0}
+  weaponModel: {fileID: 8275159652715322147, guid: ec01f602cb17b7c47b9c61ba3a1520c1, type: 3}
   fireRate: 0.1
   projectile: {fileID: 1651700291602923542, guid: 8b1f506fcb6abc34a87850f6fa7ebe91, type: 3}
   reloadSpeed: 0

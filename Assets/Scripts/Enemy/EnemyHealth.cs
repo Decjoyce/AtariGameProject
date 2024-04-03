@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [SerializeField] float maxHealth;
     public float currentHealth;
+
+    [SerializeField] MeshRenderer[] healthMeshes; //temp
+    [SerializeField] Gradient healthColorGradient;
 
     public virtual void TakeDamage(float amount)
     {
@@ -13,10 +17,19 @@ public class EnemyHealth : MonoBehaviour
         {
             Die();
         }
+        SetHealthColor();
     }
 
     public virtual void Die()
     {
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+    }
+
+    void SetHealthColor()
+    {
+        foreach (MeshRenderer mr in healthMeshes)
+        {
+            mr.material.SetColor("_EmissionColor", healthColorGradient.Evaluate((maxHealth - currentHealth) / maxHealth));
+        }
     }
 }

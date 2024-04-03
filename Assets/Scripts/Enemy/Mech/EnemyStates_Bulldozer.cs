@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public enum BulldozerStates
 {
     idle,
     aggro,
+    windup,
     charge,
 }
 
@@ -30,7 +32,6 @@ public class BulldozerState_Idle : EnemyStates_Bulldozer
     public override void EnterState(Enemy_Bulldozer controller)
     {
         Debug.Log("Idle");
-        controller.chargeDirection = controller.transform.right;
     }
 
     public override void ExitState(Enemy_Bulldozer controller)
@@ -50,7 +51,7 @@ public class BulldozerState_Idle : EnemyStates_Bulldozer
 
     public override void OnRoomEnter(Enemy_Bulldozer controller, GameObject player)
     {
-        controller.SwitchState("CHARGE");
+        controller.SwitchState("WINDUP");
     }
 
     public override void OnRoomExit(Enemy_Bulldozer controller, GameObject player)
@@ -83,7 +84,7 @@ public class BulldozerState_Aggro : EnemyStates_Bulldozer
     {
         chargeDelay = controller.charge_delay;
         canCharge = true;
-        FacePlayer(controller);
+        controller.FaceSomething(controller.currentTarget.position);
         Debug.Log("Aggro");
     }
 
@@ -96,16 +97,9 @@ public class BulldozerState_Aggro : EnemyStates_Bulldozer
     {
         if(canCharge && chargeDelay <= 0)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(controller.firePoint.position, controller.firePoint.right, out hit, Mathf.Infinity, controller.ignoreLayers))
-            {
-                Debug.Log("HIT " + hit.transform.name);
-                if (hit.transform.CompareTag("Player"))
-                {
-                    controller.SwitchState("CHARGE");
-                    canCharge = false;
-                }
-            }
+            controller.FaceSomething(controller.currentTarget.position);
+            controller.SwitchState("WINDUP");
+            canCharge = false;
         }
         else
         {
@@ -115,7 +109,17 @@ public class BulldozerState_Aggro : EnemyStates_Bulldozer
 
     public override void PhysicsUpdate(Enemy_Bulldozer controller)
     {
-
+        if(chargeDelay > 0)
+        {
+            if(controller.currentTarget.position.z == controller.transform.position.z)
+            {
+                Debug.Log("oooh");
+                controller.FaceSomething(controller.currentTarget.position);
+                Vector3 vel = controller.transform.right * controller.speed * Time.fixedDeltaTime;
+                controller.rb.MovePosition(controller.rb.position + vel);
+            }
+            
+        }
     }
 
     public override void OnRoomEnter(Enemy_Bulldozer controller, GameObject player)
@@ -151,28 +155,20 @@ public class BulldozerState_Aggro : EnemyStates_Bulldozer
                 controller.targets.RemoveAt(controller.targets.IndexOf(other.transform));
         }
     }
-
-    void FacePlayer(Enemy_Bulldozer controller)
-    {
-        if (controller.transform.position.x - controller.currentTarget.position.x > 0)
-            controller.transform.eulerAngles = Vector3.up * 180f;
-        else
-            controller.transform.eulerAngles = Vector3.zero;
-    }
 }
 
-public class BulldozerState_Charge : EnemyStates_Bulldozer
+public class BulldozerState_Windup : EnemyStates_Bulldozer
 {
     bool canCharge;
-    bool isCharging;
+    float windupDelay;
     float chargeDelay;
-    float chargingTime;
 
     public override void EnterState(Enemy_Bulldozer controller)
     {
-        chargeDelay = 5f;
+        windupDelay = 2f;
         canCharge = true;
-        Debug.Log("Charge");
+        chargeDelay = 2f;
+        controller.infoText.text = "Winding Up";
     }
 
     public override void ExitState(Enemy_Bulldozer controller)
@@ -182,37 +178,36 @@ public class BulldozerState_Charge : EnemyStates_Bulldozer
 
     public override void FrameUpdate(Enemy_Bulldozer controller)
     {
-        if (canCharge && chargeDelay <= 0)
+        if (canCharge && windupDelay <= 0)
         {
-            isCharging = true;
-            controller.SetAttackTrigger(true);
-            canCharge = false;
-            chargingTime = 3f;
+            if(chargeDelay > 0)
+            {
+                controller.infoText.text = "Ready to Charge";
+                RaycastHit hit;
+                if (Physics.Raycast(controller.firePoint.position, controller.firePoint.right, out hit, Mathf.Infinity, controller.ignoreLayers))
+                {
+                    Debug.Log("HIT " + hit.transform.name);
+                    if (hit.transform.CompareTag("Player"))
+                    {
+                        controller.SwitchState("CHARGE");
+                    }
+                }
+                chargeDelay -= Time.deltaTime;
+            }
+            else
+            {
+                controller.SwitchState("CHARGE");
+            }
         }
         else
         {
-            chargeDelay -= Time.deltaTime;
-        }
-
-        if(isCharging && chargingTime <= 0)
-        {
-            controller.SwitchState("AGGRO");
-            controller.SetAttackTrigger(true);
-            isCharging = false;
-        }
-        else
-        {
-            chargingTime -= Time.deltaTime;
+            windupDelay -= Time.deltaTime;
         }
     }
 
     public override void PhysicsUpdate(Enemy_Bulldozer controller)
     {
-        if (isCharging)
-        {
-            Vector3 vel = controller.transform.right * controller.chargeForce;
-            controller.rb.AddForce(vel);
-        }
+
     }
 
     public override void OnRoomEnter(Enemy_Bulldozer controller, GameObject player)
@@ -252,13 +247,85 @@ public class BulldozerState_Charge : EnemyStates_Bulldozer
 
     public override void OnAttackTriggerEnter(Enemy_Bulldozer controller, Collider other)
     {
-        if (isCharging)
+    
+    }
+}
+
+public class BulldozerState_Charge : EnemyStates_Bulldozer
+{
+    float chargingTime;
+
+    public override void EnterState(Enemy_Bulldozer controller)
+    {
+        chargingTime = 3f;
+        controller.SetAttackTrigger(true);
+    }
+
+    public override void ExitState(Enemy_Bulldozer controller)
+    {
+
+    }
+
+    public override void FrameUpdate(Enemy_Bulldozer controller)
+    {
+        if(chargingTime <= 0)
         {
-            if (other.CompareTag("Player"))
-            {
-                other.gameObject.GetComponent<PlayerHealth>().TakeDamage(controller.chargeDamage * controller.rb.velocity.magnitude);
-                Debug.Log(controller.chargeDamage * controller.rb.velocity.magnitude);
-            }
+            controller.SwitchState("AGGRO");
+            controller.SetAttackTrigger(false);
+        }
+        else
+        {
+            chargingTime -= Time.deltaTime;
+        }
+    }
+
+    public override void PhysicsUpdate(Enemy_Bulldozer controller)
+    {
+        Vector3 vel = controller.transform.right * controller.chargeForce;
+        controller.rb.AddForce(vel, ForceMode.Acceleration);
+    }
+
+    public override void OnRoomEnter(Enemy_Bulldozer controller, GameObject player)
+    {
+        controller.NextTarget();
+    }
+
+    public override void OnRoomExit(Enemy_Bulldozer controller, GameObject player)
+    {
+        if (controller.targets.Contains(player.transform))
+            controller.targets.RemoveAt(controller.targets.IndexOf(player.transform));
+        if (controller.currentTarget = player.transform)
+        {
+            controller.NextTarget();
+        }
+
+    }
+
+    public override void OnTriggerEnter(Enemy_Bulldozer controller, Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            controller.NextTarget();
+        }
+    }
+
+    public override void OnTriggerExit(Enemy_Bulldozer controller, Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (controller.currentTarget = other.transform)
+                controller.NextTarget();
+            else if (controller.targets.Contains(other.transform))
+                controller.targets.RemoveAt(controller.targets.IndexOf(other.transform));
+        }
+    }
+
+    public override void OnAttackTriggerEnter(Enemy_Bulldozer controller, Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(controller.chargeDamage * controller.rb.velocity.magnitude);
+            Debug.Log(controller.chargeDamage * controller.rb.velocity.magnitude);
         }
     }
 }

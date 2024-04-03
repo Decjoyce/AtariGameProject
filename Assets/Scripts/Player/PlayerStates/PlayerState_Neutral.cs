@@ -211,7 +211,7 @@ public class PlayerState_Neutral : PlayerState_Base
                 controller.FaceDirection(true);
 
 
-            Debug.Log(newRot.eulerAngles.z);
+            //Debug.Log(newRot.eulerAngles.z);
 
             controller.pivot.localRotation = newRot;
         }

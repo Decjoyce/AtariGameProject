@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static PlayerHealth;
 
@@ -22,12 +23,16 @@ public class Enemy_Bulldozer : MonoBehaviour
     public float turnSpeed;
     public float chargeForce;
     public float chargeDamage;
-    [HideInInspector] public Vector3 chargeDirection;
+    [HideInInspector] public Vector3 startPos;
+
+    //Debugging
+    public TextMeshProUGUI infoText;
 
     [SerializeField] BulldozerStates visibleState;
     EnemyStates_Bulldozer currentState;
     public BulldozerState_Idle state_Idle = new BulldozerState_Idle();
     public BulldozerState_Aggro state_Aggro = new BulldozerState_Aggro();
+    public BulldozerState_Windup state_Windup = new BulldozerState_Windup();
     public BulldozerState_Charge state_Charge = new BulldozerState_Charge();
 
     // Start is called before the first frame update
@@ -36,6 +41,7 @@ public class Enemy_Bulldozer : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         currentState = state_Idle;
         currentState.EnterState(this);
+        startPos = transform.position;
     }
 
     private void OnEnable()
@@ -130,6 +136,10 @@ public class Enemy_Bulldozer : MonoBehaviour
                 currentState = state_Aggro;
                 visibleState = BulldozerStates.aggro;
                 break;
+            case "WINDUP":
+                currentState = state_Windup;
+                visibleState = BulldozerStates.windup;
+                break;
             case "CHARGE":
                 currentState = state_Charge;
                 visibleState = BulldozerStates.charge;
@@ -138,7 +148,22 @@ public class Enemy_Bulldozer : MonoBehaviour
                 Debug.LogError("WARNING: STATE NOT VALID");
                 break;
         }
+        infoText.text = state;
         currentState.EnterState(this);
+    }
+
+    public void FaceSomething(Vector3 theThing)
+    {
+        if (transform.position.x - theThing.x > 0)
+        {
+            transform.eulerAngles = Vector3.up * 180f;
+            infoText.transform.eulerAngles = Vector3.zero; 
+        }
+        else
+        {
+            transform.eulerAngles = Vector3.zero;
+            infoText.transform.eulerAngles = Vector3.up * 180f;
+        }
     }
 
     public void AddTarget(GameObject target)
