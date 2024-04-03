@@ -43,6 +43,7 @@ public class Enemy_Turret : MonoBehaviour
 
     private void OnDisable()
     {
+        PlayerHealth.OnPlayerDied -= OnPlayerDied;
         RoomManager.OnEnter -= OnPlayerEnterRoom;
         RoomManager.OnExit -= OnPlayerExitRoom;
         proxTrig.OnEnter -= OnProximityTriggerEnter;
