@@ -22,7 +22,7 @@ public class EnemyHealth : MonoBehaviour
 
     public virtual void Die()
     {
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 
     void SetHealthColor()
