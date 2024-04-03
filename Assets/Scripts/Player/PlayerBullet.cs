@@ -26,7 +26,7 @@ public class PlayerBullet : MonoBehaviour
     {
         if (!madeContact)
         {
-            if (collision.gameObject.CompareTag("Enemy"))
+            if (collision.gameObject.CompareTag("EnemyHitbox"))
             {
                 DamageEnemy(collision);
             }

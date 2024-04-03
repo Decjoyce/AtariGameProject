@@ -10,6 +10,7 @@ TagManager:
   - Ammo
   - CritSpot
   - Bounds
+  - EnemyHitbox
   layers:
   - Default
   - TransparentFX

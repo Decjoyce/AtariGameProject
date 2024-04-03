@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.TextCore;
@@ -29,6 +30,7 @@ public class Enemy_SecurityBot : MonoBehaviour
 
     [Header("Stats")]
     public float moveSpeed = 3f;
+    [SerializeField] Vector3[] headPositions;
 
     public float machineGunAttackSpeed;
 
@@ -181,11 +183,12 @@ public class Enemy_SecurityBot : MonoBehaviour
         Debug.Log(switchDelay);
         yield return new WaitForSeconds(switchDelay);
         GetRandomState();
+        GetRandomHeight();
     }
 
     public void GetRandomState()
     {
-        int ranNum = Random.Range(1, 2);
+        int ranNum = Random.Range(0, 3);
         switch (ranNum)
         {
             case 0:
@@ -202,6 +205,13 @@ public class Enemy_SecurityBot : MonoBehaviour
         }
         SetGunGraphics(ranNum);
     }
+
+    public void GetRandomHeight()
+    {
+        int ranNum = Random.Range(0, 3);
+        head.localPosition = headPositions[ranNum];
+    }
+
     #endregion
 
     public void ShootMachineGun()

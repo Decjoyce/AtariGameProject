@@ -23,7 +23,7 @@ public class Exploision : MonoBehaviour
         {
             other.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("EnemyHitbox"))
         {
             other.GetComponent<EnemyHealth>().TakeDamage(damage);
         }

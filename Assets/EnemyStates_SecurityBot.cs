@@ -166,7 +166,6 @@ public class SecurityBot_Railgun : EnemyStates_SecurityBot
         if(beamTime > 0f)
         {
             beamTime -= Time.deltaTime;
-            //Debug.LogWarning("ShotTime: " + timeBeforeNextShot + " Isfiring: " + isFiringBeam + " BeamTime: " + beamTime);
         }
     }
 
