@@ -9,6 +9,7 @@ TagManager:
   - ScoreManager
   - Ammo
   - CritSpot
+  - Bounds
   layers:
   - Default
   - TransparentFX

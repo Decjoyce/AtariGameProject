@@ -18,6 +18,7 @@ public class WeaponPickup : Interactable
             currentAmmo = weapon.magCapacity;
             currentReserve = weapon.reserveCapacity;
             interactPrompt = "Pick up " + weapon.weaponName;
+            Instantiate(weapon.weaponModel, transform);
         }
     }
 

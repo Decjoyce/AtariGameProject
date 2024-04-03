@@ -152,6 +152,16 @@ public class Enemy_Bulldozer : MonoBehaviour
         currentState.EnterState(this);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            Debug.Log("YESSIR");
+            Vector3 newForce = new(-transform.right.x, 1f, 0f);
+            collision.rigidbody.AddForce(newForce * 50f, ForceMode.Impulse);
+        }
+    }
+
     public void FaceSomething(Vector3 theThing)
     {
         if (transform.position.x - theThing.x > 0)

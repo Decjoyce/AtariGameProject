@@ -177,6 +177,7 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+
     public void FaceDirection(bool faceLeft)
     {
         if (faceLeft)
