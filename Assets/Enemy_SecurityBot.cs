@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.TextCore;
 
 public class Enemy_SecurityBot : MonoBehaviour
 {
@@ -20,19 +22,24 @@ public class Enemy_SecurityBot : MonoBehaviour
     public GameObject railgunProjectile;
 
     [Header("Graphics")]
-    [SerializeField] Transform machineGunGraphic;
-    [SerializeField] Transform railgunGraphic;
-    [SerializeField] Transform beamGunGraphic;
-    [SerializeField] LineRenderer laserBeamGraphic;
+    [SerializeField] GameObject[] gunGraphics; // 0 = MachineGun, 1 = Railgun, 2 = BeamGun
+    public LineRenderer beamGraphic;
+    [SerializeField] Gradient railBeamColor;
+    [SerializeField] Gradient laserBeamColor;
 
     [Header("Stats")]
     public float moveSpeed = 3f;
-    public float machineGunAttackSpeed;
-    public float railgunAttackSpeed;
-    public float beamGunAttackSpeed;
 
+    public float machineGunAttackSpeed;
+
+    public float railgunAttackSpeed;
     public float railgunAttackDamage;
+    public float railGunAttackWidth;
+    public float railGunAttackRange;
+
+    public float beamGunAttackSpeed;
     public float beamGunAttackDamage;
+    public float beamGunAttackWidth;
 
     public LayerMask ignoreLayers;
 
@@ -178,7 +185,7 @@ public class Enemy_SecurityBot : MonoBehaviour
 
     public void GetRandomState()
     {
-        int ranNum = Random.Range(0, 3);
+        int ranNum = Random.Range(1, 2);
         switch (ranNum)
         {
             case 0:
@@ -186,12 +193,16 @@ public class Enemy_SecurityBot : MonoBehaviour
                 break;
             case 1:
                 SwitchState("RAILGUN");
+                SetBeamGraphics(true);
                 break;
             case 2:
                 SwitchState("BEAMGUN");
+                SetBeamGraphics(false);
                 break;
         }
+        SetGunGraphics(ranNum);
     }
+    #endregion
 
     public void ShootMachineGun()
     {
@@ -200,7 +211,18 @@ public class Enemy_SecurityBot : MonoBehaviour
 
     public void ShootRailgun()
     {
-        Instantiate(railgunProjectile, firepoint.position, Quaternion.Euler(0f, 0f, 90f));
+        Debug.Log("Yo");
+        Collider[] thingsHit = Physics.OverlapBox(firepoint.position, new(railGunAttackRange, railGunAttackWidth, railGunAttackWidth), Quaternion.Euler(Vector3.zero), ignoreLayers);
+        foreach(Collider thing in thingsHit)
+        {
+            if (thing.CompareTag("Player"))
+            {
+                thing.GetComponent<PlayerHealth>().TakeDamage(railgunAttackDamage);
+            }
+        }
+        beamGraphic.enabled = true;
+        beamGraphic.SetPosition(0, firepoint.position);
+        beamGraphic.SetPosition(1, firepoint.position + (firepoint.right * railGunAttackRange));
     }
 
     public void ShootBeamGun()
@@ -212,50 +234,72 @@ public class Enemy_SecurityBot : MonoBehaviour
             {
                 hit.transform.GetComponent<PlayerHealth>().TakeDamage(beamGunAttackDamage);
             }
-            laserBeamGraphic.SetPosition(0, firepoint.position);
-            laserBeamGraphic.SetPosition(1, hit.point);
-        }
-        else
-        {
-            laserBeamGraphic.SetPosition(0, firepoint.position);
-            laserBeamGraphic.SetPosition(1, firepoint.right * 50f);
+            beamGraphic.SetPosition(0, firepoint.position);
+            beamGraphic.SetPosition(1, hit.point);
         }
     }
 
-        #endregion
-        public void AddTarget(GameObject target)
+    void SetGunGraphics(int state)
+    {
+        for(int i = 0; i < 3; i++)
         {
-            if (!targets.Contains(target.transform))
-            {
-                targets.Add(target.transform);
-                if (currentTarget == null)
-                    currentTarget = target.transform;
-            }
+            gunGraphics[i].SetActive(i == state);
         }
+    }
 
-        public void NextTarget()
+    public void SetBeamGraphics(bool railgun)
+    {
+        if (!railgun)
         {
-            if (targets.Count > 0)
+            beamGraphic.SetPosition(0, Vector3.zero);
+            beamGraphic.SetPosition(1, Vector3.zero);
+            beamGraphic.startWidth = beamGunAttackWidth;
+            beamGraphic.endWidth = beamGunAttackWidth;
+            beamGraphic.colorGradient = laserBeamColor;
+        }
+        else
+        {
+            beamGraphic.SetPosition(0, Vector3.zero);
+            beamGraphic.SetPosition(1, Vector3.zero);
+            beamGraphic.startWidth = railGunAttackWidth;
+            beamGraphic.endWidth = 0.1f;
+            beamGraphic.colorGradient = railBeamColor;
+        }
+    }
+
+    public void AddTarget(GameObject target)
+    {
+        if (!targets.Contains(target.transform))
+        {
+            targets.Add(target.transform);
+            if (currentTarget == null)
+                currentTarget = target.transform;
+        }
+    }
+
+    public void NextTarget()
+    {
+        if (targets.Count > 0)
+        {
+            float closestInt = 50000f;
+            Transform temp_ClostestInteractable = null;
+            foreach (Transform target in targets)
             {
-                float closestInt = 50000f;
-                Transform temp_ClostestInteractable = null;
-                foreach (Transform target in targets)
+                float dist = Vector3.SqrMagnitude(transform.position - target.transform.position);
+
+                if (dist < closestInt)
                 {
-                    float dist = Vector3.SqrMagnitude(transform.position - target.transform.position);
-
-                    if (dist < closestInt)
-                    {
-                        closestInt = dist;
-                        temp_ClostestInteractable = target;
-                    }
+                    closestInt = dist;
+                    temp_ClostestInteractable = target;
                 }
-                currentTarget = temp_ClostestInteractable;
-                Debug.Log("Got Next Target: " + currentTarget.name);
             }
-            else
-            {
-                SwitchState("IDLE");
-                Debug.Log("BackToIdle");
-            }
+            currentTarget = temp_ClostestInteractable;
+            Debug.Log("Got Next Target: " + currentTarget.name);
         }
+        else
+        {
+            SwitchState("IDLE");
+            Debug.Log("BackToIdle");
+        }
+    }
 }

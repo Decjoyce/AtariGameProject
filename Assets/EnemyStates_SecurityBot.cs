@@ -125,6 +125,9 @@ public class SecurityBot_MachineGun : EnemyStates_SecurityBot
 public class SecurityBot_Railgun : EnemyStates_SecurityBot
 {
     float timeBeforeNextShot;
+    float beamTime;
+    bool isFiringBeam;
+    bool canShoot;
 
     public override void EnterState(Enemy_SecurityBot controller)
     {
@@ -135,19 +138,35 @@ public class SecurityBot_Railgun : EnemyStates_SecurityBot
 
     public override void ExitState(Enemy_SecurityBot controller)
     {
-
+        controller.beamGraphic.enabled = false;
     }
 
     public override void FrameUpdate(Enemy_SecurityBot controller)
     {
-        if (timeBeforeNextShot <= 0f)
+        if (!isFiringBeam && timeBeforeNextShot <= 0f)
         {
+            isFiringBeam = true;
             controller.ShootRailgun();
-            timeBeforeNextShot = controller.railgunAttackSpeed;
+            beamTime = 0.5f;
         }
-        else
+        
+        if(timeBeforeNextShot > 0f)
         {
             timeBeforeNextShot -= Time.deltaTime;
+        }
+
+        if(isFiringBeam && beamTime <= 0f)
+        {
+            timeBeforeNextShot = controller.railgunAttackSpeed;
+            isFiringBeam = false;
+
+            controller.beamGraphic.enabled = false;
+        }
+        
+        if(beamTime > 0f)
+        {
+            beamTime -= Time.deltaTime;
+            //Debug.LogWarning("ShotTime: " + timeBeforeNextShot + " Isfiring: " + isFiringBeam + " BeamTime: " + beamTime);
         }
     }
 
@@ -186,11 +205,13 @@ public class SecurityBot_BeamGun : EnemyStates_SecurityBot
         controller.StartRandomStateDelay();
 
         timeBeforeNextShot = controller.beamGunAttackSpeed;
+
+        controller.beamGraphic.enabled = true;
     }
 
     public override void ExitState(Enemy_SecurityBot controller)
     {
-
+        controller.beamGraphic.enabled = false;
     }
 
     public override void FrameUpdate(Enemy_SecurityBot controller)
