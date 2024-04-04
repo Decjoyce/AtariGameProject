@@ -123,17 +123,20 @@ public class Enemy_SecurityBot : MonoBehaviour
 
     void OnPlayerExitRoom(GameObject player, int roomID)
     {
-
+        if (currentRoomID == roomID)
+        {
+            currentState.OnRoomExit(this, player);
+        }
     }
 
     public void OnProximityTriggerEnter(Collider other)
     {
-        //currentState.OnTriggerEnter(this, other);
+        currentState.OnTriggerEnter(this, other);
     }
 
     public void OnProximityTriggerExit(Collider other)
     {
-        //currentState.OnTriggerEnter(this, other);
+        currentState.OnTriggerEnter(this, other);
     }
 
     public void SwitchState(string state)

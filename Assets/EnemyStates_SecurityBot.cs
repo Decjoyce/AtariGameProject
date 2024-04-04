@@ -94,45 +94,61 @@ public class SecurityBot_MachineGun : EnemyStates_SecurityBot
         {
             timeBeforeNextShot -= Time.deltaTime;
         }
-    }
 
-    public override void PhysicsUpdate(Enemy_SecurityBot controller)
-    {
         float distBetween = controller.currentTarget.position.x - controller.transform.position.x;
         Debug.Log(distBetween);
         if (distBetween < 0 && distBetween >= -controller.fleeDistanceMG)
         {
             controller.FaceSomething(controller.currentTarget.position);
-            Vector3 vel = Vector3.right * controller.moveSpeed * Time.fixedDeltaTime;
+            Vector3 vel = Vector3.right * controller.moveSpeed * Time.deltaTime;
             controller.rb.MovePosition(controller.rb.position + vel);
         }
 
         if (distBetween > 0 && distBetween <= controller.fleeDistanceMG)
         {
             controller.FaceSomething(controller.currentTarget.position);
-            Vector3 vel = -Vector3.right * controller.moveSpeed * Time.fixedDeltaTime;
+            Vector3 vel = -Vector3.right * controller.moveSpeed * Time.deltaTime;
             controller.rb.MovePosition(controller.rb.position + vel);
         }
     }
 
-    public override void OnRoomEnter(Enemy_SecurityBot controller, GameObject player)
+    public override void PhysicsUpdate(Enemy_SecurityBot controller)
     {
 
+    }
+
+    public override void OnRoomEnter(Enemy_SecurityBot controller, GameObject player)
+    {
+        controller.NextTarget();
     }
 
     public override void OnRoomExit(Enemy_SecurityBot controller, GameObject player)
     {
-
+        if (controller.targets.Contains(player.transform))
+            controller.targets.RemoveAt(controller.targets.IndexOf(player.transform));
+        if (controller.currentTarget = player.transform)
+        {
+            controller.NextTarget();
+        }
     }
 
     public override void OnTriggerEnter(Enemy_SecurityBot controller, Collider other)
     {
-
+        if (other.CompareTag("Player"))
+        {
+            controller.NextTarget();
+        }
     }
 
     public override void OnTriggerExit(Enemy_SecurityBot controller, Collider other)
     {
-
+        if (other.CompareTag("Player"))
+        {
+            if (controller.currentTarget = other.transform)
+                controller.NextTarget();
+            else if (controller.targets.Contains(other.transform))
+                controller.targets.RemoveAt(controller.targets.IndexOf(other.transform));
+        }
     }
 }
 
@@ -181,44 +197,61 @@ public class SecurityBot_Railgun : EnemyStates_SecurityBot
         {
             beamTime -= Time.deltaTime;
         }
+
+        float distBetween = controller.currentTarget.position.x - controller.transform.position.x;
+        if (distBetween < 0 && distBetween >= -controller.fleeDistanceRail)
+        {
+            controller.FaceSomething(controller.currentTarget.position);
+            Vector3 vel = Vector3.right * controller.moveSpeed * Time.deltaTime;
+            controller.rb.MovePosition(controller.rb.position + vel);
+        }
+
+        if (distBetween > 0 && distBetween <= controller.fleeDistanceRail)
+        {
+            controller.FaceSomething(controller.currentTarget.position);
+            Vector3 vel = -Vector3.right * controller.moveSpeed * Time.deltaTime;
+            controller.rb.MovePosition(controller.rb.position + vel);
+        }
+
     }
 
     public override void PhysicsUpdate(Enemy_SecurityBot controller)
     {
-        float distBetween = controller.currentTarget.position.x - controller.transform.position.x;
-        if(distBetween < 0 && distBetween >= -controller.fleeDistanceRail)
-        {
-            controller.FaceSomething(controller.currentTarget.position);
-            Vector3 vel = Vector3.right * controller.moveSpeed * Time.fixedDeltaTime;
-            controller.rb.MovePosition(controller.rb.position + vel);
-        }
-        
-        if(distBetween > 0 && distBetween <= controller.fleeDistanceRail)
-        {
-            controller.FaceSomething(controller.currentTarget.position);
-            Vector3 vel = -Vector3.right * controller.moveSpeed * Time.fixedDeltaTime;
-            controller.rb.MovePosition(controller.rb.position + vel);
-        }
+
     }
 
     public override void OnRoomEnter(Enemy_SecurityBot controller, GameObject player)
     {
-
+        controller.NextTarget();
     }
 
     public override void OnRoomExit(Enemy_SecurityBot controller, GameObject player)
     {
-
+        if (controller.targets.Contains(player.transform))
+            controller.targets.RemoveAt(controller.targets.IndexOf(player.transform));
+        if (controller.currentTarget = player.transform)
+        {
+            controller.NextTarget();
+        }
     }
 
     public override void OnTriggerEnter(Enemy_SecurityBot controller, Collider other)
     {
-
+        if (other.CompareTag("Player"))
+        {
+            controller.NextTarget();
+        }
     }
 
     public override void OnTriggerExit(Enemy_SecurityBot controller, Collider other)
     {
-
+        if (other.CompareTag("Player"))
+        {
+            if (controller.currentTarget = other.transform)
+                controller.NextTarget();
+            else if (controller.targets.Contains(other.transform))
+                controller.targets.RemoveAt(controller.targets.IndexOf(other.transform));
+        }
     }
 }
 
@@ -255,22 +288,36 @@ public class SecurityBot_BeamGun : EnemyStates_SecurityBot
 
     public override void OnRoomEnter(Enemy_SecurityBot controller, GameObject player)
     {
-
+        controller.NextTarget();
     }
 
     public override void OnRoomExit(Enemy_SecurityBot controller, GameObject player)
     {
-
+        if (controller.targets.Contains(player.transform))
+            controller.targets.RemoveAt(controller.targets.IndexOf(player.transform));
+        if (controller.currentTarget = player.transform)
+        {
+            controller.NextTarget();
+        }
     }
 
     public override void OnTriggerEnter(Enemy_SecurityBot controller, Collider other)
     {
-
+        if (other.CompareTag("Player"))
+        {
+            controller.NextTarget();
+        }
     }
 
     public override void OnTriggerExit(Enemy_SecurityBot controller, Collider other)
     {
-
+        if (other.CompareTag("Player"))
+        {
+            if (controller.currentTarget = other.transform)
+                controller.NextTarget();
+            else if (controller.targets.Contains(other.transform))
+                controller.targets.RemoveAt(controller.targets.IndexOf(other.transform));
+        }
     }
 
     public override void PhysicsUpdate(Enemy_SecurityBot controller)

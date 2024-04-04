@@ -2691,6 +2691,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SecurityBot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5562032560726689508, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 6756374456166832844, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
       propertyPath: testa
       value: 
@@ -2714,6 +2718,10 @@ PrefabInstance:
     - target: {fileID: 8332013940410334245, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
       propertyPath: m_Constraints
       value: 124
+      objectReference: {fileID: 0}
+    - target: {fileID: 8784263290163415584, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 9180287369048138392, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
       propertyPath: m_Layer
@@ -8392,6 +8400,14 @@ PrefabInstance:
     - target: {fileID: 3975161191928823044, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
       propertyPath: m_Name
       value: SecurityBot
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562032560726689508, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8784263290163415584, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

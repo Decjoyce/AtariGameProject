@@ -701,7 +701,7 @@ MonoBehaviour:
   layerOffset: 2.5
   layerLayers:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 9728
   currentSpeed: 5
   walkSpeed: 5
   crouchSpeed: 3
