@@ -11,7 +11,7 @@ public class EnemyProjectile : MonoBehaviour
 
     private void Start()
     {
-        rb.AddForce((transform.right * -upwardForce) + (transform.up * forwardForce), ForceMode.Impulse);
+        rb.AddForce((transform.right * upwardForce) + (transform.up * forwardForce), ForceMode.Impulse);
         rb.AddTorque(transform.forward * torqueForce);
         Destroy(gameObject, delayBeforeDelete);
     }

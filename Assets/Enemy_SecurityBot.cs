@@ -5,6 +5,7 @@ using UnityEngine.Android;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.TextCore;
+using UnityEngine.TextCore.Text;
 
 public class Enemy_SecurityBot : MonoBehaviour
 {
@@ -19,7 +20,6 @@ public class Enemy_SecurityBot : MonoBehaviour
     [SerializeField] Transform firepoint;
 
     public GameObject machineGunProjectile;
-    public GameObject railgunProjectile;
 
     [Header("Graphics")]
     [SerializeField] GameObject[] gunGraphics; // 0 = MachineGun, 1 = Railgun, 2 = BeamGun
@@ -29,6 +29,8 @@ public class Enemy_SecurityBot : MonoBehaviour
 
     [Header("Stats")]
     public float moveSpeed = 3f;
+    public float fleeDistanceMG = 5f;
+    public float fleeDistanceRail = 7.5f;
     [SerializeField] Vector3[] headPositions;
 
     public float machineGunAttackSpeed;
@@ -63,6 +65,8 @@ public class Enemy_SecurityBot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+
         currentState = state_Idle;
         currentState.EnterState(this);
     }
@@ -205,13 +209,12 @@ public class Enemy_SecurityBot : MonoBehaviour
 
     public void ShootMachineGun()
     {
-        Instantiate(machineGunProjectile, firepoint.position, Quaternion.Euler(0f, 0f, 90f));
+        Instantiate(machineGunProjectile, firepoint.position, firepoint.rotation);
     }
 
     public void ShootRailgun()
     {
-        Debug.Log("Yo");
-        Collider[] thingsHit = Physics.OverlapBox(firepoint.position, new(railGunAttackRange, railGunAttackWidth, railGunAttackWidth), Quaternion.Euler(Vector3.zero), ignoreLayers);
+        Collider[] thingsHit = Physics.OverlapBox(firepoint.position + (firepoint.right * (railGunAttackRange/2)), new(railGunAttackRange/2, railGunAttackWidth, railGunAttackWidth), Quaternion.Euler(Vector3.zero), ignoreLayers);
         foreach(Collider thing in thingsHit)
         {
             if (thing.CompareTag("Player"))
@@ -263,6 +266,18 @@ public class Enemy_SecurityBot : MonoBehaviour
             beamGraphic.startWidth = railGunAttackWidth;
             beamGraphic.endWidth = 0.1f;
             beamGraphic.colorGradient = railBeamColor;
+        }
+    }
+
+    public void FaceSomething(Vector3 theThing)
+    {
+        if (transform.position.x - theThing.x > 0)
+        {
+            transform.eulerAngles = Vector3.up * 180f;
+        }
+        else
+        {
+            transform.eulerAngles = Vector3.zero;
         }
     }
 

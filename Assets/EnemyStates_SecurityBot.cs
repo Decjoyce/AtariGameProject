@@ -28,7 +28,7 @@ public class SecurityBot_Idle : EnemyStates_SecurityBot
 {
     public override void EnterState(Enemy_SecurityBot controller)
     {
-        
+        controller.GetRandomHeight();
     }
 
     public override void ExitState(Enemy_SecurityBot controller)
@@ -96,6 +96,25 @@ public class SecurityBot_MachineGun : EnemyStates_SecurityBot
         }
     }
 
+    public override void PhysicsUpdate(Enemy_SecurityBot controller)
+    {
+        float distBetween = controller.currentTarget.position.x - controller.transform.position.x;
+        Debug.Log(distBetween);
+        if (distBetween < 0 && distBetween >= -controller.fleeDistanceMG)
+        {
+            controller.FaceSomething(controller.currentTarget.position);
+            Vector3 vel = Vector3.right * controller.moveSpeed * Time.fixedDeltaTime;
+            controller.rb.MovePosition(controller.rb.position + vel);
+        }
+
+        if (distBetween > 0 && distBetween <= controller.fleeDistanceMG)
+        {
+            controller.FaceSomething(controller.currentTarget.position);
+            Vector3 vel = -Vector3.right * controller.moveSpeed * Time.fixedDeltaTime;
+            controller.rb.MovePosition(controller.rb.position + vel);
+        }
+    }
+
     public override void OnRoomEnter(Enemy_SecurityBot controller, GameObject player)
     {
 
@@ -112,11 +131,6 @@ public class SecurityBot_MachineGun : EnemyStates_SecurityBot
     }
 
     public override void OnTriggerExit(Enemy_SecurityBot controller, Collider other)
-    {
-
-    }
-
-    public override void PhysicsUpdate(Enemy_SecurityBot controller)
     {
 
     }
@@ -169,6 +183,24 @@ public class SecurityBot_Railgun : EnemyStates_SecurityBot
         }
     }
 
+    public override void PhysicsUpdate(Enemy_SecurityBot controller)
+    {
+        float distBetween = controller.currentTarget.position.x - controller.transform.position.x;
+        if(distBetween < 0 && distBetween >= -controller.fleeDistanceRail)
+        {
+            controller.FaceSomething(controller.currentTarget.position);
+            Vector3 vel = Vector3.right * controller.moveSpeed * Time.fixedDeltaTime;
+            controller.rb.MovePosition(controller.rb.position + vel);
+        }
+        
+        if(distBetween > 0 && distBetween <= controller.fleeDistanceRail)
+        {
+            controller.FaceSomething(controller.currentTarget.position);
+            Vector3 vel = -Vector3.right * controller.moveSpeed * Time.fixedDeltaTime;
+            controller.rb.MovePosition(controller.rb.position + vel);
+        }
+    }
+
     public override void OnRoomEnter(Enemy_SecurityBot controller, GameObject player)
     {
 
@@ -185,11 +217,6 @@ public class SecurityBot_Railgun : EnemyStates_SecurityBot
     }
 
     public override void OnTriggerExit(Enemy_SecurityBot controller, Collider other)
-    {
-
-    }
-
-    public override void PhysicsUpdate(Enemy_SecurityBot controller)
     {
 
     }

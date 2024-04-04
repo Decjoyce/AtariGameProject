@@ -403,7 +403,6 @@ Transform:
   - {fileID: 3837253235084467106}
   - {fileID: 2264550328725829912}
   - {fileID: 5256030918462957818}
-  - {fileID: 4235643095556118443}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &8332013940410334245
@@ -448,11 +447,9 @@ MonoBehaviour:
   currentRoomID: 2
   rb: {fileID: 0}
   proxTrig: {fileID: 2857119758195165438}
-  overHeadTrig: {fileID: 2314608346843608992}
   head: {fileID: 2264550328725829912}
   firepoint: {fileID: 7189053385957360782}
-  machineGunProjectile: {fileID: 1112150731768423405, guid: 120ac64df91b0db4087a6962d5bd2958, type: 3}
-  railgunProjectile: {fileID: 1112150731768423405, guid: 120ac64df91b0db4087a6962d5bd2958, type: 3}
+  machineGunProjectile: {fileID: 1112150731768423405, guid: 06a183424673c534e9399a52c97552a7, type: 3}
   gunGraphics:
   - {fileID: 1085436554631508527}
   - {fileID: 5263460954523277978}
@@ -519,15 +516,17 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   moveSpeed: 3
+  fleeDistanceMG: 5
+  fleeDistanceRail: 7.5
   headPositions:
   - {x: 0.05, y: 2.5, z: 0}
   - {x: 0.05, y: 1.5, z: 0}
   - {x: 0.05, y: 0.75, z: 0}
-  machineGunAttackSpeed: 0.4
+  machineGunAttackSpeed: 0.6
   railgunAttackSpeed: 3
   railgunAttackDamage: 50
   railGunAttackWidth: 0.25
-  railGunAttackRange: 20
+  railGunAttackRange: 10
   beamGunAttackSpeed: 0.2
   beamGunAttackDamage: 5
   beamGunAttackWidth: 0.1
@@ -972,7 +971,7 @@ GameObject:
   - component: {fileID: 8139925332883545839}
   - component: {fileID: 873383061832550726}
   - component: {fileID: 2603626780409203685}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Thread_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1065,75 +1064,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &8004008499120392275
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4235643095556118443}
-  - component: {fileID: 5299816076557317654}
-  - component: {fileID: 2314608346843608992}
-  m_Layer: 14
-  m_Name: OverHeadTrigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4235643095556118443
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8004008499120392275}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.25, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3908465210084054607}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5299816076557317654
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8004008499120392275}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 3, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2314608346843608992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8004008499120392275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d832f8a39377848ae322bb28b8b3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkTags:
-  - Player
-  isActive: 1
 --- !u!1 &8784263290163415584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,7 +1261,7 @@ GameObject:
   - component: {fileID: 1311940922700433901}
   - component: {fileID: 8711128445264030832}
   - component: {fileID: 7830184661144950486}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Thread_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
