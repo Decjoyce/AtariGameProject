@@ -175,7 +175,7 @@ public class Enemy_SecurityBot : MonoBehaviour
 
     IEnumerator RandomStateDelay()
     {
-        switchDelay = Random.Range(5f, 20f);
+        switchDelay = Random.Range(2f, 20f);
         Debug.Log(switchDelay);
         yield return new WaitForSeconds(switchDelay);
         GetRandomState();

@@ -93,9 +93,8 @@ public class PlayerState_Neutral : PlayerState_Base
     {
         if (controller.isGrounded && ctx.performed)
         {
-            Vector3 checkObstacleSize = new(0.5f, 2f, controller.layerOffset / 2);
-            Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.y + controller.layerOffset/2);
-            int numCollisions = Physics.OverlapBox(checkObstaclePos, checkObstacleSize, Quaternion.identity, controller.layerLayers).Length;
+            Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.z + controller.layerOffset/2);
+            int numCollisions = Physics.OverlapBox(checkObstaclePos, controller.checkObstacleSize, Quaternion.identity, controller.layerLayers).Length;
 
             if (numCollisions <= 0)
             {
@@ -112,9 +111,8 @@ public class PlayerState_Neutral : PlayerState_Base
     {
         if (controller.isGrounded && ctx.performed)
         {
-            Vector3 checkObstacleSize = new(0.5f, 2f, controller.layerOffset / 2);
-            Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.y - controller.layerOffset / 2);
-            int numCollisions = Physics.OverlapBox(checkObstaclePos, checkObstacleSize, Quaternion.identity, controller.layerLayers).Length;
+            Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.z - controller.layerOffset / 2);;
+            int numCollisions = Physics.OverlapBox(checkObstaclePos, controller.checkObstacleSize, Quaternion.identity, controller.layerLayers).Length;
 
             if (numCollisions <= 0)
             {

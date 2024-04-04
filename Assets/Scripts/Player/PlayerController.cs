@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [System.NonSerialized] public PlayerInteraction interaction;
     [System.NonSerialized] public PlayerAttack attack;
     [System.NonSerialized] public PlayerHealth health;
+
+    public GameObject cub;
 
     [Header("References")]
     public Camera playerCam;
@@ -22,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public float currentLayer;
     public float layerOffset;
     public LayerMask layerLayers;
+    [HideInInspector] public Vector3 checkObstacleSize;
 
     [Header("Speed")]
     public float currentSpeed;
@@ -72,6 +76,8 @@ public class PlayerController : MonoBehaviour
     #region StateManagement
     private void Start()
     {
+        checkObstacleSize = new(0.5f, 2f, layerOffset);
+
         currentState = state_Neutral;
         currentState.EnterState(this);
 

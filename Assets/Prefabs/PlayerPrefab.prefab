@@ -692,6 +692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608ab4a004fe9a543b08a63ad1b43e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cub: {fileID: 6458126399459215357, guid: c5d9e0baa3d1e9c46b01398fb46fafb9, type: 3}
   playerCam: {fileID: 0}
   rb: {fileID: 8124268400481534176}
   col: {fileID: 0}

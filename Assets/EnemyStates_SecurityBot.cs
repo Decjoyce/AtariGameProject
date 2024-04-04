@@ -28,6 +28,7 @@ public class SecurityBot_Idle : EnemyStates_SecurityBot
 {
     public override void EnterState(Enemy_SecurityBot controller)
     {
+        controller.StopAllCoroutines();
         controller.GetRandomHeight();
     }
 
