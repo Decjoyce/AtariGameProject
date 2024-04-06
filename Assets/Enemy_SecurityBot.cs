@@ -45,6 +45,7 @@ public class Enemy_SecurityBot : MonoBehaviour
     public float beamGunAttackWidth;
 
     public LayerMask ignoreLayers;
+    public LayerMask railgunIgnoreLayers;
 
     [Header("Targeting")]
     public Transform currentTarget;
@@ -184,7 +185,7 @@ public class Enemy_SecurityBot : MonoBehaviour
 
     public void GetRandomState()
     {
-        int ranNum = Random.Range(0, 3);
+        int ranNum = Random.Range(1, 2);
         switch (ranNum)
         {
             case 0:
@@ -219,13 +220,10 @@ public class Enemy_SecurityBot : MonoBehaviour
     {
         Collider[] thingsHit = null;
         RaycastHit hit;
-        if (Physics.Raycast(firepoint.position, firepoint.right, out hit, Mathf.Infinity, ignoreLayers))
+        if (Physics.Raycast(firepoint.position, firepoint.right, out hit, Mathf.Infinity, railgunIgnoreLayers))
         {
-            if (hit.transform.CompareTag("Wall"))
-            {
-                float newRange = Vector3.Distance(firepoint.position, hit.point)/2;
-                thingsHit = Physics.OverlapBox(firepoint.position + (firepoint.right * (railGunAttackRange/2)), new(railGunAttackRange/2, railGunAttackWidth, railGunAttackWidth), Quaternion.Euler(Vector3.zero), ignoreLayers);
-            }
+            float newRange = Vector3.Distance(firepoint.position, hit.point);
+            thingsHit = Physics.OverlapBox(firepoint.position + (firepoint.right * (newRange/2)), new(newRange, railGunAttackWidth, railGunAttackWidth), Quaternion.identity, ignoreLayers);
         }
         else
         {
