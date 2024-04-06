@@ -43,6 +43,7 @@ public class PlayerState_Neutral : PlayerState_Base
             isJumping = false;
         }
 
+
         if (controller.oldLook)
         {
             LookOld(controller);
@@ -224,7 +225,7 @@ public class PlayerState_Neutral : PlayerState_Base
     {
         float jumpForce = Mathf.Sqrt(controller.jumpHeight * -2 * (Physics.gravity.y * controller.gravityScale * rb.mass));
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
+        controller.anim.SetTrigger("isJumping");
         isJumping = true;
     }
 
@@ -241,6 +242,8 @@ public class PlayerState_Neutral : PlayerState_Base
 
             controller.anim.SetBool("isCrouching", true);
 
+            controller.graphicsPivot.localEulerAngles = new Vector3(-15f, controller.graphicsPivot.localEulerAngles.y, controller.graphicsPivot.localEulerAngles.z);
+
             //controller.crouchGraphics.SetActive(true); //Temp
             //controller.standGraphics.SetActive(false); //Temp
         }
@@ -253,6 +256,8 @@ public class PlayerState_Neutral : PlayerState_Base
             controller.col.height = standColiderHeight;
 
             controller.anim.SetBool("isCrouching", false);
+
+            controller.graphicsPivot.localEulerAngles = new Vector3(0f, controller.graphicsPivot.localEulerAngles.y, controller.graphicsPivot.localEulerAngles.z);
 
             //controller.crouchGraphics.SetActive(false); //Temp
             //controller.standGraphics.SetActive(true); //Temp
