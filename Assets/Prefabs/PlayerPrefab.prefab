@@ -703,6 +703,7 @@ MonoBehaviour:
   layerLayers:
     serializedVersion: 2
     m_Bits: 9728
+  checkObstacleSize: {x: 0, y: 0, z: 0}
   currentSpeed: 5
   walkSpeed: 5
   crouchSpeed: 3
@@ -771,6 +772,7 @@ MonoBehaviour:
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
   droppedWeaponPrefab: {fileID: 2982337102470626192, guid: e72ade0b948578d48a314d9264f6cf3d, type: 3}
+  accurracy: 2
 --- !u!114 &3197097366858936561
 MonoBehaviour:
   m_ObjectHideFlags: 0

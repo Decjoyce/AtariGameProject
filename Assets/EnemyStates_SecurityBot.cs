@@ -96,20 +96,22 @@ public class SecurityBot_MachineGun : EnemyStates_SecurityBot
             timeBeforeNextShot -= Time.deltaTime;
         }
 
-        float distBetween = controller.currentTarget.position.x - controller.transform.position.x;
-        Debug.Log(distBetween);
-        if (distBetween < 0 && distBetween >= -controller.fleeDistanceMG)
+        if (controller.transform.position.z == controller.currentTarget.position.z)
         {
-            controller.FaceSomething(controller.currentTarget.position);
-            Vector3 vel = Vector3.right * controller.moveSpeed * Time.deltaTime;
-            controller.rb.MovePosition(controller.rb.position + vel);
-        }
+            float distBetween = controller.currentTarget.position.x - controller.transform.position.x;;
+            if (distBetween < 0 && distBetween >= -controller.fleeDistanceMG)
+            {
+                controller.FaceSomething(controller.currentTarget.position);
+                Vector3 vel = Vector3.right * controller.moveSpeed * Time.deltaTime;
+                controller.rb.MovePosition(controller.rb.position + vel);
+            }
 
-        if (distBetween > 0 && distBetween <= controller.fleeDistanceMG)
-        {
-            controller.FaceSomething(controller.currentTarget.position);
-            Vector3 vel = -Vector3.right * controller.moveSpeed * Time.deltaTime;
-            controller.rb.MovePosition(controller.rb.position + vel);
+            if (distBetween > 0 && distBetween <= controller.fleeDistanceMG)
+            {
+                controller.FaceSomething(controller.currentTarget.position);
+                Vector3 vel = -Vector3.right * controller.moveSpeed * Time.deltaTime;
+                controller.rb.MovePosition(controller.rb.position + vel);
+            }
         }
     }
 
@@ -199,21 +201,23 @@ public class SecurityBot_Railgun : EnemyStates_SecurityBot
             beamTime -= Time.deltaTime;
         }
 
-        float distBetween = controller.currentTarget.position.x - controller.transform.position.x;
-        if (distBetween < 0 && distBetween >= -controller.fleeDistanceRail)
+        if (controller.transform.position.z == controller.currentTarget.position.z)
         {
-            controller.FaceSomething(controller.currentTarget.position);
-            Vector3 vel = Vector3.right * controller.moveSpeed * Time.deltaTime;
-            controller.rb.MovePosition(controller.rb.position + vel);
-        }
+            float distBetween = controller.currentTarget.position.x - controller.transform.position.x;
+            if (distBetween < 0 && distBetween >= -controller.fleeDistanceRail)
+            {
+                controller.FaceSomething(controller.currentTarget.position);
+                Vector3 vel = Vector3.right * controller.moveSpeed * Time.deltaTime;
+                controller.rb.MovePosition(controller.rb.position + vel);
+            }
 
-        if (distBetween > 0 && distBetween <= controller.fleeDistanceRail)
-        {
-            controller.FaceSomething(controller.currentTarget.position);
-            Vector3 vel = -Vector3.right * controller.moveSpeed * Time.deltaTime;
-            controller.rb.MovePosition(controller.rb.position + vel);
+            if (distBetween > 0 && distBetween <= controller.fleeDistanceRail)
+            {
+                controller.FaceSomething(controller.currentTarget.position);
+                Vector3 vel = -Vector3.right * controller.moveSpeed * Time.deltaTime;
+                controller.rb.MovePosition(controller.rb.position + vel);
+            }
         }
-
     }
 
     public override void PhysicsUpdate(Enemy_SecurityBot controller)

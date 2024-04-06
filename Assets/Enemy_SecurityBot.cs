@@ -217,7 +217,22 @@ public class Enemy_SecurityBot : MonoBehaviour
 
     public void ShootRailgun()
     {
-        Collider[] thingsHit = Physics.OverlapBox(firepoint.position + (firepoint.right * (railGunAttackRange/2)), new(railGunAttackRange/2, railGunAttackWidth, railGunAttackWidth), Quaternion.Euler(Vector3.zero), ignoreLayers);
+        Collider[] thingsHit = null;
+        RaycastHit hit;
+        if (Physics.Raycast(firepoint.position, firepoint.right, out hit, Mathf.Infinity, ignoreLayers))
+        {
+            if (hit.transform.CompareTag("Wall"))
+            {
+                float newRange = Vector3.Distance(firepoint.position, hit.point)/2;
+                thingsHit = Physics.OverlapBox(firepoint.position + (firepoint.right * (railGunAttackRange/2)), new(railGunAttackRange/2, railGunAttackWidth, railGunAttackWidth), Quaternion.Euler(Vector3.zero), ignoreLayers);
+            }
+        }
+        else
+        {
+            thingsHit = Physics.OverlapBox(firepoint.position + (firepoint.right * (railGunAttackRange / 2)), new(railGunAttackRange / 2, railGunAttackWidth, railGunAttackWidth), Quaternion.Euler(Vector3.zero), ignoreLayers);
+        }
+
+        
         foreach(Collider thing in thingsHit)
         {
             if (thing.CompareTag("Player"))

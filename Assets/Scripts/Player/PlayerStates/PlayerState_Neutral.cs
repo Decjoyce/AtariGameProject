@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -94,7 +95,16 @@ public class PlayerState_Neutral : PlayerState_Base
         if (controller.isGrounded && ctx.performed)
         {
             Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.z + controller.layerOffset/2);
-            int numCollisions = Physics.OverlapBox(checkObstaclePos, controller.checkObstacleSize, Quaternion.identity, controller.layerLayers).Length;
+            Collider[] shite = Physics.OverlapBox(checkObstaclePos, controller.checkObstacleSize / 2, Quaternion.identity, controller.layerLayers);
+
+            //GameObject cub = controller.HelpInstantiate(controller.cub, controller.checkObstacleSize, Quaternion.identity);
+            //cub.transform.localScale = checkBoxSize;
+            foreach(Collider shit in shite)
+            {
+                Debug.Log(shit.gameObject.name);
+            }
+
+            int numCollisions = shite.Length;
 
             if (numCollisions <= 0)
             {
@@ -112,8 +122,15 @@ public class PlayerState_Neutral : PlayerState_Base
         if (controller.isGrounded && ctx.performed)
         {
             Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.z - controller.layerOffset / 2);;
-            int numCollisions = Physics.OverlapBox(checkObstaclePos, controller.checkObstacleSize, Quaternion.identity, controller.layerLayers).Length;
+            Collider[] shite = Physics.OverlapBox(checkObstaclePos, controller.checkObstacleSize / 2, Quaternion.identity, controller.layerLayers);
+            //GameObject cub = controller.HelpInstantiate(controller.cub, checkObstaclePos, Quaternion.identity);
+            //cub.transform.localScale = controller.checkObstacleSize;
+            foreach (Collider shit in shite)
+            {
+                Debug.Log(shit.gameObject.name);
+            }
 
+            int numCollisions = shite.Length;
             if (numCollisions <= 0)
             {
                 controller.currentLayer -= controller.layerOffset;

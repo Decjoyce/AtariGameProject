@@ -26,6 +26,8 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] GameObject droppedWeaponPrefab;
 
+    [SerializeField] float accurracy; //Temp
+
     private Coroutine currentReloadCoroutine;
 
     // Start is called before the first frame update
@@ -173,7 +175,9 @@ public class PlayerAttack : MonoBehaviour
     {
         if (ctx.performed && !isReloading && canAttack && currentAmmo > 0)
         {
-            Instantiate(weapon.projectile, firePoint.position, firePoint.rotation);
+            float spread = Random.Range(-accurracy, accurracy);
+            Quaternion bulletRotation = Quaternion.Euler(firePoint.eulerAngles.x, firePoint.eulerAngles.y, firePoint.eulerAngles.z + spread);
+            Instantiate(weapon.projectile, firePoint.position, bulletRotation);
 
             canAttack = false;
             attackDelay = weapon.fireRate;
@@ -195,7 +199,9 @@ public class PlayerAttack : MonoBehaviour
     {
         if (canAttack && !isReloading && currentAmmo > 0)
         {
-            Instantiate(weapon.projectile, firePoint.position, firePoint.rotation);
+            float spread = Random.Range(-accurracy, accurracy);
+            Quaternion bulletRotation = Quaternion.Euler(firePoint.eulerAngles.x, firePoint.eulerAngles.y, firePoint.eulerAngles.z + spread);
+            Instantiate(weapon.projectile, firePoint.position, bulletRotation);
 
             canAttack = false;
             attackDelay = weapon.fireRate;

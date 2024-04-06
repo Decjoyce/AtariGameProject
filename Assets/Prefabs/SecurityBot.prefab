@@ -516,7 +516,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  moveSpeed: 3
+  moveSpeed: 2
   fleeDistanceMG: 5
   fleeDistanceRail: 7.5
   headPositions:
