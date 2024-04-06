@@ -8,6 +8,7 @@ public class ScoreManager : MonoBehaviour
 {
     public Image quotaBar;
     public float quotaAmount = 0f;
+    public float totalAmount = 300f;
 
     // Update is called once per frame
     void Update()
@@ -25,7 +26,32 @@ public class ScoreManager : MonoBehaviour
     public void IncreaseScore(float scrapWorth)
     {
         quotaAmount += scrapWorth;
-        scrapWorth = Mathf.Clamp(scrapWorth, 0, 300);
-        quotaBar.fillAmount = quotaAmount / 300f;
+        scrapWorth = Mathf.Clamp(scrapWorth, 0, totalAmount);
+        quotaBar.fillAmount = quotaAmount / totalAmount;
+    }
+
+    public void QuotaCheck()
+    {
+        if(quotaAmount < totalAmount)
+        {
+            DidNotMeetQuota();
+        }
+
+        else if (quotaAmount >= totalAmount)
+        {
+            QuotaMade();
+        }
+    }
+
+    public void DidNotMeetQuota()
+    {
+        SceneManager.LoadScene(5, LoadSceneMode.Single);
+        Debug.Log("Quota Not Met");
+    }
+
+   public  void QuotaMade()
+    {
+        SceneManager.LoadScene(4, LoadSceneMode.Single);
+        Debug.Log("Quota Met");
     }
 }

@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JamesScene.unity
     guid: a3fa53ab2a6bf9f4fbdceb1684509ca3
+  - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: 6bff6b6c0e0351c499676e29f2bd19cb
+  - enabled: 1
+    path: Assets/Scenes/LoseScene.unity
+    guid: d8cf02987713ba84397f3a92acde759c
   m_configObjects: {}
