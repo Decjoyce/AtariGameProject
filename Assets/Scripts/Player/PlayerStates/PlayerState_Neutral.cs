@@ -54,9 +54,10 @@ public class PlayerState_Neutral : PlayerState_Base
 
         if (isSwitchingLanes)
         {
+            float newLanePos = 0f;
             if (controller.transform.position.z > controller.currentLayer + 0.025f || controller.transform.position.z < controller.currentLayer - 0.025f)
             {
-                float newLanePos = Mathf.Lerp(controller.transform.position.z, controller.currentLayer, controller.switchLaneSpeed * Time.deltaTime);
+                newLanePos = Mathf.Lerp(controller.transform.position.z, controller.currentLayer, controller.switchLaneSpeed * Time.deltaTime);
                 Vector3 newPos = new(rb.position.x, rb.position.y, newLanePos);
                 rb.MovePosition(newPos + vel);
             }
@@ -66,6 +67,7 @@ public class PlayerState_Neutral : PlayerState_Base
                 rb.MovePosition(newPos + vel);
                 isSwitchingLanes = false;
             }
+            controller.anim.SetFloat("zMove", newLanePos * controller.animFlipper);
         }
     }
 
@@ -78,6 +80,8 @@ public class PlayerState_Neutral : PlayerState_Base
             Vector3 vel = Vector3.right * controller.currentSpeed * movementInput * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + vel);
         }
+        controller.anim.SetFloat("xMove", movementInput * controller.animFlipper);
+        //Debug.Log(vel.x);
     }
 
     public override void OnMove(PlayerController controller, InputAction.CallbackContext ctx)
@@ -95,16 +99,7 @@ public class PlayerState_Neutral : PlayerState_Base
         if (controller.isGrounded && ctx.performed)
         {
             Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.z + controller.layerOffset/2);
-            Collider[] shite = Physics.OverlapBox(checkObstaclePos, controller.checkObstacleSize / 2, Quaternion.identity, controller.layerLayers);
-
-            //GameObject cub = controller.HelpInstantiate(controller.cub, controller.checkObstacleSize, Quaternion.identity);
-            //cub.transform.localScale = checkBoxSize;
-            foreach(Collider shit in shite)
-            {
-                Debug.Log(shit.gameObject.name);
-            }
-
-            int numCollisions = shite.Length;
+            int numCollisions = Physics.OverlapBox(checkObstaclePos, controller.checkObstacleSize / 2, Quaternion.identity, controller.layerLayers).Length;
 
             if (numCollisions <= 0)
             {
@@ -122,15 +117,8 @@ public class PlayerState_Neutral : PlayerState_Base
         if (controller.isGrounded && ctx.performed)
         {
             Vector3 checkObstaclePos = new(controller.transform.position.x, controller.transform.position.y + 1, controller.transform.position.z - controller.layerOffset / 2);;
-            Collider[] shite = Physics.OverlapBox(checkObstaclePos, controller.checkObstacleSize / 2, Quaternion.identity, controller.layerLayers);
-            //GameObject cub = controller.HelpInstantiate(controller.cub, checkObstaclePos, Quaternion.identity);
-            //cub.transform.localScale = controller.checkObstacleSize;
-            foreach (Collider shit in shite)
-            {
-                Debug.Log(shit.gameObject.name);
-            }
+            int numCollisions = Physics.OverlapBox(checkObstaclePos, controller.checkObstacleSize / 2, Quaternion.identity, controller.layerLayers).Length;
 
-            int numCollisions = shite.Length;
             if (numCollisions <= 0)
             {
                 controller.currentLayer -= controller.layerOffset;
@@ -251,8 +239,10 @@ public class PlayerState_Neutral : PlayerState_Base
             controller.col.center = crouchColideroffset;
             controller.col.height = crouchColiderHeight;
 
-            controller.crouchGraphics.SetActive(true); //Temp
-            controller.standGraphics.SetActive(false); //Temp
+            controller.anim.SetBool("isCrouching", true);
+
+            //controller.crouchGraphics.SetActive(true); //Temp
+            //controller.standGraphics.SetActive(false); //Temp
         }
         else
         {
@@ -262,8 +252,10 @@ public class PlayerState_Neutral : PlayerState_Base
             controller.col.center = standColideroffset;
             controller.col.height = standColiderHeight;
 
-            controller.crouchGraphics.SetActive(false); //Temp
-            controller.standGraphics.SetActive(true); //Temp
+            controller.anim.SetBool("isCrouching", false);
+
+            //controller.crouchGraphics.SetActive(false); //Temp
+            //controller.standGraphics.SetActive(true); //Temp
         }
 
         Vector3 newPos = new Vector3(0, controller.currentHeight, 0);

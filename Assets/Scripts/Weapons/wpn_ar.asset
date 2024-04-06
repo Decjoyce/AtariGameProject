@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Assault Rifle
   attackType: 1
-  holdType: 
+  holdType: 1
   weaponModel: {fileID: 2276549726354468370, guid: acae0ea9eccca00469f039eade94ac6b, type: 3}
   fireRate: 0.275
   projectile: {fileID: 1112150731768423405, guid: 8107462f46d255b4fa9f2170f06f8935, type: 3}

@@ -72,6 +72,7 @@ public class PlayerAttack : MonoBehaviour
         currentReserve = newReserve;
 
         SetWeaponMesh();
+        SetWeaponHold();
 
         SetGunColor();
 
@@ -107,8 +108,11 @@ public class PlayerAttack : MonoBehaviour
             weapon = fists;
             currentAmmo = 420;
             currentReserve = 69;
+
             //DisableWeaponMesh();
             SetWeaponMesh(); // temp
+            SetWeaponHold();
+
             ammoGraphics.material.SetColor("_EmissionColor", Color.yellow); //temp
             Debug.Log("Fistacuffs");
         }
@@ -264,6 +268,36 @@ public class PlayerAttack : MonoBehaviour
 
             canAttack = false;
             attackDelay = weapon.fireRate;
+        }
+    }
+
+    void SetWeaponHold()
+    {
+        switch (weapon.holdType)
+        {
+            case HoldType.gunOneHanded:
+                controller.anim.SetBool("useOneHanded", true);
+                controller.anim.SetBool("useTwoHanded", false);
+                controller.anim.SetBool("useMelee", false);
+                break;
+            case HoldType.gunTwoHanded:
+                controller.anim.SetBool("useTwoHanded", true);
+                controller.anim.SetBool("useOneHanded", false);
+                controller.anim.SetBool("useMelee", false);
+                break;
+            case HoldType.meleeSwing:
+                controller.anim.SetBool("useMelee", true);
+                controller.anim.SetBool("useOneHanded", false);
+                controller.anim.SetBool("useTwoHanded", false);
+                break;
+            case HoldType.meleeThrust:
+                controller.anim.SetBool("useMelee", true);
+                controller.anim.SetBool("useOneHanded", false);
+                controller.anim.SetBool("useTwoHanded", false);
+                break;
+            default:
+                Debug.Log("tbh idek how u did this but fair play");
+                break;
         }
     }
 

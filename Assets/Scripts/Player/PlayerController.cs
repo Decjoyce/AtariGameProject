@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public Canvas canvas;
 
     public Transform pivot;
+    public Transform graphicsPivot;
 
     [Header("Layer")]
     public float currentLayer;
@@ -47,6 +48,10 @@ public class PlayerController : MonoBehaviour
     public float currentHeight;
     public float crouchHeight;
     public float normalHeight;
+
+    [Header("Animation")]
+    public Animator anim;
+    [HideInInspector] public int animFlipper = 1;
 
     [Header("DEBUG")]
     public bool debuggingMode;
@@ -189,10 +194,14 @@ public class PlayerController : MonoBehaviour
         if (faceLeft)
         {
             attack.handPos.localEulerAngles = new(0f, 180f, attack.handPos.localEulerAngles.z);
+            graphicsPivot.localEulerAngles = new(0f, 180f, 0f);
+            animFlipper = -1;
         }
         else
         {
             attack.handPos.localEulerAngles = new(0f, 0f, attack.handPos.localEulerAngles.z);
+            graphicsPivot.localEulerAngles = new(0f, 0f, 0f);
+            animFlipper = 1;
         }
     }
 }

@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
     private float currentHealth;
 
     [SerializeField] MeshRenderer[] healthMeshes; //temp
+    [SerializeField] SkinnedMeshRenderer[] NEWhealthMeshes; //Will replace healthMeshes eventually
     [SerializeField] Gradient healthColorGradient;
 
     bool isDead;

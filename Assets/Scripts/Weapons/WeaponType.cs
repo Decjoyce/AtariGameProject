@@ -9,7 +9,7 @@ public class WeaponType: ScriptableObject
     [Header("Defaults")]
     public string weaponName;
     public AttackType attackType;
-    public string holdType;
+    public HoldType holdType;
     public GameObject weaponModel;
 
     [Header("General Stats")]
@@ -38,4 +38,12 @@ public class WeaponType: ScriptableObject
         auto,
         swing,
         thrust
+    }
+
+    public enum HoldType
+    {
+        gunOneHanded,
+        gunTwoHanded,
+        meleeSwing,
+        meleeThrust
     }
