@@ -193,13 +193,13 @@ public class PlayerController : MonoBehaviour
     {
         if (faceLeft)
         {
-            attack.handPos.localEulerAngles = new(0f, 180f, attack.handPos.localEulerAngles.z);
+            //attack.handPos.localEulerAngles = new(0f, -90f, attack.handPos.localEulerAngles.z);
             graphicsPivot.localEulerAngles = new(graphicsPivot.localEulerAngles.x, 180f, 0f);
             animFlipper = -1;
         }
         else
         {
-            attack.handPos.localEulerAngles = new(0f, 0f, attack.handPos.localEulerAngles.z);
+            //attack.handPos.localEulerAngles = new(0f, 90f, attack.handPos.localEulerAngles.z);
             graphicsPivot.localEulerAngles = new(graphicsPivot.localEulerAngles.x, 0f, 0f);
             animFlipper = 1;
         }
