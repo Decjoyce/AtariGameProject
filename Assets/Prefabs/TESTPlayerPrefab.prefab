@@ -3695,7 +3695,7 @@ MonoBehaviour:
   crouchGraphics: {fileID: 6561160724514354392}
   currentHeight: 1.5
   crouchHeight: 0.8
-  normalHeight: 1.5
+  normalHeight: 2
   anim: {fileID: 911242658729760843}
   animFlipper: 1
   debuggingMode: 0

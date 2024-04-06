@@ -5,10 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/DecoScene.unity
-    guid: 217928a118805094c84e74fe30ee9192
   - enabled: 0
     path: Assets/Scenes/TestScene.unity
     guid: 290cc0fbcc3c114469265959bc107bf1
+  - enabled: 1
+    path: Assets/Scenes/MainMenuScene.unity
+    guid: 796f68d5e49ec4a4599984f0fa67aea6
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelectMenuScene.unity
+    guid: 5c41c6514fbf4fa498eb5c787e05908b
+  - enabled: 1
+    path: Assets/Scenes/DecoScene.unity
+    guid: 217928a118805094c84e74fe30ee9192
+  - enabled: 1
+    path: Assets/Scenes/JamesScene.unity
+    guid: a3fa53ab2a6bf9f4fbdceb1684509ca3
   m_configObjects: {}
