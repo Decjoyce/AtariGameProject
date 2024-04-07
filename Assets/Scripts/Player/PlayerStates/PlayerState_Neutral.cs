@@ -199,13 +199,13 @@ public class PlayerState_Neutral : PlayerState_Base
 
     void LookNew(PlayerController controller)
     {
-        float angle = Mathf.Atan2(lookInput.x, lookInput.y) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(lookInput.x, -lookInput.y) * Mathf.Rad2Deg;
         if (lookInput.magnitude > 0.7)
         {
-            //float newAngle = ExtensionMethods.ModularClamp(angle, -110f, 110f);
+            float newAngle = ExtensionMethods.ModularClamp(angle, -135f, 135f);
             Quaternion newRot;
             if (lerpedRotation)
-                newRot = Quaternion.Lerp(controller.pivot.localRotation, Quaternion.Euler(0, 0, -angle), controller.lerpedAimSpeed * Time.deltaTime);
+                newRot = Quaternion.Lerp(controller.pivot.localRotation, Quaternion.Euler(0, 0, newAngle), controller.lerpedAimSpeed * Time.deltaTime);
             else
                 newRot = Quaternion.Euler(0, 0, -angle);
 
@@ -229,41 +229,28 @@ public class PlayerState_Neutral : PlayerState_Base
         isJumping = true;
     }
 
-    void Crouch(PlayerController controller)
+    void LookNew(PlayerController controller)
     {
-        isCrouched = !isCrouched;
-        if (isCrouched)
+        float angle = Mathf.Atan2(lookInput.x, -lookInput.y) * Mathf.Rad2Deg;
+        if (lookInput.magnitude > 0.7)
         {
-            controller.currentSpeed = controller.crouchSpeed;
-            controller.currentHeight = controller.crouchHeight;
+            float newAngle = ExtensionMethods.ModularClamp(angle, -135f, 135f);
+            Quaternion newRot;
+            if (lerpedRotation)
+                newRot = Quaternion.Lerp(controller.pivot.localRotation, Quaternion.Euler(0, 0, newAngle), controller.lerpedAimSpeed * Time.deltaTime);
+            else
+                newRot = Quaternion.Euler(0, 0, -angle);
 
-            controller.col.center = crouchColideroffset;
-            controller.col.height = crouchColiderHeight;
+            if (newRot.eulerAngles.z < 360 && newRot.eulerAngles.z > 180 && !controller.faceLeft)
+                controller.FaceDirection(false);
+            else
+                controller.FaceDirection(true);
 
-            controller.anim.SetBool("isCrouching", true);
 
-            controller.graphicsPivot.localEulerAngles = new Vector3(-15f, controller.graphicsPivot.localEulerAngles.y, controller.graphicsPivot.localEulerAngles.z);
+            //Debug.Log(newRot.eulerAngles.z);
 
-            //controller.crouchGraphics.SetActive(true); //Temp
-            //controller.standGraphics.SetActive(false); //Temp
+            controller.pivot.localRotation = newRot;
         }
-        else
-        {
-            controller.currentSpeed = controller.walkSpeed;
-            controller.currentHeight = controller.normalHeight;
-
-            controller.col.center = standColideroffset;
-            controller.col.height = standColiderHeight;
-
-            controller.anim.SetBool("isCrouching", false);
-
-            controller.graphicsPivot.localEulerAngles = new Vector3(0f, controller.graphicsPivot.localEulerAngles.y, controller.graphicsPivot.localEulerAngles.z);
-
-            //controller.crouchGraphics.SetActive(false); //Temp
-            //controller.standGraphics.SetActive(true); //Temp
-        }
-
-        Vector3 newPos = new Vector3(0, controller.currentHeight, 0);
-        controller.pivot.localPosition = newPos;
     }
+
 }
