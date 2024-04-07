@@ -16,7 +16,7 @@ public class PlayerBullet : MonoBehaviour
 
     private void Start()
     {
-        rb.AddForce((transform.right * -upwardForce) + (transform.up * forwardForce), ForceMode.Impulse);
+        rb.AddForce((transform.right * -upwardForce) + (-transform.forward * forwardForce), ForceMode.Impulse);
         rb.AddTorque(transform.forward * torqueForce);
         startPos = transform.position;
         Destroy(gameObject, delayBeforeDelete);

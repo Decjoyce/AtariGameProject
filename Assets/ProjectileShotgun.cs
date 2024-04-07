@@ -13,7 +13,7 @@ public class ProjectileShotgun : MonoBehaviour
         for(int i = -4; i < 4; i++)
         {
             float newAng = i * angle;
-            Vector3 spawnRot = transform.localEulerAngles + new Vector3(0, 0, Random.Range(newAng - offset, newAng + offset));
+            Vector3 spawnRot = transform.localEulerAngles + new Vector3(Random.Range(newAng - offset, newAng + offset), 0f, 0f);
             Instantiate(pellets, transform.position, Quaternion.Euler(spawnRot), transform);
         }  
     }
