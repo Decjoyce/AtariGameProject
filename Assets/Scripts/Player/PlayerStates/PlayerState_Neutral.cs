@@ -199,13 +199,13 @@ public class PlayerState_Neutral : PlayerState_Base
 
     void LookNew(PlayerController controller)
     {
-        float angle = Mathf.Atan2(lookInput.x, lookInput.y) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(lookInput.x, -lookInput.y) * Mathf.Rad2Deg;
         if (lookInput.magnitude > 0.7)
         {
-            float newAngle = ExtensionMethods.ModularClamp(angle, -110f, 110f);
+            float newAngle = ExtensionMethods.ModularClamp(angle, -135f, 135f);
             Quaternion newRot;
             if (lerpedRotation)
-                newRot = Quaternion.Lerp(controller.pivot.localRotation, Quaternion.Euler(0, 0, -newAngle), controller.lerpedAimSpeed * Time.deltaTime);
+                newRot = Quaternion.Lerp(controller.pivot.localRotation, Quaternion.Euler(0, 0, newAngle), controller.lerpedAimSpeed * Time.deltaTime);
             else
                 newRot = Quaternion.Euler(0, 0, -angle);
 
@@ -236,6 +236,7 @@ public class PlayerState_Neutral : PlayerState_Base
         {
             controller.currentSpeed = controller.crouchSpeed;
             controller.currentHeight = controller.crouchHeight;
+            controller.attack.handPos.localPosition = new(0f, controller.crouchHeightHandPos, 0f);
 
             controller.col.center = crouchColideroffset;
             controller.col.height = crouchColiderHeight;
@@ -251,6 +252,7 @@ public class PlayerState_Neutral : PlayerState_Base
         {
             controller.currentSpeed = controller.walkSpeed;
             controller.currentHeight = controller.normalHeight;
+            controller.attack.handPos.localPosition = new(0f, 0.545f, 0f);
 
             controller.col.center = standColideroffset;
             controller.col.height = standColiderHeight;

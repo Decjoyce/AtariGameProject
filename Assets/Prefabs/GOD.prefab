@@ -2776,7 +2776,7 @@ Transform:
   m_GameObject: {fileID: 5823575811703208004}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.544, z: 0}
+  m_LocalPosition: {x: 0, y: 0.545, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3663,7 +3663,7 @@ MonoBehaviour:
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
     m_MinLimit: -180
-    m_MaxLimit: 11
+    m_MaxLimit: 180
     m_AimAxis: 4
     m_UpAxis: 2
     m_WorldUpType: 0
@@ -4423,7 +4423,8 @@ MonoBehaviour:
   standGraphics: {fileID: 2714775601070898450}
   crouchGraphics: {fileID: 6561160724514354392}
   currentHeight: 2
-  crouchHeight: 1.5
+  crouchHeight: 1.25
+  crouchHeightHandPos: 0.3
   normalHeight: 2
   anim: {fileID: 911242658729760843}
   animFlipper: 1
@@ -4448,7 +4449,7 @@ MonoBehaviour:
   rightHandPos: {fileID: 2375111756517433854}
   leftHandPos: {fileID: 1489344692171447259}
   pivot: {fileID: 7386889648952322511}
-  defaultWeapon: {fileID: 11400000, guid: 9af29d2fd0ef339489d8e0b5b57943b3, type: 2}
+  defaultWeapon: {fileID: 11400000, guid: 16ddac3a285e01f4f9387cc1dcba5c3d, type: 2}
   fists: {fileID: 11400000, guid: f2f1e677da7b57a4288db014c6e99b7f, type: 2}
   ammoColorGradient:
     serializedVersion: 2

@@ -315,8 +315,8 @@ public class PlayerAttack : MonoBehaviour
         ammoGraphics = weaponMesh.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>();
         //firePoint.position = weaponMesh.transform.GetChild(0).GetChild(0).position;
         firePoint = weaponMesh.transform.GetChild(0).GetChild(0);
-        rightHandPos.position = weaponMesh.transform.GetChild(0).GetChild(2).position;
-        leftHandPos.position = weaponMesh.transform.GetChild(0).GetChild(3).position;
+        rightHandPos.SetPositionAndRotation(weaponMesh.transform.GetChild(0).GetChild(2).position, weaponMesh.transform.GetChild(0).GetChild(2).rotation);
+        leftHandPos.SetPositionAndRotation(weaponMesh.transform.GetChild(0).GetChild(3).position, weaponMesh.transform.GetChild(0).GetChild(3).rotation);
     }
 
     private void DisableWeaponMesh()

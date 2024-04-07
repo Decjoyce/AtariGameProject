@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     public GameObject crouchGraphics;
     public float currentHeight;
     public float crouchHeight;
+    public float crouchHeightHandPos;
     public float normalHeight;
 
     [Header("Animation")]
