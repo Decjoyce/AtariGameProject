@@ -229,28 +229,43 @@ public class PlayerState_Neutral : PlayerState_Base
         isJumping = true;
     }
 
-    void LookNew(PlayerController controller)
+    void Crouch(PlayerController controller)
     {
-        float angle = Mathf.Atan2(lookInput.x, -lookInput.y) * Mathf.Rad2Deg;
-        if (lookInput.magnitude > 0.7)
+        isCrouched = !isCrouched;
+        if (isCrouched)
         {
-            float newAngle = ExtensionMethods.ModularClamp(angle, -135f, 135f);
-            Quaternion newRot;
-            if (lerpedRotation)
-                newRot = Quaternion.Lerp(controller.pivot.localRotation, Quaternion.Euler(0, 0, newAngle), controller.lerpedAimSpeed * Time.deltaTime);
-            else
-                newRot = Quaternion.Euler(0, 0, -angle);
+            controller.currentSpeed = controller.crouchSpeed;
+            controller.currentHeight = controller.crouchHeight;
+            controller.attack.handPos.localPosition = new(0f, controller.crouchHeightHandPos, 0f);
 
-            if (newRot.eulerAngles.z < 360 && newRot.eulerAngles.z > 180 && !controller.faceLeft)
-                controller.FaceDirection(false);
-            else
-                controller.FaceDirection(true);
+            controller.col.center = crouchColideroffset;
+            controller.col.height = crouchColiderHeight;
 
+            controller.anim.SetBool("isCrouching", true);
 
-            //Debug.Log(newRot.eulerAngles.z);
+            controller.graphicsPivot.localEulerAngles = new Vector3(-15f, controller.graphicsPivot.localEulerAngles.y, controller.graphicsPivot.localEulerAngles.z);
 
-            controller.pivot.localRotation = newRot;
+            //controller.crouchGraphics.SetActive(true); //Temp
+            //controller.standGraphics.SetActive(false); //Temp
         }
-    }
+        else
+        {
+            controller.currentSpeed = controller.walkSpeed;
+            controller.currentHeight = controller.normalHeight;
+            controller.attack.handPos.localPosition = new(0f, 0.545f, 0f);
 
+            controller.col.center = standColideroffset;
+            controller.col.height = standColiderHeight;
+
+            controller.anim.SetBool("isCrouching", false);
+
+            controller.graphicsPivot.localEulerAngles = new Vector3(0f, controller.graphicsPivot.localEulerAngles.y, controller.graphicsPivot.localEulerAngles.z);
+
+            //controller.crouchGraphics.SetActive(false); //Temp
+            //controller.standGraphics.SetActive(true); //Temp
+        }
+
+        Vector3 newPos = new Vector3(0, controller.currentHeight, 0);
+        controller.pivot.localPosition = newPos;
+    }
 }
