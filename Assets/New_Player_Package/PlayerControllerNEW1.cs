@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 
-public class PlayerController : MonoBehaviour
+/*public class PlayerControllerSHUSH : MonoBehaviour
 {
     [System.NonSerialized] public int playerNum;
     [System.NonSerialized] public PlayerInteraction interaction;
@@ -205,4 +205,4 @@ public class PlayerController : MonoBehaviour
             animFlipper = 1;
         }
     }
-}
+}*/

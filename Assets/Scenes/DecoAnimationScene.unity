@@ -1581,7 +1581,7 @@ MonoBehaviour:
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 7941526012871332646, guid: 47e3782b8f2551e419bbd4f758873d88, type: 3}
+  m_PlayerPrefab: {fileID: 7941526012871332646, guid: 09f7ee24a71907a429d236783c6835d8, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -5432,6 +5432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quotaBar: {fileID: 623282371}
   quotaAmount: 0
+  totalAmount: 300
 --- !u!4 &1725470428
 Transform:
   m_ObjectHideFlags: 0

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Pistol
   attackType: 0
-  holdType: 
-  weaponModel: {fileID: 3235777579635567284, guid: 9eb4fceb88dda774a9a5198c3fe066a8, type: 3}
+  holdType: 0
+  weaponModel: {fileID: 3235777579635567284, guid: 4b462dc744bc57f48a1f761d55f1150b, type: 3}
   fireRate: 0.1
   projectile: {fileID: 1112150731768423405, guid: 3435b869aa0fa57429206004c09d53a4, type: 3}
   reloadSpeed: 1.5

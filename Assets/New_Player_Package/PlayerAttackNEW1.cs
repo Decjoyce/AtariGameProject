@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerAttack : MonoBehaviour
-{
+/*public class PlayerAttackSHUSH : MonoBehaviour
+*//*{
     PlayerController controller;
     AudioSource source;
 
@@ -50,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!canAttack && attackDelay <= 0)
+        if(!canAttack && attackDelay <= 0)
         {
             canAttack = true;
         }
@@ -97,7 +97,7 @@ public class PlayerAttack : MonoBehaviour
         canAttack = true;
         attackDelay = 0;
 
-        if (weapon != fists)
+        if(weapon != fists)
         {
             GameObject droppedWeapon = Instantiate(droppedWeaponPrefab, firePoint.position, Quaternion.identity);
             droppedWeapon.GetComponent<WeaponPickup>().ChangeStats(weapon, currentAmmo, currentReserve);
@@ -130,7 +130,7 @@ public class PlayerAttack : MonoBehaviour
             case AttackType.auto:
                 if (ctx.started)
                     isAutoFiring = true;
-                else if (ctx.canceled)
+                 else if (ctx.canceled)
                     isAutoFiring = false;
                 break;
             case AttackType.swing:
@@ -147,7 +147,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void PerformReload()
     {
-        if (weapon.reloadSpeed > 0 && currentAmmo < weapon.magCapacity)
+        if(weapon.reloadSpeed > 0 && currentAmmo < weapon.magCapacity)
         {
             Debug.Log("Reloading");
             ammoGraphics.material.SetColor("_EmissionColor", Color.red);
@@ -161,7 +161,7 @@ public class PlayerAttack : MonoBehaviour
         isReloading = true;
         yield return new WaitForSecondsRealtime(weapon.reloadSpeed);
 
-        if (currentReserve > weapon.magCapacity)
+        if(currentReserve > weapon.magCapacity)
         {
             currentAmmo = weapon.magCapacity;
             currentReserve -= weapon.magCapacity;
@@ -233,7 +233,7 @@ public class PlayerAttack : MonoBehaviour
             Collider[] hits;
             hits = Physics.OverlapCapsule(firePoint.position, firePoint.localPosition + (Vector3.up * weapon.meleeRange), weapon.radius);
 
-            for (int i = 0; i < hits.Length; i++)
+            for(int i = 0; i < hits.Length; i++)
             {
                 EnemyHealth enemyHealth = hits[i].transform.GetComponent<EnemyHealth>();
 
@@ -305,7 +305,7 @@ public class PlayerAttack : MonoBehaviour
 
     void SetWeaponMesh()
     {
-        if (weaponMesh != null)
+        if(weaponMesh != null)
         {
             ammoGraphics = null;
             Destroy(weaponMesh);
@@ -339,4 +339,4 @@ public class PlayerAttack : MonoBehaviour
         ammoGraphics.material.SetColor("_EmissionColor", ammoColorGradient.Evaluate((float)(weapon.magCapacity - currentAmmo) / weapon.magCapacity));
     }
 
-}
+}*/
