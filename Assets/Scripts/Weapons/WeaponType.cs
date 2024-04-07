@@ -11,6 +11,7 @@ public class WeaponType: ScriptableObject
     public AttackType attackType;
     public HoldType holdType;
     public GameObject weaponModel;
+    public Vector3 firepointPos;
 
     [Header("General Stats")]
     public float fireRate;

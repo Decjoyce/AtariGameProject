@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a637e49a52b4fe4fb9c22d14bdf6a23, type: 3}
-  m_Name: wpn_smg
+  m_Name: wpn_YOpistol
   m_EditorClassIdentifier: 
-  weaponName: SMG
-  attackType: 1
+  weaponName: Pistol
+  attackType: 0
   holdType: 0
-  weaponModel: {fileID: 3035886163761882251, guid: 8670c15a7573cd84598d93344b33ea96, type: 3}
-  firepointPos: {x: 0, y: 0, z: 0}
+  weaponModel: {fileID: 3235777579635567284, guid: 0240035c3c03f994aaf38f29e48b2d1b, type: 3}
+  firepointPos: {x: -0.05, y: 0.85, z: 0}
   fireRate: 0.1
-  projectile: {fileID: 1112150731768423405, guid: 26b8984a2535e7c43822393f6df00f59, type: 3}
-  reloadSpeed: 2
-  magCapacity: 20
-  reserveCapacity: 100
+  projectile: {fileID: 1112150731768423405, guid: 3435b869aa0fa57429206004c09d53a4, type: 3}
+  reloadSpeed: 1.5
+  magCapacity: 13
+  reserveCapacity: 130
   meleeDamage: 0
   meleeRange: 0
   radius: 0

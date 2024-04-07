@@ -10,6 +10,8 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] Transform firePoint;
     public Transform handPos;
+    public Transform gunPos;
+    [SerializeField] Transform rightHandPos, leftHandPos;
     [SerializeField] Transform pivot;
 
     GameObject weaponMesh;
@@ -311,7 +313,10 @@ public class PlayerAttack : MonoBehaviour
 
         weaponMesh = Instantiate(weapon.weaponModel, handPos.position, handPos.rotation, handPos);
         ammoGraphics = weaponMesh.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>();
-        firePoint.position = weaponMesh.transform.GetChild(0).GetChild(0).position;
+        //firePoint.position = weaponMesh.transform.GetChild(0).GetChild(0).position;
+        firePoint = weaponMesh.transform.GetChild(0).GetChild(0);
+        rightHandPos.position = weaponMesh.transform.GetChild(0).GetChild(2).position;
+        leftHandPos.position = weaponMesh.transform.GetChild(0).GetChild(3).position;
     }
 
     private void DisableWeaponMesh()
@@ -326,7 +331,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void AdjustFirePoint()
     {
-        firePoint.position = weaponMesh.transform.GetChild(0).GetChild(0).position;
+        firePoint = weaponMesh.transform.GetChild(0).GetChild(0);
     }
 
     void SetGunColor()

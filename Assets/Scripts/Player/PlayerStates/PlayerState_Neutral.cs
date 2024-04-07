@@ -202,10 +202,10 @@ public class PlayerState_Neutral : PlayerState_Base
         float angle = Mathf.Atan2(lookInput.x, lookInput.y) * Mathf.Rad2Deg;
         if (lookInput.magnitude > 0.7)
         {
-            //float newAngle = ExtensionMethods.ModularClamp(angle, -110f, 110f);
+            float newAngle = ExtensionMethods.ModularClamp(angle, -110f, 110f);
             Quaternion newRot;
             if (lerpedRotation)
-                newRot = Quaternion.Lerp(controller.pivot.localRotation, Quaternion.Euler(0, 0, -angle), controller.lerpedAimSpeed * Time.deltaTime);
+                newRot = Quaternion.Lerp(controller.pivot.localRotation, Quaternion.Euler(0, 0, -newAngle), controller.lerpedAimSpeed * Time.deltaTime);
             else
                 newRot = Quaternion.Euler(0, 0, -angle);
 

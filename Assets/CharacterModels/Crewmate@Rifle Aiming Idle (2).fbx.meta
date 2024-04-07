@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c9656c1b0f2e677428279bf55937e674
+guid: 7a8faa0d82b2cfc418d217ff7d0fe805
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,36 +31,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: T-Pose
-      takeName: mixamo.com
-      internalID: -203655887218126122
-      firstFrame: 0
-      lastFrame: 1
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -106,17 +77,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - bd4a1503104ae544b8cb9f93a81b8982
-  - b57b1094cb1155442b03160123b6feeb
-  - c9c409eb684878245b9e324217eb0f4c
-  - 706bc6b6e0d822c40b37593383c36741
-  - 2a8c808b342af1f4d86acab3f435fa47
-  - 7a8faa0d82b2cfc418d217ff7d0fe805
-  - 5323a5bebc256944e949adc1fe048fd0
-  - 8f022aaf84fa8634ea1a8c3e7973e4d2
-  - e84607211f003c9498f85ab62596715a
-  - a16cdb229aae8f742b859bf6129d4dd5
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -716,11 +677,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: c9656c1b0f2e677428279bf55937e674, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
