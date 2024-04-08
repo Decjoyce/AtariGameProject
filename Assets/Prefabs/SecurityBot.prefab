@@ -445,8 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12d15518073eff14a9ad85340d4b5e61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  helpCube: {fileID: 6458126399459215357, guid: c5d9e0baa3d1e9c46b01398fb46fafb9, type: 3}
-  currentRoomID: 2
+  currentRoomID: 0
   rb: {fileID: 0}
   proxTrig: {fileID: 2857119758195165438}
   head: {fileID: 2264550328725829912}

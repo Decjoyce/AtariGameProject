@@ -23,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
     bool canAttack = true, isReloading;
     bool isAutoFiring;
     float attackDelay;
-    bool isSwinging;
+    bool isSwinging, returningFromSwing;
     Quaternion targetRot;
 
     [SerializeField] Gradient ammoColorGradient;
@@ -71,7 +71,7 @@ public class PlayerAttack : MonoBehaviour
             //float xRot = handPivot.localEulerAngles.z + (weapon.speed / weapon.fireRate * Time.deltaTime);
             //handPivot.localEulerAngles = new(0f, 0f, xRot);
 
-            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot, weapon.speed * Time.deltaTime);
+            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot,  weapon.speed * Time.deltaTime);
 
             Collider[] hits;
             hits = Physics.OverlapCapsule(firePoint.position, firePoint.localPosition + (Vector3.up * weapon.meleeRange), weapon.radius);
@@ -81,7 +81,7 @@ public class PlayerAttack : MonoBehaviour
                 EnemyHealth enemyHealth = hits[i].transform.GetComponent<EnemyHealth>();
 
                 if (enemyHealth != null)
-                    enemyHealth.TakeDamage(weapon.meleeDamage);
+                    enemyHealth.TakeDamage(weapon.meleeDamage * weapon.speed);
             }
 
             Debug.Log(handPivot.localEulerAngles.z);
@@ -89,7 +89,16 @@ public class PlayerAttack : MonoBehaviour
             if (handPivot.localRotation == targetRot)
             {
                 isSwinging = false;
-                handPivot.localEulerAngles = Vector3.zero;
+                returningFromSwing = true;
+                targetRot = Quaternion.AngleAxis(0f, handPivot.forward);
+            }
+        }
+        if (returningFromSwing)
+        {
+            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot, (handPivot.localEulerAngles.z / attackDelay) * Time.deltaTime);
+            if (handPivot.localRotation == targetRot)
+            {
+                returningFromSwing = false;
             }
         }
 
@@ -263,7 +272,7 @@ public class PlayerAttack : MonoBehaviour
         if (ctx.performed && canAttack && !isSwinging)
         {
             isSwinging = true;
-            targetRot = Quaternion.AngleAxis(weapon.meleeArc, handPivot.forward);
+            targetRot = Quaternion.AngleAxis(weapon.meleeArc * controller.animFlipper, handPivot.forward);
             source.PlayOneShot(weapon.fireSound);
 
             canAttack = false;

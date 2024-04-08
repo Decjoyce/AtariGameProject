@@ -56,7 +56,7 @@ public class PlayerHealth : MonoBehaviour
 
     void SetHealthColor()
     {
-        foreach(MeshRenderer mr in healthMeshes)
+        foreach(SkinnedMeshRenderer mr in NEWhealthMeshes)
         {
             mr.material.SetColor("_EmissionColor", healthColorGradient.Evaluate((maxHealth - currentHealth) / maxHealth));
         }
