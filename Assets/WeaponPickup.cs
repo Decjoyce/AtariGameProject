@@ -20,6 +20,10 @@ public class WeaponPickup : Interactable
             interactPrompt = "Pick up " + weapon.weaponName;
             Instantiate(weapon.weaponModel, transform);
         }
+        else
+        {
+
+        }
     }
 
     public override void Interaction(PlayerInteraction player)

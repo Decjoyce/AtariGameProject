@@ -102,6 +102,7 @@ public class PlayerAttack : MonoBehaviour
             GameObject droppedWeapon = Instantiate(droppedWeaponPrefab, firePoint.position, Quaternion.identity);
             droppedWeapon.GetComponent<WeaponPickup>().ChangeStats(weapon, currentAmmo, currentReserve);
             GameObject droppedWeaponModel = Instantiate(weaponMesh, droppedWeapon.transform);
+            droppedWeaponModel.GetComponent<Collider>().enabled = true;
             droppedWeaponModel.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>().material = ammoGraphics.material;
         }
 
@@ -312,8 +313,8 @@ public class PlayerAttack : MonoBehaviour
         }
 
         weaponMesh = Instantiate(weapon.weaponModel, handPos.position, handPos.rotation, handPos);
+        weaponMesh.GetComponent<Collider>().enabled = false;
         ammoGraphics = weaponMesh.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>();
-        //firePoint.position = weaponMesh.transform.GetChild(0).GetChild(0).position;
         firePoint = weaponMesh.transform.GetChild(0).GetChild(0);
         rightHandPos.SetPositionAndRotation(weaponMesh.transform.GetChild(0).GetChild(2).position, weaponMesh.transform.GetChild(0).GetChild(2).rotation);
         leftHandPos.SetPositionAndRotation(weaponMesh.transform.GetChild(0).GetChild(3).position, weaponMesh.transform.GetChild(0).GetChild(3).rotation);

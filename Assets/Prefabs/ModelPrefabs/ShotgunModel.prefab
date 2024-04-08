@@ -258,7 +258,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6074581280977037534}
-  m_Layer: 0
+  - component: {fileID: -5159407831045753772}
+  m_Layer: 12
   m_Name: ShotgunModel
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
@@ -281,6 +282,27 @@ Transform:
   - {fileID: 2608838106833141314}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &-5159407831045753772
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955286229275572462}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 3.9, z: 1}
+  m_Center: {x: 0.25, y: 1.14, z: 0.26}
 --- !u!1 &2044953057551536914
 GameObject:
   m_ObjectHideFlags: 0
