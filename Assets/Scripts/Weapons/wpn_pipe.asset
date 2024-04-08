@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a637e49a52b4fe4fb9c22d14bdf6a23, type: 3}
+  m_Name: wpn_pipe
+  m_EditorClassIdentifier: 
+  weaponName: PIpe
+  attackType: 2
+  holdType: 2
+  weaponModel: {fileID: 8819979554096515408, guid: 312ea000fa492384d9193fe235814f3b, type: 3}
+  fireRate: 3
+  projectile: {fileID: 0}
+  reloadSpeed: 0
+  magCapacity: 0
+  reserveCapacity: 0
+  meleeDamage: 5
+  meleeRange: 3
+  radius: 3
+  speed: 5
+  fireSound: {fileID: 8300000, guid: 6cff04e0628942749801abad158c7d8d, type: 3}
+  impactSound: {fileID: 0}
