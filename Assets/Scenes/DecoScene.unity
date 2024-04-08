@@ -6633,6 +6633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quotaBar: {fileID: 623282371}
   quotaAmount: 0
+  totalAmount: 300
 --- !u!4 &1725470428
 Transform:
   m_ObjectHideFlags: 0

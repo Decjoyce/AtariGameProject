@@ -1599,8 +1599,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPrefabs:
-  - {fileID: 7941526012871332646, guid: 59e58b99e380332419d959a476ce6e3a, type: 3}
-  - {fileID: 7941526012871332646, guid: 06b63b91bfa68ff41a87dc5f4df0a108, type: 3}
+  - {fileID: 7941526012871332646, guid: 09f7ee24a71907a429d236783c6835d8, type: 3}
+  - {fileID: 7941526012871332646, guid: 09f7ee24a71907a429d236783c6835d8, type: 3}
   spawnPoint: {fileID: 844240393}
 --- !u!1 &500065670
 GameObject:
@@ -5386,6 +5386,10 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 2.48
       objectReference: {fileID: 0}
+    - target: {fileID: 4328449501056524002, guid: 20e11bf260332044b8391d9cd92b7c07, type: 3}
+      propertyPath: PlayerObj
+      value: 
+      objectReference: {fileID: 7941526012871332646, guid: 09f7ee24a71907a429d236783c6835d8, type: 3}
     - target: {fileID: 4328449501056524002, guid: 20e11bf260332044b8391d9cd92b7c07, type: 3}
       propertyPath: ScoreManagerObject
       value: 

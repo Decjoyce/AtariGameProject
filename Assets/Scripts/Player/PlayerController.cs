@@ -58,6 +58,9 @@ public class PlayerController : MonoBehaviour
     public bool debuggingMode;
     public bool oldLook;
 
+    [Header("Extracted")]
+    public bool extractedCheck;
+
     [HideInInspector] public bool faceLeft = true;
 
     PlayerState_Base currentState;
@@ -76,6 +79,8 @@ public class PlayerController : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
+
+        NotExtracted();
     }
 
 
@@ -204,5 +209,15 @@ public class PlayerController : MonoBehaviour
             graphicsPivot.localEulerAngles = new(graphicsPivot.localEulerAngles.x, 0f, 0f);
             animFlipper = 1;
         }
+    }
+
+    public void IsExtracted()
+    {
+        extractedCheck = true;
+    }
+
+    public void NotExtracted()
+    {
+        extractedCheck = false;
     }
 }
