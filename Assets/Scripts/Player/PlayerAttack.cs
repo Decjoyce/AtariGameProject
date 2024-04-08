@@ -12,7 +12,7 @@ public class PlayerAttack : MonoBehaviour
     public Transform handPos;
     public Transform gunPos;
     [SerializeField] Transform rightHandPos, leftHandPos;
-    [SerializeField] Transform pivot;
+    [SerializeField] Transform pivot, handPivot;
 
     GameObject weaponMesh;
     MeshRenderer ammoGraphics; //Temp
@@ -23,6 +23,8 @@ public class PlayerAttack : MonoBehaviour
     bool canAttack = true, isReloading;
     bool isAutoFiring;
     float attackDelay;
+    bool isSwinging;
+    Quaternion targetRot;
 
     [SerializeField] Gradient ammoColorGradient;
 
@@ -63,6 +65,34 @@ public class PlayerAttack : MonoBehaviour
         {
             AutoShot();
         }
+
+        if (isSwinging)
+        {
+            //float xRot = handPivot.localEulerAngles.z + (weapon.speed / weapon.fireRate * Time.deltaTime);
+            //handPivot.localEulerAngles = new(0f, 0f, xRot);
+
+            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot, weapon.speed * Time.deltaTime);
+
+            Collider[] hits;
+            hits = Physics.OverlapCapsule(firePoint.position, firePoint.localPosition + (Vector3.up * weapon.meleeRange), weapon.radius);
+
+            for (int i = 0; i < hits.Length; i++)
+            {
+                EnemyHealth enemyHealth = hits[i].transform.GetComponent<EnemyHealth>();
+
+                if (enemyHealth != null)
+                    enemyHealth.TakeDamage(weapon.meleeDamage);
+            }
+
+            Debug.Log(handPivot.localEulerAngles.z);
+
+            if (handPivot.localRotation == targetRot)
+            {
+                isSwinging = false;
+                handPivot.localEulerAngles = Vector3.zero;
+            }
+        }
+
     }
 
     public void PickUpWeapon(WeaponType newWeapon, int newAmmo, int newReserve)
@@ -93,6 +123,7 @@ public class PlayerAttack : MonoBehaviour
             StopCoroutine(currentReloadCoroutine);
 
         isAutoFiring = false;
+        isSwinging = false;
         isReloading = false;
         canAttack = true;
         attackDelay = 0;
@@ -229,19 +260,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void SwingMelee(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && canAttack)
+        if (ctx.performed && canAttack && !isSwinging)
         {
-            Collider[] hits;
-            hits = Physics.OverlapCapsule(firePoint.position, firePoint.localPosition + (Vector3.up * weapon.meleeRange), weapon.radius);
-
-            for (int i = 0; i < hits.Length; i++)
-            {
-                EnemyHealth enemyHealth = hits[i].transform.GetComponent<EnemyHealth>();
-
-                if (enemyHealth != null)
-                    enemyHealth.TakeDamage(weapon.meleeDamage);
-            }
-
+            isSwinging = true;
+            targetRot = Quaternion.AngleAxis(weapon.meleeArc, handPivot.forward);
             source.PlayOneShot(weapon.fireSound);
 
             canAttack = false;
