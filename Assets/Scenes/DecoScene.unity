@@ -5345,6 +5345,10 @@ PrefabInstance:
       value: ExtracttionCube
       objectReference: {fileID: 0}
     - target: {fileID: 7686437577316576216, guid: 20e11bf260332044b8391d9cd92b7c07, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686437577316576216, guid: 20e11bf260332044b8391d9cd92b7c07, type: 3}
       propertyPath: m_TagString
       value: Interactable
       objectReference: {fileID: 0}

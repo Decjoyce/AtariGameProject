@@ -66,63 +66,12 @@ public class PlayerAttack : MonoBehaviour
             AutoShot();
         }
 
-/*        if (isSwinging)
-        {
-            //float xRot = handPivot.localEulerAngles.z + (weapon.speed / weapon.fireRate * Time.deltaTime);
-            //handPivot.localEulerAngles = new(0f, 0f, xRot);
-
-            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot,  weapon.speed * Time.deltaTime);
-
-            Collider[] hits;
-            hits = Physics.OverlapCapsule(firePoint.position, firePoint.localPosition + (Vector3.up * weapon.meleeRange), weapon.radius);
-
-            for (int i = 0; i < hits.Length; i++)
-            {
-                EnemyHealth enemyHealth = hits[i].transform.GetComponent<EnemyHealth>();
-
-                if (enemyHealth != null)
-                    enemyHealth.TakeDamage(weapon.meleeDamage * weapon.speed);
-            }
-
-            Debug.Log(handPivot.localEulerAngles.z);
-
-            if (handPivot.localRotation == targetRot)
-            {
-                isSwinging = false;
-                returningFromSwing = true;
-                targetRot = Quaternion.AngleAxis(0f, handPivot.forward);
-            }
-        }
-        if (returningFromSwing)
-        {
-            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot, (handPivot.localEulerAngles.z / attackDelay) * Time.deltaTime);
-            if (handPivot.localRotation == targetRot)
-            {
-                returningFromSwing = false;
-            }
-        }
-*/
-    }
-
-    private void FixedUpdate()
-    {
         if (isSwinging)
         {
             //float xRot = handPivot.localEulerAngles.z + (weapon.speed / weapon.fireRate * Time.deltaTime);
             //handPivot.localEulerAngles = new(0f, 0f, xRot);
 
-            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot, weapon.speed * Time.fixedDeltaTime);
-
-            Collider[] hits;
-            hits = Physics.OverlapCapsule(firePoint.position, firePoint.localPosition + (Vector3.up * weapon.meleeRange), weapon.radius);
-
-            for (int i = 0; i < hits.Length; i++)
-            {
-                EnemyHealth enemyHealth = hits[i].transform.GetComponent<EnemyHealth>();
-
-                if (enemyHealth != null)
-                    enemyHealth.TakeDamage(weapon.meleeDamage * weapon.speed);
-            }
+            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot,  weapon.meleeSpeed * Time.deltaTime);
 
             Debug.Log(handPivot.localEulerAngles.z);
 
@@ -131,11 +80,12 @@ public class PlayerAttack : MonoBehaviour
                 isSwinging = false;
                 returningFromSwing = true;
                 targetRot = Quaternion.AngleAxis(0f, handPivot.forward);
+                weaponMesh.GetComponent<MeleeDamage>().col.enabled = false;
             }
         }
         if (returningFromSwing)
         {
-            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot, (handPivot.localEulerAngles.z / attackDelay) * Time.fixedDeltaTime);
+            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot, (handPivot.localEulerAngles.z / attackDelay) * Time.deltaTime);
             if (handPivot.localRotation == targetRot)
             {
                 returningFromSwing = false;
@@ -182,8 +132,9 @@ public class PlayerAttack : MonoBehaviour
             GameObject droppedWeapon = Instantiate(droppedWeaponPrefab, firePoint.position, Quaternion.identity);
             droppedWeapon.GetComponent<WeaponPickup>().ChangeStats(weapon, currentAmmo, currentReserve);
             GameObject droppedWeaponModel = Instantiate(weaponMesh, droppedWeapon.transform);
-            droppedWeaponModel.GetComponent<Collider>().enabled = true;
-            droppedWeaponModel.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>().material = ammoGraphics.material;
+            Transform holder = droppedWeaponModel.transform.GetChild(0);
+            holder.GetComponent<Collider>().enabled = true;
+            holder.GetChild(1).GetComponent<MeshRenderer>().material = ammoGraphics.material;
         }
 
         if (returnToFists)
@@ -313,6 +264,9 @@ public class PlayerAttack : MonoBehaviour
         {
             isSwinging = true;
             targetRot = Quaternion.AngleAxis(weapon.meleeArc * controller.animFlipper, handPivot.forward);
+
+            weaponMesh.GetComponent<MeleeDamage>().col.enabled = true;
+
             source.PlayOneShot(weapon.fireSound);
 
             canAttack = false;
@@ -324,7 +278,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (ctx.performed && canAttack)
         {
-            Collider[] hits;
+/*            Collider[] hits;
             hits = Physics.OverlapCapsule(firePoint.position, firePoint.localPosition + (Vector3.up * weapon.meleeRange), weapon.radius);
 
             for (int i = 0; i < hits.Length; i++)
@@ -336,7 +290,7 @@ public class PlayerAttack : MonoBehaviour
                     Debug.Log("HIT " + hits[i].gameObject.name);
                     enemyHealth.TakeDamage(weapon.meleeDamage);
                 }
-            }
+            }*/
 
             source.PlayOneShot(weapon.fireSound);
 
@@ -384,11 +338,12 @@ public class PlayerAttack : MonoBehaviour
         }
 
         weaponMesh = Instantiate(weapon.weaponModel, handPos.position, handPos.rotation, handPos);
-        weaponMesh.GetComponent<Collider>().enabled = false;
-        ammoGraphics = weaponMesh.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>();
-        firePoint = weaponMesh.transform.GetChild(0).GetChild(0);
-        rightHandPos.SetPositionAndRotation(weaponMesh.transform.GetChild(0).GetChild(2).position, weaponMesh.transform.GetChild(0).GetChild(2).rotation);
-        leftHandPos.SetPositionAndRotation(weaponMesh.transform.GetChild(0).GetChild(3).position, weaponMesh.transform.GetChild(0).GetChild(3).rotation);
+        Transform holder = weaponMesh.transform.GetChild(0);
+        holder.GetComponent<Collider>().enabled = false;
+        ammoGraphics = holder.GetChild(1).GetComponent<MeshRenderer>();
+        firePoint = holder.GetChild(0);
+        rightHandPos.SetPositionAndRotation(holder.GetChild(2).position, weaponMesh.transform.GetChild(0).GetChild(2).rotation);
+        leftHandPos.SetPositionAndRotation(holder.GetChild(3).position, weaponMesh.transform.GetChild(0).GetChild(3).rotation);
     }
 
     private void DisableWeaponMesh()

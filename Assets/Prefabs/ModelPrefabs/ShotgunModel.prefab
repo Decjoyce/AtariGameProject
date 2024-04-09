@@ -258,7 +258,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6074581280977037534}
-  - component: {fileID: -5159407831045753772}
   m_Layer: 12
   m_Name: ShotgunModel
   m_TagString: Untagged
@@ -282,27 +281,6 @@ Transform:
   - {fileID: 2608838106833141314}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &-5159407831045753772
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1955286229275572462}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 3.9, z: 1}
-  m_Center: {x: 0.25, y: 1.14, z: 0.26}
 --- !u!1 &2044953057551536914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,6 +1101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2608838106833141314}
+  - component: {fileID: 8436722683688643929}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -1161,6 +1140,27 @@ Transform:
   - {fileID: 6194787251846026583}
   m_Father: {fileID: 6074581280977037534}
   m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
+--- !u!65 &8436722683688643929
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8771779929301891030}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 3.9}
+  m_Center: {x: 0, y: 0.13, z: -0.35}
 --- !u!1 &8799473324437118024
 GameObject:
   m_ObjectHideFlags: 0

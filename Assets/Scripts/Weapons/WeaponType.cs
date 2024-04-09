@@ -22,11 +22,8 @@ public class WeaponType: ScriptableObject
     public int reserveCapacity;
 
     [Header("Melee Stats")]
-    public float meleeDamage;
     public float meleeArc;
-    public float meleeRange;
-    public float radius;
-    public float speed;
+    public float meleeSpeed;
 
     [Header("Aesthetics")]
     public AudioClip fireSound;

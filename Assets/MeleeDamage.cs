@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class MeleeDamage : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] float damage;
+    public Collider col;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("EnemyHitbox"))
+        {
+            other.GetComponent<EnemyHealth>().TakeDamage(damage);
+        }       
     }
 }
