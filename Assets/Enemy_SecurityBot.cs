@@ -185,7 +185,7 @@ public class Enemy_SecurityBot : MonoBehaviour
 
     public void GetRandomState()
     {
-        int ranNum = Random.Range(1, 2);
+        int ranNum = Random.Range(0, 3);
         switch (ranNum)
         {
             case 0:

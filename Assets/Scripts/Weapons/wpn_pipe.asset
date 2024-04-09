@@ -24,7 +24,7 @@ MonoBehaviour:
   meleeDamage: 0.005
   meleeArc: -100
   meleeRange: 3
-  radius: 3
+  radius: 0.5
   speed: 40
   fireSound: {fileID: 8300000, guid: 6cff04e0628942749801abad158c7d8d, type: 3}
   impactSound: {fileID: 0}
