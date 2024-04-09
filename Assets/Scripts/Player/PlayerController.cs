@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
     PlayerState_Base currentState;
     public PlayerState_Neutral state_Neutral = new PlayerState_Neutral();
     public PlayerState_Death state_Death = new PlayerState_Death();
+    public PlayerState_Extracted state_Extracted = new PlayerState_Extracted();
 
     public Character_Base currentCharacter;
     public Character_TEST character_TEST = new Character_TEST();
@@ -167,6 +168,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case "DEATH":
                 currentState = state_Death;
+                break;
+            case "EXTRACTED":
+                currentState = state_Extracted;
                 break;
             default:
                 Debug.LogError("INVALID STATE: " + newState);

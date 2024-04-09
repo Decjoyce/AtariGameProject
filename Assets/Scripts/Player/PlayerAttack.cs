@@ -66,7 +66,7 @@ public class PlayerAttack : MonoBehaviour
             AutoShot();
         }
 
-        if (isSwinging)
+/*        if (isSwinging)
         {
             //float xRot = handPivot.localEulerAngles.z + (weapon.speed / weapon.fireRate * Time.deltaTime);
             //handPivot.localEulerAngles = new(0f, 0f, xRot);
@@ -96,6 +96,46 @@ public class PlayerAttack : MonoBehaviour
         if (returningFromSwing)
         {
             handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot, (handPivot.localEulerAngles.z / attackDelay) * Time.deltaTime);
+            if (handPivot.localRotation == targetRot)
+            {
+                returningFromSwing = false;
+            }
+        }
+*/
+    }
+
+    private void FixedUpdate()
+    {
+        if (isSwinging)
+        {
+            //float xRot = handPivot.localEulerAngles.z + (weapon.speed / weapon.fireRate * Time.deltaTime);
+            //handPivot.localEulerAngles = new(0f, 0f, xRot);
+
+            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot, weapon.speed * Time.fixedDeltaTime);
+
+            Collider[] hits;
+            hits = Physics.OverlapCapsule(firePoint.position, firePoint.localPosition + (Vector3.up * weapon.meleeRange), weapon.radius);
+
+            for (int i = 0; i < hits.Length; i++)
+            {
+                EnemyHealth enemyHealth = hits[i].transform.GetComponent<EnemyHealth>();
+
+                if (enemyHealth != null)
+                    enemyHealth.TakeDamage(weapon.meleeDamage * weapon.speed);
+            }
+
+            Debug.Log(handPivot.localEulerAngles.z);
+
+            if (handPivot.localRotation == targetRot)
+            {
+                isSwinging = false;
+                returningFromSwing = true;
+                targetRot = Quaternion.AngleAxis(0f, handPivot.forward);
+            }
+        }
+        if (returningFromSwing)
+        {
+            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot, (handPivot.localEulerAngles.z / attackDelay) * Time.fixedDeltaTime);
             if (handPivot.localRotation == targetRot)
             {
                 returningFromSwing = false;

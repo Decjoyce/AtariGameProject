@@ -633,6 +633,7 @@ GameObject:
   - component: {fileID: 2765636796655173809}
   - component: {fileID: -7904829261947478999}
   - component: {fileID: -8240383407131930135}
+  - component: {fileID: 6266098953005791050}
   m_Layer: 12
   m_Name: PipeModel
   m_TagString: Untagged
@@ -689,5 +690,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48948dfe9d76b07488dacd46a7955fa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6266098953005791050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8819979554096515408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2bdd9ad1bc25564a91b759f1cb6909f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
