@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 120669030413465309}
   - component: {fileID: 5670137795489599789}
   - component: {fileID: 5505516091856132798}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SMG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 4189617045523007959}
   - component: {fileID: 7353520640855463047}
   - component: {fileID: 6663384968940589009}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3570598197102350138}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LeftHandHold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6037858966764944546}
   - component: {fileID: 2386607595618847196}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9074306925408841536}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RightHandHold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4867420996141182462}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

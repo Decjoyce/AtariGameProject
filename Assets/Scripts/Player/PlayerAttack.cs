@@ -11,7 +11,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] Transform firePoint;
     public Transform handPos;
     public Transform gunPos;
-    [SerializeField] Transform rightHandPos, leftHandPos;
+    [SerializeField] Transform rightHandPos, rightHandHint, leftHandPos, leftHandHint;
     [SerializeField] Transform pivot, handPivot;
 
     GameObject weaponMesh;
@@ -24,7 +24,9 @@ public class PlayerAttack : MonoBehaviour
     bool isAutoFiring;
     float attackDelay;
     bool isSwinging, returningFromSwing;
+    bool isThrusting, returningFromThrust;
     Quaternion targetRot;
+    Vector3 targetPos, ogHandPos;
 
     [SerializeField] Gradient ammoColorGradient;
 
@@ -66,32 +68,8 @@ public class PlayerAttack : MonoBehaviour
             AutoShot();
         }
 
-        if (isSwinging)
-        {
-            //float xRot = handPivot.localEulerAngles.z + (weapon.speed / weapon.fireRate * Time.deltaTime);
-            //handPivot.localEulerAngles = new(0f, 0f, xRot);
-
-            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot,  weapon.meleeSpeed * Time.deltaTime);
-
-            Debug.Log(handPivot.localEulerAngles.z);
-
-            if (handPivot.localRotation == targetRot)
-            {
-                isSwinging = false;
-                returningFromSwing = true;
-                targetRot = Quaternion.AngleAxis(0f, handPivot.forward);
-                weaponMesh.GetComponent<MeleeDamage>().col.enabled = false;
-            }
-        }
-        if (returningFromSwing)
-        {
-            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot, (handPivot.localEulerAngles.z / attackDelay) * Time.deltaTime);
-            if (handPivot.localRotation == targetRot)
-            {
-                returningFromSwing = false;
-            }
-        }
-
+        SwingingAttack();
+        ThrustingAttack();
     }
 
     public void PickUpWeapon(WeaponType newWeapon, int newAmmo, int newReserve)
@@ -103,7 +81,7 @@ public class PlayerAttack : MonoBehaviour
         currentReserve = newReserve;
 
         SetWeaponMesh();
-        SetWeaponHold();
+        //SetWeaponHold();
 
         SetGunColor();
 
@@ -144,10 +122,10 @@ public class PlayerAttack : MonoBehaviour
             currentReserve = 69;
 
             //DisableWeaponMesh();
-            SetWeaponMesh(); // temp
-            SetWeaponHold();
+            SetFistMesh();
+            //SetWeaponMesh(); // temp
+            //SetWeaponHold();
 
-            ammoGraphics.material.SetColor("_EmissionColor", Color.yellow); //temp
             Debug.Log("Fistacuffs");
         }
     }
@@ -278,24 +256,69 @@ public class PlayerAttack : MonoBehaviour
     {
         if (ctx.performed && canAttack)
         {
-/*            Collider[] hits;
-            hits = Physics.OverlapCapsule(firePoint.position, firePoint.localPosition + (Vector3.up * weapon.meleeRange), weapon.radius);
+            isThrusting = true;
+            targetPos = rightHandPos.localPosition + (Vector3.up * (rightHandPos.localPosition.y + weapon.meleeRange));
+            ogHandPos = rightHandPos.localPosition;
 
-            for (int i = 0; i < hits.Length; i++)
-            {
-                EnemyHealth enemyHealth = hits[i].transform.GetComponent<EnemyHealth>();
-
-                if (enemyHealth != null)
-                {
-                    Debug.Log("HIT " + hits[i].gameObject.name);
-                    enemyHealth.TakeDamage(weapon.meleeDamage);
-                }
-            }*/
+            rightHandPos.GetComponent<MeleeDamage>().col.enabled = true;
 
             source.PlayOneShot(weapon.fireSound);
 
             canAttack = false;
             attackDelay = weapon.fireRate;
+        }
+    }
+
+    void SwingingAttack()
+    {
+        if (isSwinging)
+        {
+            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot, weapon.meleeSpeed * Time.deltaTime);
+
+            //Debug.Log(handPivot.localEulerAngles.z);
+
+            if (handPivot.localRotation == targetRot)
+            {
+                isSwinging = false;
+                returningFromSwing = true;
+                targetRot = Quaternion.AngleAxis(0f, handPivot.forward);
+                weaponMesh.GetComponent<MeleeDamage>().col.enabled = false;
+            }
+        }
+        if (returningFromSwing)
+        {
+            handPivot.localRotation = Quaternion.Lerp(handPivot.localRotation, targetRot, (handPivot.localEulerAngles.z / attackDelay) * Time.deltaTime);
+            if (handPivot.localRotation == targetRot)
+            {
+                returningFromSwing = false;
+            }
+        }
+    }
+
+    void ThrustingAttack()
+    {
+        if (isThrusting)
+        {
+            rightHandPos.localPosition = Vector3.Lerp(rightHandPos.localPosition, targetPos, weapon.meleeSpeed * Time.deltaTime);
+            float dist = Vector3.Distance(rightHandPos.localPosition, targetPos);
+            if (dist <= 0.1f)
+            {
+                isThrusting = false;
+                returningFromThrust = true;
+                targetPos = ogHandPos;
+                rightHandPos.GetComponent<MeleeDamage>().col.enabled = false;
+            }
+        }
+        if (returningFromThrust)
+        {
+            rightHandPos.localPosition = Vector3.Lerp(rightHandPos.localPosition, targetPos, weapon.meleeSpeed * Time.deltaTime);
+            float dist = Vector3.Distance(rightHandPos.localPosition, targetPos);
+            //Debug.Log(targetPos + " " + );
+            if (dist <= 0.1f)
+            {
+                returningFromThrust = false;
+                rightHandPos.localPosition = targetPos;
+            }
         }
     }
 
@@ -337,13 +360,37 @@ public class PlayerAttack : MonoBehaviour
             Destroy(weaponMesh);
         }
 
-        weaponMesh = Instantiate(weapon.weaponModel, handPos.position, handPos.rotation, handPos);
+        if(weapon.holdType != HoldType.meleeThrust)
+            weaponMesh = Instantiate(weapon.weaponModel, handPos.position, handPos.rotation, handPos);
+        else
+            weaponMesh = Instantiate(weapon.weaponModel, handPos.position, handPos.rotation, rightHandPos);
         Transform holder = weaponMesh.transform.GetChild(0);
         holder.GetComponent<Collider>().enabled = false;
         ammoGraphics = holder.GetChild(1).GetComponent<MeshRenderer>();
         firePoint = holder.GetChild(0);
         rightHandPos.SetPositionAndRotation(holder.GetChild(2).position, weaponMesh.transform.GetChild(0).GetChild(2).rotation);
+        rightHandHint.localPosition = Vector3.zero;
         leftHandPos.SetPositionAndRotation(holder.GetChild(3).position, weaponMesh.transform.GetChild(0).GetChild(3).rotation);
+        leftHandHint.localPosition = Vector3.zero;
+    }
+
+    void SetFistMesh()
+    {
+        if (weaponMesh != null)
+        {
+            ammoGraphics = null;
+            Destroy(weaponMesh);
+        }
+
+        weaponMesh = Instantiate(weapon.weaponModel, handPos.position, handPos.rotation, handPos);
+
+        Transform holder = weaponMesh.transform.GetChild(0);
+        firePoint = holder.GetChild(0);
+
+        rightHandPos.SetPositionAndRotation(holder.GetChild(2).position, weaponMesh.transform.GetChild(0).GetChild(2).rotation);
+        rightHandHint.localPosition = new Vector3(0.65f, -1.32f, -0.47f);
+        leftHandPos.SetPositionAndRotation(holder.GetChild(3).position, weaponMesh.transform.GetChild(0).GetChild(3).rotation);
+        leftHandHint.localPosition = new Vector3(-0.65f, -1.32f, -0.47f);
     }
 
     private void DisableWeaponMesh()

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6049978285340828089}
   - component: {fileID: 6574532906030123219}
   - component: {fileID: 4700566310229817680}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Brace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1747859562829390110}
   - component: {fileID: 752182576998371185}
   - component: {fileID: 1856901728528787391}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BarellHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 5096572011362719850}
   - component: {fileID: 539430063508681945}
   - component: {fileID: 8645040149473699563}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ammo Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 6686229030749285465}
   - component: {fileID: 1377229481364945711}
   - component: {fileID: 1457034124182966250}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 'barrel '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -375,7 +375,7 @@ GameObject:
   - component: {fileID: 5274483409019419384}
   - component: {fileID: 2738700186907787699}
   - component: {fileID: 1609101574834080147}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,7 +458,7 @@ GameObject:
   - component: {fileID: 5716370662997430098}
   - component: {fileID: 7021153317253392304}
   - component: {fileID: 7370691554700325102}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -539,7 +539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9145053638534036133}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LeftHandPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +570,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3434018514251723696}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RightHandPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -603,7 +603,7 @@ GameObject:
   - component: {fileID: 4697779303469696604}
   - component: {fileID: 6680649748825265614}
   - component: {fileID: 4908152906216874345}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ammo
   m_TagString: Ammo
   m_Icon: {fileID: 0}
@@ -684,7 +684,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5754731499747238248}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -717,7 +717,7 @@ GameObject:
   - component: {fileID: 8430059945476555910}
   - component: {fileID: 4983072903588099013}
   - component: {fileID: 2084364908233053432}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -801,7 +801,7 @@ GameObject:
   m_Component:
   - component: {fileID: 249093709030029667}
   - component: {fileID: 2353780277374155226}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}

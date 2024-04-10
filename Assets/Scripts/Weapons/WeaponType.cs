@@ -23,6 +23,7 @@ public class WeaponType: ScriptableObject
 
     [Header("Melee Stats")]
     public float meleeArc;
+    [Range(0, 6)]public float meleeRange;
     public float meleeSpeed;
 
     [Header("Aesthetics")]

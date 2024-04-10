@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a637e49a52b4fe4fb9c22d14bdf6a23, type: 3}
-  m_Name: wpn_fists
+  m_Name: wpn_knife
   m_EditorClassIdentifier: 
-  weaponName: Fists
-  attackType: 3
-  holdType: 3
-  weaponModel: {fileID: 8275159652715322147, guid: ec01f602cb17b7c47b9c61ba3a1520c1, type: 3}
+  weaponName: Knife
+  attackType: 2
+  holdType: 2
+  weaponModel: {fileID: 8859789752894284653, guid: f2ad8f53b62edd6458cade526338b5f6, type: 3}
   fireRate: 1
-  projectile: {fileID: 1651700291602923542, guid: 8b1f506fcb6abc34a87850f6fa7ebe91, type: 3}
-  reloadSpeed: 0
+  projectile: {fileID: 0}
+  reloadSpeed: 5
   magCapacity: 420
   reserveCapacity: 69
-  meleeArc: -50
-  meleeRange: 6
-  meleeSpeed: 20
+  meleeArc: 0
+  meleeRange: 0.7
+  meleeSpeed: 30
   fireSound: {fileID: 8300000, guid: 6cff04e0628942749801abad158c7d8d, type: 3}
   impactSound: {fileID: 0}

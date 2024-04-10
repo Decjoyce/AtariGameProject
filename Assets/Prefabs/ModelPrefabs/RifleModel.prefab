@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1057219989084999040}
   - component: {fileID: 4499108227477785656}
   - component: {fileID: 1697827127862334124}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ammo Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7439199004759753449}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LeftHandHold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 5023520640686754565}
   - component: {fileID: 506945804686920517}
   - component: {fileID: 1910386098656445321}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4458486208049919885}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 2257042675110239185}
   - component: {fileID: 8923578537445087505}
   - component: {fileID: 2373549214287880634}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 865865287065504057}
   - component: {fileID: 7716672868353566416}
   - component: {fileID: 3766208252551458509}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 8825625387467002029}
   - component: {fileID: 8039312691644740224}
   - component: {fileID: 2983933783389350673}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -487,7 +487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3911101797952505386}
   - component: {fileID: 5534280068232541590}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,7 +554,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2988493602811698623}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RightHandHold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +587,7 @@ GameObject:
   - component: {fileID: 8154460649284171150}
   - component: {fileID: 637021101849215760}
   - component: {fileID: 9066074506740293583}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -702,7 +702,7 @@ GameObject:
   - component: {fileID: 3459716976962783037}
   - component: {fileID: 3507411635217570161}
   - component: {fileID: 7961863420355084233}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Torus.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -785,7 +785,7 @@ GameObject:
   - component: {fileID: 96061475991615727}
   - component: {fileID: 4154625458273374650}
   - component: {fileID: 7619629730149951814}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -868,7 +868,7 @@ GameObject:
   - component: {fileID: 7843364072011325100}
   - component: {fileID: 4425875409042290171}
   - component: {fileID: 3374431977500268027}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -951,7 +951,7 @@ GameObject:
   - component: {fileID: 2228117041443541809}
   - component: {fileID: 624035235478237509}
   - component: {fileID: 2387737472010960863}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1034,7 +1034,7 @@ GameObject:
   - component: {fileID: 6779360134895786253}
   - component: {fileID: 161380344389108829}
   - component: {fileID: 4055697956288585483}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1117,7 +1117,7 @@ GameObject:
   - component: {fileID: 1172710503054347249}
   - component: {fileID: 7084280909130748873}
   - component: {fileID: 2198007482055053426}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Icosphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
