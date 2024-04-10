@@ -11,10 +11,13 @@ public class PlayerState_Death : PlayerState_Base
         controller.col.enabled = false;
         controller.rb.constraints = RigidbodyConstraints.FreezeAll;
         controller.interaction.ClearInventory();
+        controller.anim.SetBool("isDead", true);
+        controller.anim.SetLayerWeight(1, 0f);
     }
     public override void ExitState(PlayerController controller)
     {
-
+        controller.anim.SetBool("isDead", false);
+        controller.anim.SetLayerWeight(1, 1f);
     }
 
     public override void FrameUpdate(PlayerController controller)
