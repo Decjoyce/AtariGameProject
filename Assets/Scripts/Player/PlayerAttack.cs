@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.WSA;
+using static UnityEditor.PlayerSettings;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
     public Transform handPos;
     public Transform gunPos;
     [SerializeField] Transform rightHandPos, rightHandHint, leftHandPos, leftHandHint;
+    [SerializeField] Transform[] rightHandHints, leftHandHints;
     [SerializeField] Transform pivot, handPivot;
 
     GameObject weaponMesh;
@@ -401,16 +403,16 @@ public class PlayerAttack : MonoBehaviour
             if (!isFists)
             {
                 rightHandPos.SetPositionAndRotation(holder.GetChild(2).position, holder.GetChild(2).rotation);
-                rightHandHint.localPosition = Vector3.zero;
+                AdjustRightHandHints(Vector3.zero);
                 leftHandPos.SetPositionAndRotation(holder.GetChild(3).position, holder.GetChild(3).rotation);
-                leftHandHint.localPosition = Vector3.zero;
+                AdjustLeftHandHints(Vector3.zero);
             }
             else
             {
                 rightHandPos.SetPositionAndRotation(holder.GetChild(2).position, holder.GetChild(2).rotation);
-                rightHandHint.localPosition = new Vector3(0.65f, -1.32f, -0.47f);
+                AdjustRightHandHints(new Vector3(0.65f, -1.32f, -0.47f));
                 leftHandPos.SetPositionAndRotation(holder.GetChild(3).position, holder.GetChild(3).rotation);
-                leftHandHint.localPosition = new Vector3(-0.65f, -1.32f, -0.47f);
+                AdjustLeftHandHints(new Vector3(-0.65f, -1.32f, -0.47f));
             }
         }
     }
@@ -435,6 +437,22 @@ public class PlayerAttack : MonoBehaviour
         ammoGraphics.material.SetColor("_EmissionColor", ammoColorGradient.Evaluate((float)(weapon.magCapacity - currentAmmo) / weapon.magCapacity));
     }
 
+    void AdjustRightHandHints(Vector3 pos)
+    {
+        foreach(Transform hint in rightHandHints)
+        {
+            hint.localPosition = pos;
+        }
+    }
+
+    void AdjustLeftHandHints(Vector3 pos)
+    {
+        foreach (Transform hint in leftHandHints)
+        {
+            hint.localPosition = pos;
+        }
+    }
+
     #region DocShit
     public void UseDocGun()
     {
@@ -445,9 +463,9 @@ public class PlayerAttack : MonoBehaviour
             doc_gun.SetActive(true);
             weaponMesh.SetActive(false);
             rightHandPos.SetPositionAndRotation(doc_gun.transform.GetChild(1).position, doc_gun.transform.GetChild(1).rotation);
-            rightHandHint.localPosition = Vector3.zero;
+            AdjustRightHandHints(Vector3.zero);
             leftHandPos.SetPositionAndRotation(doc_gun.transform.GetChild(2).position, doc_gun.transform.GetChild(2).rotation);
-            leftHandHint.localPosition = Vector3.zero;
+            AdjustLeftHandHints(Vector3.zero);
         }
         else
         {

@@ -24,12 +24,12 @@ public class Character_Navigator : Character_Base
     private void OpenMap(PlayerController controller)
     {
         Debug.Log("Map Opened");
-        controller.nav_map.gameObject.SetActive(true);
+        //controller.nav_map.gameObject.SetActive(true);
     }
 
     private void CloseMap(PlayerController controller)
     {
         Debug.Log("Map Closed");
-        controller.nav_map.gameObject.SetActive(false);
+        //controller.nav_map.gameObject.SetActive(false);
     }
 }
