@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f845b094f414fc641ae6555bf1a0b54d, type: 3}
   m_Name: itm_egg
   m_EditorClassIdentifier: 
-  itemName: 
-  value: 0
-  rarity: 0
+  itemName: Alien Egg
+  value: 5000
+  rarity: 4
+  graphics: {fileID: 919132149155446097, guid: f91892b0bf9268e4885a591603ca3029, type: 3}

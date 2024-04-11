@@ -28,7 +28,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6216192484942684276}
   m_Father: {fileID: 4566719020735801254}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!1 &6092143148522505465
@@ -43,7 +44,7 @@ GameObject:
   - component: {fileID: 8279691722189945129}
   - component: {fileID: 5798116295146391219}
   m_Layer: 0
-  m_Name: ItemPickup
+  m_Name: ItemPickup_Egg
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,5 +102,67 @@ MonoBehaviour:
   canInteract: 1
   interactPrompt: Pick Up Item
   switch2State: 
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: a44b3bf3309fb92449e18f6c940a3a8c, type: 2}
   sheetMetalWorth: 25
+--- !u!1001 &5894898947201910687
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5310027256263010684}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: f91892b0bf9268e4885a591603ca3029, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f91892b0bf9268e4885a591603ca3029, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.54814035
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f91892b0bf9268e4885a591603ca3029, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f91892b0bf9268e4885a591603ca3029, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f91892b0bf9268e4885a591603ca3029, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f91892b0bf9268e4885a591603ca3029, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f91892b0bf9268e4885a591603ca3029, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f91892b0bf9268e4885a591603ca3029, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f91892b0bf9268e4885a591603ca3029, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f91892b0bf9268e4885a591603ca3029, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f91892b0bf9268e4885a591603ca3029, type: 3}
+      propertyPath: m_Name
+      value: AlienEgg
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f91892b0bf9268e4885a591603ca3029, type: 3}
+--- !u!4 &6216192484942684276 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f91892b0bf9268e4885a591603ca3029, type: 3}
+  m_PrefabInstance: {fileID: 5894898947201910687}
+  m_PrefabAsset: {fileID: 0}

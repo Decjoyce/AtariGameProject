@@ -12,6 +12,7 @@ public class ItemPickup : Interactable
     {
         interactPrompt = "Pick up " + item.itemName;
         SM = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+        Instantiate(item.graphics, transform.GetChild(0));
     }
 
     public override void Interaction(PlayerInteraction player)

@@ -8,6 +8,7 @@ public class Item : ScriptableObject
     public string itemName;
     public int value;
     public ItemRarity rarity;
+    public GameObject graphics;
 }
 
 public enum ItemRarity
