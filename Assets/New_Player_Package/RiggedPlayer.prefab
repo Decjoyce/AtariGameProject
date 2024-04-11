@@ -7423,7 +7423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4307959828808049860
 Transform:
   m_ObjectHideFlags: 0
@@ -16900,7 +16900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8065232529381351949
 Transform:
   m_ObjectHideFlags: 0
@@ -18681,7 +18681,7 @@ MonoBehaviour:
   crouchHeight: 1.25
   crouchHeightHandPos: 0.3
   normalHeight: 2
-  anim: {fileID: 7865781353021472446}
+  anim: {fileID: 4111041633234892919}
   animFlipper: 1
   debuggingMode: 0
   oldLook: 0
@@ -18803,6 +18803,7 @@ MonoBehaviour:
   - {fileID: 3407821653882533250}
   - {fileID: 6816545358435983634}
   - {fileID: 7583249361885865285}
+  - {fileID: 3354663146047681357}
   healthColorGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
