@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class Character_Navigator : Character_Base
 {
@@ -12,21 +13,23 @@ public class Character_Navigator : Character_Base
 
         if (mapOpened)
         {
-            OpenMap();
+            OpenMap(controller);
         }
         else
         {
-            CloseMap();
+            CloseMap(controller);
         }
     }
 
-    private void OpenMap()
+    private void OpenMap(PlayerController controller)
     {
-        
+        Debug.Log("Map Opened");
+        controller.nav_map.gameObject.SetActive(true);
     }
 
-    private void CloseMap()
+    private void CloseMap(PlayerController controller)
     {
-
+        Debug.Log("Map Closed");
+        controller.nav_map.gameObject.SetActive(false);
     }
 }

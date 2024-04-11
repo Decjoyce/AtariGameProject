@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.WSA;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerAttack : MonoBehaviour
 
     WeaponType weapon;
     [SerializeField] WeaponType defaultWeapon, fists;
+    bool cannotDropWeapon;
     int currentAmmo, currentReserve;
     bool canAttack = true, isReloading;
     bool isAutoFiring;
@@ -27,6 +29,17 @@ public class PlayerAttack : MonoBehaviour
     bool isThrusting, returningFromThrust;
     Quaternion targetRot;
     Vector3 targetPos, ogHandPos;
+
+    bool doc_isUsing;
+    float doc_currentammo;
+    [Header("Doctor")]
+    [SerializeField] GameObject doc_gun;
+    [SerializeField] int doc_maxammo;
+    [SerializeField] float doc_range, doc_healamount, doc_firerate;
+    [SerializeField] Transform doc_firepoint;
+    [SerializeField] LayerMask doc_ignorelayers;
+    [SerializeField] LineRenderer doc_beamgraphics;
+    [SerializeField] MeshRenderer doc_ammographics;
 
     [SerializeField] Gradient ammoColorGradient;
 
@@ -47,6 +60,8 @@ public class PlayerAttack : MonoBehaviour
 
         currentAmmo = weapon.magCapacity;
         currentReserve = weapon.reserveCapacity;
+
+        doc_currentammo = doc_maxammo;
         SetWeaponMesh();
         SetGunColor();
     }
@@ -65,7 +80,10 @@ public class PlayerAttack : MonoBehaviour
 
         if (isAutoFiring)
         {
-            AutoShot();
+            if (!doc_isUsing)
+                AutoShot();
+            else
+                DocShot();
         }
 
         SwingingAttack();
@@ -81,7 +99,6 @@ public class PlayerAttack : MonoBehaviour
         currentReserve = newReserve;
 
         SetWeaponMesh();
-        //SetWeaponHold();
 
         SetGunColor();
 
@@ -110,6 +127,7 @@ public class PlayerAttack : MonoBehaviour
             GameObject droppedWeapon = Instantiate(droppedWeaponPrefab, firePoint.position, Quaternion.identity);
             droppedWeapon.GetComponent<WeaponPickup>().ChangeStats(weapon, currentAmmo, currentReserve);
             GameObject droppedWeaponModel = Instantiate(weaponMesh, droppedWeapon.transform);
+            droppedWeaponModel.SetActive(true);
             Transform holder = droppedWeaponModel.transform.GetChild(0);
             holder.GetComponent<Collider>().enabled = true;
             holder.GetChild(1).GetComponent<MeshRenderer>().material = ammoGraphics.material;
@@ -121,37 +139,52 @@ public class PlayerAttack : MonoBehaviour
             currentAmmo = 420;
             currentReserve = 69;
 
-            //DisableWeaponMesh();
             SetFistMesh();
-            //SetWeaponMesh(); // temp
-            //SetWeaponHold();
 
             Debug.Log("Fistacuffs");
         }
+
     }
 
     public void Attack(InputAction.CallbackContext ctx)
     {
-        switch (weapon.attackType)
+        if (!doc_isUsing)
         {
-            case AttackType.single:
-                SingleShot(ctx);
-                break;
-            case AttackType.auto:
-                if (ctx.started)
-                    isAutoFiring = true;
-                else if (ctx.canceled)
-                    isAutoFiring = false;
-                break;
-            case AttackType.swing:
-                SwingMelee(ctx);
-                break;
-            case AttackType.thrust:
-                ThrustMelee(ctx);
-                break;
-            default:
-                Debug.LogError("ERROR: the AttackType - " + weapon.attackType.ToString() + " - is invalid");
-                break;
+            switch (weapon.attackType)
+            {
+                case AttackType.single:
+                    SingleShot(ctx);
+                    break;
+                case AttackType.auto:
+                    if (ctx.started)
+                        isAutoFiring = true;
+                    else if (ctx.canceled)
+                        isAutoFiring = false;
+                    break;
+                case AttackType.swing:
+                    SwingMelee(ctx);
+                    break;
+                case AttackType.thrust:
+                    ThrustMelee(ctx);
+                    break;
+                default:
+                    Debug.LogError("ERROR: the AttackType - " + weapon.attackType.ToString() + " - is invalid");
+                    break;
+            }
+        }
+        else
+        {
+            if (ctx.started)
+            {
+                isAutoFiring = true;
+                doc_beamgraphics.gameObject.SetActive(true);
+            }
+            else if (ctx.canceled)
+            {
+                isAutoFiring = false;
+                doc_beamgraphics.gameObject.SetActive(false);
+            }
+
         }
     }
 
@@ -216,7 +249,7 @@ public class PlayerAttack : MonoBehaviour
         if (canAttack && !isReloading && currentAmmo > 0)
         {
             float spread = Random.Range(-accurracy, accurracy);
-            Quaternion bulletRotation = Quaternion.Euler(firePoint.eulerAngles.x, firePoint.eulerAngles.y, firePoint.eulerAngles.z + spread);
+            Quaternion bulletRotation = Quaternion.Euler(firePoint.eulerAngles.x + spread, firePoint.eulerAngles.y, firePoint.eulerAngles.z);
             Instantiate(weapon.projectile, firePoint.position, bulletRotation);
 
             canAttack = false;
@@ -322,36 +355,6 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    void SetWeaponHold()
-    {
-        switch (weapon.holdType)
-        {
-            case HoldType.gunOneHanded:
-                controller.anim.SetBool("useOneHanded", true);
-                controller.anim.SetBool("useTwoHanded", false);
-                controller.anim.SetBool("useMelee", false);
-                break;
-            case HoldType.gunTwoHanded:
-                controller.anim.SetBool("useTwoHanded", true);
-                controller.anim.SetBool("useOneHanded", false);
-                controller.anim.SetBool("useMelee", false);
-                break;
-            case HoldType.meleeSwing:
-                controller.anim.SetBool("useMelee", true);
-                controller.anim.SetBool("useOneHanded", false);
-                controller.anim.SetBool("useTwoHanded", false);
-                break;
-            case HoldType.meleeThrust:
-                controller.anim.SetBool("useMelee", true);
-                controller.anim.SetBool("useOneHanded", false);
-                controller.anim.SetBool("useTwoHanded", false);
-                break;
-            default:
-                Debug.Log("tbh idek how u did this but fair play");
-                break;
-        }
-    }
-
     void SetWeaponMesh()
     {
         if (weaponMesh != null)
@@ -368,10 +371,10 @@ public class PlayerAttack : MonoBehaviour
         holder.GetComponent<Collider>().enabled = false;
         ammoGraphics = holder.GetChild(1).GetComponent<MeshRenderer>();
         firePoint = holder.GetChild(0);
-        rightHandPos.SetPositionAndRotation(holder.GetChild(2).position, weaponMesh.transform.GetChild(0).GetChild(2).rotation);
-        rightHandHint.localPosition = Vector3.zero;
-        leftHandPos.SetPositionAndRotation(holder.GetChild(3).position, weaponMesh.transform.GetChild(0).GetChild(3).rotation);
-        leftHandHint.localPosition = Vector3.zero;
+        SetWeaponHold();
+
+        if (doc_isUsing)
+            weaponMesh.SetActive(false);
     }
 
     void SetFistMesh()
@@ -387,10 +390,29 @@ public class PlayerAttack : MonoBehaviour
         Transform holder = weaponMesh.transform.GetChild(0);
         firePoint = holder.GetChild(0);
 
-        rightHandPos.SetPositionAndRotation(holder.GetChild(2).position, weaponMesh.transform.GetChild(0).GetChild(2).rotation);
-        rightHandHint.localPosition = new Vector3(0.65f, -1.32f, -0.47f);
-        leftHandPos.SetPositionAndRotation(holder.GetChild(3).position, weaponMesh.transform.GetChild(0).GetChild(3).rotation);
-        leftHandHint.localPosition = new Vector3(-0.65f, -1.32f, -0.47f);
+        SetWeaponHold(false);
+    }
+
+    void SetWeaponHold(bool isFists = false)
+    {
+        if (!doc_isUsing)
+        {
+            Transform holder = weaponMesh.transform.GetChild(0);
+            if (!isFists)
+            {
+                rightHandPos.SetPositionAndRotation(holder.GetChild(2).position, holder.GetChild(2).rotation);
+                rightHandHint.localPosition = Vector3.zero;
+                leftHandPos.SetPositionAndRotation(holder.GetChild(3).position, holder.GetChild(3).rotation);
+                leftHandHint.localPosition = Vector3.zero;
+            }
+            else
+            {
+                rightHandPos.SetPositionAndRotation(holder.GetChild(2).position, holder.GetChild(2).rotation);
+                rightHandHint.localPosition = new Vector3(0.65f, -1.32f, -0.47f);
+                leftHandPos.SetPositionAndRotation(holder.GetChild(3).position, holder.GetChild(3).rotation);
+                leftHandHint.localPosition = new Vector3(-0.65f, -1.32f, -0.47f);
+            }
+        }
     }
 
     private void DisableWeaponMesh()
@@ -412,5 +434,69 @@ public class PlayerAttack : MonoBehaviour
     {
         ammoGraphics.material.SetColor("_EmissionColor", ammoColorGradient.Evaluate((float)(weapon.magCapacity - currentAmmo) / weapon.magCapacity));
     }
+
+    #region DocShit
+    public void UseDocGun()
+    {
+        doc_isUsing = !doc_isUsing;
+        if (doc_isUsing)
+        {
+            cannotDropWeapon = true;
+            doc_gun.SetActive(true);
+            weaponMesh.SetActive(false);
+            rightHandPos.SetPositionAndRotation(doc_gun.transform.GetChild(1).position, doc_gun.transform.GetChild(1).rotation);
+            rightHandHint.localPosition = Vector3.zero;
+            leftHandPos.SetPositionAndRotation(doc_gun.transform.GetChild(2).position, doc_gun.transform.GetChild(2).rotation);
+            leftHandHint.localPosition = Vector3.zero;
+        }
+        else
+        {
+            cannotDropWeapon = false;
+            doc_gun.SetActive(false);
+            weaponMesh.SetActive(true);
+            SetWeaponHold();
+        }
+
+    }
+
+    void DocShot()
+    {
+        if (doc_currentammo > 0)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(doc_firepoint.position, doc_firepoint.up, out hit, doc_range, doc_ignorelayers))
+            {
+                if (canAttack && hit.transform.CompareTag("Player"))
+                {
+                    hit.transform.GetComponent<PlayerHealth>().Heal(doc_healamount);
+                }
+                doc_beamgraphics.SetPosition(0, doc_firepoint.position);
+                doc_beamgraphics.SetPosition(1, hit.point);
+            }
+            else
+            {
+                doc_beamgraphics.SetPosition(0, doc_firepoint.position);
+                doc_beamgraphics.SetPosition(1, doc_firepoint.position + (doc_firepoint.up * doc_range));
+            }
+            if (canAttack)
+            {
+                canAttack = false;
+                attackDelay = doc_firerate;
+
+                //source.PlayOneShot(weapon.fireSound);
+
+                doc_currentammo--;
+
+                DocSetGunColor();
+            }
+
+        }
+    }
+
+    void DocSetGunColor()
+    {
+        doc_ammographics.material.SetColor("_EmissionColor", ammoColorGradient.Evaluate((float)(doc_maxammo - doc_currentammo) / doc_maxammo));
+    }
+    #endregion
 
 }

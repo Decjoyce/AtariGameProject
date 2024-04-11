@@ -26,6 +26,12 @@ public class PlayerHealth : MonoBehaviour
         SetHealthColor();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+            currentHealth = 0;
+    }
+
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;

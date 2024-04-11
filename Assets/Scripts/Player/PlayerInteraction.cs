@@ -16,6 +16,7 @@ public class PlayerInteraction : MonoBehaviour
     private List<Interactable> availableInteractions = new List<Interactable>();
 
     bool canInteract;
+    [HideInInspector] public bool isEngineer;
 
     [SerializeField] TextMeshProUGUI interactionText;
 
@@ -60,6 +61,12 @@ public class PlayerInteraction : MonoBehaviour
                 availableInteractions.Add(other.GetComponent<Interactable>());
             SetInteractionText();
         }
+        if (isEngineer && other.CompareTag("eng_Interactable"))
+        {
+            if (other.GetComponent<Interactable>())
+                availableInteractions.Add(other.GetComponent<Interactable>());
+            SetInteractionText();
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -68,7 +75,12 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (other.GetComponent<Interactable>())
                 RemoveInteraction(other.GetComponent<Interactable>());
-        }        
+        }
+        if (isEngineer && other.CompareTag("eng_Interactable"))
+        {
+            if (other.GetComponent<Interactable>())
+                RemoveInteraction(other.GetComponent<Interactable>());
+        }
     }
 
     public void RemoveInteraction(Interactable interactable)

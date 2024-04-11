@@ -22,7 +22,7 @@ MonoBehaviour:
   magCapacity: 420
   reserveCapacity: 69
   meleeArc: -50
-  meleeRange: 6
+  meleeRange: 1.3
   meleeSpeed: 20
   fireSound: {fileID: 8300000, guid: 6cff04e0628942749801abad158c7d8d, type: 3}
   impactSound: {fileID: 0}

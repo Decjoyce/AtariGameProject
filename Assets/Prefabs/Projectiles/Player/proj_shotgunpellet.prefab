@@ -53,7 +53,7 @@ MonoBehaviour:
   upwardForce: 0
   torqueForce: 0
   delayBeforeDelete: 0.3
-  range: 1
+  range: 2
 --- !u!136 &2329368756154790555
 CapsuleCollider:
   m_ObjectHideFlags: 0
