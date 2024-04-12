@@ -30,4 +30,14 @@ public class MenuManager : MonoBehaviour
         mainMenu.SetActive(false);
         characterSelect.SetActive(true);
     }
+
+    public void quitToMainMenu()
+    {
+
+    }
+
+    public void retry()
+    {
+
+    }
 }
