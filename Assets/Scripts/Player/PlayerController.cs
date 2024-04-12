@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public CapsuleCollider col;
     public Canvas canvas;
+    GameManagerScript gmScript;
 
     public Transform pivot;
     public Transform graphicsPivot;
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour
         attack = GetComponent<PlayerAttack>();
         health = GetComponent<PlayerHealth>();
 
+        gmScript = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManagerScript>();
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
 
@@ -165,12 +168,16 @@ public class PlayerController : MonoBehaviour
         {
             case "NEUTRAL":
                 currentState = state_Neutral;
+                gmScript.IncreasePlayersAliveAmount();
                 break;
             case "DEATH":
                 currentState = state_Death;
+                gmScript.DecreasePlayersAliveAmount();
                 break;
             case "EXTRACTED":
                 currentState = state_Extracted;
+                gmScript.IncreaseExtractedPlayerAmount();
+
                 break;
             default:
                 Debug.LogError("INVALID STATE: " + newState);

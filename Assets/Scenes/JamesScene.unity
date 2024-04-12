@@ -1417,9 +1417,10 @@ GameObject:
   - component: {fileID: 438405169}
   - component: {fileID: 438405170}
   - component: {fileID: 438405171}
+  - component: {fileID: 438405172}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: Game Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1473,6 +1474,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a3c2139bc70cea43835b8f1307b274e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &438405172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438405168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a135f990066394fa029299d054e9a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playersAlive: 0
+  playersDead: 0
+  playersExtracted: 0
 --- !u!1 &450813849
 GameObject:
   m_ObjectHideFlags: 0
@@ -2025,6 +2041,63 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1001 &563913657
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3908465210084054607, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.152346
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908465210084054607, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908465210084054607, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908465210084054607, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908465210084054607, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908465210084054607, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908465210084054607, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908465210084054607, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908465210084054607, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908465210084054607, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3975161191928823044, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
+      propertyPath: m_Name
+      value: SecurityBot
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 03228e6819f1f2d4bbecd67f94fca6ec, type: 3}
 --- !u!1 &586009950
 GameObject:
   m_ObjectHideFlags: 0
@@ -5391,6 +5464,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7941526012871332646, guid: 09f7ee24a71907a429d236783c6835d8, type: 3}
     - target: {fileID: 4328449501056524002, guid: 20e11bf260332044b8391d9cd92b7c07, type: 3}
+      propertyPath: canInteract
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328449501056524002, guid: 20e11bf260332044b8391d9cd92b7c07, type: 3}
+      propertyPath: interactPrompt
+      value: Interact to extract
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328449501056524002, guid: 20e11bf260332044b8391d9cd92b7c07, type: 3}
       propertyPath: ScoreManagerObject
       value: 
       objectReference: {fileID: 1114301509}
@@ -5437,6 +5518,10 @@ PrefabInstance:
     - target: {fileID: 7686437577316576216, guid: 20e11bf260332044b8391d9cd92b7c07, type: 3}
       propertyPath: m_Name
       value: ExtracttionCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686437577316576216, guid: 20e11bf260332044b8391d9cd92b7c07, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7280,3 +7365,4 @@ SceneRoots:
   - {fileID: 1541946740}
   - {fileID: 397514875242982331}
   - {fileID: 1714506268}
+  - {fileID: 563913657}
