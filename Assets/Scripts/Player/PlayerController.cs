@@ -168,15 +168,14 @@ public class PlayerController : MonoBehaviour
         {
             case "NEUTRAL":
                 currentState = state_Neutral;
-                gmScript.IncreasePlayersAliveAmount();
                 break;
             case "DEATH":
                 currentState = state_Death;
-                gmScript.DecreasePlayersAliveAmount();
+                //gmScript.DecreasePlayersAliveAmount();
                 break;
             case "EXTRACTED":
                 currentState = state_Extracted;
-                gmScript.IncreaseExtractedPlayerAmount();
+                //gmScript.IncreaseExtractedPlayerAmount();
 
                 break;
             default:

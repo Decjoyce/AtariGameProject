@@ -6,10 +6,14 @@ using UnityEngine;
 public class ExtractionScript : Interactable
 {
 
+
     public override void Interaction(PlayerInteraction player)
     {
         base.Interaction(player);
         player.controller.SwitchState("EXTRACTED");
+
+        GameManagerScript.instance.IncreaseExtractedPlayerAmount();
+        
     }
 
     //public GameObject ScoreManagerObject;

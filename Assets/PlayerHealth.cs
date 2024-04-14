@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public delegate void PlayerDied(GameObject player, int playerID);
     public static event PlayerDied OnPlayerDied;
+    
 
     PlayerController controller;
 
