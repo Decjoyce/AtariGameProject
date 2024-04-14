@@ -73,6 +73,10 @@ public class PlayerController : MonoBehaviour
     public Character_Base currentCharacter;
     public Character_TEST character_TEST = new Character_TEST();
     public Character_Captain character_Captain = new Character_Captain();
+    public Character_Engineer character_Engineer = new Character_Engineer();
+    public Character_Doctor character_Doctor = new Character_Doctor();
+    public Character_Navigator character_Navigator = new Character_Navigator();
+    //public Character_Crewmate character_Crewmate = new Character_Crewmate();
 
     private void Awake()
     {
@@ -184,6 +188,31 @@ public class PlayerController : MonoBehaviour
         }
 
         currentState.EnterState(this);
+    }
+
+    public void SwitchClass(string newCharacter)
+    {
+        switch (newCharacter)
+        {
+            case "CAPTAIN":
+                currentCharacter = character_Captain;
+                break;
+            case "ENGINEER":
+                currentCharacter = character_Engineer;
+                break;
+            case "DOCTOR":
+                currentCharacter = character_Doctor;
+                break;
+            case "NAVIGATOR":
+                currentCharacter = character_Navigator;
+                break;
+            case "CREWMATE":
+                //currentCharacter = character_Crewmate;
+                break;
+            default:
+                Debug.LogError("INVALID STATE: " + newCharacter);
+                break;
+        }
     }
 
     public Coroutine HelpStartCoroutine(IEnumerator coroutineMethod)
