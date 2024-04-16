@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         attack = GetComponent<PlayerAttack>();
         health = GetComponent<PlayerHealth>();
 
-        gmScript = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManagerScript>();
+        //gmScript = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManagerScript>();
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
 
