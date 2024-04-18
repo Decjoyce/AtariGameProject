@@ -3437,6 +3437,7 @@ GameObject:
   - component: {fileID: 8124268400481534176}
   - component: {fileID: 692459879546678373}
   - component: {fileID: 1039390318920594594}
+  - component: {fileID: -9040359900136410095}
   m_Layer: 6
   m_Name: TESTPlayerPrefab
   m_TagString: Player
@@ -3695,11 +3696,13 @@ MonoBehaviour:
   crouchGraphics: {fileID: 6561160724514354392}
   currentHeight: 1.5
   crouchHeight: 0.8
+  crouchHeightHandPos: 0
   normalHeight: 2
   anim: {fileID: 911242658729760843}
   animFlipper: 1
   debuggingMode: 0
   oldLook: 0
+  extractedCheck: 0
   faceLeft: 0
 --- !u!114 &4591346196035371541
 MonoBehaviour:
@@ -3715,9 +3718,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 5998401415215566978}
   handPos: {fileID: 828830442127978747}
+  gunPos: {fileID: 0}
+  rightHandPos: {fileID: 0}
+  rightHandHint: {fileID: 0}
+  leftHandPos: {fileID: 0}
+  leftHandHint: {fileID: 0}
+  rightHandHints: []
+  leftHandHints: []
   pivot: {fileID: 7386889648952322511}
+  handPivot: {fileID: 0}
   defaultWeapon: {fileID: 11400000, guid: 9af29d2fd0ef339489d8e0b5b57943b3, type: 2}
   fists: {fileID: 11400000, guid: f2f1e677da7b57a4288db014c6e99b7f, type: 2}
+  doc_gun: {fileID: 0}
+  doc_maxammo: 0
+  doc_range: 0
+  doc_healamount: 0
+  doc_firerate: 0
+  doc_firepoint: {fileID: 0}
+  doc_ignorelayers:
+    serializedVersion: 2
+    m_Bits: 0
+  doc_beamgraphics: {fileID: 0}
+  doc_ammographics: {fileID: 0}
   ammoColorGradient:
     serializedVersion: 2
     key0: {r: 0, g: 1, b: 0, a: 1}
@@ -3765,6 +3787,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   attack: {fileID: 0}
   health: {fileID: 0}
+  isEngineer: 0
   interactionText: {fileID: 1678939696182126160}
   findInteractionDelay: 0.2
 --- !u!114 &3282219436488019490
@@ -3960,6 +3983,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-9040359900136410095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941526012871332646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55b313676ed5f94ca113d63632b5666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  proficiencyIntensity: 0
 --- !u!1 &7983693468685072590
 GameObject:
   m_ObjectHideFlags: 0

@@ -360,6 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 1
+  engineerDoor: 0
   doorOffset: 0
   sign: {fileID: 517051190}
   openMat: {fileID: 2100000, guid: 8f2354ecacf808e4da9bde01ecbde17e, type: 2}
@@ -1026,6 +1027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 1
+  engineerDoor: 0
   doorOffset: 0
   sign: {fileID: 910436063}
   openMat: {fileID: 2100000, guid: 8f2354ecacf808e4da9bde01ecbde17e, type: 2}
@@ -1951,7 +1953,7 @@ GameObject:
   - component: {fileID: 438405170}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: Game Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7782,6 +7784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 0
+  engineerDoor: 0
   doorOffset: 0
   sign: {fileID: 0}
   openMat: {fileID: 0}

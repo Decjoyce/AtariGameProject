@@ -5,6 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [SerializeField] bool locked;
+    [SerializeField] bool engineerDoor;
     [SerializeField] float doorOffset;
     [SerializeField] Renderer sign;
     [SerializeField] Material openMat;
@@ -54,9 +55,31 @@ public class Door : MonoBehaviour
 
     public void UnlockDoor()
     {
-        locked = false;
-        sign.material = openMat;
-        if (pplAtDoor > 0)
-            OpenDoor();
+        if(engineerDoor == false)
+        {
+            locked = false;
+            sign.material = openMat;
+            if (pplAtDoor > 0)
+                OpenDoor();
+        }
+        else
+        {
+           void OnTriggerEnter(Collider other) 
+            {
+                if(other.CompareTag("Player"))
+                {
+                    other.GetComponent<Character_Engineer>();
+                    locked = false;
+                    sign.material = openMat;
+                    if(pplAtDoor > 0)
+                        OpenDoor();
+                }
+            }
+        }
+    }
+
+    public void UnlockEngineerDoor()
+    {
+
     }
 }

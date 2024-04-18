@@ -4,7 +4,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
-
+public struct PlayerStats
+{
+    public float moveMod;
+    public float jumpPowerMod;
+    public float weaponSpreadMod;
+    public float hackSpeedMod;
+}
 public class PlayerController : MonoBehaviour
 {
     [System.NonSerialized] public int playerNum;
@@ -20,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public CapsuleCollider col;
     public Canvas canvas;
     GameManagerScript gmScript;
+    public PlayerStats playerStats;
+    public GameObject player;
 
     public Transform pivot;
     public Transform graphicsPivot;
@@ -83,10 +91,22 @@ public class PlayerController : MonoBehaviour
         interaction = GetComponent<PlayerInteraction>();
         attack = GetComponent<PlayerAttack>();
         health = GetComponent<PlayerHealth>();
+        PlayerStats playerStats = new PlayerStats()
+        {
+            jumpPowerMod = 1.3f,
+            moveMod = 1.2f,
+            hackSpeedMod = 1.25f,
+            weaponSpreadMod = 0.85f
+
+        };
 
         //gmScript = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManagerScript>();
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
+        CheckMoveProf();
+        Debug.Log(playerStats.moveMod);
+
+        
 
         NotExtracted();
     }
@@ -100,7 +120,7 @@ public class PlayerController : MonoBehaviour
         currentState = state_Neutral;
         currentState.EnterState(this);
 
-        currentCharacter = character_Captain;
+        currentCharacter = character_Engineer;
     }
 
     private void Update()
@@ -258,5 +278,10 @@ public class PlayerController : MonoBehaviour
     public void NotExtracted()
     {
         extractedCheck = false;
+    }
+
+    void CheckMoveProf()
+    {
+        playerStats.moveMod += 1.2f;
     }
 }

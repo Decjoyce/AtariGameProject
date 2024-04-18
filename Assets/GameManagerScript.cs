@@ -32,8 +32,7 @@ public class GameManagerScript : MonoBehaviour
 
     void StartRound()
     {
-        playersAlive = PlayerManager.instance.players.Count;
-        
+        playersAlive = PlayerManager.instance.players.Count - playersDead;
     }
 
     // Update is called once per frame
@@ -45,21 +44,20 @@ public class GameManagerScript : MonoBehaviour
         }
         if (playersAlive < 1 && playersExtracted < 1) 
         {
-            Debug.Log("Everyone is dead");
+            //Debug.Log("Everyone is dead");
         }
         if(playersAlive < 1 && playersExtracted > 0)
         {
-            Debug.Log("Part of the crew escaped");
+            //Debug.Log("Part of the crew escaped");
         }
         if (playersAlive > 0 && playersExtracted >0)
         {
-            Debug.Log("Waiting on other players to extract");
+            //Debug.Log("Waiting on other players to extract");
         }
         if(playersDead < 1 && playersExtracted > 0 && playersAlive < 1)
         {
-            Debug.Log("Everyone escaped");
+           // Debug.Log("Everyone escaped");
             SceneManager.LoadScene(0);
-
         }
     }
     void OnEnable()

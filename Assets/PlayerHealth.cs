@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     
 
     PlayerController controller;
+    public PlayerStats playerStats;
 
     [SerializeField] float maxHealth;
     private float currentHealth;

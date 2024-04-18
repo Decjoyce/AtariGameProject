@@ -360,6 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 1
+  engineerDoor: 0
   doorOffset: 0
   sign: {fileID: 517051190}
   openMat: {fileID: 2100000, guid: 8f2354ecacf808e4da9bde01ecbde17e, type: 2}
@@ -825,6 +826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 1
+  engineerDoor: 0
   doorOffset: 0
   sign: {fileID: 910436063}
   openMat: {fileID: 2100000, guid: 8f2354ecacf808e4da9bde01ecbde17e, type: 2}
@@ -5495,7 +5497,7 @@ PrefabInstance:
       objectReference: {fileID: 1114301509}
     - target: {fileID: 4655164123026080480, guid: 20e11bf260332044b8391d9cd92b7c07, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.957734
+      value: 7.05
       objectReference: {fileID: 0}
     - target: {fileID: 4655164123026080480, guid: 20e11bf260332044b8391d9cd92b7c07, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6393,6 +6395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 0
+  engineerDoor: 0
   doorOffset: 0
   sign: {fileID: 0}
   openMat: {fileID: 0}
