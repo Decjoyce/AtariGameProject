@@ -18,6 +18,11 @@ public class PlayerState_Death : PlayerState_Base
     {
         controller.anim.SetBool("isDead", false);
         controller.anim.SetLayerWeight(1, 1f);
+
+        controller.col.enabled = true;
+        controller.rb.constraints = RigidbodyConstraints.None;
+        controller.rb.constraints |= RigidbodyConstraints.FreezeRotation;
+        controller.rb.constraints |= RigidbodyConstraints.FreezePositionZ;
     }
 
     public override void FrameUpdate(PlayerController controller)

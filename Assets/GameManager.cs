@@ -59,20 +59,26 @@ public class GameManager : MonoBehaviour
 
     public void StartRun()
     {
-        GenerateCharactersForAll();
-        pm.DisableJoining();
-        playersLives = new int[pm.players.Count];
-        for(int i = 0; i < playersLives.Length; i++)
+        if(pm.players.Count > 0)
         {
-            playersLives[i] = 5;
+            GenerateCharactersForAll();
+            pm.DisableJoining();
+            playersLives = new int[pm.players.Count];
+            for(int i = 0; i < playersLives.Length; i++)
+            {
+                playersLives[i] = 5;
+            }
+            StartRound();
         }
-        StartRound();
+        else
+        {
+            Debug.Log("NOT ENOUGH PLAYERS TO BEGIN. PRESS START TO JOIN!!!!!!!");
+        }
     }
 
     void EndRun()
     {
         roundsPlayed = 0;
-        //pm.ClearPlayers();
         Destroy(transform.parent.gameObject);
         SceneManager.LoadScene(0);
     }
@@ -84,7 +90,8 @@ public class GameManager : MonoBehaviour
             int ranClass = Random.Range(0, 5);
             pm.players[i].GetComponent<PlayerController>().SetUpCharacter(generatedCharacters[i][ranClass], ranClass);
         }
-
+        playersDead.Clear();
+        playersExtracted.Clear();
         SceneManager.LoadScene(1);
         pm.ResetPlayers();
     }
@@ -141,17 +148,18 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDied(GameObject player, int playerNum)
     {
-        playersLives[playerNum]--;
-        generatedCharacters[playerNum][player.GetComponent<PlayerController>().charNum].isDead = true;
+        playersLives[playerNum - 1]--;
+        generatedCharacters[playerNum - 1][player.GetComponent<PlayerController>().charNum].isDead = true;
+        playersDead.Add(player);
         CheckIfAllDead();
     }
 
     void CheckIfAllDead()
     {
-
         if(playersDead.Count == pm.players.Count - playersExtracted.Count)
         {
             EndRound();
+            Debug.Log("DeeDee Yorker");
         }
     }
 

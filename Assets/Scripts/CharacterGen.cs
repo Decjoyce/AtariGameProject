@@ -8,6 +8,7 @@ public struct Character
     //Non Generated Stuff
     public bool isDead;
     public Weapon weapon;
+    public float health;
 
     //Generated Stuff
     public string characterClass;

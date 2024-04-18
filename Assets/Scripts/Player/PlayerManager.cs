@@ -45,7 +45,7 @@ public class PlayerManager : MonoBehaviour
 
     public void DisableJoining()
     {
-        playerInputManager.EnableJoining();
+        playerInputManager.DisableJoining();
     }
 
     public void AddPlayer(PlayerInput player)
@@ -82,7 +82,6 @@ public class PlayerManager : MonoBehaviour
         {
             players[i].transform.position = spawnPoints[i].position;
             PlayerController pc = players[i].GetComponent<PlayerController>();
-            //pc.interaction.RemoveeAllInteractions();
             pc.SwitchState("NEUTRAL");
         }
     }
