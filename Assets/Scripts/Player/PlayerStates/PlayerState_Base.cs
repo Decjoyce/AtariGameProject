@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum PlayerStates
+{
+    frozen,
+    Neutral,
+    Extracted,
+    Death,
+}
+
 public abstract class PlayerState_Base
 {
     public abstract void EnterState(PlayerController controller);

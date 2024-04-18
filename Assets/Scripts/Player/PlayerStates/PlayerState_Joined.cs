@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerState_Extracted : PlayerState_Base
+public class PlayerState_Joined : PlayerState_Base
 {
     public override void EnterState(PlayerController controller)
     {
-       controller.gameObject.SetActive(false);
-        // controller.SwitchState("EXTRACTED");
-        //Call this on the extract event not actually here
+
     }
     public override void ExitState(PlayerController controller)
     {
-
+        controller.col.enabled = true;
+        controller.rb.constraints = RigidbodyConstraints.None;
+        controller.rb.constraints |= RigidbodyConstraints.FreezeRotation;
+        controller.rb.constraints |= RigidbodyConstraints.FreezePositionZ;
     }
 
     public override void FrameUpdate(PlayerController controller)
@@ -63,14 +64,7 @@ public class PlayerState_Extracted : PlayerState_Base
 
     public override void OnAction(PlayerController controller, InputAction.CallbackContext ctx)
     {
-        if(controller.debuggingMode && ctx.performed)
-        {
-            controller.health.Heal(100000);
-            controller.SwitchState("NEUTRAL");
-            controller.col.enabled = true;
-            controller.rb.constraints &= ~RigidbodyConstraints.FreezePositionX;
-            controller.rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-        }
+
     }
 
     public override void OnInteract(PlayerController controller, InputAction.CallbackContext ctx)

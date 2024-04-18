@@ -91,6 +91,12 @@ public class PlayerInteraction : MonoBehaviour
         SetInteractionText();
     }
 
+    public void RemoveeAllInteractions()
+    {
+        availableInteractions.Clear();
+        SetInteractionText();
+    }
+
     public Interactable FindClosestInteractable()
     {
         float closestInt = 50f;
@@ -134,7 +140,8 @@ public class PlayerInteraction : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(findInteractionDelay);
-            SetInteractionText();
+            if(canInteract)
+                SetInteractionText();
         }
     }
 

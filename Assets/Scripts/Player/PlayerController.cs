@@ -19,10 +19,14 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public CapsuleCollider col;
     public Canvas canvas;
-    GameManagerScript gmScript;
+    //GameManagerScript gmScript;
 
     public Transform pivot;
     public Transform graphicsPivot;
+
+    [Header("Character")]
+    public int charNum;
+    public Character character;
 
     [Header("Layer")]
     public float currentLayer;
@@ -65,7 +69,9 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public bool faceLeft = true;
 
+    public PlayerStates playerState;
     PlayerState_Base currentState;
+    public PlayerState_Joined state_Joined = new PlayerState_Joined();
     public PlayerState_Neutral state_Neutral = new PlayerState_Neutral();
     public PlayerState_Death state_Death = new PlayerState_Death();
     public PlayerState_Extracted state_Extracted = new PlayerState_Extracted();
@@ -97,7 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         checkObstacleSize = new(0.5f, 2f, layerOffset);
 
-        currentState = state_Neutral;
+        currentState = state_Joined;
         currentState.EnterState(this);
 
         currentCharacter = character_Captain;
@@ -172,13 +178,16 @@ public class PlayerController : MonoBehaviour
         {
             case "NEUTRAL":
                 currentState = state_Neutral;
+                playerState = PlayerStates.Neutral;
                 break;
             case "DEATH":
                 currentState = state_Death;
+                playerState = PlayerStates.Death;
                 //gmScript.DecreasePlayersAliveAmount();
                 break;
             case "EXTRACTED":
                 currentState = state_Extracted;
+                playerState = PlayerStates.Extracted;
                 //gmScript.IncreaseExtractedPlayerAmount();
 
                 break;
@@ -213,6 +222,13 @@ public class PlayerController : MonoBehaviour
                 Debug.LogError("INVALID STATE: " + newCharacter);
                 break;
         }
+    }
+
+    public void SetUpCharacter(Character newChar, int newCharNum)
+    {
+        charNum = newCharNum;
+        character = newChar;
+        SwitchClass(character.characterClass);
     }
 
     public Coroutine HelpStartCoroutine(IEnumerator coroutineMethod)

@@ -5,13 +5,11 @@ using UnityEngine;
 public class ItemPickup : Interactable
 {
     public Item item;
-    ScoreManager SM;
     public float sheetMetalWorth = 25f;
 
     private void Start()
     {
         interactPrompt = "Pick up " + item.itemName;
-        SM = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
         Instantiate(item.graphics, transform.GetChild(0));
     }
 
@@ -19,7 +17,7 @@ public class ItemPickup : Interactable
     {
         base.Interaction(player);
         player.AddItemToInventory(item);
-        SM.IncreaseScore(sheetMetalWorth);
+        ScoreManager.instance.IncreaseScore(sheetMetalWorth);
         Destroy(gameObject);
 
     }

@@ -8,7 +8,6 @@ public class RoomManager : MonoBehaviour
     private Dictionary<int, int> playerRooms = new Dictionary<int, int>();
 
     [SerializeField] RoomTrigger[] rooms; //StartRoom should always be at index 0!!!!!
-    [SerializeField] Camera[] playerCams;
 
     public delegate void RoomEntered(GameObject player, int roomID);
     public delegate void RoomExited(GameObject player, int roomID);
@@ -46,7 +45,7 @@ public class RoomManager : MonoBehaviour
     public void ChangeRoom(GameObject player, int playerNum, int roomID)
     {
         playerRooms[playerNum] = roomID;
-        playerCams[playerNum].transform.position = rooms[roomID].camPos.position;
+        PlayerManager.instance.playerCams[playerNum - 1].transform.position = rooms[roomID].camPos.position;
         OnEnter(player, roomID);
     }
 

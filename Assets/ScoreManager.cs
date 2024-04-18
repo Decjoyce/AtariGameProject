@@ -6,52 +6,46 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+    #region singlton
+    public static ScoreManager instance;
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("More than one <b>ScoreManager</b> has been found");
+            return;
+        }
+        instance = this;
+    }
+    #endregion 
+
     public Image quotaBar;
-    public float quotaAmount = 0f;
-    public float totalAmount = 300f;
+    public float currentScore = 0f;
+    public float quotaAmount = 300f;
 
     // Update is called once per frame
     void Update()
-    { /*
-        if (quotaAmount > 300)
+    {
+        if (Input.GetKeyUp(KeyCode.KeypadEnter))
         {
-            SceneManager.LoadScene("JamesScene", LoadScene.Additive);
-        } */
-        if(Input.GetKeyUp(KeyCode.KeypadEnter))
-            {
             IncreaseScore(30);
-            }
+        }
     }
 
     public void IncreaseScore(float scrapWorth)
     {
-        quotaAmount += scrapWorth;
-        scrapWorth = Mathf.Clamp(scrapWorth, 0, totalAmount);
-        quotaBar.fillAmount = quotaAmount / totalAmount;
+        currentScore += scrapWorth;
+        currentScore = Mathf.Clamp(currentScore, 0, quotaAmount);
+        //quotaBar.fillAmount = currentScore / currentScore;
     }
 
-    public void QuotaCheck()
+    public void GetNewQuota()
     {
-        if(quotaAmount < totalAmount)
-        {
-            DidNotMeetQuota();
-        }
-
-        else if (quotaAmount >= totalAmount)
-        {
-            QuotaMade();
-        }
+        currentScore = 0;
     }
 
-    public void DidNotMeetQuota()
+    public bool QuotaCheck()
     {
-        SceneManager.LoadScene(5, LoadSceneMode.Single);
-        Debug.Log("Quota Not Met");
-    }
-
-   public  void QuotaMade()
-    {
-        SceneManager.LoadScene(4, LoadSceneMode.Single);
-        Debug.Log("Quota Met");
+        return currentScore == quotaAmount;
     }
 }
