@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
     public Character_Engineer character_Engineer = new Character_Engineer();
     public Character_Doctor character_Doctor = new Character_Doctor();
     public Character_Navigator character_Navigator = new Character_Navigator();
-    //public Character_Crewmate character_Crewmate = new Character_Crewmate();
+    public Character_Crewmate character_Crewmate = new Character_Crewmate();
 
     private void Awake()
     {
@@ -221,7 +221,7 @@ public class PlayerController : MonoBehaviour
                 currentCharacter = character_Navigator;
                 break;
             case "CREWMATE":
-                //currentCharacter = character_Crewmate;
+                currentCharacter = character_Crewmate;
                 break;
             default:
                 Debug.LogError("INVALID STATE: " + newCharacter);
@@ -232,10 +232,18 @@ public class PlayerController : MonoBehaviour
 
     public void SetUpCharacter(Character newChar, int newCharNum)
     {
+        character.health = health.currentHealth;
+        attack.SaveCharacter(character);
+        GameManager.instance.SaveCharacter(character, playerNum, charNum);
+
         charNum = newCharNum;
         character = newChar;
         SwitchClass(character.characterClass);
         health.currentHealth = character.health;
+        if (character.weapon != null)
+            attack.PickUpWeapon(character.weapon, character.currentAmmo, character.currentReserve, false);
+        else
+            attack.UseDefaultWeapon();
     }
 
     void SetClassSkin(string nameofClass)

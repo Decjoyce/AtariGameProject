@@ -83,6 +83,8 @@ public class PlayerManager : MonoBehaviour
             players[i].transform.position = spawnPoints[i].position;
             PlayerController pc = players[i].GetComponent<PlayerController>();
             pc.SwitchState("NEUTRAL");
+            pc.health.Revive();
+            pc.health.SetHealthColor();
         }
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -61,7 +62,13 @@ public class PlayerHealth : MonoBehaviour
         OnPlayerDied(gameObject, controller.playerNum);
     }
 
-    void SetHealthColor()
+    public void Revive()
+    {
+        isDead = false;
+        SetHealthColor();
+    }
+
+    public void SetHealthColor()
     {
         foreach(SkinnedMeshRenderer mr in NEWhealthMeshes)
         {

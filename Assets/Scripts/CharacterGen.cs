@@ -3,14 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public struct Character
 {
     //Non Generated Stuff
     public bool isDead;
-    public Weapon weapon;
+    public WeaponType weapon;
+    public int currentAmmo, currentReserve;
     public float health;
 
     //Generated Stuff
+    public int dudesname;
     public string characterClass;
     //Proficiencies
     //Traits
@@ -25,6 +28,7 @@ public struct Character
         switch (ranClass)
         {
             case 0:
+                characterClass = "CAPTAIN";
                 characterClass = "CAPTAIN";
                 GameManager.instance.hasCaptain = true;
                 break;            
@@ -44,5 +48,9 @@ public struct Character
                 Debug.Log("you stupid idiot, the random range is wrong stupid idiot");
                 break;
         }
+
+        dudesname = Random.Range(-69, 70);
+
+        health = 100;
     }
 }

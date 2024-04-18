@@ -18,7 +18,7 @@ public class PlayerAttack : MonoBehaviour
     GameObject weaponMesh;
     MeshRenderer ammoGraphics; //Temp
 
-    WeaponType weapon;
+    public WeaponType weapon;
     [SerializeField] WeaponType defaultWeapon, fists;
     bool cannotDropWeapon;
     int currentAmmo, currentReserve;
@@ -89,10 +89,29 @@ public class PlayerAttack : MonoBehaviour
         SwingingAttack();
         ThrustingAttack();
     }
-
-    public void PickUpWeapon(WeaponType newWeapon, int newAmmo, int newReserve)
+    
+    public void SaveCharacter(Character car)
     {
-        DropWeapon();
+        car.weapon = weapon;
+        car.currentAmmo = currentAmmo;
+        car.currentReserve = currentReserve;
+    }
+
+    public void UseDefaultWeapon()
+    {
+        weapon = defaultWeapon;
+
+        currentAmmo = weapon.magCapacity;
+        currentReserve = weapon.reserveCapacity;
+
+        SetWeaponMesh();
+        SetGunColor();
+    }
+
+    public void PickUpWeapon(WeaponType newWeapon, int newAmmo, int newReserve, bool dropWeapon = true)
+    {
+        if(dropWeapon)
+            DropWeapon();
 
         weapon = newWeapon;
         currentAmmo = newAmmo;

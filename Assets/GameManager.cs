@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     public Character[][] generatedCharacters;
 
+    public List<List<Character>> playerCharacters = new List<List<Character>>();
+
     public int[] playersLives;
 
     /*[HideInInspector]*/ public bool hasCaptain;
@@ -85,11 +87,14 @@ public class GameManager : MonoBehaviour
 
     public void StartRound()
     {
+        //Temp
         for(int i = 0; i < pm.players.Count; i++)
         {
-            int ranClass = Random.Range(0, 5);
-            pm.players[i].GetComponent<PlayerController>().SetUpCharacter(generatedCharacters[i][ranClass], ranClass);
+            int ranClass = Random.Range(0, playerCharacters[i].Count);
+            pm.players[i].GetComponent<PlayerController>().SetUpCharacter(playerCharacters[i][ranClass], ranClass);
         }
+        //Temp
+
         playersDead.Clear();
         playersExtracted.Clear();
         SceneManager.LoadScene(1);
@@ -149,7 +154,8 @@ public class GameManager : MonoBehaviour
     public void PlayerDied(GameObject player, int playerNum)
     {
         playersLives[playerNum - 1]--;
-        generatedCharacters[playerNum - 1][player.GetComponent<PlayerController>().charNum].isDead = true;
+        //generatedCharacters[playerNum - 1][player.GetComponent<PlayerController>().charNum].isDead = true;
+        playerCharacters[0].RemoveAt(player.GetComponent<PlayerController>().charNum);
         playersDead.Add(player);
         CheckIfAllDead();
     }
@@ -180,26 +186,49 @@ public class GameManager : MonoBehaviour
     void GenerateCharactersForAll()
     {
         Debug.Log("sjkodn");
-        generatedCharacters = new Character[pm.players.Count][];
-        for (int i = 0; i < generatedCharacters.Length; i++)
+        /*        generatedCharacters = new Character[pm.players.Count][];
+                for (int i = 0; i < generatedCharacters.Length; i++)
+                {
+                    Character char1 = new Character();
+                    char1.GenerateStats(hasCaptain);
+                    Character char2 = new Character();
+                    char2.GenerateStats(hasCaptain);
+                    Character char3 = new Character();
+                    char3.GenerateStats(hasCaptain);
+                    Character char4 = new Character();
+                    char4.GenerateStats(hasCaptain);
+                    Character char5 = new Character();
+                    char5.GenerateStats(hasCaptain);
+                    generatedCharacters[i] = new Character[] { char1, char2, char3, char4, char5 };
+                }*/
+
+        for (int i = 0; i < pm.players.Count; i++)
         {
-            Character char1 = new Character();
-            char1.GenerateStats(hasCaptain);
-            Character char2 = new Character();
-            char2.GenerateStats(hasCaptain);
-            Character char3 = new Character();
-            char3.GenerateStats(hasCaptain);
-            Character char4 = new Character();
-            char4.GenerateStats(hasCaptain);
-            Character char5 = new Character();
-            char5.GenerateStats(hasCaptain);
-            generatedCharacters[i] = new Character[] { char1, char2, char3, char4, char5 };
+            List<Character> tempList = new List<Character>();
+            for (int j = 0; j < 5; j++)
+            {
+                Character tempChar = new Character();
+                tempChar.GenerateStats(hasCaptain);
+                tempList.Add(tempChar);
+            }
+            playerCharacters.Add(tempList);
         }
 
     }
 
     void GenerateCharacterForOne(int playerNum, int index)
     {
-
+        if (playerCharacters[playerNum].Count > 5)
+        {
+            Character tempChar = new Character();
+            tempChar.GenerateStats(hasCaptain);
+            playerCharacters[playerNum].Add(tempChar);
+        }
     }
+    
+    public void SaveCharacter(Character character,int playerNum, int charNum)
+    {
+        //playerCharacters[playerNum - 1][charNum] = character;
+    }
+
 }
