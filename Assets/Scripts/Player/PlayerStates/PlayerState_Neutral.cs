@@ -27,6 +27,9 @@ public class PlayerState_Neutral : PlayerState_Base
     public override void EnterState(PlayerController controller)
     {
         rb = controller.rb;
+        movementInput = 0f;
+        lookInput = Vector2.zero;
+        vel = Vector3.zero;
     }
 
     public override void ExitState(PlayerController controller)
