@@ -16,6 +16,7 @@ public class PlayerState_Neutral : PlayerState_Base
     bool isJumping;
     bool isSwitchingLanes;
     Rigidbody rb;
+    PlayerStats playerStats;
 
     float standColiderHeight = 2f;
     Vector3 standColideroffset = new(0f, 1f, 0f);
@@ -78,9 +79,10 @@ public class PlayerState_Neutral : PlayerState_Base
 
         if (movementInput > 0.1 || movementInput < -0.1)
         {
-            Vector3 vel = Vector3.right * controller.currentSpeed * movementInput * Time.fixedDeltaTime;
+            Vector3 vel = Vector3.right * controller.currentSpeed * /*playerStats.moveMod **/ movementInput * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + vel);
         }
+        Debug.Log(playerStats.moveMod);
         controller.anim.SetFloat("xMove", movementInput * controller.animFlipper);
         //Debug.Log(vel.x);
     }

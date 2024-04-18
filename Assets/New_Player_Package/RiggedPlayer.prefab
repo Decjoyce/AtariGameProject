@@ -18655,6 +18655,7 @@ MonoBehaviour:
   rb: {fileID: 8124268400481534176}
   col: {fileID: 0}
   canvas: {fileID: 8654108079530258661}
+  player: {fileID: 0}
   pivot: {fileID: 7386889648952322511}
   graphicsPivot: {fileID: 3408522813040291984}
   currentLayer: 0
