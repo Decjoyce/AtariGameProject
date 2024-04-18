@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour
     PlayerController controller;
 
     [SerializeField] float maxHealth;
-    private float currentHealth;
+    public float currentHealth;
 
     [SerializeField] MeshRenderer[] healthMeshes; //temp
     [SerializeField] SkinnedMeshRenderer[] NEWhealthMeshes; //Will replace healthMeshes eventually

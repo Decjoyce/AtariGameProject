@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour
     [Header("Character")]
     public int charNum;
     public Character character;
+    [SerializeField] GameObject skin_captain;
+    [SerializeField] GameObject skin_engineer;
+    [SerializeField] GameObject skin_doctor;
+    [SerializeField] GameObject skin_navigator;
+    [SerializeField] GameObject skin_crewmate;
 
     [Header("Layer")]
     public float currentLayer;
@@ -222,6 +227,7 @@ public class PlayerController : MonoBehaviour
                 Debug.LogError("INVALID STATE: " + newCharacter);
                 break;
         }
+        SetClassSkin(newCharacter);
     }
 
     public void SetUpCharacter(Character newChar, int newCharNum)
@@ -229,6 +235,62 @@ public class PlayerController : MonoBehaviour
         charNum = newCharNum;
         character = newChar;
         SwitchClass(character.characterClass);
+        health.currentHealth = character.health;
+    }
+
+    void SetClassSkin(string nameofClass)
+    {
+        switch (nameofClass)
+        {
+            case "CAPTAIN":
+                skin_captain.SetActive(true);
+                skin_engineer.SetActive(false);
+                skin_doctor.SetActive(false);
+                skin_navigator.SetActive(false);
+                skin_crewmate.SetActive(false);
+
+                anim = skin_captain.GetComponent<Animator>();
+                break;
+            case "ENGINEER":
+                skin_captain.SetActive(false);
+                skin_engineer.SetActive(true);
+                skin_doctor.SetActive(false);
+                skin_navigator.SetActive(false);
+                skin_crewmate.SetActive(false);
+
+                anim = skin_engineer.GetComponent<Animator>();
+                break;
+            case "DOCTOR":
+                skin_captain.SetActive(false);
+                skin_engineer.SetActive(false);
+                skin_doctor.SetActive(true);
+                skin_navigator.SetActive(false);
+                skin_crewmate.SetActive(false);
+
+                anim = skin_doctor.GetComponent<Animator>();
+                break;
+            case "NAVIGATOR":
+                skin_captain.SetActive(false);
+                skin_engineer.SetActive(false);
+                skin_doctor.SetActive(false);
+                skin_navigator.SetActive(true);
+                skin_crewmate.SetActive(false);
+
+                anim = skin_navigator.GetComponent<Animator>();
+                break;
+            case "CREWMATE":
+                skin_captain.SetActive(false);
+                skin_engineer.SetActive(false);
+                skin_doctor.SetActive(false);
+                skin_navigator.SetActive(false);
+                skin_crewmate.SetActive(true);
+
+                anim = skin_crewmate.GetComponent<Animator>();
+                break;
+            default:
+                Debug.LogError("INVALID STATE: " + nameofClass);
+                break;
+        }
     }
 
     public Coroutine HelpStartCoroutine(IEnumerator coroutineMethod)

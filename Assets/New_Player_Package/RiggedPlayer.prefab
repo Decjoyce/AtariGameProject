@@ -18658,6 +18658,11 @@ MonoBehaviour:
   pivot: {fileID: 7386889648952322511}
   graphicsPivot: {fileID: 3408522813040291984}
   charNum: 0
+  skin_captain: {fileID: 4706572021597121262}
+  skin_engineer: {fileID: 6967091344587594399}
+  skin_doctor: {fileID: 7252667789213907127}
+  skin_navigator: {fileID: 3495675185140465278}
+  skin_crewmate: {fileID: 8571824190629785273}
   currentLayer: 0
   layerOffset: 2.5
   layerLayers:
@@ -18798,6 +18803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
   healthMeshes: []
   NEWhealthMeshes:
   - {fileID: 9185149818730385763}
