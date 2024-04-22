@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public Transform graphicsPivot;
 
     [Header("Character")]
+    bool hasHadCharacter;
     public int charNum;
     public Character character;
     [SerializeField] GameObject skin_captain;
@@ -117,6 +118,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         currentState.FrameUpdate(this);
+        if (Input.GetKeyDown(KeyCode.Z))
+            attack.SaveCharacter();
     }
 
     private void FixedUpdate()
@@ -232,10 +235,6 @@ public class PlayerController : MonoBehaviour
 
     public void SetUpCharacter(Character newChar, int newCharNum)
     {
-        character.health = health.currentHealth;
-        attack.SaveCharacter(character);
-        GameManager.instance.SaveCharacter(character, playerNum, charNum);
-
         charNum = newCharNum;
         character = newChar;
         SwitchClass(character.characterClass);
@@ -244,6 +243,14 @@ public class PlayerController : MonoBehaviour
             attack.PickUpWeapon(character.weapon, character.currentAmmo, character.currentReserve, false);
         else
             attack.UseDefaultWeapon();
+        Debug.Log("Cheadle");
+    }
+
+    public void SaveCharacter()
+    {
+        character.health = health.currentHealth;
+        attack.SaveCharacter();
+            GameManager.instance.SaveCharacter(character, playerNum, charNum);
     }
 
     void SetClassSkin(string nameofClass)

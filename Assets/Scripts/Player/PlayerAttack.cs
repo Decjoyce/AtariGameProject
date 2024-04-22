@@ -90,11 +90,11 @@ public class PlayerAttack : MonoBehaviour
         ThrustingAttack();
     }
     
-    public void SaveCharacter(Character car)
+    public void SaveCharacter()
     {
-        car.weapon = weapon;
-        car.currentAmmo = currentAmmo;
-        car.currentReserve = currentReserve;
+        controller.character.weapon = weapon;
+        controller.character.currentAmmo = currentAmmo;
+        controller.character.currentReserve = currentReserve;
     }
 
     public void UseDefaultWeapon()
@@ -112,7 +112,6 @@ public class PlayerAttack : MonoBehaviour
     {
         if(dropWeapon)
             DropWeapon();
-
         weapon = newWeapon;
         currentAmmo = newAmmo;
         currentReserve = newReserve;

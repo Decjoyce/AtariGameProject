@@ -26,11 +26,10 @@ public class GameManager : MonoBehaviour
     public List<GameObject> playersDead = new List<GameObject>();
     public List<GameObject> playersExtracted = new List<GameObject>();
 
-    public Character[][] generatedCharacters;
-
     public List<List<Character>> playerCharacters = new List<List<Character>>();
+    public List<Character> testingList = new List<Character>();
 
-    public int[] playersLives;
+    [SerializeField] int numberOfLives;
 
     /*[HideInInspector]*/ public bool hasCaptain;
 
@@ -65,11 +64,6 @@ public class GameManager : MonoBehaviour
         {
             GenerateCharactersForAll();
             pm.DisableJoining();
-            playersLives = new int[pm.players.Count];
-            for(int i = 0; i < playersLives.Length; i++)
-            {
-                playersLives[i] = 5;
-            }
             StartRound();
         }
         else
@@ -103,9 +97,11 @@ public class GameManager : MonoBehaviour
 
     void EndRound()
     {
-        CheckIfLivesLeft();
+        if (!CheckIfLivesLeft())
+            return;
+
         roundsPlayed++;
-        if(roundsPlayed % 3 == 0)
+        if (roundsPlayed % 3 == 0)
         {
             if (!sm.QuotaCheck())
                 EndRun();
@@ -122,11 +118,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    #region Extraction Code
     public void ExtractPlayer(GameObject player)
     {
         if(!playersDead.Contains(player) && !playersExtracted.Contains(player))
         {
             playersExtracted.Add(player);
+            player.GetComponent<PlayerController>().SaveCharacter();
         }
         CheckIfAllExtracted();
     }
@@ -150,12 +148,14 @@ public class GameManager : MonoBehaviour
             EndRound();
         }
     }
+    #endregion
 
+    #region Death Code
     public void PlayerDied(GameObject player, int playerNum)
     {
-        playersLives[playerNum - 1]--;
         //generatedCharacters[playerNum - 1][player.GetComponent<PlayerController>().charNum].isDead = true;
-        playerCharacters[0].RemoveAt(player.GetComponent<PlayerController>().charNum);
+        Debug.Log(player.GetComponent<PlayerController>().charNum);
+        playerCharacters[playerNum - 1].RemoveAt(player.GetComponent<PlayerController>().charNum);
         playersDead.Add(player);
         CheckIfAllDead();
     }
@@ -165,53 +165,45 @@ public class GameManager : MonoBehaviour
         if(playersDead.Count == pm.players.Count - playersExtracted.Count)
         {
             EndRound();
-            Debug.Log("DeeDee Yorker");
         }
     }
 
-    void CheckIfLivesLeft()
+    bool CheckIfLivesLeft()
     {
         int playersWithNoLives = 0;
-        for(int i = 0; i < playersLives.Length; i++)
+        for(int i = 0; i < playerCharacters.Count; i++)
         {
-            if (playersLives[i] == 0)
+            if (playerCharacters[i].Count == 0)
             {
                 playersWithNoLives++;
             }
         }
-        if (playersWithNoLives == pm.players.Count)
-            EndRun();
-    }
+        Debug.Log(playersWithNoLives);
 
+        if (playersWithNoLives == pm.players.Count)
+        {
+            EndRun();
+            return false;
+        }
+        else
+            return true;
+    }
+    #endregion
+
+    #region Character Code
     void GenerateCharactersForAll()
     {
-        Debug.Log("sjkodn");
-        /*        generatedCharacters = new Character[pm.players.Count][];
-                for (int i = 0; i < generatedCharacters.Length; i++)
-                {
-                    Character char1 = new Character();
-                    char1.GenerateStats(hasCaptain);
-                    Character char2 = new Character();
-                    char2.GenerateStats(hasCaptain);
-                    Character char3 = new Character();
-                    char3.GenerateStats(hasCaptain);
-                    Character char4 = new Character();
-                    char4.GenerateStats(hasCaptain);
-                    Character char5 = new Character();
-                    char5.GenerateStats(hasCaptain);
-                    generatedCharacters[i] = new Character[] { char1, char2, char3, char4, char5 };
-                }*/
-
         for (int i = 0; i < pm.players.Count; i++)
         {
             List<Character> tempList = new List<Character>();
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < numberOfLives; j++)
             {
                 Character tempChar = new Character();
                 tempChar.GenerateStats(hasCaptain);
                 tempList.Add(tempChar);
             }
             playerCharacters.Add(tempList);
+            testingList = tempList;
         }
 
     }
@@ -228,7 +220,8 @@ public class GameManager : MonoBehaviour
     
     public void SaveCharacter(Character character,int playerNum, int charNum)
     {
-        //playerCharacters[playerNum - 1][charNum] = character;
+        playerCharacters[playerNum - 1][charNum] = character;
+        Debug.Log("Don");
     }
-
+    #endregion
 }

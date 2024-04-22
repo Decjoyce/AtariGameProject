@@ -7,6 +7,7 @@ using UnityEngine;
 public struct Character
 {
     //Non Generated Stuff
+    public bool beenUsed;
     public bool isDead;
     public WeaponType weapon;
     public int currentAmmo, currentReserve;
