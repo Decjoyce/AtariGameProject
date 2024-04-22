@@ -360,7 +360,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 1
-  engineerDoor: 0
   doorOffset: 0
   sign: {fileID: 517051190}
   openMat: {fileID: 2100000, guid: 8f2354ecacf808e4da9bde01ecbde17e, type: 2}
@@ -826,7 +825,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 1
-  engineerDoor: 0
   doorOffset: 0
   sign: {fileID: 910436063}
   openMat: {fileID: 2100000, guid: 8f2354ecacf808e4da9bde01ecbde17e, type: 2}
@@ -1516,7 +1514,7 @@ MonoBehaviour:
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 7941526012871332646, guid: 59e58b99e380332419d959a476ce6e3a, type: 3}
+  m_PlayerPrefab: {fileID: 7941526012871332646, guid: 09f7ee24a71907a429d236783c6835d8, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -1575,7 +1573,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450813849}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 657568ebe3521b847ac59a8cbb451a5c, type: 3}
   m_Name: 
@@ -6395,7 +6393,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 0
-  engineerDoor: 0
   doorOffset: 0
   sign: {fileID: 0}
   openMat: {fileID: 0}
@@ -6671,6 +6668,7 @@ MonoBehaviour:
   door: {fileID: 23813510}
   panel: {fileID: 630457232}
   unlockedMat: {fileID: 2100000, guid: 8f2354ecacf808e4da9bde01ecbde17e, type: 2}
+  engineerDoor: 1
 --- !u!136 &1987480666
 CapsuleCollider:
   m_ObjectHideFlags: 0

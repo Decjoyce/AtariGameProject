@@ -16,7 +16,7 @@ public class PlayerInteraction : MonoBehaviour
     private List<Interactable> availableInteractions = new List<Interactable>();
 
     bool canInteract;
-    [HideInInspector] public bool isEngineer;
+    public bool isEngineer;
 
     [SerializeField] TextMeshProUGUI interactionText;
 

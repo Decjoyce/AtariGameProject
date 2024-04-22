@@ -6,11 +6,38 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 public struct PlayerStats
 {
-    public float moveMod;
-    public float jumpPowerMod;
-    public float weaponSpreadMod;
-    public float hackSpeedMod;
+    public int moveMod;
+    public int jumpPowerMod;
+    public int weaponSpreadMod;
+    public int hackSpeedMod;
+
+    public void GenerateProciencies()
+    {
+        moveMod = Random.Range(-5, 5);
+        jumpPowerMod = Random.Range(-5, 5);
+        weaponSpreadMod = Random.Range(-5, 5);
+        hackSpeedMod = Random.Range(-5, 5);   
+
+        if(moveMod == 0)
+        {
+            moveMod = 1;
+        }
+        if(jumpPowerMod == 0)
+        {
+            jumpPowerMod = 1;
+        }
+        if(weaponSpreadMod == 0)
+        {
+            weaponSpreadMod = 1;
+        }
+        if(hackSpeedMod == 0)
+        {
+            hackSpeedMod= 1;
+        }
+    }
 }
+
+
 public class PlayerController : MonoBehaviour
 {
     [System.NonSerialized] public int playerNum;
@@ -91,20 +118,18 @@ public class PlayerController : MonoBehaviour
         interaction = GetComponent<PlayerInteraction>();
         attack = GetComponent<PlayerAttack>();
         health = GetComponent<PlayerHealth>();
-        PlayerStats playerStats = new PlayerStats()
-        {
-            jumpPowerMod = 1.3f,
-            moveMod = 1.2f,
-            hackSpeedMod = 1.25f,
-            weaponSpreadMod = 0.85f
 
-        };
+        currentSpeed = currentSpeed;
 
         //gmScript = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManagerScript>();
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
-        CheckMoveProf();
+        //CheckMoveProf();
+        playerStats.GenerateProciencies();
         Debug.Log(playerStats.moveMod);
+        Debug.Log(playerStats.hackSpeedMod);
+        Debug.Log(playerStats.weaponSpreadMod);
+        Debug.Log(playerStats.jumpPowerMod);
 
         
 
@@ -216,18 +241,23 @@ public class PlayerController : MonoBehaviour
         {
             case "CAPTAIN":
                 currentCharacter = character_Captain;
+                interaction.isEngineer = false;
                 break;
             case "ENGINEER":
                 currentCharacter = character_Engineer;
+                interaction.isEngineer = true;
                 break;
             case "DOCTOR":
                 currentCharacter = character_Doctor;
+                interaction.isEngineer = false;
                 break;
             case "NAVIGATOR":
                 currentCharacter = character_Navigator;
+                interaction.isEngineer = false;
                 break;
             case "CREWMATE":
                 //currentCharacter = character_Crewmate;
+                interaction.isEngineer = false;
                 break;
             default:
                 Debug.LogError("INVALID STATE: " + newCharacter);
@@ -280,8 +310,8 @@ public class PlayerController : MonoBehaviour
         extractedCheck = false;
     }
 
-    void CheckMoveProf()
+   /* void CheckMoveProf()
     {
         playerStats.moveMod += 1.2f;
-    }
+    }  */
 }

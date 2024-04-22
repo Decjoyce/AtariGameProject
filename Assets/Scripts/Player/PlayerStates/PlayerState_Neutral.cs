@@ -79,10 +79,10 @@ public class PlayerState_Neutral : PlayerState_Base
 
         if (movementInput > 0.1 || movementInput < -0.1)
         {
-            Vector3 vel = Vector3.right * controller.currentSpeed * /*playerStats.moveMod **/ movementInput * Time.fixedDeltaTime;
+            Vector3 vel = Vector3.right * (controller.currentSpeed + (0.5f * controller.playerStats.moveMod)) * movementInput * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + vel);
+            Debug.Log(controller.playerStats.moveMod);
         }
-        Debug.Log(playerStats.moveMod);
         controller.anim.SetFloat("xMove", movementInput * controller.animFlipper);
         //Debug.Log(vel.x);
     }

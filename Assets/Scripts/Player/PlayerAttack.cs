@@ -60,6 +60,9 @@ public class PlayerAttack : MonoBehaviour
 
         currentAmmo = weapon.magCapacity;
         currentReserve = weapon.reserveCapacity;
+        accurracy = accurracy * controller.playerStats.weaponSpreadMod;
+
+        Debug.Log(controller.playerStats.weaponSpreadMod);
 
         doc_currentammo = doc_maxammo;
         SetWeaponMesh();
