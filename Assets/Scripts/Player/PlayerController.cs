@@ -16,10 +16,10 @@ public struct PlayerStats
 
     public void GenerateProciencies()
     {
-        moveMod = Random.Range(-5, 5);
-        jumpPowerMod = Random.Range(-5, 5);
-        weaponSpreadMod = Random.Range(-5, 5);
-        hackSpeedMod = Random.Range(-5, 5);
+        moveMod = Random.Range(-5, 6);
+        jumpPowerMod = Random.Range(-5, 6);
+        weaponSpreadMod = Random.Range(-5, 6);
+        hackSpeedMod = Random.Range(-5, 6);
 
         if (moveMod == 0)
         {
