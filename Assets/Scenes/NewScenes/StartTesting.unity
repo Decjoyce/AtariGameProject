@@ -1068,7 +1068,8 @@ MonoBehaviour:
   playersDead: []
   playersExtracted: []
   testingList: []
-  numberOfLives: 5
+  testingList2: []
+  numberOfLives: 3
   hasCaptain: 0
 --- !u!4 &1003303217
 Transform:

@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 
 public class PlayerController : MonoBehaviour
 {
     [System.NonSerialized] public int playerNum;
+    public bool isOut;
     [System.NonSerialized] public PlayerInteraction interaction;
     [System.NonSerialized] public PlayerAttack attack;
     [System.NonSerialized] public PlayerHealth health;
@@ -65,6 +67,7 @@ public class PlayerController : MonoBehaviour
     [Header("Animation")]
     public Animator anim;
     [HideInInspector] public int animFlipper = 1;
+    public RigBuilder[] rigs;
 
     [Header("DEBUG")]
     public bool debuggingMode;
@@ -78,6 +81,7 @@ public class PlayerController : MonoBehaviour
     public PlayerStates playerState;
     PlayerState_Base currentState;
     public PlayerState_Joined state_Joined = new PlayerState_Joined();
+    public PlayerState_CharacterSelect state_CharacterSelect = new PlayerState_CharacterSelect();
     public PlayerState_Neutral state_Neutral = new PlayerState_Neutral();
     public PlayerState_Death state_Death = new PlayerState_Death();
     public PlayerState_Extracted state_Extracted = new PlayerState_Extracted();
@@ -326,6 +330,14 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    public void TurnOnIK(int layerNum, bool turnOn)
+    {
+        foreach(RigBuilder rig in rigs)
+        {
+            rig.layers[layerNum].active = turnOn;
+        }
+
+    }
 
     public void FaceDirection(bool faceLeft)
     {

@@ -32,7 +32,6 @@ public class BulldozerState_Idle : EnemyStates_Bulldozer
 {
     public override void EnterState(Enemy_Bulldozer controller)
     {
-        Debug.Log("Idle");
     }
 
     public override void ExitState(Enemy_Bulldozer controller)
@@ -87,7 +86,6 @@ public class BulldozerState_Aggro : EnemyStates_Bulldozer
         chargeDelay = controller.charge_delay;
         canCharge = true;
         controller.FaceSomething(controller.currentTarget.position);
-        Debug.Log("Aggro");
     }
 
     public override void ExitState(Enemy_Bulldozer controller)
@@ -115,7 +113,6 @@ public class BulldozerState_Aggro : EnemyStates_Bulldozer
         {
             if(controller.currentTarget.position.z == controller.transform.position.z)
             {
-                Debug.Log("oooh");
                 if(tryToFacePlayer)
                     controller.FaceSomething(controller.currentTarget.position);
 

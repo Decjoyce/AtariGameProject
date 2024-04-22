@@ -8,13 +8,14 @@ public class CharacterSelectionScript : MonoBehaviour
     public GameObject[] characters;
 
     public int selectedCharacter = 0;
-        
-        public void NextCharacter()
+
+    public void NextCharacter()
     {
         characters[selectedCharacter].SetActive(false);
         selectedCharacter = (selectedCharacter + 1) % characters.Length;
         characters[selectedCharacter].SetActive(true);
     }
+
     public void PreviousCharacter()
     {
         characters[selectedCharacter].SetActive(false);

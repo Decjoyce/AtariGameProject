@@ -18650,6 +18650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608ab4a004fe9a543b08a63ad1b43e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOut: 0
   cub: {fileID: 6458126399459215357, guid: c5d9e0baa3d1e9c46b01398fb46fafb9, type: 3}
   playerCam: {fileID: 0}
   rb: {fileID: 8124268400481534176}
@@ -18658,6 +18659,15 @@ MonoBehaviour:
   pivot: {fileID: 7386889648952322511}
   graphicsPivot: {fileID: 3408522813040291984}
   charNum: 0
+  character:
+    beenUsed: 0
+    isDead: 0
+    weapon: {fileID: 0}
+    currentAmmo: 0
+    currentReserve: 0
+    health: 0
+    dudesname: 0
+    characterClass: 
   skin_captain: {fileID: 4706572021597121262}
   skin_engineer: {fileID: 6967091344587594399}
   skin_doctor: {fileID: 7252667789213907127}
@@ -18689,6 +18699,12 @@ MonoBehaviour:
   normalHeight: 2
   anim: {fileID: 4111041633234892919}
   animFlipper: 1
+  rigs:
+  - {fileID: 6510044933200337591}
+  - {fileID: 6561568379874106411}
+  - {fileID: 1514436758083447098}
+  - {fileID: 433120447495013525}
+  - {fileID: 5389497353342833196}
   debuggingMode: 0
   oldLook: 0
   extractedCheck: 0
@@ -18727,6 +18743,7 @@ MonoBehaviour:
   - {fileID: 1692742495545652599}
   pivot: {fileID: 7386889648952322511}
   handPivot: {fileID: 203138221438536613}
+  weapon: {fileID: 0}
   defaultWeapon: {fileID: 11400000, guid: 9af29d2fd0ef339489d8e0b5b57943b3, type: 2}
   fists: {fileID: 11400000, guid: f2f1e677da7b57a4288db014c6e99b7f, type: 2}
   doc_gun: {fileID: 4339049712629319460}

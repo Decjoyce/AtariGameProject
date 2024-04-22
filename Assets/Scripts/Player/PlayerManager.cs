@@ -79,12 +79,20 @@ public class PlayerManager : MonoBehaviour
     public void ResetPlayers()
     {
         for(int i = 0; i < players.Count; i++)
-        {
-            players[i].transform.position = spawnPoints[i].position;
+        {           
             PlayerController pc = players[i].GetComponent<PlayerController>();
-            pc.SwitchState("NEUTRAL");
-            pc.health.Revive();
-            pc.health.SetHealthColor();
+            if (!pc.isOut)
+            {
+                players[i].transform.position = spawnPoints[i].position;
+                pc.SwitchState("NEUTRAL");
+                pc.health.Revive();
+                pc.health.SetHealthColor();
+            }
+            else
+            {
+                players[i].transform.position = Vector3.one * 420f;
+                pc.SwitchState("DEATH");
+            }
         }
     }
 

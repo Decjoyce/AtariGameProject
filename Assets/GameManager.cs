@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -22,12 +23,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] ScoreManager sm;
     [SerializeField] PlayerManager pm;
 
-    public List<GameObject> playersPlaying = new List<GameObject>();
+    public List<PlayerInput> playersPlaying = new List<PlayerInput>();
     public List<GameObject> playersDead = new List<GameObject>();
     public List<GameObject> playersExtracted = new List<GameObject>();
 
     public List<List<Character>> playerCharacters = new List<List<Character>>();
     public List<Character> testingList = new List<Character>();
+    public List<Character> testingList2 = new List<Character>();
 
     [SerializeField] int numberOfLives;
 
@@ -64,7 +66,8 @@ public class GameManager : MonoBehaviour
         {
             GenerateCharactersForAll();
             pm.DisableJoining();
-            StartRound();
+            playersPlaying = pm.players.ToList();
+            SceneManager.LoadScene(2);
         }
         else
         {
@@ -82,10 +85,13 @@ public class GameManager : MonoBehaviour
     public void StartRound()
     {
         //Temp
-        for(int i = 0; i < pm.players.Count; i++)
+        for(int i = 0; i < playersPlaying.Count; i++)
         {
-            int ranClass = Random.Range(0, playerCharacters[i].Count);
-            pm.players[i].GetComponent<PlayerController>().SetUpCharacter(playerCharacters[i][ranClass], ranClass);
+            if (playerCharacters[i].Count > 0)
+            {
+                int ranClass = Random.Range(0, playerCharacters[i].Count);
+                playersPlaying[i].GetComponent<PlayerController>().SetUpCharacter(playerCharacters[i][ranClass], ranClass);
+            }
         }
         //Temp
 
@@ -97,24 +103,33 @@ public class GameManager : MonoBehaviour
 
     void EndRound()
     {
+        //Check if players stills have characters to play as
         if (!CheckIfLivesLeft())
             return;
 
         roundsPlayed++;
-        if (roundsPlayed % 3 == 0)
+
+        //Checks if its been 3 rounds
+        if (roundsPlayed % 3 == 0) //if it has been 3 rounds
         {
+            //Checks if quota was reached 
             if (!sm.QuotaCheck())
-                EndRun();
+            {
+                Debug.Log("Did not make quota");
+                EndRun(); //Ends the the run
+            }
+
             else
             {
+                //Gets new quota, generates a new character for each player, loads the character select scene
                 sm.GetNewQuota();
                 //GenerateNewCharacter();
                 SceneManager.LoadScene(2);
             }
         }
-        else
+        else //if it hasnt
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(2); //loads the character select scene
         }
     }
 
@@ -131,11 +146,11 @@ public class GameManager : MonoBehaviour
 
     public void ExtractAllPlayers()
     {
-        foreach(GameObject player in playersPlaying)
+        foreach(PlayerInput player in playersPlaying)
         {
-            if (!playersDead.Contains(player) && !playersExtracted.Contains(player))
+            if (!playersDead.Contains(player.gameObject) && !playersExtracted.Contains(player.gameObject))
             {
-                playersExtracted.Add(player);
+                playersExtracted.Add(player.gameObject);
             }
         }
         EndRound();
@@ -154,7 +169,7 @@ public class GameManager : MonoBehaviour
     public void PlayerDied(GameObject player, int playerNum)
     {
         //generatedCharacters[playerNum - 1][player.GetComponent<PlayerController>().charNum].isDead = true;
-        Debug.Log(player.GetComponent<PlayerController>().charNum);
+        Debug.Log(playerCharacters[playerNum - 1].Count);
         playerCharacters[playerNum - 1].RemoveAt(player.GetComponent<PlayerController>().charNum);
         playersDead.Add(player);
         CheckIfAllDead();
@@ -162,7 +177,7 @@ public class GameManager : MonoBehaviour
 
     void CheckIfAllDead()
     {
-        if(playersDead.Count == pm.players.Count - playersExtracted.Count)
+        if(playersDead.Count == playersPlaying.Count - playersExtracted.Count)
         {
             EndRound();
         }
@@ -178,7 +193,17 @@ public class GameManager : MonoBehaviour
                 playersWithNoLives++;
             }
         }
-        Debug.Log(playersWithNoLives);
+
+        for (int i = 0; i < playersPlaying.Count; i++)
+        {
+            if (playerCharacters[i].Count == 0)
+            {
+                playersPlaying[i].GetComponent<PlayerController>().isOut = true;
+                playersPlaying.RemoveAt(i);
+            }
+        }
+
+       // Debug.Log(playersWithNoLives);
 
         if (playersWithNoLives == pm.players.Count)
         {
@@ -191,6 +216,12 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Character Code
+
+    public void SelectCharacter()
+    {
+
+    }
+
     void GenerateCharactersForAll()
     {
         for (int i = 0; i < pm.players.Count; i++)
@@ -203,7 +234,10 @@ public class GameManager : MonoBehaviour
                 tempList.Add(tempChar);
             }
             playerCharacters.Add(tempList);
-            testingList = tempList;
+            if (i == 0)
+                testingList = tempList;
+            else
+                testingList2 = tempList;
         }
 
     }

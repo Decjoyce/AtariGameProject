@@ -177,7 +177,6 @@ public class Enemy_SecurityBot : MonoBehaviour
     IEnumerator RandomStateDelay()
     {
         switchDelay = Random.Range(2f, 20f);
-        Debug.Log(switchDelay);
         yield return new WaitForSeconds(switchDelay);
         GetRandomState();
         GetRandomHeight();
@@ -324,12 +323,10 @@ public class Enemy_SecurityBot : MonoBehaviour
                 }
             }
             currentTarget = temp_ClostestInteractable;
-            Debug.Log("Got Next Target: " + currentTarget.name);
         }
         else
         {
             SwitchState("IDLE");
-            Debug.Log("BackToIdle");
         }
     }
 }

@@ -2,29 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.TextCore.Text;
 
-public class PlayerState_Death : PlayerState_Base
+public class PlayerState_CharacterSelect : PlayerState_Base
 {
+    int selectedCharacter;
+
+
     public override void EnterState(PlayerController controller)
     {
-        controller.attack.DropWeapon(true);
-        controller.col.enabled = false;
-        controller.rb.constraints = RigidbodyConstraints.FreezeAll;
-        controller.interaction.ClearInventory();
-        controller.anim.SetBool("isDead", true);
-        controller.anim.SetLayerWeight(1, 0f);
-        controller.TurnOnIK(1, false);
+        selectedCharacter = controller.charNum;
     }
     public override void ExitState(PlayerController controller)
     {
-        controller.anim.SetBool("isDead", false);
-        controller.anim.SetLayerWeight(1, 1f);
-
         controller.col.enabled = true;
         controller.rb.constraints = RigidbodyConstraints.None;
         controller.rb.constraints |= RigidbodyConstraints.FreezeRotation;
         controller.rb.constraints |= RigidbodyConstraints.FreezePositionZ;
-        controller.TurnOnIK(1, true);
     }
 
     public override void FrameUpdate(PlayerController controller)
@@ -59,7 +53,15 @@ public class PlayerState_Death : PlayerState_Base
 
     public override void OnJump(PlayerController controller, InputAction.CallbackContext ctx)
     {
-
+        if (ctx.performed)
+        {
+            selectedCharacter--;
+            if (selectedCharacter < 0)
+            {
+                selectedCharacter = GameManager.instance.playerCharacters[controller.playerNum - 1].Count - 1;
+            }
+            FakeMenuManager.instance.ChangeDisplayCard(controller.playerNum, selectedCharacter);
+        }
     }
 
     public override void OnCrouch(PlayerController controller, InputAction.CallbackContext ctx)
@@ -69,19 +71,16 @@ public class PlayerState_Death : PlayerState_Base
 
     public override void OnShoot(PlayerController controller, InputAction.CallbackContext ctx)
     {
-
+        if (ctx.performed)
+        {
+            selectedCharacter = (selectedCharacter + 1) % GameManager.instance.playerCharacters[controller.playerNum - 1].Count;
+            FakeMenuManager.instance.ChangeDisplayCard(controller.playerNum, selectedCharacter);
+        }
     }
 
     public override void OnAction(PlayerController controller, InputAction.CallbackContext ctx)
     {
-        if(controller.debuggingMode && ctx.performed)
-        {
-            controller.health.Heal(100000);
-            controller.SwitchState("NEUTRAL");
-            controller.col.enabled = true;
-            controller.rb.constraints &= ~RigidbodyConstraints.FreezePositionX;
-            controller.rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-        }
+
     }
 
     public override void OnInteract(PlayerController controller, InputAction.CallbackContext ctx)

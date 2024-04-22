@@ -153,12 +153,10 @@ public class Enemy_Turret : MonoBehaviour
                 }
             }
             currentTarget = temp_ClostestInteractable;
-            Debug.Log("Got Next Target: " + currentTarget.name);
         }
         else
         {
             SwitchState("IDLE");
-            Debug.Log("BackToIdle");
         }
     }
 
