@@ -18674,18 +18674,18 @@ MonoBehaviour:
   skin_navigator: {fileID: 3495675185140465278}
   skin_crewmate: {fileID: 8571824190629785273}
   currentLayer: 0
-  layerOffset: 0
+  layerOffset: 2.5
   layerLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 9728
   checkObstacleSize: {x: 0, y: 0, z: 0}
   currentSpeed: 5
   walkSpeed: 5
   crouchSpeed: 2
   lerpedAimSpeed: 35
-  switchLaneSpeed: 15
-  jumpHeight: 3
-  gravityScale: 9.1
+  switchLaneSpeed: 25
+  jumpHeight: 20
+  gravityScale: 8
   checkOffset: 0.1
   isGrounded: 0
   groundLayers:
@@ -18693,10 +18693,10 @@ MonoBehaviour:
     m_Bits: 256
   standGraphics: {fileID: 0}
   crouchGraphics: {fileID: 0}
-  currentHeight: 0
-  crouchHeight: 0
-  crouchHeightHandPos: 0
-  normalHeight: 0
+  currentHeight: 2
+  crouchHeight: 1.25
+  crouchHeightHandPos: 0.3
+  normalHeight: 2
   anim: {fileID: 2088234441793808942}
   animFlipper: 1
   rigs:
@@ -18744,30 +18744,30 @@ MonoBehaviour:
   defaultWeapon: {fileID: 11400000, guid: 9af29d2fd0ef339489d8e0b5b57943b3, type: 2}
   fists: {fileID: 11400000, guid: f2f1e677da7b57a4288db014c6e99b7f, type: 2}
   doc_gun: {fileID: 4339049712629319460}
-  doc_maxammo: 0
-  doc_range: 0
-  doc_healamount: 0
-  doc_firerate: 0
+  doc_maxammo: 228
+  doc_range: 7
+  doc_healamount: 0.44
+  doc_firerate: 0.066
   doc_firepoint: {fileID: 3093647701897747696}
   doc_ignorelayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 79681
   doc_beamgraphics: {fileID: 8141648467944843002}
   doc_ammographics: {fileID: 4922668523180978975}
   ammoColorGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 0, g: 1, b: 0, a: 1}
+    key1: {r: 1, g: 1, b: 0, a: 1}
+    key2: {r: 1, g: 0.401685, b: 0, a: 0}
+    key3: {r: 1, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
+    ctime1: 19661
+    ctime2: 52428
+    ctime3: 65535
     ctime4: 0
     ctime5: 0
     ctime6: 0
@@ -18780,9 +18780,9 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 0
+    m_Mode: 2
     m_ColorSpace: -1
-    m_NumColorKeys: 2
+    m_NumColorKeys: 4
     m_NumAlphaKeys: 2
   droppedWeaponPrefab: {fileID: 2982337102470626192, guid: e72ade0b948578d48a314d9264f6cf3d, type: 3}
   accurracy: 2
@@ -18815,18 +18815,18 @@ MonoBehaviour:
   healthColorGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
+    key1: {r: 0, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 1, a: 0}
+    key3: {r: 1, g: 0, b: 1, a: 0}
+    key4: {r: 1, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
+    ctime1: 19815
+    ctime2: 41094
+    ctime3: 52428
+    ctime4: 65535
     ctime5: 0
     ctime6: 0
     ctime7: 0
@@ -18840,7 +18840,7 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_ColorSpace: -1
-    m_NumColorKeys: 2
+    m_NumColorKeys: 5
     m_NumAlphaKeys: 2
 --- !u!114 &2467129524074190940
 MonoBehaviour:
