@@ -115,7 +115,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7686437577316576216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 026460d5ff4732b41a37f7df47c1a7a3, type: 3}
+  m_Script: {fileID: 11500000, guid: 33ec6c3809f091f458f464eefc7c1f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sm: {fileID: 0}
+  canInteract: 1
+  interactPrompt: Extract?
+  switch2State: 
