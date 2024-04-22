@@ -16,7 +16,6 @@ public class ItemPickup : Interactable
     {
         base.Interaction(player);
         player.AddItemToInventory(item);
-        ScoreManager.instance.IncreaseScore(item.value);
         Destroy(gameObject);
 
     }

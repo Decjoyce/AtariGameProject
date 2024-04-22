@@ -76,6 +76,18 @@ public class PlayerManager : MonoBehaviour
         playerInputManager.DisableJoining();
     }
 
+    public void PlayersToCharacterSelect()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            PlayerController pc = players[i].GetComponent<PlayerController>();
+            if (!pc.isOut)
+            {
+                pc.SwitchState("CHARACTERSELECT");
+            }
+        }
+    }
+
     public void ResetPlayers()
     {
         for(int i = 0; i < players.Count; i++)
@@ -83,6 +95,7 @@ public class PlayerManager : MonoBehaviour
             PlayerController pc = players[i].GetComponent<PlayerController>();
             if (!pc.isOut)
             {
+                Debug.Log("John Cena");
                 players[i].transform.position = spawnPoints[i].position;
                 pc.SwitchState("NEUTRAL");
                 pc.health.Revive();

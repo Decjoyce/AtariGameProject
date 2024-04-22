@@ -188,6 +188,10 @@ public class PlayerController : MonoBehaviour
 
         switch (newState)
         {
+            case "CHARACTERSELECT":
+                currentState = state_CharacterSelect;
+                playerState = PlayerStates.Selecting;
+                break;
             case "NEUTRAL":
                 currentState = state_Neutral;
                 playerState = PlayerStates.Neutral;
@@ -201,7 +205,6 @@ public class PlayerController : MonoBehaviour
                 currentState = state_Extracted;
                 playerState = PlayerStates.Extracted;
                 //gmScript.IncreaseExtractedPlayerAmount();
-
                 break;
             default:
                 Debug.LogError("INVALID STATE: " + newState);

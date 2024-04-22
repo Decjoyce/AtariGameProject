@@ -11,7 +11,8 @@ public class PlayerState_CharacterSelect : PlayerState_Base
 
     public override void EnterState(PlayerController controller)
     {
-        selectedCharacter = controller.charNum;
+        selectedCharacter = 0;
+        FakeMenuManager.instance.ChangeDisplayCard(controller.playerNum, selectedCharacter);
     }
     public override void ExitState(PlayerController controller)
     {
@@ -19,6 +20,7 @@ public class PlayerState_CharacterSelect : PlayerState_Base
         controller.rb.constraints = RigidbodyConstraints.None;
         controller.rb.constraints |= RigidbodyConstraints.FreezeRotation;
         controller.rb.constraints |= RigidbodyConstraints.FreezePositionZ;
+        GameManager.instance.SelectCharacter(controller.playerNum, selectedCharacter);
     }
 
     public override void FrameUpdate(PlayerController controller)
@@ -73,7 +75,9 @@ public class PlayerState_CharacterSelect : PlayerState_Base
     {
         if (ctx.performed)
         {
-            selectedCharacter = (selectedCharacter + 1) % GameManager.instance.playerCharacters[controller.playerNum - 1].Count;
+            selectedCharacter++;
+            if (selectedCharacter >= GameManager.instance.playerCharacters[controller.playerNum - 1].Count)
+                selectedCharacter = 0;
             FakeMenuManager.instance.ChangeDisplayCard(controller.playerNum, selectedCharacter);
         }
     }

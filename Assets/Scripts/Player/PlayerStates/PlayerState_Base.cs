@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 
 public enum PlayerStates
 {
-    frozen,
+    Joined,
+    Selecting,
     Neutral,
     Extracted,
     Death,

@@ -150,6 +150,15 @@ public class PlayerInteraction : MonoBehaviour
         inventory.Add(item);
     }
 
+    public void ConvertItemsToScore()
+    {
+        foreach(Item itm in inventory)
+        {
+            ScoreManager.instance.IncreaseScore(itm.value);
+        }
+        inventory.Clear();
+    }
+
     public void ClearInventory()
     {
         inventory.Clear();

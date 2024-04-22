@@ -19,6 +19,11 @@ public class FakeMenuManager : MonoBehaviour
 
     [SerializeField] CharacterCard[] characterCards;
 
+    private void Start()
+    {
+        PlayerManager.instance.PlayersToCharacterSelect();
+    }
+
     public void ChangeDisplayCard(int playerNum, int charNum)
     {
         characterCards[playerNum - 1].SetDisplay(GameManager.instance.playerCharacters[playerNum - 1][charNum]);

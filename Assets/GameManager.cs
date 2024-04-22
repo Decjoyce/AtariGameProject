@@ -139,7 +139,9 @@ public class GameManager : MonoBehaviour
         if(!playersDead.Contains(player) && !playersExtracted.Contains(player))
         {
             playersExtracted.Add(player);
-            player.GetComponent<PlayerController>().SaveCharacter();
+            PlayerController pc = player.GetComponent<PlayerController>();
+            pc.SaveCharacter();
+            pc.interaction.ConvertItemsToScore();
         }
         CheckIfAllExtracted();
     }
@@ -217,9 +219,9 @@ public class GameManager : MonoBehaviour
 
     #region Character Code
 
-    public void SelectCharacter()
+    public void SelectCharacter(int playerNum, int charNum)
     {
-
+        pm.players[playerNum - 1].GetComponent<PlayerController>().SetUpCharacter(playerCharacters[playerNum - 1][charNum], charNum);
     }
 
     void GenerateCharactersForAll()
