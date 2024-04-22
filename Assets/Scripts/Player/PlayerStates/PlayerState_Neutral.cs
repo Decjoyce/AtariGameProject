@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class PlayerState_Neutral : PlayerState_Base
 {
@@ -16,7 +13,6 @@ public class PlayerState_Neutral : PlayerState_Base
     bool isJumping;
     bool isSwitchingLanes;
     Rigidbody rb;
-    PlayerStats playerStats;
 
     float standColiderHeight = 2f;
     Vector3 standColideroffset = new(0f, 1f, 0f);
@@ -28,11 +24,16 @@ public class PlayerState_Neutral : PlayerState_Base
     public override void EnterState(PlayerController controller)
     {
         rb = controller.rb;
+        movementInput = 0f;
+        lookInput = Vector2.zero;
+        vel = Vector3.zero;
     }
 
     public override void ExitState(PlayerController controller)
     {
-
+        movementInput = 0f;
+        lookInput = Vector2.zero;
+        vel = Vector3.zero;
     }
 
     public override void FrameUpdate(PlayerController controller)
@@ -211,13 +212,13 @@ public class PlayerState_Neutral : PlayerState_Base
             else
                 newRot = Quaternion.Euler(0, 0, -angle);
 
-            if (newRot.eulerAngles.z < 360 && newRot.eulerAngles.z > 180 && !controller.faceLeft)
+            if (newRot.eulerAngles.z < 360 && newRot.eulerAngles.z > 180)
                 controller.FaceDirection(false);
             else
                 controller.FaceDirection(true);
 
 
-            Debug.Log(newRot.eulerAngles.z);
+            //Debug.Log(newRot.eulerAngles.z);
 
             controller.pivot.localRotation = newRot;
         }

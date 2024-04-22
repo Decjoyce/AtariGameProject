@@ -40,6 +40,15 @@ public struct PlayerStats
     }
 }
 
+public enum PlayerStates
+{
+    joined,
+    selecting,
+    neutral,
+    death,
+    extracted,
+}
+
 public class PlayerController : MonoBehaviour
 {
     [System.NonSerialized] public int playerNum;
@@ -110,9 +119,9 @@ public class PlayerController : MonoBehaviour
     [Header("Extracted")]
     public bool extractedCheck;
 
-    [HideInInspector] public bool faceLeft = true;
+    public bool faceLeft = true;
 
-    //public PlayerStates playerState;
+    public PlayerStates playerState;
     PlayerState_Base currentState;
     public PlayerState_Joined state_Joined = new PlayerState_Joined();
     public PlayerState_CharacterSelect state_CharacterSelect = new PlayerState_CharacterSelect();
@@ -138,7 +147,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
 
-        playerStats.GenerateProciencies();
     }
 
 
@@ -224,20 +232,20 @@ public class PlayerController : MonoBehaviour
         {
             case "CHARACTERSELECT":
                 currentState = state_CharacterSelect;
-                //playerState = PlayerStates.Selecting;
+                playerState = PlayerStates.selecting;
                 break;
             case "NEUTRAL":
                 currentState = state_Neutral;
                 Debug.Log("Yo");
-                //playerState = PlayerStates.Neutral;
+                playerState = PlayerStates.neutral;
                 break;
             case "DEATH":
                 currentState = state_Death;
-                //playerState = PlayerStates.Death;
+                playerState = PlayerStates.death;
                 break;
             case "EXTRACTED":
                 currentState = state_Extracted;
-                //playerState = PlayerStates.Extracted;
+                playerState = PlayerStates.extracted;
                 break;
             default:
                 Debug.LogError("INVALID STATE: " + newState);
@@ -284,6 +292,8 @@ public class PlayerController : MonoBehaviour
         character = newChar;
         SwitchClass(character.characterClass);
         health.currentHealth = character.health;
+        playerStats = newChar.proficiencies;
+        attack.SetUpClassWeapon();
         if (character.weapon != null)
             attack.PickUpWeapon(character.weapon, character.currentAmmo, character.currentReserve, false);
         else

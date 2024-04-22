@@ -16,7 +16,7 @@ public struct Character
     //Generated Stuff
     public int dudesname;
     public string characterClass;
-    //Proficiencies
+    public PlayerStats proficiencies;
     //Traits
 
     public void GenerateStats(bool hasCap)
@@ -53,5 +53,7 @@ public struct Character
         dudesname = Random.Range(-69, 70);
 
         health = 100;
+
+        proficiencies.GenerateProciencies();
     }
 }

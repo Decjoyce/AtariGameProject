@@ -13,9 +13,9 @@ public class CharacterCard : MonoBehaviour
     {
         text_className.text = character.characterClass;
 
-        //text_proficiencies_weapon.text = character.prof.profWeapon.ToString();
-        //text_proficiencies_hacking.text = character.prof.profHacking.ToString();
-        //text_proficiencies_movement.text = character.prof.profMovement.ToString();
+        text_proficiencies_weapon.text = "Weapon: " + character.proficiencies.weaponSpreadMod;
+        text_proficiencies_hacking.text = "Hacking: " + character.proficiencies.hackSpeedMod;
+        text_proficiencies_movement.text = "Movement: " + character.proficiencies.moveMod;
 
         //text_trait.text = character.trait.name;
         //img_trait.sprite = character.trait.icon;
