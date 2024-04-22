@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Animation")]
     public Animator anim;
-    [HideInInspector] public int animFlipper = 1;
+    public int animFlipper = 1;
     public RigBuilder[] rigs;
 
     [Header("DEBUG")]

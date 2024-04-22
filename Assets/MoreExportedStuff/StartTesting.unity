@@ -757,7 +757,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 621061342}
-  - component: {fileID: 621061341}
+  - component: {fileID: 621061343}
   m_Layer: 0
   m_Name: ScoreManager
   m_TagString: ScoreManager
@@ -765,21 +765,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &621061341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 621061340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb09cd195888bfa45b35a94a2dbab17e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quotaBar: {fileID: 0}
-  currentScore: 0
-  quotaAmount: 300
 --- !u!4 &621061342
 Transform:
   m_ObjectHideFlags: 0
@@ -795,6 +780,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1316366285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &621061343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621061340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb09cd195888bfa45b35a94a2dbab17e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quotaBar: {fileID: 0}
+  currentScore: 0
+  quotaAmount: 300
 --- !u!1 &658981416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,7 +1077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d8e1b502ba7d0478f20cf17fd79f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sm: {fileID: 621061341}
+  sm: {fileID: 621061343}
   pm: {fileID: 35902313}
   playersPlaying: []
   playersDead: []
