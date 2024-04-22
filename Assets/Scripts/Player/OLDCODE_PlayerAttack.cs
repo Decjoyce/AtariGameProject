@@ -1,9 +1,17 @@
-using System.Collections;
+
+/////////
+/// OLD CODE ONLY HERE IF SOMETHING BREAKS
+//////
+
+
+
+
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttackOLD : MonoBehaviour
 {
     PlayerController controller;
     AudioSource source;
@@ -11,14 +19,14 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] Transform firePoint;
     public Transform handPos;
     public Transform gunPos;
-    [SerializeField] Transform rightHandPos, leftHandPos;
+    [SerializeField] Transform rightHandPos, rightHandHint, leftHandPos, leftHandHint;
     [SerializeField] Transform[] rightHandHints, leftHandHints;
     [SerializeField] Transform pivot, handPivot;
 
     GameObject weaponMesh;
     MeshRenderer ammoGraphics; //Temp
 
-    public WeaponType weapon;
+    WeaponType weapon;
     [SerializeField] WeaponType defaultWeapon, fists;
     bool cannotDropWeapon;
     int currentAmmo, currentReserve;
@@ -62,6 +70,8 @@ public class PlayerAttack : MonoBehaviour
         currentReserve = weapon.reserveCapacity;
         accurracy = accurracy * controller.playerStats.weaponSpreadMod;
 
+        Debug.Log(controller.playerStats.weaponSpreadMod);
+
         doc_currentammo = doc_maxammo;
         SetWeaponMesh();
         SetGunColor();
@@ -90,29 +100,11 @@ public class PlayerAttack : MonoBehaviour
         SwingingAttack();
         ThrustingAttack();
     }
-    
-    public void SaveCharacter()
+
+    public void PickUpWeapon(WeaponType newWeapon, int newAmmo, int newReserve)
     {
-        controller.character.weapon = weapon;
-        controller.character.currentAmmo = currentAmmo;
-        controller.character.currentReserve = currentReserve;
-    }
+        DropWeapon();
 
-    public void UseDefaultWeapon()
-    {
-        weapon = defaultWeapon;
-
-        currentAmmo = weapon.magCapacity;
-        currentReserve = weapon.reserveCapacity;
-
-        SetWeaponMesh();
-        SetGunColor();
-    }
-
-    public void PickUpWeapon(WeaponType newWeapon, int newAmmo, int newReserve, bool dropWeapon = true)
-    {
-        if(dropWeapon)
-            DropWeapon();
         weapon = newWeapon;
         currentAmmo = newAmmo;
         currentReserve = newReserve;
@@ -535,3 +527,4 @@ public class PlayerAttack : MonoBehaviour
     #endregion
 
 }
+*/

@@ -1,12 +1,18 @@
-using System.Collections;
+
+/////////
+/// OLD CODE ONLY HERE IF SOMETHING BREAKS
+//////
+
+
+
+
+/*using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
-
-public struct PlayerStats
+public struct PlayerStatsOLD
 {
     public int moveMod;
     public int jumpPowerMod;
@@ -18,31 +24,31 @@ public struct PlayerStats
         moveMod = Random.Range(-5, 5);
         jumpPowerMod = Random.Range(-5, 5);
         weaponSpreadMod = Random.Range(-5, 5);
-        hackSpeedMod = Random.Range(-5, 5);
+        hackSpeedMod = Random.Range(-5, 5);   
 
-        if (moveMod == 0)
+        if(moveMod == 0)
         {
             moveMod = 1;
         }
-        if (jumpPowerMod == 0)
+        if(jumpPowerMod == 0)
         {
             jumpPowerMod = 1;
         }
-        if (weaponSpreadMod == 0)
+        if(weaponSpreadMod == 0)
         {
             weaponSpreadMod = 1;
         }
-        if (hackSpeedMod == 0)
+        if(hackSpeedMod == 0)
         {
-            hackSpeedMod = 1;
+            hackSpeedMod= 1;
         }
     }
 }
 
-public class PlayerController : MonoBehaviour
+
+public class PlayerControllerOLD : MonoBehaviour
 {
     [System.NonSerialized] public int playerNum;
-    public bool isOut;
     [System.NonSerialized] public PlayerInteraction interaction;
     [System.NonSerialized] public PlayerAttack attack;
     [System.NonSerialized] public PlayerHealth health;
@@ -54,20 +60,12 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public CapsuleCollider col;
     public Canvas canvas;
+    GameManagerScript gmScript;
+    public PlayerStats playerStats;
+    public GameObject player;
 
     public Transform pivot;
     public Transform graphicsPivot;
-
-    [Header("Character")]
-    bool hasHadCharacter;
-    public int charNum;
-    public Character character;
-    public PlayerStats playerStats;
-    [SerializeField] GameObject skin_captain;
-    [SerializeField] GameObject skin_engineer;
-    [SerializeField] GameObject skin_doctor;
-    [SerializeField] GameObject skin_navigator;
-    [SerializeField] GameObject skin_crewmate;
 
     [Header("Layer")]
     public float currentLayer;
@@ -100,7 +98,6 @@ public class PlayerController : MonoBehaviour
     [Header("Animation")]
     public Animator anim;
     [HideInInspector] public int animFlipper = 1;
-    public RigBuilder[] rigs;
 
     [Header("DEBUG")]
     public bool debuggingMode;
@@ -111,10 +108,7 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public bool faceLeft = true;
 
-    //public PlayerStates playerState;
     PlayerState_Base currentState;
-    public PlayerState_Joined state_Joined = new PlayerState_Joined();
-    public PlayerState_CharacterSelect state_CharacterSelect = new PlayerState_CharacterSelect();
     public PlayerState_Neutral state_Neutral = new PlayerState_Neutral();
     public PlayerState_Death state_Death = new PlayerState_Death();
     public PlayerState_Extracted state_Extracted = new PlayerState_Extracted();
@@ -125,7 +119,7 @@ public class PlayerController : MonoBehaviour
     public Character_Engineer character_Engineer = new Character_Engineer();
     public Character_Doctor character_Doctor = new Character_Doctor();
     public Character_Navigator character_Navigator = new Character_Navigator();
-    public Character_Crewmate character_Crewmate = new Character_Crewmate();
+    //public Character_Crewmate character_Crewmate = new Character_Crewmate();
 
     private void Awake()
     {
@@ -133,11 +127,21 @@ public class PlayerController : MonoBehaviour
         attack = GetComponent<PlayerAttack>();
         health = GetComponent<PlayerHealth>();
 
-        
+        currentSpeed = currentSpeed;
+
+        //gmScript = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManagerScript>();
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
-
+        //CheckMoveProf();
         playerStats.GenerateProciencies();
+        Debug.Log(playerStats.moveMod);
+        Debug.Log(playerStats.hackSpeedMod);
+        Debug.Log(playerStats.weaponSpreadMod);
+        Debug.Log(playerStats.jumpPowerMod);
+
+        
+
+        NotExtracted();
     }
 
 
@@ -146,17 +150,15 @@ public class PlayerController : MonoBehaviour
     {
         checkObstacleSize = new(0.5f, 2f, layerOffset);
 
-        currentState = state_Joined;
+        currentState = state_Neutral;
         currentState.EnterState(this);
 
-        currentCharacter = character_Captain;
+        currentCharacter = character_Engineer;
     }
 
     private void Update()
     {
         currentState.FrameUpdate(this);
-        if (Input.GetKeyDown(KeyCode.Z))
-            attack.SaveCharacter();
     }
 
     private void FixedUpdate()
@@ -221,21 +223,17 @@ public class PlayerController : MonoBehaviour
 
         switch (newState)
         {
-            case "CHARACTERSELECT":
-                currentState = state_CharacterSelect;
-                //playerState = PlayerStates.Selecting;
-                break;
             case "NEUTRAL":
                 currentState = state_Neutral;
-                //playerState = PlayerStates.Neutral;
                 break;
             case "DEATH":
                 currentState = state_Death;
-                //playerState = PlayerStates.Death;
+                //gmScript.DecreasePlayersAliveAmount();
                 break;
             case "EXTRACTED":
                 currentState = state_Extracted;
-                //playerState = PlayerStates.Extracted;
+                //gmScript.IncreaseExtractedPlayerAmount();
+
                 break;
             default:
                 Debug.LogError("INVALID STATE: " + newState);
@@ -273,82 +271,6 @@ public class PlayerController : MonoBehaviour
                 Debug.LogError("INVALID STATE: " + newCharacter);
                 break;
         }
-        SetClassSkin(newCharacter);
-    }
-
-    public void SetUpCharacter(Character newChar, int newCharNum)
-    {
-        charNum = newCharNum;
-        character = newChar;
-        SwitchClass(character.characterClass);
-        health.currentHealth = character.health;
-        if (character.weapon != null)
-            attack.PickUpWeapon(character.weapon, character.currentAmmo, character.currentReserve, false);
-        else
-            attack.UseDefaultWeapon();
-        Debug.Log("Cheadle");
-    }
-
-    public void SaveCharacter()
-    {
-        character.health = health.currentHealth;
-        attack.SaveCharacter();
-            GameManager.instance.SaveCharacter(character, playerNum, charNum);
-    }
-
-    void SetClassSkin(string nameofClass)
-    {
-        switch (nameofClass)
-        {
-            case "CAPTAIN":
-                skin_captain.SetActive(true);
-                skin_engineer.SetActive(false);
-                skin_doctor.SetActive(false);
-                skin_navigator.SetActive(false);
-                skin_crewmate.SetActive(false);
-
-                anim = skin_captain.GetComponent<Animator>();
-                break;
-            case "ENGINEER":
-                skin_captain.SetActive(false);
-                skin_engineer.SetActive(true);
-                skin_doctor.SetActive(false);
-                skin_navigator.SetActive(false);
-                skin_crewmate.SetActive(false);
-
-                anim = skin_engineer.GetComponent<Animator>();
-                break;
-            case "DOCTOR":
-                skin_captain.SetActive(false);
-                skin_engineer.SetActive(false);
-                skin_doctor.SetActive(true);
-                skin_navigator.SetActive(false);
-                skin_crewmate.SetActive(false);
-
-                anim = skin_doctor.GetComponent<Animator>();
-                break;
-            case "NAVIGATOR":
-                skin_captain.SetActive(false);
-                skin_engineer.SetActive(false);
-                skin_doctor.SetActive(false);
-                skin_navigator.SetActive(true);
-                skin_crewmate.SetActive(false);
-
-                anim = skin_navigator.GetComponent<Animator>();
-                break;
-            case "CREWMATE":
-                skin_captain.SetActive(false);
-                skin_engineer.SetActive(false);
-                skin_doctor.SetActive(false);
-                skin_navigator.SetActive(false);
-                skin_crewmate.SetActive(true);
-
-                anim = skin_crewmate.GetComponent<Animator>();
-                break;
-            default:
-                Debug.LogError("INVALID STATE: " + nameofClass);
-                break;
-        }
     }
 
     public Coroutine HelpStartCoroutine(IEnumerator coroutineMethod)
@@ -369,14 +291,6 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    public void TurnOnIK(int layerNum, bool turnOn)
-    {
-        foreach(RigBuilder rig in rigs)
-        {
-            rig.layers[layerNum].active = turnOn;
-        }
-
-    }
 
     public void FaceDirection(bool faceLeft)
     {
@@ -403,4 +317,10 @@ public class PlayerController : MonoBehaviour
     {
         extractedCheck = false;
     }
+
+   *//* void CheckMoveProf()
+    {
+        playerStats.moveMod += 1.2f;
+    }  *//*
 }
+*/

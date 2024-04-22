@@ -1,10 +1,18 @@
-using System.Collections;
+
+/////////
+/// OLD CODE ONLY HERE IF SOMETHING BREAKS
+//////
+
+
+
+
+/*using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInteraction : MonoBehaviour
+public class PlayerInteractionOLD : MonoBehaviour
 {
     public delegate void InteractedWithSomething(Interactable other);
     public static event InteractedWithSomething OnInteractedWith;
@@ -16,7 +24,7 @@ public class PlayerInteraction : MonoBehaviour
     private List<Interactable> availableInteractions = new List<Interactable>();
 
     bool canInteract;
-    [HideInInspector] public bool isEngineer;
+    public bool isEngineer;
 
     [SerializeField] TextMeshProUGUI interactionText;
 
@@ -91,12 +99,6 @@ public class PlayerInteraction : MonoBehaviour
         SetInteractionText();
     }
 
-    public void RemoveeAllInteractions()
-    {
-        availableInteractions.Clear();
-        SetInteractionText();
-    }
-
     public Interactable FindClosestInteractable()
     {
         float closestInt = 50f;
@@ -140,8 +142,7 @@ public class PlayerInteraction : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(findInteractionDelay);
-            if(canInteract)
-                SetInteractionText();
+            SetInteractionText();
         }
     }
 
@@ -150,18 +151,10 @@ public class PlayerInteraction : MonoBehaviour
         inventory.Add(item);
     }
 
-    public void ConvertItemsToScore()
-    {
-        foreach(Item itm in inventory)
-        {
-            ScoreManager.instance.IncreaseScore(itm.value);
-        }
-        inventory.Clear();
-    }
-
     public void ClearInventory()
     {
         inventory.Clear();
     }
 
 }
+*/
