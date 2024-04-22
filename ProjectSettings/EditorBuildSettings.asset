@@ -6,21 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/DecoScene.unity
-    guid: 217928a118805094c84e74fe30ee9192
+    path: Assets/MoreExportedStuff/StartTesting.unity
+    guid: de5978c8586cb3e4089ad888f5887247
   - enabled: 1
-    path: Assets/Scenes/MainMenuScene.unity
-    guid: 796f68d5e49ec4a4599984f0fa67aea6
+    path: Assets/MoreExportedStuff/InGameTest.unity
+    guid: f7adc756b103b074ab63d7358887a649
   - enabled: 1
-    path: Assets/Scenes/CharacterSelectMenuScene.unity
-    guid: 5c41c6514fbf4fa498eb5c787e05908b
-  - enabled: 1
-    path: Assets/Scenes/JamesScene.unity
-    guid: a3fa53ab2a6bf9f4fbdceb1684509ca3
-  - enabled: 1
-    path: Assets/Scenes/WinScene.unity
-    guid: 6bff6b6c0e0351c499676e29f2bd19cb
-  - enabled: 1
-    path: Assets/Scenes/LoseScene.unity
-    guid: d8cf02987713ba84397f3a92acde759c
+    path: Assets/MoreExportedStuff/PreRound.unity
+    guid: 03876da487bf1d548bff68b26693116e
   m_configObjects: {}

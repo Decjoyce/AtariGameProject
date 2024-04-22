@@ -12,6 +12,7 @@ TagManager:
   - Bounds
   - EnemyHitbox
   - Game Manager
+  - eng_Interactable
   layers:
   - Default
   - TransparentFX

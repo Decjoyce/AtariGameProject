@@ -6,6 +6,7 @@ using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 
+[System.Serializable]
 public struct PlayerStats
 {
     public int moveMod;
@@ -227,6 +228,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case "NEUTRAL":
                 currentState = state_Neutral;
+                Debug.Log("Yo");
                 //playerState = PlayerStates.Neutral;
                 break;
             case "DEATH":
@@ -385,12 +387,14 @@ public class PlayerController : MonoBehaviour
             attack.gunPos.localEulerAngles = new(0f, 180f, attack.gunPos.localEulerAngles.z);
             graphicsPivot.localEulerAngles = new(graphicsPivot.localEulerAngles.x, 180f, 0f);
             animFlipper = -1;
+            Debug.Log("WTF");
         }
         else
         {
             attack.gunPos.localEulerAngles = new(0f, 0f, attack.gunPos.localEulerAngles.z);
             graphicsPivot.localEulerAngles = new(graphicsPivot.localEulerAngles.x, 0f, 0f);
             animFlipper = 1;
+            Debug.Log("CUCK");
         }
     }
 

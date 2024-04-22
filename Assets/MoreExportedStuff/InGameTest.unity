@@ -1139,7 +1139,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 255597376}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bdaeb03460db82419f8d06ea7051fd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7237fe95e85da7f4d9d32a192308df53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   roomID: 0
@@ -1897,7 +1897,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 438405168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e9e53f24d9b5a74b80f26e12083ffca, type: 3}
+  m_Script: {fileID: 11500000, guid: f5cbbd5557940f94488154d9ed0b42e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rooms:
@@ -4368,7 +4368,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1126254759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bdaeb03460db82419f8d06ea7051fd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7237fe95e85da7f4d9d32a192308df53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   roomID: 2
@@ -7462,6 +7462,7 @@ MonoBehaviour:
   door: {fileID: 23813510}
   panel: {fileID: 630457232}
   unlockedMat: {fileID: 2100000, guid: 8f2354ecacf808e4da9bde01ecbde17e, type: 2}
+  engineerDoor: 0
 --- !u!136 &1987480666
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7848,7 +7849,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2089889659}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bdaeb03460db82419f8d06ea7051fd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7237fe95e85da7f4d9d32a192308df53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   roomID: 1

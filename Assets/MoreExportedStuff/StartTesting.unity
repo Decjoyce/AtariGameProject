@@ -320,13 +320,12 @@ MonoBehaviour:
   - {fileID: 1195688965}
   - {fileID: 1130273456}
   playerCams:
-  - {fileID: 6714346}
   - {fileID: 1474032134}
   - {fileID: 1198348433}
   - {fileID: 475702452}
   - {fileID: 1520544123}
   sharedCam: {fileID: 6714346}
-  keepRatio: 0
+  keepRatio: 1
 --- !u!1 &111511104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,7 +1042,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1003303217}
-  - component: {fileID: 1003303216}
+  - component: {fileID: 1003303218}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1051,21 +1050,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1003303216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003303215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39a135f990066394fa029299d054e9a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playersAlive: 0
-  playersDead: 0
-  playersExtracted: 0
 --- !u!4 &1003303217
 Transform:
   m_ObjectHideFlags: 0
@@ -1081,6 +1065,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1316366285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1003303218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003303215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d8e1b502ba7d0478f20cf17fd79f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sm: {fileID: 621061341}
+  pm: {fileID: 35902313}
+  playersPlaying: []
+  playersDead: []
+  playersExtracted: []
+  testingList: []
+  testingList2: []
+  numberOfLives: 3
+  hasCaptain: 0
 --- !u!1 &1130273455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1388,7 +1393,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1003303216}
+      - m_Target: {fileID: 1003303218}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: StartRun
         m_Mode: 1
