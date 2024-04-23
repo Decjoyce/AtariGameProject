@@ -18619,10 +18619,10 @@ MonoBehaviour:
     m_ActionName: GameplayControls/LayerDown[/DualShock4GamepadHID/leftTrigger,/XInputControllerWindows/leftTrigger]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6010278067886509465}
-        m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
-        m_MethodName: PerformReload
-        m_Mode: 1
+      - m_Target: {fileID: 4482731031742426862}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnReload
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

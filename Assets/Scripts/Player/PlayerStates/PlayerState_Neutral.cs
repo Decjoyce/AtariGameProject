@@ -27,6 +27,7 @@ public class PlayerState_Neutral : PlayerState_Base
         movementInput = 0f;
         lookInput = Vector2.zero;
         vel = Vector3.zero;
+        isSwitchingLanes = false;
     }
 
     public override void ExitState(PlayerController controller)
@@ -34,6 +35,7 @@ public class PlayerState_Neutral : PlayerState_Base
         movementInput = 0f;
         lookInput = Vector2.zero;
         vel = Vector3.zero;
+        isSwitchingLanes = false;
     }
 
     public override void FrameUpdate(PlayerController controller)
@@ -82,7 +84,7 @@ public class PlayerState_Neutral : PlayerState_Base
         {
             Vector3 vel = Vector3.right * (controller.currentSpeed + (0.5f * controller.playerStats.moveMod)) * movementInput * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + vel);
-            Debug.Log(controller.playerStats.moveMod);
+            Debug.Log(controller.currentSpeed + (0.5f * controller.playerStats.moveMod));
         }
         controller.anim.SetFloat("xMove", movementInput * controller.animFlipper);
         //Debug.Log(vel.x);

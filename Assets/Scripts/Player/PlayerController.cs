@@ -298,7 +298,6 @@ public class PlayerController : MonoBehaviour
             attack.PickUpWeapon(character.weapon, character.currentAmmo, character.currentReserve, false);
         else
             attack.UseDefaultWeapon();
-        Debug.Log("Cheadle");
     }
 
     public void SaveCharacter()
@@ -397,14 +396,12 @@ public class PlayerController : MonoBehaviour
             attack.gunPos.localEulerAngles = new(0f, 180f, attack.gunPos.localEulerAngles.z);
             graphicsPivot.localEulerAngles = new(graphicsPivot.localEulerAngles.x, 180f, 0f);
             animFlipper = -1;
-            Debug.Log("WTF");
         }
         else
         {
             attack.gunPos.localEulerAngles = new(0f, 0f, attack.gunPos.localEulerAngles.z);
             graphicsPivot.localEulerAngles = new(graphicsPivot.localEulerAngles.x, 0f, 0f);
             animFlipper = 1;
-            Debug.Log("CUCK");
         }
     }
 

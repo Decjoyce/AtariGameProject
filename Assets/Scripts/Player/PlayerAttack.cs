@@ -164,7 +164,6 @@ public class PlayerAttack : MonoBehaviour
 
             SetFistMesh();
 
-            Debug.Log("Fistacuffs");
         }
 
     }

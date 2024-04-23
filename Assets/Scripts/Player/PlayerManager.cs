@@ -95,7 +95,6 @@ public class PlayerManager : MonoBehaviour
             PlayerController pc = players[i].GetComponent<PlayerController>();
             if (!pc.isOut)
             {
-                Debug.Log("John Cena");
                 players[i].transform.position = spawnPoints[i].position;
                 pc.SwitchState("NEUTRAL");
                 pc.health.Revive();
