@@ -17,6 +17,27 @@ public class CharacterCard : MonoBehaviour
         text_proficiencies_hacking.text = "Hacking: " + character.proficiencies.hackSpeedMod;
         text_proficiencies_movement.text = "Movement: " + character.proficiencies.moveMod;
 
+        switch (character.characterClass)
+        {
+            case "CAPTAIN":
+                img_class.sprite = MenuManager.instance.classUI.classImages[1];
+                break;
+            case "ENGINEER":
+                img_class.sprite = MenuManager.instance.classUI.classImages[3];
+                break;
+            case "DOCTOR":
+                img_class.sprite = MenuManager.instance.classUI.classImages[2];
+                break;
+            case "NAVIGATOR":
+                img_class.sprite = MenuManager.instance.classUI.classImages[4];
+                break;
+            case "CREWMATE":
+                img_class.sprite = MenuManager.instance.classUI.classImages[0];
+                break;
+            default:
+                break;
+        }
+
         //text_trait.text = character.trait.name;
         //img_trait.sprite = character.trait.icon;
     }

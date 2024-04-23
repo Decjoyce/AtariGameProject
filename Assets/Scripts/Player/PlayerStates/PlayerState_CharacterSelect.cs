@@ -12,7 +12,7 @@ public class PlayerState_CharacterSelect : PlayerState_Base
     public override void EnterState(PlayerController controller)
     {
         selectedCharacter = 0;
-        FakeMenuManager.instance.ChangeDisplayCard(controller.playerNum, selectedCharacter);
+        MenuManager.instance.ChangeDisplayCard(controller.playerNum, selectedCharacter);
     }
     public override void ExitState(PlayerController controller)
     {
@@ -62,7 +62,7 @@ public class PlayerState_CharacterSelect : PlayerState_Base
             {
                 selectedCharacter = GameManager.instance.playerCharacters[controller.playerNum - 1].Count - 1;
             }
-            FakeMenuManager.instance.ChangeDisplayCard(controller.playerNum, selectedCharacter);
+            MenuManager.instance.ChangeDisplayCard(controller.playerNum, selectedCharacter);
         }
     }
 
@@ -78,7 +78,7 @@ public class PlayerState_CharacterSelect : PlayerState_Base
             selectedCharacter++;
             if (selectedCharacter >= GameManager.instance.playerCharacters[controller.playerNum - 1].Count)
                 selectedCharacter = 0;
-            FakeMenuManager.instance.ChangeDisplayCard(controller.playerNum, selectedCharacter);
+            MenuManager.instance.ChangeDisplayCard(controller.playerNum, selectedCharacter);
         }
     }
 
