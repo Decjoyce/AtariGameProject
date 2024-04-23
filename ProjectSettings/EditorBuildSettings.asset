@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MoreExportedStuff/StartTesting.unity
+    path: Assets/Scenes/StartTesting.unity
     guid: de5978c8586cb3e4089ad888f5887247
   - enabled: 1
-    path: Assets/MoreExportedStuff/InGameTest.unity
+    path: Assets/Scenes/InGameTest.unity
     guid: f7adc756b103b074ab63d7358887a649
   - enabled: 1
-    path: Assets/MoreExportedStuff/PreRound.unity
+    path: Assets/Scenes/PreRound.unity
     guid: 03876da487bf1d548bff68b26693116e
   m_configObjects: {}
