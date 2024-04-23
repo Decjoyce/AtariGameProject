@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LoadingScene : MonoBehaviour
 {
+    public int SceneIndex;
     public float loadDelay = 3f;
     // Start is called before the first frame update
     void Start()
@@ -14,6 +15,6 @@ public class LoadingScene : MonoBehaviour
 
     void NextScene()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(SceneIndex);
     }
 }

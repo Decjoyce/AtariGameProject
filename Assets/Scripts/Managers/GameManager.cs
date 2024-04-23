@@ -124,12 +124,12 @@ public class GameManager : MonoBehaviour
                 //Gets new quota, generates a new character for each player, loads the character select scene
                 sm.GetNewQuota();
                 //GenerateNewCharacter();
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(3);
             }
         }
         else //if it hasnt
         {
-            SceneManager.LoadScene(2); //loads the character select scene
+            SceneManager.LoadScene(3); //loads the character select scene
         }
     }
 

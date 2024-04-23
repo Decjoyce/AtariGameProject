@@ -5,13 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StartTesting.unity
     guid: de5978c8586cb3e4089ad888f5887247
+  - enabled: 1
+    path: Assets/Scenes/LunaScenes/MainMenu.unity
+    guid: df443db5bf737204999a07b053391b3b
   - enabled: 1
     path: Assets/Scenes/InGameTest.unity
     guid: f7adc756b103b074ab63d7358887a649
   - enabled: 1
+    path: Assets/Scenes/LunaScenes/CharacterSelect.unity
+    guid: a211d71001a715e418291bfb6789a748
+  - enabled: 0
     path: Assets/Scenes/PreRound.unity
     guid: 03876da487bf1d548bff68b26693116e
+  - enabled: 1
+    path: Assets/Scenes/LunaScenes/LoadingScene.unity
+    guid: 52fb33de4899e2f41adaf1f0d3078e5c
   m_configObjects: {}
