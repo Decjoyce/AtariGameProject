@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/StartTesting.unity
-    guid: de5978c8586cb3e4089ad888f5887247
   - enabled: 1
     path: Assets/Scenes/LunaScenes/MainMenu.unity
     guid: df443db5bf737204999a07b053391b3b
@@ -18,9 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/LunaScenes/CharacterSelect.unity
     guid: a211d71001a715e418291bfb6789a748
   - enabled: 1
-    path: Assets/Scenes/InGameTest.unity
-    guid: f7adc756b103b074ab63d7358887a649
-  - enabled: 0
-    path: Assets/Scenes/PreRound.unity
-    guid: 03876da487bf1d548bff68b26693116e
+    path: Assets/Scenes/Levels/Level_Easy.unity
+    guid: 4b2c1fc3f2e3e054bbdf727d32b214c4
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_Mid.unity
+    guid: bd4c53b2b2b49e743a6a9c9bfcd9194a
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_Hard.unity
+    guid: 2bb9eb8dd6477d240a51bc2bc7cb8bf2
   m_configObjects: {}

@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
 
     int roundsPlayed;
 
+    [SerializeField] int[] randomLevels;
+    public int currentLevel;
+
     void Start()
     {        
 
@@ -97,7 +100,7 @@ public class GameManager : MonoBehaviour
 
         playersDead.Clear();
         playersExtracted.Clear();
-        SceneManager.LoadScene(3);
+        GetRandomLevel();
         pm.ResetPlayers();
     }
 
@@ -133,6 +136,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void GetRandomLevel()
+    {
+        currentLevel = randomLevels[Random.Range(0, randomLevels.Length)];
+        SceneManager.LoadScene(currentLevel);
+    }
+
     public void LoadScene_Loading()
     {
         SceneManager.LoadScene(1);
@@ -145,7 +154,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene_Level()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(currentLevel);
     }
 
     #region Extraction Code

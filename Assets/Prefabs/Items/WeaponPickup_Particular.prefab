@@ -51,7 +51,7 @@ MonoBehaviour:
   switch2State: 
   weapon: {fileID: 0}
   weaponList: {fileID: 0}
-  useWeaponList: 1
+  useWeaponList: 0
 --- !u!54 &3522857616697453830
 Rigidbody:
   m_ObjectHideFlags: 0

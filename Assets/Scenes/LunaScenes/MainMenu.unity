@@ -2025,6 +2025,8 @@ MonoBehaviour:
   testingList2: []
   numberOfLives: 3
   hasCaptain: 0
+  randomLevels: 030000000400000005000000
+  currentLevel: 0
 --- !u!1 &971272727
 GameObject:
   m_ObjectHideFlags: 0
