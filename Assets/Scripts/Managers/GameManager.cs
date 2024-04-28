@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
             GenerateCharactersForAll();
             pm.DisableJoining();
             playersPlaying = pm.players.ToList();
-            SceneManager.LoadScene(2);
+            LoadScene_Loading();
         }
         else
         {
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
 
         playersDead.Clear();
         playersExtracted.Clear();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(3);
         pm.ResetPlayers();
     }
 
@@ -124,13 +124,28 @@ public class GameManager : MonoBehaviour
                 //Gets new quota, generates a new character for each player, loads the character select scene
                 sm.GetNewQuota();
                 //GenerateNewCharacter();
-                SceneManager.LoadScene(3);
+                LoadScene_Loading();
             }
         }
         else //if it hasnt
         {
-            SceneManager.LoadScene(3); //loads the character select scene
+            LoadScene_Loading();            //loads the character select scene
         }
+    }
+
+    public void LoadScene_Loading()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void LoadScene_CharacterSelect()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void LoadScene_Level()
+    {
+        SceneManager.LoadScene(3);
     }
 
     #region Extraction Code
