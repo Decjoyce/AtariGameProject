@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3522857616697453830}
   - component: {fileID: 5554678221088283173}
   m_Layer: 0
-  m_Name: WeaponPickup
+  m_Name: WeaponPickup_Random
   m_TagString: Interactable
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -50,6 +50,8 @@ MonoBehaviour:
   interactPrompt: 
   switch2State: 
   weapon: {fileID: 0}
+  weaponList: {fileID: 0}
+  useWeaponList: 1
 --- !u!54 &3522857616697453830
 Rigidbody:
   m_ObjectHideFlags: 0

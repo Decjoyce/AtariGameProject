@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2a63a96cf584ba4f91112756ee9a013, type: 3}
+  m_Name: wpnlist_guns
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 11400000, guid: 9af29d2fd0ef339489d8e0b5b57943b3, type: 2}
+  - {fileID: 11400000, guid: b81f93569d48a0f49ad401d610883554, type: 2}
+  - {fileID: 11400000, guid: 49e9c3174e68b424791261583b301a50, type: 2}
+  - {fileID: 11400000, guid: 16ddac3a285e01f4f9387cc1dcba5c3d, type: 2}
+  - {fileID: 11400000, guid: 6512b02aaa0a689428a956fcf7506db8, type: 2}
+  chances2Spawn:
+  - 8
+  - 5
+  - 4
+  - 2
+  - 2

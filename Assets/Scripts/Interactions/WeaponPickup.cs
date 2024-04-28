@@ -5,16 +5,20 @@ using UnityEngine;
 public class WeaponPickup : Interactable
 {
     public WeaponType weapon;
+    public SO_AllWeapons weaponList;
 
     int currentAmmo;
     int currentReserve;
 
+    [SerializeField] bool useWeaponList;
     bool hasBeenUsed;
 
     private void Start()
     {
         if(!hasBeenUsed)
         {
+            if (useWeaponList)
+                weapon = weaponList.GetRandomWeapon();
             currentAmmo = weapon.magCapacity;
             currentReserve = weapon.reserveCapacity;
             interactPrompt = "Pick up " + weapon.weaponName;

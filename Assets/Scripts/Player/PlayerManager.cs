@@ -93,16 +93,17 @@ public class PlayerManager : MonoBehaviour
         for(int i = 0; i < players.Count; i++)
         {           
             PlayerController pc = players[i].GetComponent<PlayerController>();
+            Rigidbody rb = players[i].GetComponent<Rigidbody>();
             if (!pc.isOut)
             {
-                players[i].transform.position = spawnPoints[i].position;
+                rb.MovePosition(spawnPoints[i].position);
                 pc.SwitchState("NEUTRAL");
                 pc.health.Revive();
                 pc.health.SetHealthColor();
             }
             else
             {
-                players[i].transform.position = Vector3.one * 420f;
+                rb.MovePosition(Vector3.one * 420f);
                 pc.SwitchState("DEATH");
             }
         }
