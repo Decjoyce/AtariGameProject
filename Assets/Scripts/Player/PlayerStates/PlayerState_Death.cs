@@ -7,6 +7,7 @@ public class PlayerState_Death : PlayerState_Base
 {
     public override void EnterState(PlayerController controller)
     {
+        controller.interaction.RemoveeAllInteractions();
         controller.attack.DropWeapon(true);
         controller.col.enabled = false;
         controller.rb.constraints = RigidbodyConstraints.FreezeAll;
