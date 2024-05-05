@@ -102,7 +102,7 @@ public class TurretState_Aggro : EnemyStates_Turret
                 RaycastHit hit;
                 if(Physics.Raycast(controller.firePoint.position, controller.firePoint.up, out hit, Mathf.Infinity, controller.ignoreLayers))
                 {
-                    //Debug.Log("HIT " + hit.transform.name);
+                    Debug.Log("HIT " + hit.transform.name);
                     if (hit.transform.CompareTag("Player"))
                     {
                         controller.HelpInstantiate(controller.firePoint.position, controller.firePoint.rotation);
@@ -119,13 +119,24 @@ public class TurretState_Aggro : EnemyStates_Turret
     {
         if (controller.currentTarget)
         {
-            Vector3 direction = (controller.currentTarget.transform.position + (Vector3.up * 2f)) - controller.y_pivot.position;
-            Vector3 rot = Quaternion.LookRotation(direction).eulerAngles;
 
-            float newYAngle = Mathf.LerpAngle(controller.y_pivot.localEulerAngles.y, rot.y, controller.turnSpeed);
-            controller.y_pivot.rotation = Quaternion.Euler(0, newYAngle, 0);
 
-            controller.x_pivot.localRotation = Quaternion.Euler(rot.x + 90, 0, 0);
+            if (!controller.wallMounted)
+            {            
+                Vector3 direction = (controller.currentTarget.transform.position + (Vector3.up * 2f)) - controller.y_pivot.position;
+                Vector3 rot = Quaternion.LookRotation(direction).eulerAngles;
+
+                float newYAngle = Mathf.LerpAngle(controller.y_pivot.localEulerAngles.y, rot.y, controller.turnSpeed);
+                controller.y_pivot.rotation = Quaternion.Euler(0, newYAngle, 0);
+
+                controller.x_pivot.localRotation = Quaternion.Euler(rot.x + 90, 0, 0);
+            }
+            else
+            {
+                Vector3 direction = (controller.currentTarget.transform.position + (Vector3.up * 0.5f)) - controller.y_pivot.position;
+                Vector3 rot = Quaternion.LookRotation(direction).eulerAngles;
+                controller.x_pivot.localRotation = Quaternion.Euler(rot.x, 0, 0);
+            }
         }
     }
 

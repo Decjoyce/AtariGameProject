@@ -7,6 +7,8 @@ public class Enemy_Turret : MonoBehaviour
 {
     public int currentRoomID;
 
+    public bool wallMounted;
+
     public Transform firePoint;
     public Transform y_pivot, x_pivot;
     public LayerMask ignoreLayers;

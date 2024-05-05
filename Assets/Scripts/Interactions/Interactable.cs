@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public bool canInteract;
+    public bool canInteract = true;
     public string interactPrompt;
     public string switch2State;
 

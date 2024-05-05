@@ -18687,7 +18687,7 @@ MonoBehaviour:
   layerOffset: 2.5
   layerLayers:
     serializedVersion: 2
-    m_Bits: 9728
+    m_Bits: 140800
   checkObstacleSize: {x: 0, y: 0, z: 0}
   currentSpeed: 5
   walkSpeed: 5
@@ -18700,7 +18700,7 @@ MonoBehaviour:
   isGrounded: 0
   groundLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 131328
   standGraphics: {fileID: 2714775601070898450}
   crouchGraphics: {fileID: 6561160724514354392}
   currentHeight: 2
