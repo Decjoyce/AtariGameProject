@@ -50,7 +50,7 @@ MonoBehaviour:
   interactPrompt: 
   switch2State: 
   weapon: {fileID: 0}
-  weaponList: {fileID: 0}
+  weaponList: {fileID: 11400000, guid: 9e37997cc3617584ca3c52d9d431b6e3, type: 2}
   useWeaponList: 1
 --- !u!54 &3522857616697453830
 Rigidbody:

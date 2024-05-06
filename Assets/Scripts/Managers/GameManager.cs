@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerManager pm;
 
     public List<PlayerInput> playersPlaying = new List<PlayerInput>();
+    public List<PlayerInput> playersActive = new List<PlayerInput>();
     public List<GameObject> playersDead = new List<GameObject>();
     public List<GameObject> playersExtracted = new List<GameObject>();
 
@@ -100,6 +101,7 @@ public class GameManager : MonoBehaviour
 
         playersDead.Clear();
         playersExtracted.Clear();
+        playersActive = playersPlaying.ToList();
         GetRandomLevel();
         pm.ResetPlayers();
     }
@@ -163,6 +165,7 @@ public class GameManager : MonoBehaviour
         if(!playersDead.Contains(player) && !playersExtracted.Contains(player))
         {
             playersExtracted.Add(player);
+            playersActive.Remove(player.GetComponent<PlayerInput>());
             PlayerController pc = player.GetComponent<PlayerController>();
             pc.SaveCharacter();
             pc.interaction.ConvertItemsToScore();
@@ -197,7 +200,10 @@ public class GameManager : MonoBehaviour
         //generatedCharacters[playerNum - 1][player.GetComponent<PlayerController>().charNum].isDead = true;
         Debug.Log(playerCharacters[playerNum - 1].Count);
         playerCharacters[playerNum - 1].RemoveAt(player.GetComponent<PlayerController>().charNum);
+
         playersDead.Add(player);
+        playersActive.Remove(player.GetComponent<PlayerInput>());
+
         CheckIfAllDead();
     }
 

@@ -61,7 +61,7 @@ public class PlayerManager : MonoBehaviour
         controller.playerCam = playerCams[players.Count - 1];
         controller.canvas.worldCamera = playerCams[players.Count - 1];
 
-        SetSplitScreen();
+        SetSplitScreen(players.Count);
 
         player.transform.position = spawnPoints[players.Count - 1].position;
     }
@@ -109,11 +109,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void SetSplitScreen()
+    public void SetSplitScreen(int amountOfPlayers)
     {
         if (keepRatio)
         {
-            switch (players.Count)
+            switch (amountOfPlayers)
             {
                 case 1:
                     playerCams[0].gameObject.SetActive(true);
@@ -124,6 +124,7 @@ public class PlayerManager : MonoBehaviour
                     playerCams[0].rect = new Rect(0.25f, 0.5f, 0.5f, 1f);
                     playerCams[1].rect = new Rect(0.25f,- 0.5f, 0.5f, 1);
                     break;
+                #region 4 player Code
                 case 3:
                     playerCams[2].gameObject.SetActive(true);
 
@@ -139,6 +140,7 @@ public class PlayerManager : MonoBehaviour
                     playerCams[2].rect = new Rect(0f, -0.5f, 0.5f, 1);
                     playerCams[3].rect = new Rect(0.5f, -0.5f, 0.5f, 1);
                     break;
+                #endregion
                 default:
                     Debug.LogWarning("Error when trynna splitscreen yo");
                     break;

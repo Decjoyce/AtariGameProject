@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6135950335788547709}
-  damage: 5
+  damage: 2
   forwardForce: 30
   upwardForce: 0
   torqueForce: 0
