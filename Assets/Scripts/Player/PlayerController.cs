@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -38,7 +39,73 @@ public struct PlayerStats
             hackSpeedMod = 1;
         }
     }
-}
+
+        public int introvertedPenalty;
+        public int introvertedBoon;
+        public int clingyPenalty;
+        public int clingyBoon;
+        public bool isClingy;
+        public bool isIntroverted;
+        public bool isNeither;
+
+        public void GenerateTraits()
+    {
+        float traitDecide;
+
+        traitDecide = Random.Range(0f, 1f);
+
+        if (traitDecide < 0.99)
+        {
+            isClingy = true;
+            isIntroverted = false;
+            isNeither = false;
+            introvertedPenalty = 0;
+            introvertedBoon = 0;
+            clingyPenalty = 1;
+            clingyBoon = 2;
+        }
+        if(traitDecide < 0.1)
+        {
+            isIntroverted = true;
+            isClingy = false;
+            isNeither = false;
+            clingyPenalty = 0;
+            clingyBoon = 0;
+            introvertedPenalty = 1;
+            introvertedBoon = 2;
+        }
+      /*  else
+        {
+            isNeither = true;
+            isClingy = false;
+            isIntroverted = false;
+            clingyPenalty = 0;
+            clingyBoon = 0;
+            introvertedPenalty = 0;
+            introvertedBoon = 0;
+        } */
+
+        if(isClingy)
+        {
+            Debug.Log("Player is clingy");
+        }
+        if(isIntroverted)
+        {
+            Debug.Log("Player is introverted");
+        }
+        if (isNeither)
+        {
+            Debug.Log("Player is neither introverted or clingy");
+        }
+
+        Debug.Log(traitDecide);
+    }
+
+    }
+
+
+
+
 
 public enum PlayerStates
 {
@@ -63,6 +130,7 @@ public class PlayerController : MonoBehaviour
     public Camera playerCam;
     public Rigidbody rb;
     public CapsuleCollider col;
+    public SphereCollider traitCollider;
     public Canvas canvas;
 
     public Transform pivot;
@@ -142,10 +210,13 @@ public class PlayerController : MonoBehaviour
         interaction = GetComponent<PlayerInteraction>();
         attack = GetComponent<PlayerAttack>();
         health = GetComponent<PlayerHealth>();
-
-        
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
+        traitCollider = GetComponent<SphereCollider>();
+        if (playerStats.isIntroverted)
+        {
+            playerStats.hackSpeedMod = playerStats.hackSpeedMod + playerStats.introvertedBoon;
+        }
 
     }
 
@@ -166,7 +237,9 @@ public class PlayerController : MonoBehaviour
         currentState.FrameUpdate(this);
         if (Input.GetKeyDown(KeyCode.Z))
             attack.SaveCharacter();
-    }
+
+        
+     }
 
     private void FixedUpdate()
     {
@@ -402,6 +475,47 @@ public class PlayerController : MonoBehaviour
             attack.gunPos.localEulerAngles = new(0f, 0f, attack.gunPos.localEulerAngles.z);
             graphicsPivot.localEulerAngles = new(graphicsPivot.localEulerAngles.x, 0f, 0f);
             animFlipper = 1;
+        }
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            if (playerStats.isClingy)
+            {
+                playerStats.hackSpeedMod = playerStats.hackSpeedMod + playerStats.clingyBoon;
+            }
+            if(playerStats.isIntroverted)
+            {
+                playerStats.hackSpeedMod = playerStats.hackSpeedMod - playerStats.introvertedPenalty * 2;
+            }
+
+
+           Debug.Log(playerStats.hackSpeedMod);
+        }
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            if (playerStats.isClingy)
+            {
+                playerStats.hackSpeedMod = playerStats.hackSpeedMod - playerStats.clingyBoon * 2;
+            }
+            else
+            {
+                playerStats.hackSpeedMod = playerStats.hackSpeedMod + playerStats.introvertedPenalty * 2;
+            }
+
+            if (playerStats.isIntroverted)
+            {
+                playerStats.hackSpeedMod = playerStats.hackSpeedMod + playerStats.introvertedPenalty * 4;
+            }
+
+
+            Debug.Log(playerStats.hackSpeedMod);
         }
     }
 

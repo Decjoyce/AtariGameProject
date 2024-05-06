@@ -18476,6 +18476,7 @@ GameObject:
   - component: {fileID: 8124268400481534176}
   - component: {fileID: 692459879546678373}
   - component: {fileID: 1039390318920594594}
+  - component: {fileID: 6515753700131964353}
   m_Layer: 6
   m_Name: RiggedPlayer
   m_TagString: Player
@@ -18710,6 +18711,7 @@ MonoBehaviour:
   playerCam: {fileID: 0}
   rb: {fileID: 8124268400481534176}
   col: {fileID: 692459879546678373}
+  traitCollider: {fileID: 0}
   canvas: {fileID: 8654108079530258661}
   pivot: {fileID: 7386889648952322511}
   graphicsPivot: {fileID: 3408522813040291984}
@@ -18728,11 +18730,25 @@ MonoBehaviour:
       jumpPowerMod: 0
       weaponSpreadMod: 0
       hackSpeedMod: 0
+      introvertedPenalty: 0
+      introvertedBoon: 0
+      clingyPenalty: 0
+      clingyBoon: 0
+      isClingy: 0
+      isIntroverted: 0
+      isNeither: 0
   playerStats:
     moveMod: 0
     jumpPowerMod: 0
     weaponSpreadMod: 0
     hackSpeedMod: 0
+    introvertedPenalty: 0
+    introvertedBoon: 0
+    clingyPenalty: 0
+    clingyBoon: 0
+    isClingy: 0
+    isIntroverted: 0
+    isNeither: 0
   skin_captain: {fileID: 4706572021597121262}
   skin_engineer: {fileID: 6967091344587594399}
   skin_doctor: {fileID: 7252667789213907127}
@@ -19072,6 +19088,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &6515753700131964353
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941526012871332646}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.7
+  m_Center: {x: 0, y: 1.3, z: 0}
 --- !u!1 &7957402046880277896
 GameObject:
   m_ObjectHideFlags: 0

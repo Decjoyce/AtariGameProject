@@ -55,5 +55,6 @@ public struct Character
         health = 100;
 
         proficiencies.GenerateProciencies();
+        proficiencies.GenerateTraits();
     }
 }

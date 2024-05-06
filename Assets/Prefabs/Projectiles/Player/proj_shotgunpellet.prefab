@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6135950335788547709}
-  damage: 10
+  damage: 15
   forwardForce: 20
   upwardForce: 0
   torqueForce: 0
