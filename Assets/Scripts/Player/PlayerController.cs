@@ -32,7 +32,7 @@ public struct PlayerStats
         }
         if (weaponSpreadMod == 0)
         {
-            weaponSpreadMod = 1;
+            weaponSpreadMod = -1;
         }
         if (hackSpeedMod == 0)
         {
@@ -54,7 +54,7 @@ public struct PlayerStats
 
         traitDecide = Random.Range(0f, 1f);
 
-        if (traitDecide < 0.99)
+        if (traitDecide < 0.33)
         {
             isClingy = true;
             isIntroverted = false;
@@ -64,7 +64,7 @@ public struct PlayerStats
             clingyPenalty = 1;
             clingyBoon = 2;
         }
-        if(traitDecide < 0.1)
+        if(traitDecide < 0.66)
         {
             isIntroverted = true;
             isClingy = false;
@@ -74,7 +74,7 @@ public struct PlayerStats
             introvertedPenalty = 1;
             introvertedBoon = 2;
         }
-      /*  else
+        else
         {
             isNeither = true;
             isClingy = false;
@@ -83,7 +83,7 @@ public struct PlayerStats
             clingyBoon = 0;
             introvertedPenalty = 0;
             introvertedBoon = 0;
-        } */
+        } 
 
         if(isClingy)
         {
@@ -478,9 +478,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider col)
+   /* void OnTriggerEnter(Collider other)
     {
-        if (col.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             if (playerStats.isClingy)
             {
@@ -488,7 +488,7 @@ public class PlayerController : MonoBehaviour
             }
             if(playerStats.isIntroverted)
             {
-                playerStats.hackSpeedMod = playerStats.hackSpeedMod - playerStats.introvertedPenalty * 2;
+                playerStats.hackSpeedMod = playerStats.hackSpeedMod - (playerStats.introvertedPenalty);
             }
 
 
@@ -498,26 +498,22 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (col.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             if (playerStats.isClingy)
             {
-                playerStats.hackSpeedMod = playerStats.hackSpeedMod - playerStats.clingyBoon * 2;
-            }
-            else
-            {
-                playerStats.hackSpeedMod = playerStats.hackSpeedMod + playerStats.introvertedPenalty * 2;
+                playerStats.hackSpeedMod = playerStats.hackSpeedMod - playerStats.clingyBoon;
             }
 
             if (playerStats.isIntroverted)
             {
-                playerStats.hackSpeedMod = playerStats.hackSpeedMod + playerStats.introvertedPenalty * 4;
+                playerStats.hackSpeedMod = playerStats.hackSpeedMod + (playerStats.introvertedPenalty);
             }
 
 
             Debug.Log(playerStats.hackSpeedMod);
         }
-    }
+    }  */
 
     public void IsExtracted()
     {

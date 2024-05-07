@@ -239,7 +239,7 @@ public class PlayerState_Neutral : PlayerState_Base
         isCrouched = !isCrouched;
         if (isCrouched)
         {
-            controller.currentSpeed = controller.crouchSpeed + (0.5f * controller.playerStats.moveMod);
+            controller.currentSpeed = controller.crouchSpeed + (0.05f * controller.playerStats.moveMod);
             controller.currentHeight = controller.crouchHeight;
             controller.attack.handPos.localPosition = new(0f, controller.crouchHeightHandPos, 0f);
 

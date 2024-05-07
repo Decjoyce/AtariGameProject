@@ -99,7 +99,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void SetUpClassWeapon()
     {
-        accurracy = accurracy * controller.playerStats.weaponSpreadMod + (0.5f * controller.playerStats.moveMod);
+        accurracy = accurracy * controller.playerStats.weaponSpreadMod + (0.7f * controller.playerStats.moveMod);
     }
 
     public void UseDefaultWeapon()
