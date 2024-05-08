@@ -26,9 +26,6 @@ public class Enemy_Bulldozer : MonoBehaviour
     public float attackDamage;
     [HideInInspector] public Vector3 startPos;
 
-    //Debugging
-    public TextMeshProUGUI infoText;
-
     [SerializeField] BulldozerStates visibleState;
     EnemyStates_Bulldozer currentState;
     public BulldozerState_Idle state_Idle = new BulldozerState_Idle();
@@ -155,7 +152,6 @@ public class Enemy_Bulldozer : MonoBehaviour
                 Debug.LogError("WARNING: STATE NOT VALID");
                 break;
         }
-        infoText.text = state;
         currentState.EnterState(this);
     }
 
@@ -173,12 +169,10 @@ public class Enemy_Bulldozer : MonoBehaviour
         if (transform.position.x - theThing.x > 0)
         {
             transform.eulerAngles = Vector3.up * 180f;
-            infoText.transform.eulerAngles = Vector3.zero; 
         }
         else
         {
             transform.eulerAngles = Vector3.zero;
-            infoText.transform.eulerAngles = Vector3.up * 180f;
         }
     }
 

@@ -41,7 +41,7 @@ public class ScoreManager : MonoBehaviour
 
     public void GetNewQuota()
     {
-        currentScore = 0;
+        quotaAmount += 300f;
     }
 
     public bool QuotaCheck()

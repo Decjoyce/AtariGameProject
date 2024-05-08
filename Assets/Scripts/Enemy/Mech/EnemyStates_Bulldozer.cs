@@ -264,7 +264,6 @@ public class BulldozerState_Windup : EnemyStates_Bulldozer
         {
             if(chargeDelay > 0)
             {
-                controller.infoText.text = "Ready to Charge";
                 RaycastHit hit;
                 if (Physics.Raycast(controller.firePoint.position, controller.firePoint.right, out hit, Mathf.Infinity, controller.ignoreLayers))
                 {
