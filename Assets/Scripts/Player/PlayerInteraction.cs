@@ -152,6 +152,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void ConvertItemsToScore()
     {
+        Debug.Log("Yo");
         foreach(Item itm in inventory)
         {
             ScoreManager.instance.IncreaseScore(itm.value);

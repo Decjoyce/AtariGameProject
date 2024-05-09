@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     public List<Character> testingList = new List<Character>();
     public List<Character> testingList2 = new List<Character>();
 
+    [SerializeField] GameObject sharedCanvas;
+
     [SerializeField] int numberOfLives;
 
     /*[HideInInspector]*/ public bool hasCaptain;
@@ -104,6 +106,7 @@ public class GameManager : MonoBehaviour
         playersActive = playersPlaying.ToList();
         GetRandomLevel();
         pm.ResetPlayers();
+        sharedCanvas.SetActive(true);
     }
 
     void EndRound()
@@ -111,6 +114,8 @@ public class GameManager : MonoBehaviour
         //Check if players stills have characters to play as
         if (!CheckIfLivesLeft())
             return;
+
+        sharedCanvas.SetActive(false);
 
         roundsPlayed++;
 
@@ -180,6 +185,11 @@ public class GameManager : MonoBehaviour
             if (!playersDead.Contains(player.gameObject) && !playersExtracted.Contains(player.gameObject))
             {
                 playersExtracted.Add(player.gameObject);
+                playersActive.Remove(player.GetComponent<PlayerInput>());
+                PlayerController pc = player.GetComponent<PlayerController>();
+                pc.SwitchState("EXTRACTED");
+                pc.SaveCharacter();
+                pc.interaction.ConvertItemsToScore();
             }
         }
         EndRound();

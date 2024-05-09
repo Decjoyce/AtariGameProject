@@ -6,7 +6,7 @@ public class RoomTrigger : MonoBehaviour
 {
     public int roomID;
 
-    public Transform camPos;
+    public Transform camPos, campos_only1player;
 
     RoomManager manager;
 

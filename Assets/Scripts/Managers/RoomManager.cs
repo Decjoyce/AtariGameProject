@@ -46,6 +46,9 @@ public class RoomManager : MonoBehaviour
     public void ChangeRoom(GameObject player, int playerNum, int roomID)
     {
         playerRooms[playerNum] = roomID;
+        if(PlayerManager.instance.players.Count == 1)
+            PlayerManager.instance.playerCams[playerNum - 1].transform.position = rooms[roomID].campos_only1player.position;
+        else
         PlayerManager.instance.playerCams[playerNum - 1].transform.position = rooms[roomID].camPos.position;
         OnEnter(player, roomID);
     }
@@ -55,7 +58,10 @@ public class RoomManager : MonoBehaviour
         for(int i = 0; i < playerRooms.Count; i++)
         {
             playerRooms[i] = 0;
-            PlayerManager.instance.playerCams[i].transform.position = rooms[0].camPos.position;
+            if (PlayerManager.instance.players.Count == 1)
+                PlayerManager.instance.playerCams[i].transform.position = rooms[0].campos_only1player.position;
+            else
+                PlayerManager.instance.playerCams[i].transform.position = rooms[0].camPos.position;
         }
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class PlayerManager : MonoBehaviour
     public Camera[] playerCams;
     public Camera sharedCam;
     //[SerializeField] private GameObject[] playerCanvases;
+
+    [SerializeField] private GameObject playerHealths_one, playerHealths_two;
+    [SerializeField] private Slider playerHealthSlider_one_p1, playerHealthSlider_two_p1, playerHealthSlider_two_p2; 
+    [SerializeField] private Slider playerAmmoSlider_one_p1, playerAmmoSlider_two_p1, playerAmmoSlider_two_p2; 
 
     [SerializeField] bool keepRatio; //temp
 
@@ -117,9 +122,21 @@ public class PlayerManager : MonoBehaviour
             {
                 case 1:
                     playerCams[0].gameObject.SetActive(true);
+                    playerHealths_one.SetActive(true);
+                    players[0].GetComponent<PlayerHealth>().healthSlider = playerHealthSlider_one_p1;
+                    players[0].GetComponent<PlayerAttack>().ammoSlider = playerAmmoSlider_one_p1;
                     break;
                 case 2:
                     playerCams[1].gameObject.SetActive(true);
+
+                    playerHealths_one.SetActive(false);
+                    playerHealths_two.SetActive(true);
+
+                    players[0].GetComponent<PlayerHealth>().healthSlider = playerHealthSlider_two_p1;
+                    players[1].GetComponent<PlayerHealth>().healthSlider = playerHealthSlider_two_p2;
+
+                    players[0].GetComponent<PlayerAttack>().ammoSlider = playerAmmoSlider_two_p1;
+                    players[1].GetComponent<PlayerAttack>().ammoSlider = playerAmmoSlider_two_p2;
 
                     playerCams[0].rect = new Rect(0.25f, 0.5f, 0.5f, 1f);
                     playerCams[1].rect = new Rect(0.25f,- 0.5f, 0.5f, 1);

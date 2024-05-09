@@ -35,7 +35,6 @@ public class ScoreManager : MonoBehaviour
     public void IncreaseScore(float scrapWorth)
     {
         currentScore += scrapWorth;
-        currentScore = Mathf.Clamp(currentScore, 0, quotaAmount);
         //quotaBar.fillAmount = currentScore / currentScore;
     }
 

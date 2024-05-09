@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] MeshRenderer[] healthMeshes; //temp
     [SerializeField] Gradient healthColorGradient;
 
+    [SerializeField] GameObject droppedItem;
+    [SerializeField] LayerMask ignoreLayers;
+ 
     public virtual void TakeDamage(float amount)
     {
         currentHealth -= amount;
@@ -22,6 +26,8 @@ public class EnemyHealth : MonoBehaviour
 
     public virtual void Die()
     {
+            Instantiate(droppedItem, transform.position, Quaternion.identity);
+
         Destroy(transform.parent.gameObject);
     }
 

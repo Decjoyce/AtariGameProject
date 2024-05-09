@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] MeshRenderer[] healthMeshes; //temp
     [SerializeField] SkinnedMeshRenderer[] NEWhealthMeshes; //Will replace healthMeshes eventually
     [SerializeField] Gradient healthColorGradient;
+
+    public Slider healthSlider;
 
     bool isDead;
 
@@ -37,7 +40,10 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
-        if(currentHealth <= 0 && !isDead)
+
+            healthSlider.value = currentHealth;
+
+        if (currentHealth <= 0 && !isDead)
         {
             Die();
         }
@@ -47,10 +53,13 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(float amount)
     {
         currentHealth += amount;
+
         if (currentHealth >= maxHealth)
         {
             currentHealth = maxHealth;
         }
+            healthSlider.value = currentHealth;
+
         SetHealthColor();
     }
 
@@ -74,7 +83,10 @@ public class PlayerHealth : MonoBehaviour
         {
             mr.material.SetColor("_EmissionColor", healthColorGradient.Evaluate((maxHealth - currentHealth) / maxHealth));
         }
-
+        foreach (MeshRenderer mr in healthMeshes)
+        {
+            mr.material.SetColor("_EmissionColor", healthColorGradient.Evaluate((maxHealth - currentHealth) / maxHealth));
+        }
     }
 
 }

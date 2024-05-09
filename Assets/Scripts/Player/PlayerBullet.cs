@@ -29,15 +29,16 @@ public class PlayerBullet : MonoBehaviour
             if (collision.gameObject.CompareTag("EnemyHitbox"))
             {
                 DamageEnemy(collision);
+                madeContact = true;
             }
 
             if (collision.gameObject.CompareTag("CritSpot"))
             {
                 DamageCritSpot(collision);
+                madeContact = true;
             }
         }
         Debug.Log("HIT " + collision.gameObject.name);
-        madeContact = true;
         Destroy(gameObject);
     }
 

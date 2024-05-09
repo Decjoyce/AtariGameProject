@@ -876,6 +876,10 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  droppedItem: {fileID: 6092143148522505465, guid: e7998ad3f9315734d93632915b1a7da9, type: 3}
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &6574199561256596471
 GameObject:
   m_ObjectHideFlags: 0

@@ -382,7 +382,6 @@ MonoBehaviour:
   chargeDamage: 100
   attackDamage: 50
   startPos: {x: 0, y: 0, z: 0}
-  infoText: {fileID: 0}
   visibleState: 0
 --- !u!65 &2928952595252287888
 BoxCollider:
@@ -747,6 +746,10 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
+  droppedItem: {fileID: 6092143148522505465, guid: de2d15b518638b64eb373a6ea8f6e146, type: 3}
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 524023
 --- !u!1 &2168823810835360284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,7 +1352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9110559873411861391
 Transform:
   m_ObjectHideFlags: 0
@@ -1359,7 +1362,7 @@ Transform:
   m_GameObject: {fileID: 4134309811962950950}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.0300015, y: 1.125, z: 0}
+  m_LocalPosition: {x: -1.17, y: 1.21, z: 0}
   m_LocalScale: {x: 0.4, y: 1, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1475,9 +1478,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594f4690f12560949b5173f3562bebca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 40
   currentHealth: 40
-  healthMeshes: []
+  healthMeshes:
+  - {fileID: 4711646261515055839}
   healthColorGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1508,6 +1512,10 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  droppedItem: {fileID: 6092143148522505465, guid: de2d15b518638b64eb373a6ea8f6e146, type: 3}
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 524023
   explosion: {fileID: 416630834011310953, guid: 36b160d9daa1901488f1352d4f64cad7, type: 3}
 --- !u!1 &5993988578160447579
 GameObject:

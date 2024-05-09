@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -49,6 +50,8 @@ public class PlayerAttack : MonoBehaviour
 
     private Coroutine currentReloadCoroutine;
 
+    public Slider ammoSlider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +63,9 @@ public class PlayerAttack : MonoBehaviour
 
         currentAmmo = weapon.magCapacity;
         currentReserve = weapon.reserveCapacity;
+
+        ammoSlider.maxValue = weapon.magCapacity;
+        ammoSlider.value = currentAmmo;
 
         doc_currentammo = doc_maxammo;
         SetWeaponMesh();
@@ -110,6 +116,9 @@ public class PlayerAttack : MonoBehaviour
         currentAmmo = weapon.magCapacity;
         currentReserve = weapon.reserveCapacity;
 
+        ammoSlider.maxValue = weapon.magCapacity;
+        ammoSlider.value = currentAmmo;
+
         SetWeaponMesh();
         SetGunColor();
     }
@@ -121,6 +130,9 @@ public class PlayerAttack : MonoBehaviour
         weapon = newWeapon;
         currentAmmo = newAmmo;
         currentReserve = newReserve;
+
+        ammoSlider.maxValue = weapon.magCapacity;
+        ammoSlider.value = currentAmmo;
 
         SetWeaponMesh();
 
@@ -166,7 +178,8 @@ public class PlayerAttack : MonoBehaviour
             SetFistMesh();
 
         }
-
+        ammoSlider.maxValue = weapon.magCapacity;
+        ammoSlider.value = currentAmmo;
     }
 
     public void Attack(InputAction.CallbackContext ctx)
@@ -240,6 +253,8 @@ public class PlayerAttack : MonoBehaviour
 
         SetGunColor();
 
+        ammoSlider.value = currentAmmo;
+
         isReloading = false;
     }
 
@@ -257,6 +272,8 @@ public class PlayerAttack : MonoBehaviour
             source.PlayOneShot(weapon.fireSound);
 
             currentAmmo--;
+
+            ammoSlider.value = currentAmmo;
 
             SetGunColor();
 
@@ -283,6 +300,8 @@ public class PlayerAttack : MonoBehaviour
             currentAmmo--;
 
             SetGunColor();
+
+            ammoSlider.value = currentAmmo;
 
             if (currentAmmo == 0)
             {

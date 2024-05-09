@@ -1389,6 +1389,10 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  droppedItem: {fileID: 6092143148522505465, guid: e7998ad3f9315734d93632915b1a7da9, type: 3}
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 524023
 --- !u!1 &7590996127154424549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,6 +1633,10 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
+  droppedItem: {fileID: 6092143148522505465, guid: e7998ad3f9315734d93632915b1a7da9, type: 3}
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 524023
 --- !u!1 &9180287369048138392
 GameObject:
   m_ObjectHideFlags: 0

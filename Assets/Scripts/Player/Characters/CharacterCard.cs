@@ -13,7 +13,7 @@ public class CharacterCard : MonoBehaviour
     {
         text_className.text = character.characterClass;
 
-        text_proficiencies_weapon.text = "Weapon: " + character.proficiencies.weaponSpreadMod;
+        text_proficiencies_weapon.text = "Weapon: " + (character.proficiencies.weaponSpreadMod + 5);
         text_proficiencies_hacking.text = "Hacking: " + character.proficiencies.hackSpeedMod;
         text_proficiencies_movement.text = "Movement: " + character.proficiencies.moveMod;
 

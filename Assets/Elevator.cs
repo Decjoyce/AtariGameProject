@@ -7,7 +7,7 @@ public class Elevator : Interactable
 {
     List<PlayerController> playerAtLift = new List<PlayerController>();
 
-    bool bottomFloor;
+    [SerializeField] bool bottomFloor;
 
     public override void Interaction(PlayerInteraction player)
     {
