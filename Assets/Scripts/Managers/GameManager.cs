@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void EndRun()
+    public void EndRun()
     {
         roundsPlayed = 0;
         Destroy(transform.parent.gameObject);

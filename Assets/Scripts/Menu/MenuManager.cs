@@ -27,6 +27,11 @@ public class MenuManager : MonoBehaviour
         settingsMenu.SetActive(false);
     }
 
+    public void EnterControls()
+    {
+        SceneManager.LoadScene("Controls");
+    }
+
     public void Playgame()
     {
         mainMenu.SetActive(false);
