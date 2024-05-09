@@ -8,13 +8,21 @@ public class DoorControls : Interactable
     [SerializeField] Renderer panel;
     [SerializeField] Material unlockedMat;
     [SerializeField] public bool engineerDoor;
+    [SerializeField] public float hackDelay;
+
+    private void Start()
+    {
+
+    }
 
     public override void Interaction(PlayerInteraction player)
     {
         if (canInteract && !engineerDoor)
         {
+            hackDelay = hackDelay + 5 - (player.controller.playerStats.hackSpeedMod);
             base.Interaction(player);
-            door.UnlockDoor();
+            door.Invoke("UnlockDoor", hackDelay);
+            Debug.Log("Door hacked open after delay");
             panel.material = unlockedMat;
             canInteract = false;
         }
@@ -23,8 +31,9 @@ public class DoorControls : Interactable
         {
             if(player.isEngineer)
             {
+                hackDelay = hackDelay - player.controller.playerStats.hackSpeedMod;
                 base.Interaction(player);
-                door.UnlockDoor();
+                door.Invoke("UnlockDoor", hackDelay);
                 panel.material = unlockedMat;
                 canInteract = false;
             }

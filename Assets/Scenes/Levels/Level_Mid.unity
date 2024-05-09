@@ -11983,6 +11983,7 @@ MonoBehaviour:
   panel: {fileID: 547438290}
   unlockedMat: {fileID: 2100000, guid: 743411a3fc08be745bf193cb62b03cca, type: 2}
   engineerDoor: 1
+  hackDelay: 0
 --- !u!136 &680127404
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -20067,6 +20068,7 @@ MonoBehaviour:
   panel: {fileID: 547438290}
   unlockedMat: {fileID: 2100000, guid: 743411a3fc08be745bf193cb62b03cca, type: 2}
   engineerDoor: 0
+  hackDelay: 0
 --- !u!1 &1154425331
 GameObject:
   m_ObjectHideFlags: 0
