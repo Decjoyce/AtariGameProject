@@ -7,6 +7,7 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] float maxHealth;
     public float currentHealth;
+    public bool isDead;
 
     [SerializeField] MeshRenderer[] healthMeshes; //temp
     [SerializeField] Gradient healthColorGradient;
@@ -17,7 +18,7 @@ public class EnemyHealth : MonoBehaviour
     public virtual void TakeDamage(float amount)
     {
         currentHealth -= amount;
-        if(currentHealth <= 0)
+        if(!isDead && currentHealth <= 0)
         {
             Die();
         }
@@ -27,6 +28,8 @@ public class EnemyHealth : MonoBehaviour
     public virtual void Die()
     {
             Instantiate(droppedItem, transform.position, Quaternion.identity);
+
+        isDead = true;
 
         Destroy(transform.parent.gameObject);
     }

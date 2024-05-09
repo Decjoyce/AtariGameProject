@@ -72,6 +72,6 @@ public class ScoreManager : MonoBehaviour
 
     public bool QuotaCheck()
     {
-        return currentScore == quotaAmount;
+        return currentScore >= quotaAmount;
     }
 }

@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
             //Checks if quota was reached 
             if (!sm.QuotaCheck())
             {
-                Debug.Log("Did not make quota");
+                Debug.Log("Did not make quota: " + sm.currentScore + " / " + sm.quotaAmount);
                 EndRun(); //Ends the the run
             }
 

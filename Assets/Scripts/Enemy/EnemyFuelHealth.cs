@@ -14,6 +14,7 @@ public class EnemyFuelHealth : EnemyHealth
     public override void Die()
     {
         Instantiate(explosion, transform.position, transform.rotation);
+        isDead = true;
         Destroy(gameObject);
     }
 }
