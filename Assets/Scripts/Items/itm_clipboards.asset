@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: itm_clipboards
   m_EditorClassIdentifier: 
   itemName: Clipboard
-  value: 500
+  value: 3
   rarity: 0
   graphics: {fileID: 919132149155446097, guid: 94cd312ed6b221f4099fbc30ef4bc461, type: 3}
