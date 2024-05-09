@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
         pm.ResetPlayers();
         sharedCanvas.SetActive(true);
         mrSound.Stop();
+        Cursor.visible = false;
     }
 
     void EndRound()
@@ -120,6 +121,9 @@ public class GameManager : MonoBehaviour
         sharedCanvas.SetActive(false);
 
         roundsPlayed++;
+
+        mrSound.Play();
+        Cursor.visible = true;
 
         //Checks if its been 3 rounds
         if (roundsPlayed % 3 == 0) //if it has been 3 rounds
@@ -142,7 +146,6 @@ public class GameManager : MonoBehaviour
         }
         else //if it hasnt
         {
-            mrSound.Play();
             LoadScene_Loading();            //loads the character select scene
         }
     }

@@ -24,5 +24,5 @@ MonoBehaviour:
   meleeArc: 0
   meleeRange: 0
   meleeSpeed: 0
-  fireSound: {fileID: 8300000, guid: fb96d50bb87090c499fb0af8f39e3419, type: 3}
+  fireSound: {fileID: 8300000, guid: 78414a2ec18ef7f4f8a1b48a441e5b3a, type: 3}
   impactSound: {fileID: 0}

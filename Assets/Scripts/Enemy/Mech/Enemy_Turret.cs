@@ -27,11 +27,15 @@ public class Enemy_Turret : MonoBehaviour
     public TurretState_Idle state_Idle = new TurretState_Idle();
     public TurretState_Aggro state_Aggro = new TurretState_Aggro();
 
+    public AudioSource source;
+    public AudioClip shootClip;
+
     // Start is called before the first frame update
     void Start()
     {
         currentState = state_Idle;
         currentState.EnterState(this);
+        source = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -77,6 +81,7 @@ public class Enemy_Turret : MonoBehaviour
         {
             currentState.OnRoomEnter(this, player);
             AddTarget(player);
+            NextTarget();
         }
 
     }
@@ -86,6 +91,7 @@ public class Enemy_Turret : MonoBehaviour
         if (currentRoomID == roomID)
         {
             currentState.OnRoomExit(this, player);
+            NextTarget();
         }
     }
 

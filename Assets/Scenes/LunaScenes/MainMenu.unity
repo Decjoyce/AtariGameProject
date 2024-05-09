@@ -4625,7 +4625,7 @@ MonoBehaviour:
   numberOfLives: 3
   hasCaptain: 0
   roundsPlayed: 0
-  randomLevels: 040000000500000006000000
+  randomLevels: 0400000005000000
   currentLevel: 0
   currentTime: 0
   mrSound: {fileID: 941723719}

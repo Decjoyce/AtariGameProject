@@ -107,6 +107,7 @@ public class TurretState_Aggro : EnemyStates_Turret
                     {
                         controller.HelpInstantiate(controller.firePoint.position, controller.firePoint.rotation);
                         shootDelay = controller.shoot_delay;
+                        controller.source.PlayOneShot(controller.shootClip);
                     }
                 }
             }

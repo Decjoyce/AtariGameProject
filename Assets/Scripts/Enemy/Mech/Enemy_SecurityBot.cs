@@ -62,6 +62,9 @@ public class Enemy_SecurityBot : MonoBehaviour
     public SecurityBot_Railgun state_Railgun = new SecurityBot_Railgun();
     public SecurityBot_BeamGun state_BeamGun = new SecurityBot_BeamGun();
 
+    public AudioSource source;
+    public AudioClip clip;
+
     #region StateMachine
     // Start is called before the first frame update
     void Start()
@@ -214,6 +217,7 @@ public class Enemy_SecurityBot : MonoBehaviour
     public void ShootMachineGun()
     {
         Instantiate(machineGunProjectile, firepoint.position, firepoint.rotation);
+        source.PlayOneShot(clip);
     }
 
     public void ShootRailgun()
@@ -238,6 +242,9 @@ public class Enemy_SecurityBot : MonoBehaviour
                 thing.GetComponent<PlayerHealth>().TakeDamage(railgunAttackDamage);
             }
         }
+
+        source.PlayOneShot(clip);
+
         beamGraphic.enabled = true;
         beamGraphic.SetPosition(0, firepoint.position);
         beamGraphic.SetPosition(1, firepoint.position + (firepoint.right * railGunAttackRange));
@@ -254,6 +261,7 @@ public class Enemy_SecurityBot : MonoBehaviour
             }
             beamGraphic.SetPosition(0, firepoint.position);
             beamGraphic.SetPosition(1, hit.point);
+            source.PlayOneShot(clip);
         }
     }
 
