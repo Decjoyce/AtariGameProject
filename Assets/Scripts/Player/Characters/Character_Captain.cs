@@ -31,6 +31,7 @@ public class Character_Captain : Character_Base
         yield return new WaitForSecondsRealtime(2f);
         Debug.Log("EVACED");
         GameManager.instance.ExtractAllPlayers();
+        beganEvacuation = false;
         //Exit Animation
     }
 

@@ -29136,7 +29136,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 895042253010160221, guid: bccdb0d9a77b37241bd6f300c156706a, type: 3}
       propertyPath: currentRoomID
-      value: 6
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3335979719064479126, guid: bccdb0d9a77b37241bd6f300c156706a, type: 3}
       propertyPath: m_Name
@@ -33592,6 +33592,7 @@ MonoBehaviour:
   panel: {fileID: 547438290}
   unlockedMat: {fileID: 2100000, guid: 743411a3fc08be745bf193cb62b03cca, type: 2}
   engineerDoor: 0
+  hackDelay: 0
 --- !u!136 &1509355227
 CapsuleCollider:
   m_ObjectHideFlags: 0
