@@ -162,6 +162,10 @@ public class PlayerInteraction : MonoBehaviour
 
     public void ClearInventory()
     {
+        foreach (Item itm in inventory)
+        {
+            ScoreManager.instance.IncreaseFakeQuota(-itm.value);
+        }
         inventory.Clear();
     }
 

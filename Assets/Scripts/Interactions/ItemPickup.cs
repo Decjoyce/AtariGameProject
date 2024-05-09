@@ -20,6 +20,7 @@ public class ItemPickup : Interactable
     {
         base.Interaction(player);
         player.AddItemToInventory(item);
+        ScoreManager.instance.IncreaseFakeQuota(item.value);
         Destroy(gameObject);
 
     }
