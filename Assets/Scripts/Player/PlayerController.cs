@@ -19,7 +19,7 @@ public struct PlayerStats
     {
         moveMod = Random.Range(-5, 6);
         jumpPowerMod = Random.Range(-5, 6);
-        weaponSpreadMod = Random.Range(-5, 6);
+        weaponSpreadMod = Random.Range(-10, 1);
         hackSpeedMod = Random.Range(-5, 6);
 
         if (moveMod == 0)

@@ -99,7 +99,8 @@ public class PlayerAttack : MonoBehaviour
 
     public void SetUpClassWeapon()
     {
-        accurracy = accurracy * controller.playerStats.weaponSpreadMod + (0.7f * controller.playerStats.moveMod);
+        accurracy = accurracy /** controller.playerStats.weaponSpreadMod +*/ * (0.4f * (controller.playerStats.moveMod)
+            );
     }
 
     public void UseDefaultWeapon()
@@ -247,7 +248,7 @@ public class PlayerAttack : MonoBehaviour
         if (ctx.performed && !isReloading && canAttack && currentAmmo > 0)
         {
             float spread = Random.Range(-accurracy, accurracy);
-            Quaternion bulletRotation = Quaternion.Euler(firePoint.eulerAngles.x, firePoint.eulerAngles.y, firePoint.eulerAngles.z + spread);
+            Quaternion bulletRotation = Quaternion.Euler(firePoint.eulerAngles.x + spread, firePoint.eulerAngles.y, firePoint.eulerAngles.z);
             Instantiate(weapon.projectile, firePoint.position, bulletRotation);
 
             canAttack = false;
