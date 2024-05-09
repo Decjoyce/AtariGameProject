@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         roundsPlayed++;
 
         //Checks if its been 3 rounds
-        if (roundsPlayed % 2 == 0) //if it has been 3 rounds
+        if (roundsPlayed % 3 == 0) //if it has been 3 rounds
         {
             //Checks if quota was reached 
             if (!sm.QuotaCheck())
