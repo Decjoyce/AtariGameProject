@@ -48,12 +48,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6135950335788547709}
-  damage: 15
+  damage: 17
   forwardForce: 20
   upwardForce: 0
   torqueForce: 0
   delayBeforeDelete: 0.3
-  range: 2
+  range: 3
 --- !u!136 &2329368756154790555
 CapsuleCollider:
   m_ObjectHideFlags: 0
