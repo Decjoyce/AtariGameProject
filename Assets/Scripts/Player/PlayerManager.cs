@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static PlayerHealth;
 
 public class PlayerManager : MonoBehaviour
 {
+    public delegate void PlayerHasJoined(int playerID);
+    public static event PlayerHasJoined OnPlayerHasJoined;
+
     public List<PlayerInput> players = new List<PlayerInput>();
 
     private PlayerInputManager playerInputManager;
@@ -36,11 +40,13 @@ public class PlayerManager : MonoBehaviour
     private void OnEnable()
     {
         playerInputManager.onPlayerJoined += AddPlayer;
+        OnPlayerHasJoined += Shush;
     }
 
     private void OnDisable()
     {
         playerInputManager.onPlayerJoined -= AddPlayer;
+        OnPlayerHasJoined -= Shush;
     }
 
     public void EnableJoining()
@@ -55,7 +61,7 @@ public class PlayerManager : MonoBehaviour
 
     public void AddPlayer(PlayerInput player)
     {
-        sharedCam.cullingMask = 0;
+        //sharedCam.cullingMask = 0;
 
         player.transform.parent = transform;
 
@@ -65,6 +71,8 @@ public class PlayerManager : MonoBehaviour
         controller.playerNum = players.Count;
         controller.playerCam = playerCams[players.Count - 1];
         controller.canvas.worldCamera = playerCams[players.Count - 1];
+
+        OnPlayerHasJoined.Invoke(players.Count);
 
         SetSplitScreen(players.Count);
 
@@ -196,5 +204,10 @@ public class PlayerManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void Shush(int playerID)
+    {
+
     }
 }
