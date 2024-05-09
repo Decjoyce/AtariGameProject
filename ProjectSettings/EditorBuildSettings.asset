@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/LunaScenes/CharacterSelect.unity
     guid: a211d71001a715e418291bfb6789a748
   - enabled: 1
+    path: Assets/Scenes/LunaScenes/GameOver.unity
+    guid: 6fa93091e116c034f9af4107bdea28a3
+  - enabled: 1
     path: Assets/Scenes/Levels/Level_Easy.unity
     guid: 57912507eafdb284e912a0b45faaf8e3
   - enabled: 1

@@ -38,10 +38,12 @@ public class GameManager : MonoBehaviour
 
     /*[HideInInspector]*/ public bool hasCaptain;
 
-    int roundsPlayed;
+    public int roundsPlayed;
 
     [SerializeField] int[] randomLevels;
     public int currentLevel;
+
+    public float currentTime;
 
     void Start()
     {        
@@ -50,10 +52,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P)) 
-        {
-            StartRound();
-        }
+        currentTime += Time.deltaTime;
     }
 
     private void OnEnable()
@@ -126,7 +125,7 @@ public class GameManager : MonoBehaviour
             if (!sm.QuotaCheck())
             {
                 Debug.Log("Did not make quota: " + sm.currentScore + " / " + sm.quotaAmount);
-                EndRun(); //Ends the the run
+                SceneManager.LoadScene(3);
             }
 
             else
