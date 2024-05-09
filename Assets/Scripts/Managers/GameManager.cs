@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
 
     public float currentTime;
 
+    [SerializeField] AudioSource mrSound;
+
     void Start()
     {        
 
@@ -106,6 +108,7 @@ public class GameManager : MonoBehaviour
         GetRandomLevel();
         pm.ResetPlayers();
         sharedCanvas.SetActive(true);
+        mrSound.Stop();
     }
 
     void EndRound()
@@ -139,6 +142,7 @@ public class GameManager : MonoBehaviour
         }
         else //if it hasnt
         {
+            mrSound.Play();
             LoadScene_Loading();            //loads the character select scene
         }
     }

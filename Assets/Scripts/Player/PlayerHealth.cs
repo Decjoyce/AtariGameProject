@@ -8,8 +8,9 @@ public class PlayerHealth : MonoBehaviour
 {
     public delegate void PlayerDied(GameObject player, int playerID);
     public static event PlayerDied OnPlayerDied;
-    
 
+    [SerializeField] AudioClip deathSound, hitSound;
+    AudioSource source;
     PlayerController controller;
 
     [SerializeField] float maxHealth;
@@ -29,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
         controller = GetComponent<PlayerController>();
         currentHealth = maxHealth;
         SetHealthColor();
+        source = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -47,6 +49,8 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
+        else
+            source.PlayOneShot(hitSound);
         SetHealthColor();
     }
 
@@ -67,6 +71,7 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log(gameObject.name + " HAS DIED");
         controller.SwitchState("DEATH");
+        source.PlayOneShot(deathSound);
         isDead = true;
         OnPlayerDied(gameObject, controller.playerNum);
     }

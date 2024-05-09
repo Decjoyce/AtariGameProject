@@ -24,9 +24,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Level_Mid.unity
     guid: 18acfe33a7bc69c48a5c21128407bef2
   - enabled: 1
-    path: Assets/Scenes/Levels/Level_Hard.unity
-    guid: 7d70071cae254b743bc9f5dc25c2a4f0
-  - enabled: 1
     path: Assets/Scenes/LunaScenes/Controls.unity
     guid: 5260ee00e2a63f34f9b556b6cc8f847c
   m_configObjects: {}

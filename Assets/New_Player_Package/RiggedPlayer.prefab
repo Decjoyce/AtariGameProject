@@ -19341,6 +19341,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   droppedWeaponPrefab: {fileID: 2982337102470626192, guid: e72ade0b948578d48a314d9264f6cf3d, type: 3}
   accurracy: 2
+  ammoSlider: {fileID: 0}
 --- !u!114 &4472869307484305191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19353,6 +19354,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7713749e4ee52145bc8322f7b0a969d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathSound: {fileID: 8300000, guid: f26aa1a826c87f9428d022d23a3d126a, type: 3}
+  hitSound: {fileID: 8300000, guid: c7cd14c951fd4de49a0ee7f8bab41cfd, type: 3}
   maxHealth: 100
   currentHealth: 100
   healthMeshes:
@@ -19402,6 +19405,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 5
     m_NumAlphaKeys: 2
+  healthSlider: {fileID: 0}
 --- !u!114 &2467129524074190940
 MonoBehaviour:
   m_ObjectHideFlags: 0
