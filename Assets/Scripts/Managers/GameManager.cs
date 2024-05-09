@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         roundsPlayed++;
 
         //Checks if its been 3 rounds
-        if (roundsPlayed % 3 == 0) //if it has been 3 rounds
+        if (roundsPlayed % 2 == 0) //if it has been 3 rounds
         {
             //Checks if quota was reached 
             if (!sm.QuotaCheck())
@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour
             {
                 //Gets new quota, generates a new character for each player, loads the character select scene
                 sm.GetNewQuota();
+                GenerateCharacterForOne();
                 //GenerateNewCharacter();
                 LoadScene_Loading();
             }
@@ -284,13 +285,17 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void GenerateCharacterForOne(int playerNum, int index)
+    void GenerateCharacterForOne()
     {
-        if (playerCharacters[playerNum].Count > 5)
+        for (int i = 0; i < pm.players.Count; i++)
         {
-            Character tempChar = new Character();
-            tempChar.GenerateStats(hasCaptain);
-            playerCharacters[playerNum].Add(tempChar);
+            if (playerCharacters[i].Count < numberOfLives)
+            {
+                Character tempChar = new Character();
+                tempChar.GenerateStats(hasCaptain);
+                testingList.Add(tempChar);
+                playerCharacters[i].Add(tempChar);
+            }
         }
     }
     

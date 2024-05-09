@@ -79,6 +79,7 @@ public class PlayerState_CharacterSelect : PlayerState_Base
             if (selectedCharacter >= GameManager.instance.playerCharacters[controller.playerNum - 1].Count)
                 selectedCharacter = 0;
             MenuManager.instance.ChangeDisplayCard(controller.playerNum, selectedCharacter);
+            Debug.Log(selectedCharacter + " " + GameManager.instance.playerCharacters[controller.playerNum - 1].Count);
         }
     }
 

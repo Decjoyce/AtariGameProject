@@ -67,6 +67,7 @@ public class ScoreManager : MonoBehaviour
         foreach (Slider qb in quotaSliders)
         {
             qb.maxValue = quotaAmount;
+            qb.value = currentScore;
         }
     }
 
