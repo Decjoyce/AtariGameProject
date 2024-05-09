@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: itm_fakesheetmetal 1
   m_EditorClassIdentifier: 
   itemName: Sheet Metal
-  value: 30
+  value: 8
   rarity: 0
   graphics: {fileID: 1162284446116004742, guid: 1bd04a325e351c24386b5b5308003864, type: 3}

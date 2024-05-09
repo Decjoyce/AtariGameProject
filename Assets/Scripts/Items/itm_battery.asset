@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: itm_battery
   m_EditorClassIdentifier: 
   itemName: Battery
-  value: 60
+  value: 16
   rarity: 0
   graphics: {fileID: 919132149155446097, guid: 950d605db9296504293014542b6b9cb1, type: 3}
