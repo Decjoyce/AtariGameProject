@@ -51,7 +51,6 @@ public class Door : MonoBehaviour
         anim.SetBool("doorOpen", false);
         //blackness.SetActive(true);
     }
-
     public void UnlockDoor()
     {
         locked = false;

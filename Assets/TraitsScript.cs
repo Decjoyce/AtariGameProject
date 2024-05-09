@@ -14,7 +14,14 @@ public class TraitsScript : MonoBehaviour
         if(pc.playerStats.isIntroverted)
         {
             pc.playerStats.hackSpeedMod = pc.playerStats.hackSpeedMod + pc.playerStats.introvertedBoon;
-            pc.playerStats.weaponSpreadMod = pc.playerStats.weaponSpreadMod - pc.playerStats.introvertedBoon;
+            if(pc.playerStats.weaponSpreadMod > -2)
+            {
+                pc.playerStats.weaponSpreadMod = 0;
+            }
+            else
+            {
+                pc.playerStats.weaponSpreadMod = pc.playerStats.weaponSpreadMod = pc.playerStats.weaponSpreadMod + pc.playerStats.introvertedBoon;
+            }
             pc.playerStats.jumpPowerMod = pc.playerStats.jumpPowerMod + pc.playerStats.introvertedBoon;
             pc.playerStats.moveMod = pc.playerStats.moveMod + pc.playerStats.introvertedBoon;
         }
@@ -77,7 +84,7 @@ public class TraitsScript : MonoBehaviour
             {
                 pc.playerStats.hackSpeedMod = pc.playerStats.hackSpeedMod + (pc.playerStats.introvertedPenalty);
                 pc.playerStats.moveMod = pc.playerStats.moveMod + (pc.playerStats.introvertedPenalty);
-                pc.playerStats.weaponSpreadMod = pc.playerStats.weaponSpreadMod - (pc.playerStats.introvertedPenalty);
+                pc.playerStats.weaponSpreadMod = pc.playerStats.weaponSpreadMod + (pc.playerStats.introvertedPenalty);
                 pc.playerStats.jumpPowerMod = pc.playerStats.jumpPowerMod + (pc.playerStats.introvertedPenalty);
             }
 
