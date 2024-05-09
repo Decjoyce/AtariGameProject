@@ -7,7 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     public ClassUISO classUI;
     public GameObject mainMenu;
-    public GameObject settingsMenu;
+    public GameObject ControlsMenu;
     public GameObject playerJoin;
 
     public void QuitGame()
@@ -15,16 +15,9 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void OpenSettings()
+    public void OpenControls()
     {
-        mainMenu.SetActive(false);
-        settingsMenu.SetActive(true);
-    }
-
-    public void CloseSettings()
-    {
-        mainMenu.SetActive(true);
-        settingsMenu.SetActive(false);
+        SceneManager.LoadScene("Controls");
     }
 
     public void Playgame()
